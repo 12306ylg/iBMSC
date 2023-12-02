@@ -1,6 +1,5 @@
 ﻿Imports iBMSC.Editor
 Imports System.Text.Json
-
 Partial Public Class MainWindow
     Private Sub OpenBMS(ByVal xStrAll As String)
         KMouseOver = -1
@@ -629,7 +628,7 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
             Next
 
             Dim xDiag As New dgImportSM(xTempStr)
-            If xDiag.ShowDialog() = Windows.Forms.DialogResult.Cancel Then Return True
+            If xDiag.ShowDialog() = Forms.DialogResult.Cancel Then Return True
             iDiff = xDiag.iResult
         End If
 

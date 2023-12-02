@@ -824,7 +824,7 @@ Public Class MainWindow
                     xDSave.DefaultExt = "bms"
                     xDSave.InitialDirectory = InitPath
 
-                    If xDSave.ShowDialog = Windows.Forms.DialogResult.Cancel Then e.Cancel = True : Exit Sub
+                    If xDSave.ShowDialog = Forms.DialogResult.Cancel Then e.Cancel = True : Exit Sub
                     SetFileName(xDSave.FileName)
                 End If
                 Dim xStrAll As String = SaveBMS()
@@ -959,7 +959,7 @@ Public Class MainWindow
             previousWindowState = Me.WindowState
 
             Me.WindowState = FormWindowState.Normal
-            Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
+            Me.FormBorderStyle = FormBorderStyle.None
             Me.WindowState = FormWindowState.Maximized
             ToolStripContainer1.TopToolStripPanelVisible = False
 
@@ -967,7 +967,7 @@ Public Class MainWindow
             isFullScreen = True
         Else
             Me.SuspendLayout()
-            Me.FormBorderStyle = Windows.Forms.FormBorderStyle.Sizable
+            Me.FormBorderStyle = FormBorderStyle.Sizable
             ToolStripContainer1.TopToolStripPanelVisible = True
             Me.WindowState = FormWindowState.Normal
 
@@ -1359,7 +1359,7 @@ EndSearch:
                     xDSave.DefaultExt = "bms"
                     xDSave.InitialDirectory = InitPath
 
-                    If xDSave.ShowDialog = Windows.Forms.DialogResult.Cancel Then Return True
+                    If xDSave.ShowDialog = Forms.DialogResult.Cancel Then Return True
                     SetFileName(xDSave.FileName)
                 End If
                 Dim xStrAll As String = SaveBMS()
@@ -1472,7 +1472,7 @@ EndSearch:
         xDOpen.DefaultExt = "bms"
         xDOpen.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
 
-        If xDOpen.ShowDialog = Windows.Forms.DialogResult.Cancel Then Exit Sub
+        If xDOpen.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDOpen.FileName)
         OpenBMS(My.Computer.FileSystem.ReadAllText(xDOpen.FileName, TextEncoding))
         ClearUndo()
@@ -1493,7 +1493,7 @@ EndSearch:
         xDOpen.DefaultExt = "ibmsc"
         xDOpen.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
 
-        If xDOpen.ShowDialog = Windows.Forms.DialogResult.Cancel Then Return
+        If xDOpen.ShowDialog = Forms.DialogResult.Cancel Then Return
         InitPath = ExcludeFileName(xDOpen.FileName)
         SetFileName("Imported_" & GetFileName(xDOpen.FileName))
         OpeniBMSC(xDOpen.FileName)
@@ -1513,7 +1513,7 @@ EndSearch:
         xDOpen.DefaultExt = "sm"
         xDOpen.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
 
-        If xDOpen.ShowDialog = Windows.Forms.DialogResult.Cancel Then Exit Sub
+        If xDOpen.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         If OpenSM(My.Computer.FileSystem.ReadAllText(xDOpen.FileName, TextEncoding)) Then Exit Sub
         InitPath = ExcludeFileName(xDOpen.FileName)
         SetFileName("Untitled.bms")
@@ -1539,7 +1539,7 @@ EndSearch:
             xDSave.DefaultExt = "bms"
             xDSave.InitialDirectory = InitPath
 
-            If xDSave.ShowDialog = Windows.Forms.DialogResult.Cancel Then Exit Sub
+            If xDSave.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
             InitPath = ExcludeFileName(xDSave.FileName)
             SetFileName(xDSave.FileName)
         End If
@@ -1568,7 +1568,7 @@ EndSearch:
         xDSave.DefaultExt = "bms"
         xDSave.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
 
-        If xDSave.ShowDialog = Windows.Forms.DialogResult.Cancel Then Exit Sub
+        If xDSave.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDSave.FileName)
         SetFileName(xDSave.FileName)
         Dim xStrAll As String = SaveBMS()
@@ -1589,7 +1589,7 @@ EndSearch:
         xDSave.Filter = Strings.FileType.IBMSC & "|*.ibmsc"
         xDSave.DefaultExt = "ibmsc"
         xDSave.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
-        If xDSave.ShowDialog = Windows.Forms.DialogResult.Cancel Then Exit Sub
+        If xDSave.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
 
         SaveiBMSC(xDSave.FileName)
         'My.Computer.FileSystem.WriteAllText(xDSave.FileName, xStrAll, False, TextEncoding)
@@ -1606,7 +1606,7 @@ EndSearch:
         xDSave.Filter = Strings.FileType.BMSON & "|*.bmson"
         xDSave.DefaultExt = "bmson"
         xDSave.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
-        If xDSave.ShowDialog = Windows.Forms.DialogResult.Cancel Then Exit Sub
+        If xDSave.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
 
         SaveBMSON(xDSave.FileName)
         'My.Computer.FileSystem.WriteAllText(xDSave.FileName, xStrAll, False, TextEncoding)
@@ -1853,7 +1853,7 @@ EndSearch:
                 End With
         End Select
 
-        Dim xMEArgs As New System.Windows.Forms.MouseEventArgs(Windows.Forms.MouseButtons.Left, 0, MouseMoveStatus.X, MouseMoveStatus.Y, 0)
+        Dim xMEArgs As New System.Windows.Forms.MouseEventArgs(Forms.MouseButtons.Left, 0, MouseMoveStatus.X, MouseMoveStatus.Y, 0)
         PMainInMouseMove(spMain(PanelFocus), xMEArgs)
 
     End Sub
@@ -1907,7 +1907,7 @@ EndSearch:
                 End With
         End Select
 
-        Dim xMEArgs As New System.Windows.Forms.MouseEventArgs(Windows.Forms.MouseButtons.Left, 0, MouseMoveStatus.X, MouseMoveStatus.Y, 0)
+        Dim xMEArgs As New System.Windows.Forms.MouseEventArgs(Forms.MouseButtons.Left, 0, MouseMoveStatus.X, MouseMoveStatus.Y, 0)
         PMainInMouseMove(spMain(PanelFocus), xMEArgs)
     End Sub
 
@@ -1949,7 +1949,7 @@ EndSearch:
                        Strings.FileType._all & "|*.*"
         xDWAV.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
 
-        If xDWAV.ShowDialog = Windows.Forms.DialogResult.Cancel Then Exit Sub
+        If xDWAV.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDWAV.FileName)
         hWAV(LWAV.SelectedIndex + 1) = GetFileName(xDWAV.FileName)
         LWAV.Items.Item(LWAV.SelectedIndex) = C10to36(LWAV.SelectedIndex + 1) & ": " & GetFileName(xDWAV.FileName)
@@ -1982,7 +1982,7 @@ EndSearch:
                        Strings.FileType._all & "|*.*"
         xDBMP.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
 
-        If xDBMP.ShowDialog = Windows.Forms.DialogResult.Cancel Then Exit Sub
+        If xDBMP.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDBMP.FileName)
         hBMP(LBMP.SelectedIndex + 1) = GetFileName(xDBMP.FileName)
         LBMP.Items.Item(LBMP.SelectedIndex) = C10to36(LBMP.SelectedIndex + 1) & ": " & GetFileName(xDBMP.FileName)
@@ -2121,7 +2121,7 @@ EndSearch:
         xDOpen.FileName = PrevCodeToReal(xArg.Path)
         xDOpen.Filter = Strings.FileType.EXE & "|*.exe"
         xDOpen.DefaultExt = "exe"
-        If xDOpen.ShowDialog = Windows.Forms.DialogResult.Cancel Then Exit Sub
+        If xDOpen.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
 
         'pArgs(CurrentPlayer) = Replace(xDOpen.FileName, My.Application.Info.DirectoryPath, "<apppath>") & _
         '                                           Mid(pArgs(CurrentPlayer), InStr(pArgs(CurrentPlayer), vbCrLf))
@@ -2457,7 +2457,7 @@ StartCount:     If Not NTInput Then
         Return stop_contrib + bpm_contrib
     End Function
 
-    Private Sub POBStorm_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
+    Private Sub POBStorm_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
     End Sub
 
@@ -3269,7 +3269,7 @@ StartCount:     If Not NTInput Then
             AutoSaveInterval, BeepWhileSaved, BPMx1296, STOPx1296,
             AutoFocusMouseEnter, FirstClickDisabled, ClickStopPreview)
 
-        If xDiag.ShowDialog() = Windows.Forms.DialogResult.OK Then
+        If xDiag.ShowDialog() = Forms.DialogResult.OK Then
             With xDiag
                 gWheel = .zWheel
                 gPgUpDn = .zPgUpDn
@@ -3870,7 +3870,7 @@ Jump2:
         xDiag.Filter = Strings.FileType.THEME_XML & "|*.Theme.xml"
         xDiag.DefaultExt = "Theme.xml"
         xDiag.InitialDirectory = My.Application.Info.DirectoryPath & "\Data"
-        If xDiag.ShowDialog = Windows.Forms.DialogResult.Cancel Then Exit Sub
+        If xDiag.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
 
         Me.SaveSettings(xDiag.FileName, True)
         If BeepWhileSaved Then Beep()
@@ -3898,7 +3898,7 @@ Jump2:
         xDiag.DefaultExt = "th"
         xDiag.InitialDirectory = My.Application.Info.DirectoryPath
         If My.Computer.FileSystem.DirectoryExists(My.Application.Info.DirectoryPath & "\Theme") Then xDiag.InitialDirectory = My.Application.Info.DirectoryPath & "\Theme"
-        If xDiag.ShowDialog = Windows.Forms.DialogResult.Cancel Then Exit Sub
+        If xDiag.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
 
         Me.LoadThemeComptability(xDiag.FileName)
         RefreshPanelAll()
@@ -4121,7 +4121,7 @@ Jump2:
         xDWAV.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
         xDWAV.Multiselect = WAVMultiSelect
 
-        If xDWAV.ShowDialog = Windows.Forms.DialogResult.Cancel Then Exit Sub
+        If xDWAV.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDWAV.FileName)
 
         AddToPOWAV(xDWAV.FileNames)
@@ -4281,7 +4281,7 @@ Jump2:
         xDBMP.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
         xDBMP.Multiselect = WAVMultiSelect
 
-        If xDBMP.ShowDialog = Windows.Forms.DialogResult.Cancel Then Exit Sub
+        If xDBMP.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDBMP.FileName)
 
         AddToPOBMP(xDBMP.FileNames)
@@ -4306,13 +4306,13 @@ Jump2:
     End Sub
 
     Private Sub mnMain_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles mnMain.MouseDown ', TBMain.MouseDown  ', pttl.MouseDown, pIsSaved.MouseDown
-        If e.Button = Windows.Forms.MouseButtons.Left Then
+        If e.Button = Forms.MouseButtons.Left Then
             ReleaseCapture()
             SendMessage(Me.Handle, &H112, &HF012, 0)
             If e.Clicks = 2 Then
                 If Me.WindowState = FormWindowState.Maximized Then Me.WindowState = FormWindowState.Normal Else Me.WindowState = FormWindowState.Maximized
             End If
-        ElseIf e.Button = Windows.Forms.MouseButtons.Right Then
+        ElseIf e.Button = Forms.MouseButtons.Right Then
             'mnSys.Show(sender, e.Location)
         End If
     End Sub
@@ -4730,7 +4730,7 @@ case2:              Dim xI0 As Integer
         xDiag.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
         xDiag.DefaultExt = "png"
 
-        If xDiag.ShowDialog = Windows.Forms.DialogResult.Cancel Then Exit Sub
+        If xDiag.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDiag.FileName)
 
         If [Object].ReferenceEquals(sender, BHStageFile) Then
@@ -4756,7 +4756,7 @@ case2:              Dim xI0 As Integer
         xDiag.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
         xDiag.DefaultExt = "wav"
 
-        If xDiag.ShowDialog = Windows.Forms.DialogResult.Cancel Then Exit Sub
+        If xDiag.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
 
         If [Object].ReferenceEquals(sender, BHLandMine) Then
             InitPath = ExcludeFileName(xDiag.FileName)
@@ -4845,7 +4845,7 @@ case2:              Dim xI0 As Integer
     End Sub
 
     Private Sub POResizer_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles POWAVResizer.MouseMove, POBMPResizer.MouseMove, POBeatResizer.MouseMove, POExpansionResizer.MouseMove
-        If e.Button <> Windows.Forms.MouseButtons.Left Then Exit Sub
+        If e.Button <> Forms.MouseButtons.Left Then Exit Sub
         If e.Y = tempResize Then Exit Sub
 
         Try
@@ -4863,7 +4863,7 @@ case2:              Dim xI0 As Integer
     End Sub
 
     Private Sub POptionsResizer_MouseMove(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles POptionsResizer.MouseMove
-        If e.Button <> Windows.Forms.MouseButtons.Left Then Exit Sub
+        If e.Button <> Forms.MouseButtons.Left Then Exit Sub
         If e.X = tempResize Then Exit Sub
 
         Try
@@ -4879,7 +4879,7 @@ case2:              Dim xI0 As Integer
     End Sub
 
     Private Sub SpR_MouseMove(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles SpR.MouseMove
-        If e.Button <> Windows.Forms.MouseButtons.Left Then Exit Sub
+        If e.Button <> Forms.MouseButtons.Left Then Exit Sub
         If e.X = tempResize Then Exit Sub
 
         Try
@@ -4895,7 +4895,7 @@ case2:              Dim xI0 As Integer
     End Sub
 
     Private Sub SpL_MouseMove(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles SpL.MouseMove
-        If e.Button <> Windows.Forms.MouseButtons.Left Then Exit Sub
+        If e.Button <> Forms.MouseButtons.Left Then Exit Sub
         If e.X = tempResize Then Exit Sub
 
         Try
