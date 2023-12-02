@@ -114,7 +114,7 @@ Public Class MainWindow
     Dim tempH As Integer
     Dim MiddleButtonLocation As New Point(0, 0)
     Dim MiddleButtonClicked As Boolean = False
-    Dim MouseMoveStatus As Point = New Point(0, 0)  'mouse is moved to which point (For Status Panel)
+    Dim MouseMoveStatus As New Point(0, 0)  'mouse is moved to which point (For Status Panel)
     'Dim uCol As Integer         'temp variables for undo, original enabled columnindex
     'Dim uVPos As Double         'temp variables for undo, original vposition
     'Dim uPairWithI As Double    'temp variables for undo, original note length
@@ -367,7 +367,7 @@ Public Class MainWindow
         Do
             ' Look down from hi for a value < med_value.
             Do While Notes(iHi).VPosition >= xNote.VPosition
-                iHi = iHi - 1
+                iHi -= 1
                 If iHi <= iLo Then Exit Do
             Loop
             If iHi <= iLo Then
@@ -379,9 +379,9 @@ Public Class MainWindow
             Notes(iLo) = Notes(iHi)
 
             ' Look up from lo for a value >= med_value.
-            iLo = iLo + 1
+            iLo += 1
             Do While Notes(iLo).VPosition < xNote.VPosition
-                iLo = iLo + 1
+                iLo += 1
                 If iLo >= iHi Then Exit Do
             Loop
             If iLo >= iHi Then
@@ -431,17 +431,17 @@ Public Class MainWindow
         xNoteMid = Notes(xxMid)
         Do
             Do While Notes(xxMin).VPosition < xNoteMid.VPosition And xxMin < xMax
-                xxMin = xxMin + 1
+                xxMin += 1
             Loop
             Do While xNoteMid.VPosition < Notes(xxMax).VPosition And xxMax > xMin
-                xxMax = xxMax - 1
+                xxMax -= 1
             Loop
             If xxMin <= xxMax Then
                 xNote = Notes(xxMin)
                 Notes(xxMin) = Notes(xxMax)
                 Notes(xxMax) = xNote
-                xxMin = xxMin + 1
-                xxMax = xxMax - 1
+                xxMin += 1
+                xxMax -= 1
             End If
         Loop Until xxMin > xxMax
         If xxMax - xMin < xMax - xxMin Then
@@ -794,22 +794,22 @@ Public Class MainWindow
         Return cReal
     End Function
 
-    Private Sub Form1_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
+    Private Sub Form1_FormClosed(ByVal sender As Object, ByVal e As FormClosedEventArgs) Handles MyBase.FormClosed
         If pTempFileNames IsNot Nothing Then
-            For Each xStr As String In pTempFileNames
-                IO.File.Delete(xStr)
+            For Each xStr In pTempFileNames
+                File.Delete(xStr)
             Next
         End If
-        If PreviousAutoSavedFileName <> "" Then IO.File.Delete(PreviousAutoSavedFileName)
+        If PreviousAutoSavedFileName <> "" Then File.Delete(PreviousAutoSavedFileName)
     End Sub
 
-    Private Sub Form1_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+    Private Sub Form1_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles MyBase.FormClosing
         If Not IsSaved Then
-            Dim xStr As String = Strings.Messages.SaveOnExit
+            Dim xStr = Strings.Messages.SaveOnExit
             If e.CloseReason = CloseReason.WindowsShutDown Then xStr = Strings.Messages.SaveOnExit1
             If e.CloseReason = CloseReason.TaskManagerClosing Then xStr = Strings.Messages.SaveOnExit2
 
-            Dim xResult As MsgBoxResult = MsgBox(xStr, MsgBoxStyle.YesNoCancel Or MsgBoxStyle.Question, Me.Text)
+            Dim xResult = MsgBox(xStr, MsgBoxStyle.YesNoCancel Or MsgBoxStyle.Question, Text)
 
             If xResult = MsgBoxResult.Yes Then
                 If ExcludeFileName(FileName) = "" Then
@@ -827,10 +827,10 @@ Public Class MainWindow
                     If xDSave.ShowDialog = Forms.DialogResult.Cancel Then e.Cancel = True : Exit Sub
                     SetFileName(xDSave.FileName)
                 End If
-                Dim xStrAll As String = SaveBMS()
+                Dim xStrAll = SaveBMS
                 My.Computer.FileSystem.WriteAllText(FileName, xStrAll, False, TextEncoding)
                 NewRecent(FileName)
-                If BeepWhileSaved Then Beep()
+                If BeepWhileSaved Then Beep
             End If
 
             If xResult = MsgBoxResult.Cancel Then e.Cancel = True
@@ -846,7 +846,7 @@ Public Class MainWindow
             'My.Computer.FileSystem.WriteAllText(My.Application.Info.DirectoryPath & "\PlayerArgs.cff", SavePlayerCFF, False, System.Text.Encoding.Unicode)
             'My.Computer.FileSystem.WriteAllText(My.Application.Info.DirectoryPath & "\Config.cff", SaveCFF, False, System.Text.Encoding.Unicode)
             'My.Computer.FileSystem.WriteAllText(My.Application.Info.DirectoryPath & "\PreConfig.cff", "", False, System.Text.Encoding.Unicode)
-            Me.SaveSettings(My.Application.Info.DirectoryPath & "\iBMSC.Settings.xml", False)
+            SaveSettings(My.Application.Info.DirectoryPath & "\iBMSC.Settings.xml", False)
         End If
     End Sub
 
@@ -920,33 +920,33 @@ Public Class MainWindow
         'THLnType.Text = ""
     End Sub
 
-    Private Sub Form1_DragEnter(ByVal sender As Object, ByVal e As DragEventArgs) Handles Me.DragEnter
+    Private Sub Form1_DragEnter(ByVal sender As Object, ByVal e As DragEventArgs) Handles MyBase.DragEnter
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
             e.Effect = DragDropEffects.Copy
             DDFileName = FilterFileBySupported(CType(e.Data.GetData(DataFormats.FileDrop), String()), SupportedFileExtension)
         Else
             e.Effect = DragDropEffects.None
         End If
-        RefreshPanelAll()
+        RefreshPanelAll
     End Sub
 
-    Private Sub Form1_DragLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.DragLeave
+    Private Sub Form1_DragLeave(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.DragLeave
         ReDim DDFileName(-1)
-        RefreshPanelAll()
+        RefreshPanelAll
     End Sub
 
-    Private Sub Form1_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles Me.DragDrop
+    Private Sub Form1_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles MyBase.DragDrop
         ReDim DDFileName(-1)
         If Not e.Data.GetDataPresent(DataFormats.FileDrop) Then Return
 
-        Dim xOrigPath() As String = CType(e.Data.GetData(DataFormats.FileDrop), String())
-        Dim xPath() As String = FilterFileBySupported(xOrigPath, SupportedFileExtension)
+        Dim xOrigPath = CType(e.Data.GetData(DataFormats.FileDrop), String())
+        Dim xPath = FilterFileBySupported(xOrigPath, SupportedFileExtension)
         If xPath.Length > 0 Then
             Dim xProg As New fLoadFileProgress(xPath, IsSaved)
             xProg.ShowDialog(Me)
         End If
 
-        RefreshPanelAll()
+        RefreshPanelAll
     End Sub
 
     Private Sub setFullScreen(ByVal value As Boolean)
@@ -982,16 +982,16 @@ Public Class MainWindow
         End If
     End Sub
 
-    Private Sub Form1_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
+    Private Sub Form1_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyDown
         Select Case e.KeyCode
             Case Keys.F11
                 setFullScreen(Not isFullScreen)
         End Select
     End Sub
 
-    Private Sub Form1_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyUp
-        RefreshPanelAll()
-        POStatusRefresh()
+    Private Sub Form1_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyUp
+        RefreshPanelAll
+        POStatusRefresh
     End Sub
 
     Friend Sub ReadFile(ByVal xPath As String)
@@ -1059,8 +1059,8 @@ Public Class MainWindow
         Return New Cursor(LoadCursorFromFile(path))
     End Function
 
-    Private Sub Unload() Handles MyBase.Disposed
-        Audio.Finalize()
+    Private Sub Unload()
+        Audio.Finalize
     End Sub
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load

@@ -22,22 +22,23 @@ Partial Class SplashScreen1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.SuspendLayout()
-        '
-        'SplashScreen1
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.ClientSize = New System.Drawing.Size(722, 331)
-        Me.ControlBox = False
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
-        Me.Name = "SplashScreen1"
-        Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.ResumeLayout(False)
+        SuspendLayout()
+        ' 
+        ' SplashScreen1
+        ' 
+        AutoScaleDimensions = New SizeF(7F, 17F)
+        AutoScaleMode = AutoScaleMode.Font
+        BackColor = SystemColors.ControlDarkDark
+        ClientSize = New Size(842, 433)
+        ControlBox = False
+        FormBorderStyle = FormBorderStyle.None
+        Margin = New Padding(4, 4, 4, 4)
+        MaximizeBox = False
+        MinimizeBox = False
+        Name = "SplashScreen1"
+        ShowInTaskbar = False
+        StartPosition = FormStartPosition.CenterScreen
+        ResumeLayout(False)
 
     End Sub
 

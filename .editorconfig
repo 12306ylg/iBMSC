@@ -1,4 +1,0 @@
-﻿[*.vb]
-
-# IDE0001: 简化名称
-dotnet_diagnostic.IDE0001.severity = suggestion

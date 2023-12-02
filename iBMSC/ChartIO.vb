@@ -830,20 +830,20 @@ Jump1:
 
                     ErrorCheck = xPref And &H2
                     TBErrorCheck.Checked = ErrorCheck
-                    TBErrorCheck_Click(TBErrorCheck, New System.EventArgs)
+                    TBErrorCheck_Click(TBErrorCheck, New EventArgs)
 
                     PreviewOnClick = xPref And &H4
                     TBPreviewOnClick.Checked = PreviewOnClick
-                    TBPreviewOnClick_Click(TBPreviewOnClick, New System.EventArgs)
+                    TBPreviewOnClick_Click(TBPreviewOnClick, New EventArgs)
 
                     ShowFileName = xPref And &H8
                     TBShowFileName.Checked = ShowFileName
-                    TBShowFileName_Click(TBShowFileName, New System.EventArgs)
+                    TBShowFileName_Click(TBShowFileName, New EventArgs)
 
                     Rscratch = xPref And &H10
                     If TBChangePlaySide.Checked <> Rscratch Then
                         TBChangePlaySide.Checked = Rscratch
-                        TBChangePlaySide_Click(TBChangePlaySide, New System.EventArgs)
+                        TBChangePlaySide_Click(TBChangePlaySide, New EventArgs)
                     Else
                         TBChangePlaySide.Checked = Rscratch
                     End If
@@ -1038,7 +1038,7 @@ EndOfSub:
 
         Try
 
-            Dim bw As New BinaryWriter(New IO.FileStream(Path, FileMode.Create), System.Text.Encoding.Unicode)
+            Dim bw As New BinaryWriter(New FileStream(Path, FileMode.Create), System.Text.Encoding.Unicode)
 
             'bw.Write("iBMSC".ToCharArray)
             bw.Write(&H534D4269)
@@ -1488,7 +1488,7 @@ EndOfSub:
 
             options.IncludeFields = True
             options.WriteIndented = True
-            Dim bw As New BinaryWriter(New IO.FileStream(Path, FileMode.Create), System.Text.Encoding.UTF8)
+            Dim bw As New BinaryWriter(New FileStream(Path, FileMode.Create), System.Text.Encoding.UTF8)
             Dim str = JsonSerializer.SerializeToUtf8Bytes(format, options)
             bw.Write(str)
             bw.Close()
