@@ -2457,7 +2457,7 @@ StartCount:     If Not NTInput Then
         Return stop_contrib + bpm_contrib
     End Function
 
-    Private Sub POBStorm_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles POBStorm.Click
+    Private Sub POBStorm_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
 
     End Sub
 

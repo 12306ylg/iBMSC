@@ -157,3 +157,5 @@ $RECYCLE.BIN/
 /ubmsc
 *.zip
 /ubmsc
+iBMSC/.vs/iBMSC.vbproj.dtbcache.json
+*.vsidx
