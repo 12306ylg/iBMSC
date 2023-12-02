@@ -588,7 +588,7 @@ Partial Class MainWindow
         Me.POptions.Dock = System.Windows.Forms.DockStyle.Top
         Me.POptions.Location = New System.Drawing.Point(0, 0)
         Me.POptions.Name = "POptions"
-        Me.POptions.Size = New System.Drawing.Size(183, 2081)
+        Me.POptions.Size = New System.Drawing.Size(183, 2083)
         Me.POptions.TabIndex = 29
         '
         'POExpansion
@@ -598,7 +598,7 @@ Partial Class MainWindow
         Me.POExpansion.Controls.Add(Me.POExpansionInner)
         Me.POExpansion.Controls.Add(Me.POExpansionSwitch)
         Me.POExpansion.Dock = System.Windows.Forms.DockStyle.Top
-        Me.POExpansion.Location = New System.Drawing.Point(0, 1811)
+        Me.POExpansion.Location = New System.Drawing.Point(0, 1813)
         Me.POExpansion.Name = "POExpansion"
         Me.POExpansion.Size = New System.Drawing.Size(183, 270)
         Me.POExpansion.TabIndex = 6
@@ -665,7 +665,7 @@ Partial Class MainWindow
         Me.POBeat.Controls.Add(Me.POBeatInner)
         Me.POBeat.Controls.Add(Me.POBeatSwitch)
         Me.POBeat.Dock = System.Windows.Forms.DockStyle.Top
-        Me.POBeat.Location = New System.Drawing.Point(0, 1541)
+        Me.POBeat.Location = New System.Drawing.Point(0, 1543)
         Me.POBeat.Name = "POBeat"
         Me.POBeat.Size = New System.Drawing.Size(183, 270)
         Me.POBeat.TabIndex = 5
@@ -929,7 +929,7 @@ Partial Class MainWindow
         Me.POBMP.Controls.Add(Me.POBMPInner)
         Me.POBMP.Controls.Add(Me.POBMPSwitch)
         Me.POBMP.Dock = System.Windows.Forms.DockStyle.Top
-        Me.POBMP.Location = New System.Drawing.Point(0, 1271)
+        Me.POBMP.Location = New System.Drawing.Point(0, 1273)
         Me.POBMP.Name = "POBMP"
         Me.POBMP.Size = New System.Drawing.Size(183, 270)
         Me.POBMP.TabIndex = 4
@@ -1063,7 +1063,7 @@ Partial Class MainWindow
         Me.POWAV.Controls.Add(Me.POWAVInner)
         Me.POWAV.Controls.Add(Me.POWAVSwitch)
         Me.POWAV.Dock = System.Windows.Forms.DockStyle.Top
-        Me.POWAV.Location = New System.Drawing.Point(0, 1001)
+        Me.POWAV.Location = New System.Drawing.Point(0, 1003)
         Me.POWAV.Name = "POWAV"
         Me.POWAV.Size = New System.Drawing.Size(183, 270)
         Me.POWAV.TabIndex = 4
@@ -1277,7 +1277,7 @@ Partial Class MainWindow
         Me.POWaveForm.Controls.Add(Me.POWaveFormInner)
         Me.POWaveForm.Controls.Add(Me.POWaveFormSwitch)
         Me.POWaveForm.Dock = System.Windows.Forms.DockStyle.Top
-        Me.POWaveForm.Location = New System.Drawing.Point(0, 758)
+        Me.POWaveForm.Location = New System.Drawing.Point(0, 760)
         Me.POWaveForm.Name = "POWaveForm"
         Me.POWaveForm.Size = New System.Drawing.Size(183, 243)
         Me.POWaveForm.TabIndex = 3
@@ -1704,7 +1704,7 @@ Partial Class MainWindow
         Me.POGrid.Controls.Add(Me.POGridInner)
         Me.POGrid.Controls.Add(Me.POGridSwitch)
         Me.POGrid.Dock = System.Windows.Forms.DockStyle.Top
-        Me.POGrid.Location = New System.Drawing.Point(0, 528)
+        Me.POGrid.Location = New System.Drawing.Point(0, 530)
         Me.POGrid.Name = "POGrid"
         Me.POGrid.Size = New System.Drawing.Size(183, 230)
         Me.POGrid.TabIndex = 2
@@ -2101,7 +2101,7 @@ Partial Class MainWindow
         Me.POGridSwitch.CheckState = System.Windows.Forms.CheckState.Checked
         Me.POGridSwitch.Cursor = System.Windows.Forms.Cursors.Hand
         Me.POGridSwitch.Dock = System.Windows.Forms.DockStyle.Top
-        Me.POGridSwitch.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.POGridSwitch.Font = New System.Drawing.Font("Microsoft YaHei UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.POGridSwitch.Location = New System.Drawing.Point(0, 0)
         Me.POGridSwitch.Name = "POGridSwitch"
         Me.POGridSwitch.Size = New System.Drawing.Size(183, 20)
@@ -2121,7 +2121,7 @@ Partial Class MainWindow
         Me.POHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.POHeader.Location = New System.Drawing.Point(0, 0)
         Me.POHeader.Name = "POHeader"
-        Me.POHeader.Size = New System.Drawing.Size(183, 528)
+        Me.POHeader.Size = New System.Drawing.Size(183, 530)
         Me.POHeader.TabIndex = 1
         '
         'POHeaderInner
@@ -2134,7 +2134,7 @@ Partial Class MainWindow
         Me.POHeaderInner.Dock = System.Windows.Forms.DockStyle.Top
         Me.POHeaderInner.Location = New System.Drawing.Point(0, 20)
         Me.POHeaderInner.Name = "POHeaderInner"
-        Me.POHeaderInner.Size = New System.Drawing.Size(183, 508)
+        Me.POHeaderInner.Size = New System.Drawing.Size(183, 510)
         Me.POHeaderInner.TabIndex = 2
         '
         'POHeaderPart2
@@ -2179,7 +2179,7 @@ Partial Class MainWindow
         Me.POHeaderPart2.Controls.Add(Me.BHPreview, 2, 11)
         Me.POHeaderPart2.Controls.Add(Me.CHLnmode, 1, 12)
         Me.POHeaderPart2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.POHeaderPart2.Location = New System.Drawing.Point(0, 206)
+        Me.POHeaderPart2.Location = New System.Drawing.Point(0, 208)
         Me.POHeaderPart2.Name = "POHeaderPart2"
         Me.POHeaderPart2.RowCount = 13
         Me.POHeaderPart2.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -2565,10 +2565,11 @@ Partial Class MainWindow
         Me.POHeaderExpander.Dock = System.Windows.Forms.DockStyle.Top
         Me.POHeaderExpander.FlatAppearance.BorderSize = 0
         Me.POHeaderExpander.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.POHeaderExpander.Font = New System.Drawing.Font("Microsoft YaHei UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.POHeaderExpander.Location = New System.Drawing.Point(0, 181)
         Me.POHeaderExpander.Margin = New System.Windows.Forms.Padding(0)
         Me.POHeaderExpander.Name = "POHeaderExpander"
-        Me.POHeaderExpander.Size = New System.Drawing.Size(183, 25)
+        Me.POHeaderExpander.Size = New System.Drawing.Size(183, 27)
         Me.POHeaderExpander.TabIndex = 26
         Me.POHeaderExpander.TabStop = False
         Me.POHeaderExpander.Text = "Expand..."
@@ -2813,7 +2814,7 @@ Partial Class MainWindow
         Me.POHeaderSwitch.CheckState = System.Windows.Forms.CheckState.Checked
         Me.POHeaderSwitch.Cursor = System.Windows.Forms.Cursors.Hand
         Me.POHeaderSwitch.Dock = System.Windows.Forms.DockStyle.Top
-        Me.POHeaderSwitch.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.POHeaderSwitch.Font = New System.Drawing.Font("Microsoft YaHei UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.POHeaderSwitch.Location = New System.Drawing.Point(0, 0)
         Me.POHeaderSwitch.Name = "POHeaderSwitch"
         Me.POHeaderSwitch.Size = New System.Drawing.Size(183, 20)
