@@ -588,7 +588,7 @@ Partial Class MainWindow
         Me.POptions.Dock = System.Windows.Forms.DockStyle.Top
         Me.POptions.Location = New System.Drawing.Point(0, 0)
         Me.POptions.Name = "POptions"
-        Me.POptions.Size = New System.Drawing.Size(183, 2078)
+        Me.POptions.Size = New System.Drawing.Size(183, 2081)
         Me.POptions.TabIndex = 29
         '
         'POExpansion
@@ -598,7 +598,7 @@ Partial Class MainWindow
         Me.POExpansion.Controls.Add(Me.POExpansionInner)
         Me.POExpansion.Controls.Add(Me.POExpansionSwitch)
         Me.POExpansion.Dock = System.Windows.Forms.DockStyle.Top
-        Me.POExpansion.Location = New System.Drawing.Point(0, 1808)
+        Me.POExpansion.Location = New System.Drawing.Point(0, 1811)
         Me.POExpansion.Name = "POExpansion"
         Me.POExpansion.Size = New System.Drawing.Size(183, 270)
         Me.POExpansion.TabIndex = 6
@@ -665,7 +665,7 @@ Partial Class MainWindow
         Me.POBeat.Controls.Add(Me.POBeatInner)
         Me.POBeat.Controls.Add(Me.POBeatSwitch)
         Me.POBeat.Dock = System.Windows.Forms.DockStyle.Top
-        Me.POBeat.Location = New System.Drawing.Point(0, 1538)
+        Me.POBeat.Location = New System.Drawing.Point(0, 1541)
         Me.POBeat.Name = "POBeat"
         Me.POBeat.Size = New System.Drawing.Size(183, 270)
         Me.POBeat.TabIndex = 5
@@ -929,7 +929,7 @@ Partial Class MainWindow
         Me.POBMP.Controls.Add(Me.POBMPInner)
         Me.POBMP.Controls.Add(Me.POBMPSwitch)
         Me.POBMP.Dock = System.Windows.Forms.DockStyle.Top
-        Me.POBMP.Location = New System.Drawing.Point(0, 1268)
+        Me.POBMP.Location = New System.Drawing.Point(0, 1271)
         Me.POBMP.Name = "POBMP"
         Me.POBMP.Size = New System.Drawing.Size(183, 270)
         Me.POBMP.TabIndex = 4
@@ -1063,7 +1063,7 @@ Partial Class MainWindow
         Me.POWAV.Controls.Add(Me.POWAVInner)
         Me.POWAV.Controls.Add(Me.POWAVSwitch)
         Me.POWAV.Dock = System.Windows.Forms.DockStyle.Top
-        Me.POWAV.Location = New System.Drawing.Point(0, 998)
+        Me.POWAV.Location = New System.Drawing.Point(0, 1001)
         Me.POWAV.Name = "POWAV"
         Me.POWAV.Size = New System.Drawing.Size(183, 270)
         Me.POWAV.TabIndex = 4
@@ -1277,7 +1277,7 @@ Partial Class MainWindow
         Me.POWaveForm.Controls.Add(Me.POWaveFormInner)
         Me.POWaveForm.Controls.Add(Me.POWaveFormSwitch)
         Me.POWaveForm.Dock = System.Windows.Forms.DockStyle.Top
-        Me.POWaveForm.Location = New System.Drawing.Point(0, 755)
+        Me.POWaveForm.Location = New System.Drawing.Point(0, 758)
         Me.POWaveForm.Name = "POWaveForm"
         Me.POWaveForm.Size = New System.Drawing.Size(183, 243)
         Me.POWaveForm.TabIndex = 3
@@ -1704,7 +1704,7 @@ Partial Class MainWindow
         Me.POGrid.Controls.Add(Me.POGridInner)
         Me.POGrid.Controls.Add(Me.POGridSwitch)
         Me.POGrid.Dock = System.Windows.Forms.DockStyle.Top
-        Me.POGrid.Location = New System.Drawing.Point(0, 525)
+        Me.POGrid.Location = New System.Drawing.Point(0, 528)
         Me.POGrid.Name = "POGrid"
         Me.POGrid.Size = New System.Drawing.Size(183, 230)
         Me.POGrid.TabIndex = 2
@@ -2121,7 +2121,7 @@ Partial Class MainWindow
         Me.POHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.POHeader.Location = New System.Drawing.Point(0, 0)
         Me.POHeader.Name = "POHeader"
-        Me.POHeader.Size = New System.Drawing.Size(183, 525)
+        Me.POHeader.Size = New System.Drawing.Size(183, 528)
         Me.POHeader.TabIndex = 1
         '
         'POHeaderInner
@@ -2134,7 +2134,7 @@ Partial Class MainWindow
         Me.POHeaderInner.Dock = System.Windows.Forms.DockStyle.Top
         Me.POHeaderInner.Location = New System.Drawing.Point(0, 20)
         Me.POHeaderInner.Name = "POHeaderInner"
-        Me.POHeaderInner.Size = New System.Drawing.Size(183, 505)
+        Me.POHeaderInner.Size = New System.Drawing.Size(183, 508)
         Me.POHeaderInner.TabIndex = 2
         '
         'POHeaderPart2
@@ -2195,7 +2195,7 @@ Partial Class MainWindow
         Me.POHeaderPart2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.POHeaderPart2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.POHeaderPart2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.POHeaderPart2.Size = New System.Drawing.Size(183, 299)
+        Me.POHeaderPart2.Size = New System.Drawing.Size(183, 302)
         Me.POHeaderPart2.TabIndex = 27
         '
         'CHDifficulty
@@ -2281,7 +2281,7 @@ Partial Class MainWindow
         '
         Me.Label24.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(25, 189)
+        Me.Label24.Location = New System.Drawing.Point(25, 191)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(39, 15)
         Me.Label24.TabIndex = 27
@@ -2441,7 +2441,7 @@ Partial Class MainWindow
         '
         Me.Label26.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(13, 211)
+        Me.Label26.Location = New System.Drawing.Point(13, 214)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(51, 15)
         Me.Label26.TabIndex = 29
@@ -2452,7 +2452,7 @@ Partial Class MainWindow
         '
         Me.Label27.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label27.AutoSize = True
-        Me.Label27.Location = New System.Drawing.Point(13, 235)
+        Me.Label27.Location = New System.Drawing.Point(13, 238)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(51, 15)
         Me.Label27.TabIndex = 32
@@ -2462,7 +2462,7 @@ Partial Class MainWindow
         'THLandMine
         '
         Me.THLandMine.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.THLandMine.Location = New System.Drawing.Point(67, 207)
+        Me.THLandMine.Location = New System.Drawing.Point(67, 210)
         Me.THLandMine.Margin = New System.Windows.Forms.Padding(0)
         Me.THLandMine.Name = "THLandMine"
         Me.THLandMine.Size = New System.Drawing.Size(88, 23)
@@ -2472,7 +2472,7 @@ Partial Class MainWindow
         '
         Me.BHLandMine.Dock = System.Windows.Forms.DockStyle.Fill
         Me.BHLandMine.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.BHLandMine.Location = New System.Drawing.Point(158, 207)
+        Me.BHLandMine.Location = New System.Drawing.Point(158, 210)
         Me.BHLandMine.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.BHLandMine.Name = "BHLandMine"
         Me.BHLandMine.Size = New System.Drawing.Size(25, 24)
@@ -2483,7 +2483,7 @@ Partial Class MainWindow
         'THMissBMP
         '
         Me.THMissBMP.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.THMissBMP.Location = New System.Drawing.Point(67, 231)
+        Me.THMissBMP.Location = New System.Drawing.Point(67, 234)
         Me.THMissBMP.Margin = New System.Windows.Forms.Padding(0)
         Me.THMissBMP.Name = "THMissBMP"
         Me.THMissBMP.Size = New System.Drawing.Size(88, 23)
@@ -2493,7 +2493,7 @@ Partial Class MainWindow
         '
         Me.BHMissBMP.Dock = System.Windows.Forms.DockStyle.Fill
         Me.BHMissBMP.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.BHMissBMP.Location = New System.Drawing.Point(158, 231)
+        Me.BHMissBMP.Location = New System.Drawing.Point(158, 234)
         Me.BHMissBMP.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.BHMissBMP.Name = "BHMissBMP"
         Me.BHMissBMP.Size = New System.Drawing.Size(25, 24)
@@ -2505,7 +2505,7 @@ Partial Class MainWindow
         '
         Me.Label28.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(16, 259)
+        Me.Label28.Location = New System.Drawing.Point(16, 262)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(48, 15)
         Me.Label28.TabIndex = 35
@@ -2516,7 +2516,7 @@ Partial Class MainWindow
         '
         Me.Label29.Anchor = System.Windows.Forms.AnchorStyles.Right
         Me.Label29.AutoSize = True
-        Me.Label29.Location = New System.Drawing.Point(11, 281)
+        Me.Label29.Location = New System.Drawing.Point(11, 284)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(53, 15)
         Me.Label29.TabIndex = 38
@@ -2526,7 +2526,7 @@ Partial Class MainWindow
         'THPreview
         '
         Me.THPreview.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.THPreview.Location = New System.Drawing.Point(67, 255)
+        Me.THPreview.Location = New System.Drawing.Point(67, 258)
         Me.THPreview.Margin = New System.Windows.Forms.Padding(0)
         Me.THPreview.Name = "THPreview"
         Me.THPreview.Size = New System.Drawing.Size(88, 23)
@@ -2536,7 +2536,7 @@ Partial Class MainWindow
         '
         Me.BHPreview.Dock = System.Windows.Forms.DockStyle.Fill
         Me.BHPreview.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.BHPreview.Location = New System.Drawing.Point(158, 255)
+        Me.BHPreview.Location = New System.Drawing.Point(158, 258)
         Me.BHPreview.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.BHPreview.Name = "BHPreview"
         Me.BHPreview.Size = New System.Drawing.Size(25, 24)
@@ -2551,7 +2551,7 @@ Partial Class MainWindow
         Me.CHLnmode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CHLnmode.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.CHLnmode.Items.AddRange(New Object() {"Selectable", "LN only", "CN only", "HN only"})
-        Me.CHLnmode.Location = New System.Drawing.Point(67, 279)
+        Me.CHLnmode.Location = New System.Drawing.Point(67, 282)
         Me.CHLnmode.Margin = New System.Windows.Forms.Padding(0)
         Me.CHLnmode.Name = "CHLnmode"
         Me.CHLnmode.Size = New System.Drawing.Size(116, 23)
