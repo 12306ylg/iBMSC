@@ -588,7 +588,7 @@ Partial Class MainWindow
         POptions.Dock = DockStyle.Top
         POptions.Location = New Point(0, 0)
         POptions.Name = "POptions"
-        POptions.Size = New Size(183, 2083)
+        POptions.Size = New Size(183, 2099)
         POptions.TabIndex = 29
         ' 
         ' POExpansion
@@ -598,7 +598,7 @@ Partial Class MainWindow
         POExpansion.Controls.Add(POExpansionInner)
         POExpansion.Controls.Add(POExpansionSwitch)
         POExpansion.Dock = DockStyle.Top
-        POExpansion.Location = New Point(0, 1813)
+        POExpansion.Location = New Point(0, 1829)
         POExpansion.Name = "POExpansion"
         POExpansion.Size = New Size(183, 270)
         POExpansion.TabIndex = 6
@@ -665,7 +665,7 @@ Partial Class MainWindow
         POBeat.Controls.Add(POBeatInner)
         POBeat.Controls.Add(POBeatSwitch)
         POBeat.Dock = DockStyle.Top
-        POBeat.Location = New Point(0, 1543)
+        POBeat.Location = New Point(0, 1559)
         POBeat.Name = "POBeat"
         POBeat.Size = New Size(183, 270)
         POBeat.TabIndex = 5
@@ -700,10 +700,10 @@ Partial Class MainWindow
         POBeatExpander.Dock = DockStyle.Top
         POBeatExpander.FlatAppearance.BorderSize = 0
         POBeatExpander.FlatStyle = FlatStyle.Popup
-        POBeatExpander.Location = New Point(0, 54)
+        POBeatExpander.Location = New Point(0, 58)
         POBeatExpander.Margin = New Padding(0)
         POBeatExpander.Name = "POBeatExpander"
-        POBeatExpander.Size = New Size(183, 25)
+        POBeatExpander.Size = New Size(183, 27)
         POBeatExpander.TabIndex = 65
         POBeatExpander.TabStop = False
         POBeatExpander.Text = "Expand..."
@@ -746,13 +746,13 @@ Partial Class MainWindow
         TableLayoutPanel7.RowCount = 2
         TableLayoutPanel7.RowStyles.Add(New RowStyle())
         TableLayoutPanel7.RowStyles.Add(New RowStyle())
-        TableLayoutPanel7.Size = New Size(183, 54)
+        TableLayoutPanel7.Size = New Size(183, 58)
         TableLayoutPanel7.TabIndex = 63
         ' 
         ' nBeatD
         ' 
         nBeatD.Dock = DockStyle.Fill
-        nBeatD.Location = New Point(66, 3)
+        nBeatD.Location = New Point(67, 3)
         nBeatD.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         nBeatD.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         nBeatD.Name = "nBeatD"
@@ -765,10 +765,10 @@ Partial Class MainWindow
         BBeatApplyV.AutoSize = True
         BBeatApplyV.AutoSizeMode = AutoSizeMode.GrowAndShrink
         BBeatApplyV.Dock = DockStyle.Fill
-        BBeatApplyV.Location = New Point(114, 29)
+        BBeatApplyV.Location = New Point(115, 31)
         BBeatApplyV.Margin = New Padding(0, 0, 3, 0)
         BBeatApplyV.Name = "BBeatApplyV"
-        BBeatApplyV.Size = New Size(66, 25)
+        BBeatApplyV.Size = New Size(65, 27)
         BBeatApplyV.TabIndex = 35
         BBeatApplyV.Text = "Apply"
         BBeatApplyV.UseVisualStyleBackColor = True
@@ -789,10 +789,10 @@ Partial Class MainWindow
         BBeatApply.AutoSize = True
         BBeatApply.AutoSizeMode = AutoSizeMode.GrowAndShrink
         BBeatApply.Dock = DockStyle.Fill
-        BBeatApply.Location = New Point(114, 2)
+        BBeatApply.Location = New Point(115, 2)
         BBeatApply.Margin = New Padding(0, 2, 3, 2)
         BBeatApply.Name = "BBeatApply"
-        BBeatApply.Size = New Size(66, 25)
+        BBeatApply.Size = New Size(65, 27)
         BBeatApply.TabIndex = 30
         BBeatApply.Text = "Apply"
         BBeatApply.UseVisualStyleBackColor = True
@@ -804,7 +804,7 @@ Partial Class MainWindow
         Label7.Location = New Point(51, 7)
         Label7.Margin = New Padding(0)
         Label7.Name = "Label7"
-        Label7.Size = New Size(12, 15)
+        Label7.Size = New Size(13, 17)
         Label7.TabIndex = 31
         Label7.Text = "/"
         Label7.TextAlign = ContentAlignment.MiddleCenter
@@ -813,10 +813,10 @@ Partial Class MainWindow
         ' 
         TableLayoutPanel7.SetColumnSpan(tBeatValue, 3)
         tBeatValue.Dock = DockStyle.Fill
-        tBeatValue.Location = New Point(3, 30)
+        tBeatValue.Location = New Point(3, 32)
         tBeatValue.Margin = New Padding(3, 1, 3, 0)
         tBeatValue.Name = "tBeatValue"
-        tBeatValue.Size = New Size(108, 23)
+        tBeatValue.Size = New Size(109, 23)
         tBeatValue.TabIndex = 36
         tBeatValue.Text = "1"
         ' 
@@ -827,11 +827,11 @@ Partial Class MainWindow
         LBeat.IntegralHeight = False
         LBeat.ItemHeight = 14
         LBeat.Items.AddRange(New Object() {"000: 15.984375 (1023/64)"})
-        LBeat.Location = New Point(3, 155)
+        LBeat.Location = New Point(3, 167)
         LBeat.Margin = New Padding(3, 0, 3, 0)
         LBeat.Name = "LBeat"
         LBeat.SelectionMode = SelectionMode.MultiExtended
-        LBeat.Size = New Size(177, 90)
+        LBeat.Size = New Size(177, 78)
         LBeat.TabIndex = 26
         ' 
         ' POBeatPart2
@@ -845,7 +845,7 @@ Partial Class MainWindow
         POBeatPart2.Controls.Add(CBeatMeasure, 0, 1)
         POBeatPart2.Controls.Add(CBeatPreserve, 0, 0)
         POBeatPart2.Dock = DockStyle.Fill
-        POBeatPart2.Location = New Point(0, 79)
+        POBeatPart2.Location = New Point(0, 85)
         POBeatPart2.Margin = New Padding(0)
         POBeatPart2.Name = "POBeatPart2"
         POBeatPart2.RowCount = 4
@@ -853,17 +853,17 @@ Partial Class MainWindow
         POBeatPart2.RowStyles.Add(New RowStyle())
         POBeatPart2.RowStyles.Add(New RowStyle())
         POBeatPart2.RowStyles.Add(New RowStyle())
-        POBeatPart2.Size = New Size(183, 76)
+        POBeatPart2.Size = New Size(183, 82)
         POBeatPart2.TabIndex = 66
         POBeatPart2.Visible = False
         ' 
         ' CBeatScale
         ' 
         CBeatScale.AutoSize = True
-        CBeatScale.Location = New Point(3, 57)
+        CBeatScale.Location = New Point(3, 61)
         CBeatScale.Margin = New Padding(3, 0, 3, 0)
         CBeatScale.Name = "CBeatScale"
-        CBeatScale.Size = New Size(151, 19)
+        CBeatScale.Size = New Size(166, 21)
         CBeatScale.TabIndex = 3
         CBeatScale.Text = "Scale to measure length"
         CBeatScale.UseVisualStyleBackColor = True
@@ -872,7 +872,7 @@ Partial Class MainWindow
         ' 
         CBeatCut.AutoEllipsis = True
         CBeatCut.Dock = DockStyle.Fill
-        CBeatCut.Location = New Point(3, 38)
+        CBeatCut.Location = New Point(3, 42)
         CBeatCut.Margin = New Padding(3, 0, 3, 0)
         CBeatCut.Name = "CBeatCut"
         CBeatCut.Size = New Size(177, 19)
@@ -883,10 +883,10 @@ Partial Class MainWindow
         ' CBeatMeasure
         ' 
         CBeatMeasure.AutoSize = True
-        CBeatMeasure.Location = New Point(3, 19)
+        CBeatMeasure.Location = New Point(3, 21)
         CBeatMeasure.Margin = New Padding(3, 0, 3, 0)
         CBeatMeasure.Name = "CBeatMeasure"
-        CBeatMeasure.Size = New Size(145, 19)
+        CBeatMeasure.Size = New Size(161, 21)
         CBeatMeasure.TabIndex = 1
         CBeatMeasure.Text = "Keep measure position"
         CBeatMeasure.UseVisualStyleBackColor = True
@@ -898,7 +898,7 @@ Partial Class MainWindow
         CBeatPreserve.Location = New Point(3, 0)
         CBeatPreserve.Margin = New Padding(3, 0, 3, 0)
         CBeatPreserve.Name = "CBeatPreserve"
-        CBeatPreserve.Size = New Size(145, 19)
+        CBeatPreserve.Size = New Size(161, 21)
         CBeatPreserve.TabIndex = 0
         CBeatPreserve.TabStop = True
         CBeatPreserve.Text = "Keep absolute position"
@@ -929,7 +929,7 @@ Partial Class MainWindow
         POBMP.Controls.Add(POBMPInner)
         POBMP.Controls.Add(POBMPSwitch)
         POBMP.Dock = DockStyle.Top
-        POBMP.Location = New Point(0, 1273)
+        POBMP.Location = New Point(0, 1289)
         POBMP.Name = "POBMP"
         POBMP.Size = New Size(183, 270)
         POBMP.TabIndex = 4
@@ -1063,7 +1063,7 @@ Partial Class MainWindow
         POWAV.Controls.Add(POWAVInner)
         POWAV.Controls.Add(POWAVSwitch)
         POWAV.Dock = DockStyle.Top
-        POWAV.Location = New Point(0, 1003)
+        POWAV.Location = New Point(0, 1019)
         POWAV.Name = "POWAV"
         POWAV.Size = New Size(183, 270)
         POWAV.TabIndex = 4
@@ -1100,7 +1100,7 @@ Partial Class MainWindow
         POWAVExpander.Location = New Point(0, 30)
         POWAVExpander.Margin = New Padding(0)
         POWAVExpander.Name = "POWAVExpander"
-        POWAVExpander.Size = New Size(183, 25)
+        POWAVExpander.Size = New Size(183, 27)
         POWAVExpander.TabIndex = 34
         POWAVExpander.TabStop = False
         POWAVExpander.Text = "Expand..."
@@ -1113,11 +1113,11 @@ Partial Class MainWindow
         LWAV.Font = New Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         LWAV.IntegralHeight = False
         LWAV.ItemHeight = 14
-        LWAV.Location = New Point(3, 113)
+        LWAV.Location = New Point(3, 119)
         LWAV.Margin = New Padding(3, 0, 3, 0)
         LWAV.Name = "LWAV"
         LWAV.SelectionMode = SelectionMode.MultiExtended
-        LWAV.Size = New Size(177, 132)
+        LWAV.Size = New Size(177, 126)
         LWAV.TabIndex = 25
         ' 
         ' FlowLayoutPanel3
@@ -1201,14 +1201,14 @@ Partial Class MainWindow
         POWAVPart2.Controls.Add(CWAVChangeLabel, 0, 1)
         POWAVPart2.Controls.Add(CWAVEmptyfill, 0, 2)
         POWAVPart2.Dock = DockStyle.Fill
-        POWAVPart2.Location = New Point(0, 55)
+        POWAVPart2.Location = New Point(0, 57)
         POWAVPart2.Margin = New Padding(0)
         POWAVPart2.Name = "POWAVPart2"
         POWAVPart2.RowCount = 2
         POWAVPart2.RowStyles.Add(New RowStyle())
         POWAVPart2.RowStyles.Add(New RowStyle())
         POWAVPart2.RowStyles.Add(New RowStyle(SizeType.Absolute, 20F))
-        POWAVPart2.Size = New Size(183, 58)
+        POWAVPart2.Size = New Size(183, 62)
         POWAVPart2.TabIndex = 35
         POWAVPart2.Visible = False
         ' 
@@ -1220,7 +1220,7 @@ Partial Class MainWindow
         CWAVMultiSelect.Location = New Point(3, 0)
         CWAVMultiSelect.Margin = New Padding(3, 0, 3, 0)
         CWAVMultiSelect.Name = "CWAVMultiSelect"
-        CWAVMultiSelect.Size = New Size(154, 19)
+        CWAVMultiSelect.Size = New Size(165, 21)
         CWAVMultiSelect.TabIndex = 0
         CWAVMultiSelect.Text = "Allow Multiple Selection"
         CWAVMultiSelect.UseVisualStyleBackColor = True
@@ -1230,10 +1230,10 @@ Partial Class MainWindow
         CWAVChangeLabel.AutoSize = True
         CWAVChangeLabel.Checked = True
         CWAVChangeLabel.CheckState = CheckState.Checked
-        CWAVChangeLabel.Location = New Point(3, 19)
+        CWAVChangeLabel.Location = New Point(3, 21)
         CWAVChangeLabel.Margin = New Padding(3, 0, 3, 0)
         CWAVChangeLabel.Name = "CWAVChangeLabel"
-        CWAVChangeLabel.Size = New Size(155, 19)
+        CWAVChangeLabel.Size = New Size(170, 21)
         CWAVChangeLabel.TabIndex = 1
         CWAVChangeLabel.Text = "Synchronize Note Labels"
         CWAVChangeLabel.UseVisualStyleBackColor = True
@@ -1243,10 +1243,10 @@ Partial Class MainWindow
         CWAVEmptyfill.AutoSize = True
         CWAVEmptyfill.Checked = True
         CWAVEmptyfill.CheckState = CheckState.Checked
-        CWAVEmptyfill.Location = New Point(3, 38)
+        CWAVEmptyfill.Location = New Point(3, 42)
         CWAVEmptyfill.Margin = New Padding(3, 0, 3, 0)
         CWAVEmptyfill.Name = "CWAVEmptyfill"
-        CWAVEmptyfill.Size = New Size(158, 19)
+        CWAVEmptyfill.Size = New Size(169, 20)
         CWAVEmptyfill.TabIndex = 0
         CWAVEmptyfill.Text = "Fill Empty Definition First"
         CWAVEmptyfill.UseVisualStyleBackColor = True
@@ -1277,9 +1277,9 @@ Partial Class MainWindow
         POWaveForm.Controls.Add(POWaveFormInner)
         POWaveForm.Controls.Add(POWaveFormSwitch)
         POWaveForm.Dock = DockStyle.Top
-        POWaveForm.Location = New Point(0, 760)
+        POWaveForm.Location = New Point(0, 774)
         POWaveForm.Name = "POWaveForm"
-        POWaveForm.Size = New Size(183, 243)
+        POWaveForm.Size = New Size(183, 245)
         POWaveForm.TabIndex = 3
         ' 
         ' POWaveFormInner
@@ -1292,7 +1292,7 @@ Partial Class MainWindow
         POWaveFormInner.Dock = DockStyle.Top
         POWaveFormInner.Location = New Point(0, 20)
         POWaveFormInner.Name = "POWaveFormInner"
-        POWaveFormInner.Size = New Size(183, 223)
+        POWaveFormInner.Size = New Size(183, 225)
         POWaveFormInner.TabIndex = 29
         POWaveFormInner.Visible = False
         ' 
@@ -1320,7 +1320,7 @@ Partial Class MainWindow
         POWaveFormPart2.Controls.Add(TWWidth2, 1, 1)
         POWaveFormPart2.Controls.Add(TWPrecision2, 1, 2)
         POWaveFormPart2.Dock = DockStyle.Top
-        POWaveFormPart2.Location = New Point(0, 83)
+        POWaveFormPart2.Location = New Point(0, 85)
         POWaveFormPart2.Name = "POWaveFormPart2"
         POWaveFormPart2.RowCount = 5
         POWaveFormPart2.RowStyles.Add(New RowStyle(SizeType.Absolute, 28F))
@@ -1523,7 +1523,7 @@ Partial Class MainWindow
         POWaveFormExpander.Location = New Point(0, 58)
         POWaveFormExpander.Margin = New Padding(0)
         POWaveFormExpander.Name = "POWaveFormExpander"
-        POWaveFormExpander.Size = New Size(183, 25)
+        POWaveFormExpander.Size = New Size(183, 27)
         POWaveFormExpander.TabIndex = 29
         POWaveFormExpander.TabStop = False
         POWaveFormExpander.Text = "Expand..."
@@ -1704,9 +1704,9 @@ Partial Class MainWindow
         POGrid.Controls.Add(POGridInner)
         POGrid.Controls.Add(POGridSwitch)
         POGrid.Dock = DockStyle.Top
-        POGrid.Location = New Point(0, 530)
+        POGrid.Location = New Point(0, 538)
         POGrid.Name = "POGrid"
-        POGrid.Size = New Size(183, 230)
+        POGrid.Size = New Size(183, 236)
         POGrid.TabIndex = 2
         ' 
         ' POGridInner
@@ -1719,7 +1719,7 @@ Partial Class MainWindow
         POGridInner.Dock = DockStyle.Top
         POGridInner.Location = New Point(0, 20)
         POGridInner.Name = "POGridInner"
-        POGridInner.Size = New Size(183, 210)
+        POGridInner.Size = New Size(183, 216)
         POGridInner.TabIndex = 3
         ' 
         ' POGridPart2
@@ -1731,7 +1731,7 @@ Partial Class MainWindow
         POGridPart2.Controls.Add(TableLayoutPanel5, 0, 1)
         POGridPart2.Controls.Add(TableLayoutPanel4, 0, 0)
         POGridPart2.Dock = DockStyle.Top
-        POGridPart2.Location = New Point(0, 152)
+        POGridPart2.Location = New Point(0, 158)
         POGridPart2.Name = "POGridPart2"
         POGridPart2.RowCount = 2
         POGridPart2.RowStyles.Add(New RowStyle())
@@ -1765,9 +1765,9 @@ Partial Class MainWindow
         FlowLayoutPanel2.Controls.Add(cVSLockL)
         FlowLayoutPanel2.Controls.Add(cVSLock)
         FlowLayoutPanel2.Controls.Add(cVSLockR)
-        FlowLayoutPanel2.Location = New Point(114, 3)
+        FlowLayoutPanel2.Location = New Point(127, 3)
         FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-        FlowLayoutPanel2.Size = New Size(66, 23)
+        FlowLayoutPanel2.Size = New Size(53, 23)
         FlowLayoutPanel2.TabIndex = 72
         FlowLayoutPanel2.WrapContents = False
         ' 
@@ -1816,7 +1816,7 @@ Partial Class MainWindow
         Label5.Dock = DockStyle.Fill
         Label5.Location = New Point(3, 0)
         Label5.Name = "Label5"
-        Label5.Size = New Size(105, 29)
+        Label5.Size = New Size(118, 29)
         Label5.TabIndex = 39
         Label5.Text = "Vertical Scroll Lock"
         Label5.TextAlign = ContentAlignment.MiddleRight
@@ -1845,7 +1845,7 @@ Partial Class MainWindow
         Label1.Dock = DockStyle.Fill
         Label1.Location = New Point(3, 0)
         Label1.Name = "Label1"
-        Label1.Size = New Size(126, 29)
+        Label1.Size = New Size(138, 29)
         Label1.TabIndex = 43
         Label1.Text = "Number of B Columns"
         Label1.TextAlign = ContentAlignment.MiddleRight
@@ -1853,11 +1853,11 @@ Partial Class MainWindow
         ' CGB
         ' 
         CGB.Dock = DockStyle.Fill
-        CGB.Location = New Point(135, 3)
+        CGB.Location = New Point(147, 3)
         CGB.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
         CGB.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         CGB.Name = "CGB"
-        CGB.Size = New Size(45, 23)
+        CGB.Size = New Size(33, 23)
         CGB.TabIndex = 35
         CGB.Value = New Decimal(New Integer() {15, 0, 0, 0})
         ' 
@@ -1869,10 +1869,10 @@ Partial Class MainWindow
         POGridExpander.Dock = DockStyle.Top
         POGridExpander.FlatAppearance.BorderSize = 0
         POGridExpander.FlatStyle = FlatStyle.Popup
-        POGridExpander.Location = New Point(0, 127)
+        POGridExpander.Location = New Point(0, 131)
         POGridExpander.Margin = New Padding(0)
         POGridExpander.Name = "POGridExpander"
-        POGridExpander.Size = New Size(183, 25)
+        POGridExpander.Size = New Size(183, 27)
         POGridExpander.TabIndex = 27
         POGridExpander.TabStop = False
         POGridExpander.Text = "Expand..."
@@ -1898,7 +1898,7 @@ Partial Class MainWindow
         POGridPart1.RowStyles.Add(New RowStyle())
         POGridPart1.RowStyles.Add(New RowStyle())
         POGridPart1.RowStyles.Add(New RowStyle(SizeType.Absolute, 20F))
-        POGridPart1.Size = New Size(183, 127)
+        POGridPart1.Size = New Size(183, 131)
         POGridPart1.TabIndex = 11
         ' 
         ' TableLayoutPanel3
@@ -2006,10 +2006,10 @@ Partial Class MainWindow
         ' CGDisableVertical
         ' 
         CGDisableVertical.AutoSize = True
-        CGDisableVertical.Location = New Point(3, 108)
+        CGDisableVertical.Location = New Point(3, 110)
         CGDisableVertical.Margin = New Padding(3, 0, 3, 0)
         CGDisableVertical.Name = "CGDisableVertical"
-        CGDisableVertical.Size = New Size(162, 19)
+        CGDisableVertical.Size = New Size(177, 21)
         CGDisableVertical.TabIndex = 45
         CGDisableVertical.Text = "Disable vertical moves (D)"
         CGDisableVertical.UseVisualStyleBackColor = True
@@ -2022,7 +2022,7 @@ Partial Class MainWindow
         CGSnap.Location = New Point(3, 89)
         CGSnap.Margin = New Padding(3, 3, 3, 0)
         CGSnap.Name = "CGSnap"
-        CGSnap.Size = New Size(109, 19)
+        CGSnap.Size = New Size(121, 21)
         CGSnap.TabIndex = 10
         CGSnap.Text = "Snap to grid (G)"
         CGSnap.UseVisualStyleBackColor = True
@@ -2121,7 +2121,7 @@ Partial Class MainWindow
         POHeader.Dock = DockStyle.Top
         POHeader.Location = New Point(0, 0)
         POHeader.Name = "POHeader"
-        POHeader.Size = New Size(183, 530)
+        POHeader.Size = New Size(183, 538)
         POHeader.TabIndex = 1
         ' 
         ' POHeaderInner
@@ -2134,7 +2134,7 @@ Partial Class MainWindow
         POHeaderInner.Dock = DockStyle.Top
         POHeaderInner.Location = New Point(0, 20)
         POHeaderInner.Name = "POHeaderInner"
-        POHeaderInner.Size = New Size(183, 510)
+        POHeaderInner.Size = New Size(183, 518)
         POHeaderInner.TabIndex = 2
         ' 
         ' POHeaderPart2
@@ -2179,7 +2179,7 @@ Partial Class MainWindow
         POHeaderPart2.Controls.Add(BHPreview, 2, 11)
         POHeaderPart2.Controls.Add(CHLnmode, 1, 12)
         POHeaderPart2.Dock = DockStyle.Top
-        POHeaderPart2.Location = New Point(0, 208)
+        POHeaderPart2.Location = New Point(0, 212)
         POHeaderPart2.Name = "POHeaderPart2"
         POHeaderPart2.RowCount = 13
         POHeaderPart2.RowStyles.Add(New RowStyle())
@@ -2195,7 +2195,7 @@ Partial Class MainWindow
         POHeaderPart2.RowStyles.Add(New RowStyle())
         POHeaderPart2.RowStyles.Add(New RowStyle())
         POHeaderPart2.RowStyles.Add(New RowStyle(SizeType.Absolute, 20F))
-        POHeaderPart2.Size = New Size(183, 302)
+        POHeaderPart2.Size = New Size(183, 306)
         POHeaderPart2.TabIndex = 27
         ' 
         ' CHDifficulty
@@ -2205,20 +2205,20 @@ Partial Class MainWindow
         CHDifficulty.DropDownStyle = ComboBoxStyle.DropDownList
         CHDifficulty.FlatStyle = FlatStyle.System
         CHDifficulty.Items.AddRange(New Object() {"None", "1 - EZ / Beginner", "2 - NM / Normal", "3 - HD / Hyper", "4 - MX / Another", "5 - SC / Insane"})
-        CHDifficulty.Location = New Point(67, 118)
+        CHDifficulty.Location = New Point(73, 118)
         CHDifficulty.Margin = New Padding(0)
         CHDifficulty.Name = "CHDifficulty"
-        CHDifficulty.Size = New Size(116, 23)
+        CHDifficulty.Size = New Size(110, 25)
         CHDifficulty.TabIndex = 63
         ' 
         ' Label13
         ' 
         Label13.AutoSize = True
         Label13.Dock = DockStyle.Fill
-        Label13.Location = New Point(158, 141)
+        Label13.Location = New Point(156, 143)
         Label13.Margin = New Padding(3, 0, 0, 0)
         Label13.Name = "Label13"
-        Label13.Size = New Size(25, 23)
+        Label13.Size = New Size(27, 23)
         Label13.TabIndex = 63
         Label13.Text = "(%)"
         Label13.TextAlign = ContentAlignment.MiddleLeft
@@ -2226,10 +2226,10 @@ Partial Class MainWindow
         ' THExRank
         ' 
         THExRank.Dock = DockStyle.Fill
-        THExRank.Location = New Point(67, 141)
+        THExRank.Location = New Point(73, 143)
         THExRank.Margin = New Padding(0)
         THExRank.Name = "THExRank"
-        THExRank.Size = New Size(88, 23)
+        THExRank.Size = New Size(80, 23)
         THExRank.TabIndex = 27
         ' 
         ' CHLnObj
@@ -2239,19 +2239,19 @@ Partial Class MainWindow
         CHLnObj.DropDownStyle = ComboBoxStyle.DropDownList
         CHLnObj.FlatStyle = FlatStyle.System
         CHLnObj.Items.AddRange(New Object() {"None (#LnType 1)", "01", "02", "03", "04", "05", "06", "07", "08", "09", "0A", "0B", "0C", "0D", "0E", "0F", "0G", "0H", "0I", "0J", "0K", "0L", "0M", "0N", "0O", "0P", "0Q", "0R", "0S", "0T", "0U", "0V", "0W", "0X", "0Y", "0Z", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "1A", "1B", "1C", "1D", "1E", "1F", "1G", "1H", "1I", "1J", "1K", "1L", "1M", "1N", "1O", "1P", "1Q", "1R", "1S", "1T", "1U", "1V", "1W", "1X", "1Y", "1Z", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "2A", "2B", "2C", "2D", "2E", "2F", "2G", "2H", "2I", "2J", "2K", "2L", "2M", "2N", "2O", "2P", "2Q", "2R", "2S", "2T", "2U", "2V", "2W", "2X", "2Y", "2Z", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "3A", "3B", "3C", "3D", "3E", "3F", "3G", "3H", "3I", "3J", "3K", "3L", "3M", "3N", "3O", "3P", "3Q", "3R", "3S", "3T", "3U", "3V", "3W", "3X", "3Y", "3Z", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "4A", "4B", "4C", "4D", "4E", "4F", "4G", "4H", "4I", "4J", "4K", "4L", "4M", "4N", "4O", "4P", "4Q", "4R", "4S", "4T", "4U", "4V", "4W", "4X", "4Y", "4Z", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "5A", "5B", "5C", "5D", "5E", "5F", "5G", "5H", "5I", "5J", "5K", "5L", "5M", "5N", "5O", "5P", "5Q", "5R", "5S", "5T", "5U", "5V", "5W", "5X", "5Y", "5Z", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "6A", "6B", "6C", "6D", "6E", "6F", "6G", "6H", "6I", "6J", "6K", "6L", "6M", "6N", "6O", "6P", "6Q", "6R", "6S", "6T", "6U", "6V", "6W", "6X", "6Y", "6Z", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "7A", "7B", "7C", "7D", "7E", "7F", "7G", "7H", "7I", "7J", "7K", "7L", "7M", "7N", "7O", "7P", "7Q", "7R", "7S", "7T", "7U", "7V", "7W", "7X", "7Y", "7Z", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "8A", "8B", "8C", "8D", "8E", "8F", "8G", "8H", "8I", "8J", "8K", "8L", "8M", "8N", "8O", "8P", "8Q", "8R", "8S", "8T", "8U", "8V", "8W", "8X", "8Y", "8Z", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "9A", "9B", "9C", "9D", "9E", "9F", "9G", "9H", "9I", "9J", "9K", "9L", "9M", "9N", "9O", "9P", "9Q", "9R", "9S", "9T", "9U", "9V", "9W", "9X", "9Y", "9Z", "A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "AI", "AJ", "AK", "AL", "AM", "AN", "AO", "AP", "AQ", "AR", "AS", "AT", "AU", "AV", "AW", "AX", "AY", "AZ", "B0", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B9", "BA", "BB", "BC", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BK", "BL", "BM", "BN", "BO", "BP", "BQ", "BR", "BS", "BT", "BU", "BV", "BW", "BX", "BY", "BZ", "C0", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "CA", "CB", "CC", "CD", "CE", "CF", "CG", "CH", "CI", "CJ", "CK", "CL", "CM", "CN", "CO", "CP", "CQ", "CR", "CS", "CT", "CU", "CV", "CW", "CX", "CY", "CZ", "D0", "D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "DA", "DB", "DC", "DD", "DE", "DF", "DG", "DH", "DI", "DJ", "DK", "DL", "DM", "DN", "DO", "DP", "DQ", "DR", "DS", "DT", "DU", "DV", "DW", "DX", "DY", "DZ", "E0", "E1", "E2", "E3", "E4", "E5", "E6", "E7", "E8", "E9", "EA", "EB", "EC", "ED", "EE", "EF", "EG", "EH", "EI", "EJ", "EK", "EL", "EM", "EN", "EO", "EP", "EQ", "ER", "ES", "ET", "EU", "EV", "EW", "EX", "EY", "EZ", "F0", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "FA", "FB", "FC", "FD", "FE", "FF", "FG", "FH", "FI", "FJ", "FK", "FL", "FM", "FN", "FO", "FP", "FQ", "FR", "FS", "FT", "FU", "FV", "FW", "FX", "FY", "FZ", "G0", "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9", "GA", "GB", "GC", "GD", "GE", "GF", "GG", "GH", "GI", "GJ", "GK", "GL", "GM", "GN", "GO", "GP", "GQ", "GR", "GS", "GT", "GU", "GV", "GW", "GX", "GY", "GZ", "H0", "H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9", "HA", "HB", "HC", "HD", "HE", "HF", "HG", "HH", "HI", "HJ", "HK", "HL", "HM", "HN", "HO", "HP", "HQ", "HR", "HS", "HT", "HU", "HV", "HW", "HX", "HY", "HZ", "I0", "I1", "I2", "I3", "I4", "I5", "I6", "I7", "I8", "I9", "IA", "IB", "IC", "ID", "IE", "IF", "IG", "IH", "II", "IJ", "IK", "IL", "IM", "IN", "IO", "IP", "IQ", "IR", "IS", "IT", "IU", "IV", "IW", "IX", "IY", "IZ", "J0", "J1", "J2", "J3", "J4", "J5", "J6", "J7", "J8", "J9", "JA", "JB", "JC", "JD", "JE", "JF", "JG", "JH", "JI", "JJ", "JK", "JL", "JM", "JN", "JO", "JP", "JQ", "JR", "JS", "JT", "JU", "JV", "JW", "JX", "JY", "JZ", "K0", "K1", "K2", "K3", "K4", "K5", "K6", "K7", "K8", "K9", "KA", "KB", "KC", "KD", "KE", "KF", "KG", "KH", "KI", "KJ", "KK", "KL", "KM", "KN", "KO", "KP", "KQ", "KR", "KS", "KT", "KU", "KV", "KW", "KX", "KY", "KZ", "L0", "L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "LA", "LB", "LC", "LD", "LE", "LF", "LG", "LH", "LI", "LJ", "LK", "LL", "LM", "LN", "LO", "LP", "LQ", "LR", "LS", "LT", "LU", "LV", "LW", "LX", "LY", "LZ", "M0", "M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "MA", "MB", "MC", "MD", "ME", "MF", "MG", "MH", "MI", "MJ", "MK", "ML", "MM", "MN", "MO", "MP", "MQ", "MR", "MS", "MT", "MU", "MV", "MW", "MX", "MY", "MZ", "N0", "N1", "N2", "N3", "N4", "N5", "N6", "N7", "N8", "N9", "NA", "NB", "NC", "ND", "NE", "NF", "NG", "NH", "NI", "NJ", "NK", "NL", "NM", "NN", "NO", "NP", "NQ", "NR", "NS", "NT", "NU", "NV", "NW", "NX", "NY", "NZ", "O0", "O1", "O2", "O3", "O4", "O5", "O6", "O7", "O8", "O9", "OA", "OB", "OC", "OD", "OE", "OF", "OG", "OH", "OI", "OJ", "OK", "OL", "OM", "ON", "OO", "OP", "OQ", "OR", "OS", "OT", "OU", "OV", "OW", "OX", "OY", "OZ", "P0", "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9", "PA", "PB", "PC", "PD", "PE", "PF", "PG", "PH", "PI", "PJ", "PK", "PL", "PM", "PN", "PO", "PP", "PQ", "PR", "PS", "PT", "PU", "PV", "PW", "PX", "PY", "PZ", "Q0", "Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "QA", "QB", "QC", "QD", "QE", "QF", "QG", "QH", "QI", "QJ", "QK", "QL", "QM", "QN", "QO", "QP", "QQ", "QR", "QS", "QT", "QU", "QV", "QW", "QX", "QY", "QZ", "R0", "R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8", "R9", "RA", "RB", "RC", "RD", "RE", "RF", "RG", "RH", "RI", "RJ", "RK", "RL", "RM", "RN", "RO", "RP", "RQ", "RR", "RS", "RT", "RU", "RV", "RW", "RX", "RY", "RZ", "S0", "S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9", "SA", "SB", "SC", "SD", "SE", "SF", "SG", "SH", "SI", "SJ", "SK", "SL", "SM", "SN", "SO", "SP", "SQ", "SR", "SS", "ST", "SU", "SV", "SW", "SX", "SY", "SZ", "T0", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "TA", "TB", "TC", "TD", "TE", "TF", "TG", "TH", "TI", "TJ", "TK", "TL", "TM", "TN", "TO", "TP", "TQ", "TR", "TS", "TT", "TU", "TV", "TW", "TX", "TY", "TZ", "U0", "U1", "U2", "U3", "U4", "U5", "U6", "U7", "U8", "U9", "UA", "UB", "UC", "UD", "UE", "UF", "UG", "UH", "UI", "UJ", "UK", "UL", "UM", "UN", "UO", "UP", "UQ", "UR", "US", "UT", "UU", "UV", "UW", "UX", "UY", "UZ", "V0", "V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "VA", "VB", "VC", "VD", "VE", "VF", "VG", "VH", "VI", "VJ", "VK", "VL", "VM", "VN", "VO", "VP", "VQ", "VR", "VS", "VT", "VU", "VV", "VW", "VX", "VY", "VZ", "W0", "W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8", "W9", "WA", "WB", "WC", "WD", "WE", "WF", "WG", "WH", "WI", "WJ", "WK", "WL", "WM", "WN", "WO", "WP", "WQ", "WR", "WS", "WT", "WU", "WV", "WW", "WX", "WY", "WZ", "X0", "X1", "X2", "X3", "X4", "X5", "X6", "X7", "X8", "X9", "XA", "XB", "XC", "XD", "XE", "XF", "XG", "XH", "XI", "XJ", "XK", "XL", "XM", "XN", "XO", "XP", "XQ", "XR", "XS", "XT", "XU", "XV", "XW", "XX", "XY", "XZ", "Y0", "Y1", "Y2", "Y3", "Y4", "Y5", "Y6", "Y7", "Y8", "Y9", "YA", "YB", "YC", "YD", "YE", "YF", "YG", "YH", "YI", "YJ", "YK", "YL", "YM", "YN", "YO", "YP", "YQ", "YR", "YS", "YT", "YU", "YV", "YW", "YX", "YY", "YZ", "Z0", "Z1", "Z2", "Z3", "Z4", "Z5", "Z6", "Z7", "Z8", "Z9", "ZA", "ZB", "ZC", "ZD", "ZE", "ZF", "ZG", "ZH", "ZI", "ZJ", "ZK", "ZL", "ZM", "ZN", "ZO", "ZP", "ZQ", "ZR", "ZS", "ZT", "ZU", "ZV", "ZW", "ZX", "ZY", "ZZ"})
-        CHLnObj.Location = New Point(67, 187)
+        CHLnObj.Location = New Point(73, 189)
         CHLnObj.Margin = New Padding(0)
         CHLnObj.Name = "CHLnObj"
-        CHLnObj.Size = New Size(116, 23)
+        CHLnObj.Size = New Size(110, 25)
         CHLnObj.TabIndex = 28
         ' 
         ' Label23
         ' 
         Label23.Anchor = AnchorStyles.Right
         Label23.AutoSize = True
-        Label23.Location = New Point(19, 145)
+        Label23.Location = New Point(20, 146)
         Label23.Name = "Label23"
-        Label23.Size = New Size(45, 15)
+        Label23.Size = New Size(50, 17)
         Label23.TabIndex = 26
         Label23.Text = "ExRank"
         Label23.TextAlign = ContentAlignment.MiddleRight
@@ -2260,9 +2260,9 @@ Partial Class MainWindow
         ' 
         Label21.Anchor = AnchorStyles.Right
         Label21.AutoSize = True
-        Label21.Location = New Point(9, 122)
+        Label21.Location = New Point(13, 122)
         Label21.Name = "Label21"
-        Label21.Size = New Size(55, 15)
+        Label21.Size = New Size(57, 17)
         Label21.TabIndex = 25
         Label21.Text = "Difficulty"
         Label21.TextAlign = ContentAlignment.MiddleRight
@@ -2271,19 +2271,19 @@ Partial Class MainWindow
         ' 
         POHeaderPart2.SetColumnSpan(THComment, 2)
         THComment.Dock = DockStyle.Fill
-        THComment.Location = New Point(67, 164)
+        THComment.Location = New Point(73, 166)
         THComment.Margin = New Padding(0)
         THComment.Name = "THComment"
-        THComment.Size = New Size(116, 23)
+        THComment.Size = New Size(110, 23)
         THComment.TabIndex = 19
         ' 
         ' Label24
         ' 
         Label24.Anchor = AnchorStyles.Right
         Label24.AutoSize = True
-        Label24.Location = New Point(25, 191)
+        Label24.Location = New Point(28, 193)
         Label24.Name = "Label24"
-        Label24.Size = New Size(39, 15)
+        Label24.Size = New Size(42, 17)
         Label24.TabIndex = 27
         Label24.Text = "LnObj"
         Label24.TextAlign = ContentAlignment.MiddleRight
@@ -2292,9 +2292,9 @@ Partial Class MainWindow
         ' 
         Label15.Anchor = AnchorStyles.Right
         Label15.AutoSize = True
-        Label15.Location = New Point(15, 4)
+        Label15.Location = New Point(16, 3)
         Label15.Name = "Label15"
-        Label15.Size = New Size(49, 15)
+        Label15.Size = New Size(54, 17)
         Label15.TabIndex = 6
         Label15.Text = "SubTitle"
         Label15.TextAlign = ContentAlignment.MiddleRight
@@ -2303,10 +2303,10 @@ Partial Class MainWindow
         ' 
         BHStageFile.Dock = DockStyle.Fill
         BHStageFile.FlatStyle = FlatStyle.System
-        BHStageFile.Location = New Point(158, 46)
+        BHStageFile.Location = New Point(156, 46)
         BHStageFile.Margin = New Padding(3, 0, 0, 0)
         BHStageFile.Name = "BHStageFile"
-        BHStageFile.Size = New Size(25, 24)
+        BHStageFile.Size = New Size(27, 24)
         BHStageFile.TabIndex = 20
         BHStageFile.Text = "..."
         BHStageFile.UseVisualStyleBackColor = True
@@ -2315,10 +2315,10 @@ Partial Class MainWindow
         ' 
         BHBanner.Dock = DockStyle.Fill
         BHBanner.FlatStyle = FlatStyle.System
-        BHBanner.Location = New Point(158, 70)
+        BHBanner.Location = New Point(156, 70)
         BHBanner.Margin = New Padding(3, 0, 0, 0)
         BHBanner.Name = "BHBanner"
-        BHBanner.Size = New Size(25, 24)
+        BHBanner.Size = New Size(27, 24)
         BHBanner.TabIndex = 21
         BHBanner.Text = "..."
         BHBanner.UseVisualStyleBackColor = True
@@ -2327,9 +2327,9 @@ Partial Class MainWindow
         ' 
         Label19.Anchor = AnchorStyles.Right
         Label19.AutoSize = True
-        Label19.Location = New Point(3, 168)
+        Label19.Location = New Point(6, 169)
         Label19.Name = "Label19"
-        Label19.Size = New Size(61, 15)
+        Label19.Size = New Size(64, 17)
         Label19.TabIndex = 13
         Label19.Text = "Comment"
         Label19.TextAlign = ContentAlignment.MiddleRight
@@ -2338,10 +2338,10 @@ Partial Class MainWindow
         ' 
         BHBackBMP.Dock = DockStyle.Fill
         BHBackBMP.FlatStyle = FlatStyle.System
-        BHBackBMP.Location = New Point(158, 94)
+        BHBackBMP.Location = New Point(156, 94)
         BHBackBMP.Margin = New Padding(3, 0, 0, 0)
         BHBackBMP.Name = "BHBackBMP"
-        BHBackBMP.Size = New Size(25, 24)
+        BHBackBMP.Size = New Size(27, 24)
         BHBackBMP.TabIndex = 22
         BHBackBMP.Text = "..."
         BHBackBMP.UseVisualStyleBackColor = True
@@ -2350,9 +2350,9 @@ Partial Class MainWindow
         ' 
         Label17.Anchor = AnchorStyles.Right
         Label17.AutoSize = True
-        Label17.Location = New Point(9, 27)
+        Label17.Location = New Point(10, 26)
         Label17.Name = "Label17"
-        Label17.Size = New Size(55, 15)
+        Label17.Size = New Size(60, 17)
         Label17.TabIndex = 7
         Label17.Text = "SubArtist"
         Label17.TextAlign = ContentAlignment.MiddleRight
@@ -2361,9 +2361,9 @@ Partial Class MainWindow
         ' 
         Label16.Anchor = AnchorStyles.Right
         Label16.AutoSize = True
-        Label16.Location = New Point(7, 50)
+        Label16.Location = New Point(6, 49)
         Label16.Name = "Label16"
-        Label16.Size = New Size(57, 15)
+        Label16.Size = New Size(64, 17)
         Label16.TabIndex = 9
         Label16.Text = "Stage File"
         Label16.TextAlign = ContentAlignment.MiddleRight
@@ -2372,9 +2372,9 @@ Partial Class MainWindow
         ' 
         Label12.Anchor = AnchorStyles.Right
         Label12.AutoSize = True
-        Label12.Location = New Point(20, 74)
+        Label12.Location = New Point(21, 73)
         Label12.Name = "Label12"
-        Label12.Size = New Size(44, 15)
+        Label12.Size = New Size(49, 17)
         Label12.TabIndex = 13
         Label12.Text = "Banner"
         Label12.TextAlign = ContentAlignment.MiddleRight
@@ -2382,19 +2382,19 @@ Partial Class MainWindow
         ' THBackBMP
         ' 
         THBackBMP.Dock = DockStyle.Fill
-        THBackBMP.Location = New Point(67, 94)
+        THBackBMP.Location = New Point(73, 94)
         THBackBMP.Margin = New Padding(0)
         THBackBMP.Name = "THBackBMP"
-        THBackBMP.Size = New Size(88, 23)
+        THBackBMP.Size = New Size(80, 23)
         THBackBMP.TabIndex = 17
         ' 
         ' Label11
         ' 
         Label11.Anchor = AnchorStyles.Right
         Label11.AutoSize = True
-        Label11.Location = New Point(4, 98)
+        Label11.Location = New Point(3, 97)
         Label11.Name = "Label11"
-        Label11.Size = New Size(60, 15)
+        Label11.Size = New Size(67, 17)
         Label11.TabIndex = 16
         Label11.Text = "Back BMP"
         Label11.TextAlign = ContentAlignment.MiddleRight
@@ -2402,48 +2402,48 @@ Partial Class MainWindow
         ' THBanner
         ' 
         THBanner.Dock = DockStyle.Fill
-        THBanner.Location = New Point(67, 70)
+        THBanner.Location = New Point(73, 70)
         THBanner.Margin = New Padding(0)
         THBanner.Name = "THBanner"
-        THBanner.Size = New Size(88, 23)
+        THBanner.Size = New Size(80, 23)
         THBanner.TabIndex = 19
         ' 
         ' THStageFile
         ' 
         THStageFile.Dock = DockStyle.Fill
-        THStageFile.Location = New Point(67, 46)
+        THStageFile.Location = New Point(73, 46)
         THStageFile.Margin = New Padding(0)
         THStageFile.Name = "THStageFile"
-        THStageFile.Size = New Size(88, 23)
+        THStageFile.Size = New Size(80, 23)
         THStageFile.TabIndex = 18
         ' 
         ' THSubTitle
         ' 
         POHeaderPart2.SetColumnSpan(THSubTitle, 2)
         THSubTitle.Dock = DockStyle.Fill
-        THSubTitle.Location = New Point(67, 0)
+        THSubTitle.Location = New Point(73, 0)
         THSubTitle.Margin = New Padding(0)
         THSubTitle.Name = "THSubTitle"
-        THSubTitle.Size = New Size(116, 23)
+        THSubTitle.Size = New Size(110, 23)
         THSubTitle.TabIndex = 6
         ' 
         ' THSubArtist
         ' 
         POHeaderPart2.SetColumnSpan(THSubArtist, 2)
         THSubArtist.Dock = DockStyle.Fill
-        THSubArtist.Location = New Point(67, 23)
+        THSubArtist.Location = New Point(73, 23)
         THSubArtist.Margin = New Padding(0)
         THSubArtist.Name = "THSubArtist"
-        THSubArtist.Size = New Size(116, 23)
+        THSubArtist.Size = New Size(110, 23)
         THSubArtist.TabIndex = 7
         ' 
         ' Label26
         ' 
         Label26.Anchor = AnchorStyles.Right
         Label26.AutoSize = True
-        Label26.Location = New Point(13, 214)
+        Label26.Location = New Point(12, 217)
         Label26.Name = "Label26"
-        Label26.Size = New Size(51, 15)
+        Label26.Size = New Size(58, 17)
         Label26.TabIndex = 29
         Label26.Text = "#WAV00"
         Label26.TextAlign = ContentAlignment.MiddleRight
@@ -2452,9 +2452,9 @@ Partial Class MainWindow
         ' 
         Label27.Anchor = AnchorStyles.Right
         Label27.AutoSize = True
-        Label27.Location = New Point(13, 238)
+        Label27.Location = New Point(13, 241)
         Label27.Name = "Label27"
-        Label27.Size = New Size(51, 15)
+        Label27.Size = New Size(57, 17)
         Label27.TabIndex = 32
         Label27.Text = "#BMP00"
         Label27.TextAlign = ContentAlignment.MiddleRight
@@ -2462,20 +2462,20 @@ Partial Class MainWindow
         ' THLandMine
         ' 
         THLandMine.Dock = DockStyle.Fill
-        THLandMine.Location = New Point(67, 210)
+        THLandMine.Location = New Point(73, 214)
         THLandMine.Margin = New Padding(0)
         THLandMine.Name = "THLandMine"
-        THLandMine.Size = New Size(88, 23)
+        THLandMine.Size = New Size(80, 23)
         THLandMine.TabIndex = 30
         ' 
         ' BHLandMine
         ' 
         BHLandMine.Dock = DockStyle.Fill
         BHLandMine.FlatStyle = FlatStyle.System
-        BHLandMine.Location = New Point(158, 210)
+        BHLandMine.Location = New Point(156, 214)
         BHLandMine.Margin = New Padding(3, 0, 0, 0)
         BHLandMine.Name = "BHLandMine"
-        BHLandMine.Size = New Size(25, 24)
+        BHLandMine.Size = New Size(27, 24)
         BHLandMine.TabIndex = 31
         BHLandMine.Text = "..."
         BHLandMine.UseVisualStyleBackColor = True
@@ -2483,20 +2483,20 @@ Partial Class MainWindow
         ' THMissBMP
         ' 
         THMissBMP.Dock = DockStyle.Fill
-        THMissBMP.Location = New Point(67, 234)
+        THMissBMP.Location = New Point(73, 238)
         THMissBMP.Margin = New Padding(0)
         THMissBMP.Name = "THMissBMP"
-        THMissBMP.Size = New Size(88, 23)
+        THMissBMP.Size = New Size(80, 23)
         THMissBMP.TabIndex = 33
         ' 
         ' BHMissBMP
         ' 
         BHMissBMP.Dock = DockStyle.Fill
         BHMissBMP.FlatStyle = FlatStyle.System
-        BHMissBMP.Location = New Point(158, 234)
+        BHMissBMP.Location = New Point(156, 238)
         BHMissBMP.Margin = New Padding(3, 0, 0, 0)
         BHMissBMP.Name = "BHMissBMP"
-        BHMissBMP.Size = New Size(25, 24)
+        BHMissBMP.Size = New Size(27, 24)
         BHMissBMP.TabIndex = 34
         BHMissBMP.Text = "..."
         BHMissBMP.UseVisualStyleBackColor = True
@@ -2505,9 +2505,9 @@ Partial Class MainWindow
         ' 
         Label28.Anchor = AnchorStyles.Right
         Label28.AutoSize = True
-        Label28.Location = New Point(16, 262)
+        Label28.Location = New Point(18, 265)
         Label28.Name = "Label28"
-        Label28.Size = New Size(48, 15)
+        Label28.Size = New Size(52, 17)
         Label28.TabIndex = 35
         Label28.Text = "Preview"
         Label28.TextAlign = ContentAlignment.MiddleRight
@@ -2516,9 +2516,9 @@ Partial Class MainWindow
         ' 
         Label29.Anchor = AnchorStyles.Right
         Label29.AutoSize = True
-        Label29.Location = New Point(11, 284)
+        Label29.Location = New Point(12, 287)
         Label29.Name = "Label29"
-        Label29.Size = New Size(53, 15)
+        Label29.Size = New Size(58, 17)
         Label29.TabIndex = 38
         Label29.Text = "LNmode"
         Label29.TextAlign = ContentAlignment.MiddleRight
@@ -2526,20 +2526,20 @@ Partial Class MainWindow
         ' THPreview
         ' 
         THPreview.Dock = DockStyle.Fill
-        THPreview.Location = New Point(67, 258)
+        THPreview.Location = New Point(73, 262)
         THPreview.Margin = New Padding(0)
         THPreview.Name = "THPreview"
-        THPreview.Size = New Size(88, 23)
+        THPreview.Size = New Size(80, 23)
         THPreview.TabIndex = 36
         ' 
         ' BHPreview
         ' 
         BHPreview.Dock = DockStyle.Fill
         BHPreview.FlatStyle = FlatStyle.System
-        BHPreview.Location = New Point(158, 258)
+        BHPreview.Location = New Point(156, 262)
         BHPreview.Margin = New Padding(3, 0, 0, 0)
         BHPreview.Name = "BHPreview"
-        BHPreview.Size = New Size(25, 24)
+        BHPreview.Size = New Size(27, 24)
         BHPreview.TabIndex = 37
         BHPreview.Text = "..."
         BHPreview.UseVisualStyleBackColor = True
@@ -2551,10 +2551,10 @@ Partial Class MainWindow
         CHLnmode.DropDownStyle = ComboBoxStyle.DropDownList
         CHLnmode.FlatStyle = FlatStyle.System
         CHLnmode.Items.AddRange(New Object() {"Selectable", "LN only", "CN only", "HN only"})
-        CHLnmode.Location = New Point(67, 282)
+        CHLnmode.Location = New Point(73, 286)
         CHLnmode.Margin = New Padding(0)
         CHLnmode.Name = "CHLnmode"
-        CHLnmode.Size = New Size(116, 23)
+        CHLnmode.Size = New Size(110, 25)
         CHLnmode.TabIndex = 39
         ' 
         ' POHeaderExpander
@@ -2566,7 +2566,7 @@ Partial Class MainWindow
         POHeaderExpander.FlatAppearance.BorderSize = 0
         POHeaderExpander.FlatStyle = FlatStyle.Popup
         POHeaderExpander.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        POHeaderExpander.Location = New Point(0, 181)
+        POHeaderExpander.Location = New Point(0, 185)
         POHeaderExpander.Margin = New Padding(0)
         POHeaderExpander.Name = "POHeaderExpander"
         POHeaderExpander.Size = New Size(183, 27)
@@ -2613,7 +2613,7 @@ Partial Class MainWindow
         POHeaderPart1.RowStyles.Add(New RowStyle())
         POHeaderPart1.RowStyles.Add(New RowStyle())
         POHeaderPart1.RowStyles.Add(New RowStyle(SizeType.Absolute, 20F))
-        POHeaderPart1.Size = New Size(183, 181)
+        POHeaderPart1.Size = New Size(183, 185)
         POHeaderPart1.TabIndex = 25
         ' 
         ' Label3
@@ -2621,9 +2621,9 @@ Partial Class MainWindow
         Label3.Anchor = AnchorStyles.Right
         Label3.AutoSize = True
         Label3.BackColor = SystemColors.Control
-        Label3.Location = New Point(33, 4)
+        Label3.Location = New Point(35, 3)
         Label3.Name = "Label3"
-        Label3.Size = New Size(29, 15)
+        Label3.Size = New Size(32, 17)
         Label3.TabIndex = 6
         Label3.Text = "Title"
         Label3.TextAlign = ContentAlignment.MiddleRight
@@ -2632,10 +2632,10 @@ Partial Class MainWindow
         ' 
         POHeaderPart1.SetColumnSpan(THPlayLevel, 2)
         THPlayLevel.Dock = DockStyle.Fill
-        THPlayLevel.Location = New Point(65, 138)
+        THPlayLevel.Location = New Point(70, 142)
         THPlayLevel.Margin = New Padding(0)
         THPlayLevel.Name = "THPlayLevel"
-        THPlayLevel.Size = New Size(118, 23)
+        THPlayLevel.Size = New Size(113, 23)
         THPlayLevel.TabIndex = 8
         ' 
         ' CHRank
@@ -2645,19 +2645,19 @@ Partial Class MainWindow
         CHRank.DropDownStyle = ComboBoxStyle.DropDownList
         CHRank.FlatStyle = FlatStyle.System
         CHRank.Items.AddRange(New Object() {"0 - Very Hard", "1 - Hard", "2 - Normal", "3 - Easy", "4 - Very Easy"})
-        CHRank.Location = New Point(65, 115)
+        CHRank.Location = New Point(70, 117)
         CHRank.Margin = New Padding(0)
         CHRank.Name = "CHRank"
-        CHRank.Size = New Size(118, 23)
+        CHRank.Size = New Size(113, 25)
         CHRank.TabIndex = 15
         ' 
         ' Label10
         ' 
         Label10.Anchor = AnchorStyles.Right
         Label10.AutoSize = True
-        Label10.Location = New Point(29, 119)
+        Label10.Location = New Point(30, 121)
         Label10.Name = "Label10"
-        Label10.Size = New Size(33, 15)
+        Label10.Size = New Size(37, 17)
         Label10.TabIndex = 16
         Label10.Text = "Rank"
         Label10.TextAlign = ContentAlignment.MiddleRight
@@ -2669,19 +2669,19 @@ Partial Class MainWindow
         CHPlayer.DropDownStyle = ComboBoxStyle.DropDownList
         CHPlayer.FlatStyle = FlatStyle.System
         CHPlayer.Items.AddRange(New Object() {"1 - Single Play", "2 - Couple Play", "3 - Double Play"})
-        CHPlayer.Location = New Point(65, 92)
+        CHPlayer.Location = New Point(70, 92)
         CHPlayer.Margin = New Padding(0)
         CHPlayer.Name = "CHPlayer"
-        CHPlayer.Size = New Size(118, 23)
+        CHPlayer.Size = New Size(113, 25)
         CHPlayer.TabIndex = 14
         ' 
         ' Label4
         ' 
         Label4.Anchor = AnchorStyles.Right
         Label4.AutoSize = True
-        Label4.Location = New Point(27, 27)
+        Label4.Location = New Point(29, 26)
         Label4.Name = "Label4"
-        Label4.Size = New Size(35, 15)
+        Label4.Size = New Size(38, 17)
         Label4.TabIndex = 7
         Label4.Text = "Artist"
         Label4.TextAlign = ContentAlignment.MiddleRight
@@ -2690,10 +2690,10 @@ Partial Class MainWindow
         ' 
         POHeaderPart1.SetColumnSpan(THGenre, 2)
         THGenre.Dock = DockStyle.Fill
-        THGenre.Location = New Point(65, 46)
+        THGenre.Location = New Point(70, 46)
         THGenre.Margin = New Padding(0)
         THGenre.Name = "THGenre"
-        THGenre.Size = New Size(118, 23)
+        THGenre.Size = New Size(113, 23)
         THGenre.TabIndex = 5
         ' 
         ' THBPM
@@ -2702,12 +2702,12 @@ Partial Class MainWindow
         THBPM.DecimalPlaces = 4
         THBPM.Dock = DockStyle.Fill
         THBPM.Increment = New Decimal(New Integer() {10, 0, 0, 0})
-        THBPM.Location = New Point(65, 69)
+        THBPM.Location = New Point(70, 69)
         THBPM.Margin = New Padding(0)
         THBPM.Maximum = New Decimal(New Integer() {655359999, 0, 0, 262144})
         THBPM.Minimum = New Decimal(New Integer() {1, 0, 0, 262144})
         THBPM.Name = "THBPM"
-        THBPM.Size = New Size(118, 23)
+        THBPM.Size = New Size(113, 23)
         THBPM.TabIndex = 10
         THBPM.Value = New Decimal(New Integer() {120, 0, 0, 0})
         ' 
@@ -2715,9 +2715,9 @@ Partial Class MainWindow
         ' 
         Label2.Anchor = AnchorStyles.Right
         Label2.AutoSize = True
-        Label2.Location = New Point(24, 50)
+        Label2.Location = New Point(24, 49)
         Label2.Name = "Label2"
-        Label2.Size = New Size(38, 15)
+        Label2.Size = New Size(43, 17)
         Label2.TabIndex = 5
         Label2.Text = "Genre"
         Label2.TextAlign = ContentAlignment.MiddleRight
@@ -2726,29 +2726,29 @@ Partial Class MainWindow
         ' 
         POHeaderPart1.SetColumnSpan(THArtist, 2)
         THArtist.Dock = DockStyle.Fill
-        THArtist.Location = New Point(65, 23)
+        THArtist.Location = New Point(70, 23)
         THArtist.Margin = New Padding(0)
         THArtist.Name = "THArtist"
-        THArtist.Size = New Size(118, 23)
+        THArtist.Size = New Size(113, 23)
         THArtist.TabIndex = 7
         ' 
         ' THTitle
         ' 
         POHeaderPart1.SetColumnSpan(THTitle, 2)
         THTitle.Dock = DockStyle.Fill
-        THTitle.Location = New Point(65, 0)
+        THTitle.Location = New Point(70, 0)
         THTitle.Margin = New Padding(0)
         THTitle.Name = "THTitle"
-        THTitle.Size = New Size(118, 23)
+        THTitle.Size = New Size(113, 23)
         THTitle.TabIndex = 6
         ' 
         ' Label9
         ' 
         Label9.Anchor = AnchorStyles.Right
         Label9.AutoSize = True
-        Label9.Location = New Point(30, 73)
+        Label9.Location = New Point(32, 72)
         Label9.Name = "Label9"
-        Label9.Size = New Size(32, 15)
+        Label9.Size = New Size(35, 17)
         Label9.TabIndex = 9
         Label9.Text = "BPM"
         Label9.TextAlign = ContentAlignment.MiddleRight
@@ -2757,9 +2757,9 @@ Partial Class MainWindow
         ' 
         Label8.Anchor = AnchorStyles.Right
         Label8.AutoSize = True
-        Label8.Location = New Point(23, 96)
+        Label8.Location = New Point(24, 96)
         Label8.Name = "Label8"
-        Label8.Size = New Size(39, 15)
+        Label8.Size = New Size(43, 17)
         Label8.TabIndex = 13
         Label8.Text = "Player"
         Label8.TextAlign = ContentAlignment.MiddleRight
@@ -2768,9 +2768,9 @@ Partial Class MainWindow
         ' 
         Label6.Anchor = AnchorStyles.Right
         Label6.AutoSize = True
-        Label6.Location = New Point(3, 142)
+        Label6.Location = New Point(3, 145)
         Label6.Name = "Label6"
-        Label6.Size = New Size(59, 15)
+        Label6.Size = New Size(64, 17)
         Label6.TabIndex = 8
         Label6.Text = "Play Level"
         Label6.TextAlign = ContentAlignment.MiddleRight
@@ -2778,19 +2778,19 @@ Partial Class MainWindow
         ' THTotal
         ' 
         THTotal.Dock = DockStyle.Fill
-        THTotal.Location = New Point(65, 161)
+        THTotal.Location = New Point(70, 165)
         THTotal.Margin = New Padding(0)
         THTotal.Name = "THTotal"
-        THTotal.Size = New Size(90, 23)
+        THTotal.Size = New Size(83, 23)
         THTotal.TabIndex = 5
         ' 
         ' Label20
         ' 
         Label20.Anchor = AnchorStyles.Right
         Label20.AutoSize = True
-        Label20.Location = New Point(30, 163)
+        Label20.Location = New Point(30, 166)
         Label20.Name = "Label20"
-        Label20.Size = New Size(32, 15)
+        Label20.Size = New Size(37, 17)
         Label20.TabIndex = 5
         Label20.Text = "Total"
         Label20.TextAlign = ContentAlignment.MiddleRight
@@ -2799,10 +2799,10 @@ Partial Class MainWindow
         ' 
         Label25.AutoSize = True
         Label25.Dock = DockStyle.Fill
-        Label25.Location = New Point(158, 161)
+        Label25.Location = New Point(156, 165)
         Label25.Margin = New Padding(3, 0, 0, 0)
         Label25.Name = "Label25"
-        Label25.Size = New Size(25, 20)
+        Label25.Size = New Size(27, 20)
         Label25.TabIndex = 23
         Label25.Text = "(%)"
         Label25.TextAlign = ContentAlignment.MiddleLeft
@@ -3008,7 +3008,7 @@ Partial Class MainWindow
         mnUndo.Image = CType(resources.GetObject("mnUndo.Image"), Image)
         mnUndo.Name = "mnUndo"
         mnUndo.ShortcutKeyDisplayString = "Ctrl+Z"
-        mnUndo.Size = New Size(252, 22)
+        mnUndo.Size = New Size(300, 22)
         mnUndo.Text = "&Undo"
         ' 
         ' mnRedo
@@ -3017,20 +3017,20 @@ Partial Class MainWindow
         mnRedo.Image = CType(resources.GetObject("mnRedo.Image"), Image)
         mnRedo.Name = "mnRedo"
         mnRedo.ShortcutKeyDisplayString = "Ctrl+Y"
-        mnRedo.Size = New Size(252, 22)
+        mnRedo.Size = New Size(300, 22)
         mnRedo.Text = "&Redo"
         ' 
         ' ToolStripSeparator17
         ' 
         ToolStripSeparator17.Name = "ToolStripSeparator17"
-        ToolStripSeparator17.Size = New Size(249, 6)
+        ToolStripSeparator17.Size = New Size(297, 6)
         ' 
         ' mnCut
         ' 
         mnCut.Image = CType(resources.GetObject("mnCut.Image"), Image)
         mnCut.Name = "mnCut"
         mnCut.ShortcutKeyDisplayString = "Ctrl+X"
-        mnCut.Size = New Size(252, 22)
+        mnCut.Size = New Size(300, 22)
         mnCut.Text = "Cu&t"
         ' 
         ' mnCopy
@@ -3038,7 +3038,7 @@ Partial Class MainWindow
         mnCopy.Image = CType(resources.GetObject("mnCopy.Image"), Image)
         mnCopy.Name = "mnCopy"
         mnCopy.ShortcutKeyDisplayString = "Ctrl+C"
-        mnCopy.Size = New Size(252, 22)
+        mnCopy.Size = New Size(300, 22)
         mnCopy.Text = "&Copy"
         ' 
         ' mnPaste
@@ -3046,7 +3046,7 @@ Partial Class MainWindow
         mnPaste.Image = CType(resources.GetObject("mnPaste.Image"), Image)
         mnPaste.Name = "mnPaste"
         mnPaste.ShortcutKeyDisplayString = "Ctrl+V"
-        mnPaste.Size = New Size(252, 22)
+        mnPaste.Size = New Size(300, 22)
         mnPaste.Text = "&Paste"
         ' 
         ' mnDelete
@@ -3054,34 +3054,34 @@ Partial Class MainWindow
         mnDelete.Image = CType(resources.GetObject("mnDelete.Image"), Image)
         mnDelete.Name = "mnDelete"
         mnDelete.ShortcutKeyDisplayString = "Del"
-        mnDelete.Size = New Size(252, 22)
+        mnDelete.Size = New Size(300, 22)
         mnDelete.Text = "De&lete"
         ' 
         ' mnSelectAll
         ' 
         mnSelectAll.Name = "mnSelectAll"
         mnSelectAll.ShortcutKeyDisplayString = "Ctrl+A"
-        mnSelectAll.Size = New Size(252, 22)
+        mnSelectAll.Size = New Size(300, 22)
         mnSelectAll.Text = "Select &All"
         ' 
         ' mnGotoMeasure
         ' 
         mnGotoMeasure.Name = "mnGotoMeasure"
         mnGotoMeasure.ShortcutKeys = Keys.Control Or Keys.G
-        mnGotoMeasure.Size = New Size(252, 22)
+        mnGotoMeasure.Size = New Size(300, 22)
         mnGotoMeasure.Text = "Go To Measure..."
         ' 
         ' ToolStripSeparator18
         ' 
         ToolStripSeparator18.Name = "ToolStripSeparator18"
-        ToolStripSeparator18.Size = New Size(249, 6)
+        ToolStripSeparator18.Size = New Size(297, 6)
         ' 
         ' mnFind
         ' 
         mnFind.Image = CType(resources.GetObject("mnFind.Image"), Image)
         mnFind.Name = "mnFind"
         mnFind.ShortcutKeyDisplayString = "Ctrl+F"
-        mnFind.Size = New Size(252, 22)
+        mnFind.Size = New Size(300, 22)
         mnFind.Text = "&Find / Delete / Replace"
         ' 
         ' mnStatistics
@@ -3089,13 +3089,13 @@ Partial Class MainWindow
         mnStatistics.Image = CType(resources.GetObject("mnStatistics.Image"), Image)
         mnStatistics.Name = "mnStatistics"
         mnStatistics.ShortcutKeyDisplayString = "Ctrl+T"
-        mnStatistics.Size = New Size(252, 22)
+        mnStatistics.Size = New Size(300, 22)
         mnStatistics.Text = "St&atistics"
         ' 
         ' ToolStripSeparator19
         ' 
         ToolStripSeparator19.Name = "ToolStripSeparator19"
-        ToolStripSeparator19.Size = New Size(249, 6)
+        ToolStripSeparator19.Size = New Size(297, 6)
         ' 
         ' mnTimeSelect
         ' 
@@ -3103,7 +3103,7 @@ Partial Class MainWindow
         mnTimeSelect.Image = CType(resources.GetObject("mnTimeSelect.Image"), Image)
         mnTimeSelect.Name = "mnTimeSelect"
         mnTimeSelect.ShortcutKeys = Keys.F1
-        mnTimeSelect.Size = New Size(252, 22)
+        mnTimeSelect.Size = New Size(300, 22)
         mnTimeSelect.Text = "T&ime Selection Tool"
         ' 
         ' mnSelect
@@ -3114,7 +3114,7 @@ Partial Class MainWindow
         mnSelect.Image = CType(resources.GetObject("mnSelect.Image"), Image)
         mnSelect.Name = "mnSelect"
         mnSelect.ShortcutKeys = Keys.F2
-        mnSelect.Size = New Size(252, 22)
+        mnSelect.Size = New Size(300, 22)
         mnSelect.Text = "&Select Tool"
         ' 
         ' mnWrite
@@ -3123,19 +3123,20 @@ Partial Class MainWindow
         mnWrite.Image = CType(resources.GetObject("mnWrite.Image"), Image)
         mnWrite.Name = "mnWrite"
         mnWrite.ShortcutKeys = Keys.F3
-        mnWrite.Size = New Size(252, 22)
+        mnWrite.Size = New Size(300, 22)
         mnWrite.Text = "&Write Tool"
         ' 
         ' ToolStripSeparator23
         ' 
         ToolStripSeparator23.Name = "ToolStripSeparator23"
-        ToolStripSeparator23.Size = New Size(249, 6)
+        ToolStripSeparator23.Size = New Size(297, 6)
         ' 
         ' mnMyO2
         ' 
         mnMyO2.Image = CType(resources.GetObject("mnMyO2.Image"), Image)
         mnMyO2.Name = "mnMyO2"
-        mnMyO2.Size = New Size(252, 22)
+        mnMyO2.ShortcutKeys = Keys.Control Or Keys.F4
+        mnMyO2.Size = New Size(300, 22)
         mnMyO2.Text = "MyO2 ToolBox (Chinese Only)"
         ' 
         ' mnSys
@@ -4373,7 +4374,7 @@ Partial Class MainWindow
         Controls.Add(POptionsResizer)
         Controls.Add(POptionsScroll)
         DoubleBuffered = True
-        Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         KeyPreview = True
         MainMenuStrip = mnMain
@@ -4627,10 +4628,6 @@ Partial Class MainWindow
     Friend WithEvents TBExportIBMSC As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TBExportBMSON As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents TBCut As System.Windows.Forms.ToolStripButton
-    Friend WithEvents TBCopy As System.Windows.Forms.ToolStripButton
-    Friend WithEvents TBPaste As System.Windows.Forms.ToolStripButton
-    Friend WithEvents TBFind As System.Windows.Forms.ToolStripButton
     Friend WithEvents TBStatistics As System.Windows.Forms.ToolStripButton
     Friend WithEvents pStatus As System.Windows.Forms.Panel
     Friend WithEvents FStatus As System.Windows.Forms.StatusStrip
@@ -4858,4 +4855,8 @@ Partial Class MainWindow
     Friend WithEvents TBWavIncrease As ToolStripButton
     Friend WithEvents TimeStatusLabel As ToolStripStatusLabel
     Friend WithEvents BConvertStop As ToolStripButton
+    Friend WithEvents TBCut As ToolStripButton
+    Friend WithEvents TBCopy As ToolStripButton
+    Friend WithEvents TBPaste As ToolStripButton
+    Friend WithEvents TBFind As ToolStripButton
 End Class

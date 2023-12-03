@@ -1,4 +1,3 @@
-Imports System.Linq
 Imports iBMSC.Editor
 
 
@@ -4921,5 +4920,9 @@ case2:              Dim xI0 As Integer
 
             PanelVScroll(PanelFocus) = -MeasureBottom(i)
         End If
+    End Sub
+
+    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
+
     End Sub
 End Class
