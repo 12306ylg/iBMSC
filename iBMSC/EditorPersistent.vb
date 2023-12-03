@@ -372,7 +372,7 @@ Partial Public Class MainWindow
                     Case "ASCII" : TextEncoding = System.Text.Encoding.ASCII
                     Case "BIG ENDIAN UTF16" : TextEncoding = System.Text.Encoding.BigEndianUnicode
                     Case "LITTLE ENDIAN UTF32" : TextEncoding = System.Text.Encoding.UTF32
-                    Case "UTF7" : TextEncoding = System.Text.Encoding.UTF7
+                    'Case "UTF7" : TextEncoding = System.Text.Encoding.UTF7
                     Case "UTF8" : TextEncoding = System.Text.Encoding.UTF8
                     Case "SJIS" : TextEncoding = System.Text.Encoding.GetEncoding(932)
                     Case "EUC-KR" : TextEncoding = System.Text.Encoding.GetEncoding(51949)

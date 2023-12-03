@@ -22,56 +22,56 @@ Partial Class fLoadFileProgress
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Cancel_Button = New System.Windows.Forms.Button
-        Me.prog = New System.Windows.Forms.ProgressBar
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.SuspendLayout()
-        '
-        'Cancel_Button
-        '
-        Me.Cancel_Button.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel_Button.Location = New System.Drawing.Point(245, 81)
-        Me.Cancel_Button.Name = "Cancel_Button"
-        Me.Cancel_Button.Size = New System.Drawing.Size(120, 27)
-        Me.Cancel_Button.TabIndex = 1
-        Me.Cancel_Button.Text = "Cancel"
-        '
-        'prog
-        '
-        Me.prog.Location = New System.Drawing.Point(15, 60)
-        Me.prog.Name = "prog"
-        Me.prog.Size = New System.Drawing.Size(584, 15)
-        Me.prog.TabIndex = 2
-        '
-        'Label1
-        '
-        Me.Label1.Location = New System.Drawing.Point(12, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(587, 48)
-        Me.Label1.TabIndex = 3
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'fLoadFileProgress
-        '
-        Me.AcceptButton = Me.Cancel_Button
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.CancelButton = Me.Cancel_Button
-        Me.ClientSize = New System.Drawing.Size(611, 120)
-        Me.ControlBox = False
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.prog)
-        Me.Controls.Add(Me.Cancel_Button)
-        Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
-        Me.Name = "fLoadFileProgress"
-        Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Loading Files"
-        Me.TopMost = True
-        Me.ResumeLayout(False)
+        Cancel_Button = New Button()
+        prog = New ProgressBar()
+        Label1 = New Label()
+        SuspendLayout()
+        ' 
+        ' Cancel_Button
+        ' 
+        Cancel_Button.Anchor = AnchorStyles.Bottom
+        Cancel_Button.DialogResult = DialogResult.Cancel
+        Cancel_Button.Location = New Point(245, 81)
+        Cancel_Button.Name = "Cancel_Button"
+        Cancel_Button.Size = New Size(120, 27)
+        Cancel_Button.TabIndex = 1
+        Cancel_Button.Text = "Cancel"
+        ' 
+        ' prog
+        ' 
+        prog.Location = New Point(15, 60)
+        prog.Name = "prog"
+        prog.Size = New Size(584, 15)
+        prog.TabIndex = 2
+        ' 
+        ' Label1
+        ' 
+        Label1.Location = New Point(12, 9)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(587, 48)
+        Label1.TabIndex = 3
+        Label1.TextAlign = ContentAlignment.MiddleLeft
+        ' 
+        ' fLoadFileProgress
+        ' 
+        AcceptButton = Cancel_Button
+        AutoScaleMode = AutoScaleMode.None
+        CancelButton = Cancel_Button
+        ClientSize = New Size(611, 120)
+        ControlBox = False
+        Controls.Add(Label1)
+        Controls.Add(prog)
+        Controls.Add(Cancel_Button)
+        Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        FormBorderStyle = FormBorderStyle.FixedDialog
+        MaximizeBox = False
+        MinimizeBox = False
+        Name = "fLoadFileProgress"
+        ShowInTaskbar = False
+        StartPosition = FormStartPosition.CenterScreen
+        Text = "Loading Files"
+        TopMost = True
+        ResumeLayout(False)
 
     End Sub
     Friend WithEvents Cancel_Button As System.Windows.Forms.Button

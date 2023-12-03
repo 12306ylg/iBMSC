@@ -38,7 +38,7 @@ Public Class OpGeneral
             Case 2 : zEncoding = System.Text.Encoding.ASCII
             Case 3 : zEncoding = System.Text.Encoding.BigEndianUnicode
             Case 4 : zEncoding = System.Text.Encoding.UTF32
-            Case 5 : zEncoding = System.Text.Encoding.UTF7
+            'Case 5 : zEncoding = System.Text.Encoding.UTF7
             Case 6 : zEncoding = System.Text.Encoding.UTF8
             Case 7 : zEncoding = System.Text.Encoding.GetEncoding(932)
             Case 8 : zEncoding = System.Text.Encoding.GetEncoding(51949)
