@@ -25,16 +25,16 @@ Partial Class MainWindow
         TBLangDef = New ToolStripMenuItem()
         TBLangRefresh = New ToolStripMenuItem()
         ToolStripSeparator9 = New ToolStripSeparator()
-        mnLanguage = New ToolStripMenuItem()
         TBLanguage = New ToolStripDropDownButton()
+        mnLanguage = New ToolStripMenuItem()
         cmnTheme = New ContextMenuStrip(components)
         TBThemeDef = New ToolStripMenuItem()
         TBThemeSave = New ToolStripMenuItem()
         TBThemeRefresh = New ToolStripMenuItem()
         TBThemeLoadComptability = New ToolStripMenuItem()
         ToolStripSeparator6 = New ToolStripSeparator()
-        mnTheme = New ToolStripMenuItem()
         TBTheme = New ToolStripDropDownButton()
+        mnTheme = New ToolStripMenuItem()
         POptionsScroll = New Panel()
         POptions = New Panel()
         POExpansion = New Panel()
@@ -286,11 +286,11 @@ Partial Class MainWindow
         ToolStripSeparator11 = New ToolStripSeparator()
         POBModify = New ToolStripMenuItem()
         POBMirror = New ToolStripMenuItem()
-        POConvert = New ToolStripDropDownButton()
         mnPreview = New ToolStripMenuItem()
         mnPlayB = New ToolStripMenuItem()
         mnPlay = New ToolStripMenuItem()
         mnStop = New ToolStripMenuItem()
+        POConvert = New ToolStripDropDownButton()
         TBMain = New ToolStrip()
         TBNew = New ToolStripButton()
         TBOpen = New ToolStripSplitButton()
@@ -469,7 +469,7 @@ Partial Class MainWindow
         ' 
         cmnLanguage.Items.AddRange(New ToolStripItem() {TBLangDef, TBLangRefresh, ToolStripSeparator9})
         cmnLanguage.Name = "cmnLanguage"
-        cmnLanguage.OwnerItem = TBLanguage
+        cmnLanguage.OwnerItem = mnLanguage
         cmnLanguage.Size = New Size(126, 54)
         ' 
         ' TBLangDef
@@ -490,14 +490,6 @@ Partial Class MainWindow
         ToolStripSeparator9.Name = "ToolStripSeparator9"
         ToolStripSeparator9.Size = New Size(122, 6)
         ' 
-        ' mnLanguage
-        ' 
-        mnLanguage.DropDown = cmnLanguage
-        mnLanguage.Image = CType(resources.GetObject("mnLanguage.Image"), Image)
-        mnLanguage.Name = "mnLanguage"
-        mnLanguage.Size = New Size(247, 22)
-        mnLanguage.Text = "&Language"
-        ' 
         ' TBLanguage
         ' 
         TBLanguage.DisplayStyle = ToolStripItemDisplayStyle.Image
@@ -508,11 +500,19 @@ Partial Class MainWindow
         TBLanguage.Size = New Size(29, 22)
         TBLanguage.Text = "Language"
         ' 
+        ' mnLanguage
+        ' 
+        mnLanguage.DropDown = cmnLanguage
+        mnLanguage.Image = CType(resources.GetObject("mnLanguage.Image"), Image)
+        mnLanguage.Name = "mnLanguage"
+        mnLanguage.Size = New Size(247, 22)
+        mnLanguage.Text = "&Language"
+        ' 
         ' cmnTheme
         ' 
         cmnTheme.Items.AddRange(New ToolStripItem() {TBThemeDef, TBThemeSave, TBThemeRefresh, TBThemeLoadComptability, ToolStripSeparator6})
         cmnTheme.Name = "cmnLanguage"
-        cmnTheme.OwnerItem = TBTheme
+        cmnTheme.OwnerItem = mnTheme
         cmnTheme.Size = New Size(266, 98)
         ' 
         ' TBThemeDef
@@ -546,14 +546,6 @@ Partial Class MainWindow
         ToolStripSeparator6.Name = "ToolStripSeparator6"
         ToolStripSeparator6.Size = New Size(262, 6)
         ' 
-        ' mnTheme
-        ' 
-        mnTheme.DropDown = cmnTheme
-        mnTheme.Image = CType(resources.GetObject("mnTheme.Image"), Image)
-        mnTheme.Name = "mnTheme"
-        mnTheme.Size = New Size(247, 22)
-        mnTheme.Text = "&Theme"
-        ' 
         ' TBTheme
         ' 
         TBTheme.DisplayStyle = ToolStripItemDisplayStyle.Image
@@ -563,6 +555,14 @@ Partial Class MainWindow
         TBTheme.Name = "TBTheme"
         TBTheme.Size = New Size(29, 22)
         TBTheme.Text = "Theme"
+        ' 
+        ' mnTheme
+        ' 
+        mnTheme.DropDown = cmnTheme
+        mnTheme.Image = CType(resources.GetObject("mnTheme.Image"), Image)
+        mnTheme.Name = "mnTheme"
+        mnTheme.Size = New Size(247, 22)
+        mnTheme.Text = "&Theme"
         ' 
         ' POptionsScroll
         ' 
@@ -3397,6 +3397,7 @@ Partial Class MainWindow
         ' 
         cmnConversion.Items.AddRange(New ToolStripItem() {POBLong, POBShort, POBLongShort, ToolStripSeparator10, POBHidden, POBVisible, POBHiddenVisible, ToolStripSeparator11, POBModify, POBMirror})
         cmnConversion.Name = "cmnLanguage"
+        cmnConversion.OwnerItem = POConvert
         cmnConversion.Size = New Size(241, 192)
         ' 
         ' POBLong
@@ -3467,16 +3468,6 @@ Partial Class MainWindow
         POBMirror.Size = New Size(240, 22)
         POBMirror.Text = "Mi&rror"
         ' 
-        ' POConvert
-        ' 
-        POConvert.DisplayStyle = ToolStripItemDisplayStyle.Image
-        POConvert.DropDown = cmnConversion
-        POConvert.Image = CType(resources.GetObject("POConvert.Image"), Image)
-        POConvert.ImageTransparentColor = Color.Magenta
-        POConvert.Name = "POConvert"
-        POConvert.Size = New Size(29, 22)
-        POConvert.Text = "Convert Notes"
-        ' 
         ' mnPreview
         ' 
         mnPreview.DropDownItems.AddRange(New ToolStripItem() {mnPlayB, mnPlay, mnStop})
@@ -3507,6 +3498,16 @@ Partial Class MainWindow
         mnStop.ShortcutKeys = Keys.F7
         mnStop.Size = New Size(214, 22)
         mnStop.Text = "&Stop"
+        ' 
+        ' POConvert
+        ' 
+        POConvert.DisplayStyle = ToolStripItemDisplayStyle.Image
+        POConvert.DropDown = cmnConversion
+        POConvert.Image = CType(resources.GetObject("POConvert.Image"), Image)
+        POConvert.ImageTransparentColor = Color.Magenta
+        POConvert.Name = "POConvert"
+        POConvert.Size = New Size(29, 22)
+        POConvert.Text = "Convert Notes"
         ' 
         ' TBMain
         ' 
