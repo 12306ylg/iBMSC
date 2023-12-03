@@ -45,7 +45,7 @@ Public Class OpVisual
 
 
 
-    Public Sub New(ByVal xvo As visualSettings, ByVal xcol() As Column, ByVal monoFont As Font)
+    Public Sub New(xvo As visualSettings, xcol() As Column, monoFont As Font)
         InitializeComponent()
 
         'eColor = xeColor
@@ -200,18 +200,18 @@ Public Class OpVisual
         Next
     End Sub
 
-    Private Sub cButtonChange(ByVal xbutton As Button, ByVal c As Color)
+    Private Sub cButtonChange(xbutton As Button, c As Color)
         xbutton.Text = Hex(c.ToArgb)
         xbutton.BackColor = c
         xbutton.ForeColor = IIf(CInt(c.GetBrightness * 255) + 255 - c.A >= 128, Color.Black, Color.White)
     End Sub
 
-    Private Sub fButtonChange(ByVal xbutton As Button, ByVal f As Font)
+    Private Sub fButtonChange(xbutton As Button, f As Font)
         xbutton.Text = f.FontFamily.Name
         xbutton.Font = f
     End Sub
 
-    Private Sub OK_Button_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles OK_Button.Click
+    Private Sub OK_Button_Click(sender As Object, e As EventArgs) Handles OK_Button.Click
         'With Form1
 
         '-----------------------------------------------
@@ -306,16 +306,16 @@ Public Class OpVisual
 
         MainWindow.column = col
 
-        DialogResult = System.Windows.Forms.DialogResult.OK
+        DialogResult = DialogResult.OK
         Close()
     End Sub
 
-    Private Sub Cancel_Button_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
-        DialogResult = System.Windows.Forms.DialogResult.Cancel
+    Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
+        DialogResult = DialogResult.Cancel
         Close()
     End Sub
 
-    Private Sub OpVisual_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub OpVisual_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Font = MainWindow.Font
 
         'Language
@@ -615,7 +615,7 @@ Public Class OpVisual
     '    Panel2.Visible = rb2.Checked
     'End Sub
     '
-    Private Sub BCClick(ByVal sender As Object, ByVal e As System.EventArgs) _
+    Private Sub BCClick(sender As Object, e As EventArgs) _
     Handles cColumnTitle.Click, _
             cBG.Click, _
             cGrid.Click, _
@@ -646,7 +646,7 @@ Public Class OpVisual
         'sender.ForeColor = IIf(eColor(xI).GetBrightness + (255 - eColor(xI).A) / 255 >= 0.5, Color.Black, Color.White)
     End Sub
 
-    Private Sub BFClick(ByVal sender As Object, ByVal e As System.EventArgs) _
+    Private Sub BFClick(sender As Object, e As EventArgs) _
     Handles fColumnTitle.Click, _
             fNoteLabel.Click, _
             fMeasureLabel.Click, _
@@ -730,7 +730,7 @@ Public Class OpVisual
     '    sender.BackColor = lBg(xI)
     '    sender.ForeColor = IIf(lBg(xI).GetBrightness + (255 - lBg(xI).A) / 255 >= 0.5, Color.Black, Color.White)
     'End Sub
-    Private Sub ButtonClick(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub ButtonClick(sender As Object, e As EventArgs)
         'Dim xI As Integer = Val(sender.Tag)
         Dim s As Button = CType(sender, Button)
         Dim xColorPicker As New ColorPicker
@@ -759,7 +759,7 @@ Public Class OpVisual
         'jForeColor(xI).Backcolor = lColor(xI)
     End Sub
 
-    Private Function ColorArrayToIntArray(ByVal xC() As Color) As Integer()
+    Private Function ColorArrayToIntArray(xC() As Color) As Integer()
         Dim xI(UBound(xC)) As Integer
         For xI1 As Integer = 0 To UBound(xI)
             xI(xI1) = xC(xI1).ToArgb
@@ -767,7 +767,7 @@ Public Class OpVisual
         Return xI
     End Function
 
-    Private Function To4Hex(ByVal xInt As Integer) As String
+    Private Function To4Hex(xInt As Integer) As String
         Dim xCl As Color = Color.FromArgb(xInt)
         Return Hex(xCl.A) & vbCrLf & Hex(xCl.R) & vbCrLf & Hex(xCl.G) & vbCrLf & Hex(xCl.B)
     End Function

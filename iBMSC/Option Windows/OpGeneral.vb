@@ -9,11 +9,11 @@ Public Class OpGeneral
 
     'Dim lpfa() As String
 
-    <System.Runtime.InteropServices.DllImport("shell32.dll")> _
-    Public Shared Sub SHChangeNotify(ByVal wEventId As Integer, ByVal uFlags As Integer, ByVal dwItem1 As Integer, ByVal dwItem2 As Integer)
+    <DllImport("shell32.dll")> _
+    Public Shared Sub SHChangeNotify(wEventId As Integer, uFlags As Integer, dwItem1 As Integer, dwItem2 As Integer)
     End Sub
 
-    Private Sub OK_Button_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles OK_Button.Click
+    Private Sub OK_Button_Click(sender As Object, e As EventArgs) Handles OK_Button.Click
 
         Select Case CWheel.SelectedIndex
             Case 0 : zWheel = 192
@@ -45,18 +45,18 @@ Public Class OpGeneral
         zMiddle = IIf(rMiddleDrag.Checked, 1, 0)
         zAutoSave = IIf(cAutoSave.Checked, 1, 0) * NAutoSave.Value * 60000
         zGridPartition = nGridPartition.Value
-        DialogResult = System.Windows.Forms.DialogResult.OK
+        DialogResult = DialogResult.OK
         Close()
     End Sub
 
-    Private Sub Cancel_Button_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
-        DialogResult = System.Windows.Forms.DialogResult.Cancel
+    Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
+        DialogResult = DialogResult.Cancel
         Close()
     End Sub
 
-    Public Sub New(ByVal xMsWheel As Integer, ByVal xPgUpDn As Integer, ByVal xMiddleButton As Integer, ByVal xTextEncoding As Integer, ByVal xGridPartition As Integer, _
-                   ByVal xAutoSave As Integer, ByVal xBeep As Boolean, ByVal xBPMx As Boolean, ByVal xSTOPx As Boolean, _
-                   ByVal xMFEnter As Boolean, ByVal xMFClick As Boolean, ByVal xMStopPreview As Boolean)
+    Public Sub New(xMsWheel As Integer, xPgUpDn As Integer, xMiddleButton As Integer, xTextEncoding As Integer, xGridPartition As Integer, _
+                   xAutoSave As Integer, xBeep As Boolean, xBPMx As Boolean, xSTOPx As Boolean, _
+                   xMFEnter As Boolean, xMFClick As Boolean, xMStopPreview As Boolean)
         InitializeComponent()
 
         On Error Resume Next
@@ -98,7 +98,7 @@ Public Class OpGeneral
         cMStopPreview.Checked = xMStopPreview
     End Sub
 
-    Private Sub OpGeneral_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub OpGeneral_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Font = MainWindow.Font
 
         'lpfa = Form1.lpfa
@@ -135,27 +135,27 @@ Public Class OpGeneral
         Cancel_Button.Text = Strings.Cancel
     End Sub
 
-    Private Sub TBAssociate_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBAssociate.Click
+    Private Sub TBAssociate_Click(sender As Object, e As EventArgs) Handles TBAssociate.Click
         Associate(".bms", "iBMSC.BMS", Strings.FileAssociation.BMS, False)
     End Sub
 
-    Private Sub TBAssociateIBMSC_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBAssociateIBMSC.Click
+    Private Sub TBAssociateIBMSC_Click(sender As Object, e As EventArgs) Handles TBAssociateIBMSC.Click
         Associate(".ibmsc", "iBMSC.iBMSC", Strings.FileAssociation.IBMSC, True)
     End Sub
 
-    Private Sub TBAssociateBME_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBAssociateBME.Click
+    Private Sub TBAssociateBME_Click(sender As Object, e As EventArgs) Handles TBAssociateBME.Click
         Associate(".bme", "iBMSC.BME", Strings.FileAssociation.BME, False)
     End Sub
 
-    Private Sub TBAssociateBML_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBAssociateBML.Click
+    Private Sub TBAssociateBML_Click(sender As Object, e As EventArgs) Handles TBAssociateBML.Click
         Associate(".bml", "iBMSC.BML", Strings.FileAssociation.BML, False)
     End Sub
 
-    Private Sub TBAssociatePMS_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBAssociatePMS.Click
+    Private Sub TBAssociatePMS_Click(sender As Object, e As EventArgs) Handles TBAssociatePMS.Click
         Associate(".pms", "iBMSC.PMS", Strings.FileAssociation.PMS, False)
     End Sub
 
-    Private Sub Associate(ByVal xExt As String, ByVal xClass As String, ByVal xDescription As String, ByVal isIBMSC As Boolean)
+    Private Sub Associate(xExt As String, xClass As String, xDescription As String, isIBMSC As Boolean)
         If MsgBox(Replace(Strings.Messages.FileAssociationPrompt, "{}", "*" & xExt), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) <> MsgBoxResult.Yes Then Exit Sub
 
         Dim xReg As Microsoft.Win32.RegistryKey
@@ -354,7 +354,7 @@ Public Class OpGeneral
     '        Beep()
     '    End Sub
 
-    Private Sub cAutoSave_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cAutoSave.CheckedChanged
+    Private Sub cAutoSave_CheckedChanged(sender As Object, e As EventArgs) Handles cAutoSave.CheckedChanged
         NAutoSave.Enabled = cAutoSave.Checked
     End Sub
 End Class

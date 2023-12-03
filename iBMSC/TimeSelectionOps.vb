@@ -2,7 +2,7 @@ Imports iBMSC.Editor
 
 Partial Public Class MainWindow
 
-    Private Sub BVCCalculate_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BVCCalculate.Click
+    Private Sub BVCCalculate_Click(sender As Object, e As EventArgs) Handles BVCCalculate.Click
         If Not TBTimeSelect.Checked Then Exit Sub
 
         SortByVPositionInsertion()
@@ -17,7 +17,7 @@ Partial Public Class MainWindow
         TVCBPM.Focus()
     End Sub
 
-    Private Sub BVCApply_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BVCApply.Click
+    Private Sub BVCApply_Click(sender As Object, e As EventArgs) Handles BVCApply.Click
         If Not TBTimeSelect.Checked Then Exit Sub
 
         SortByVPositionInsertion()
@@ -38,7 +38,7 @@ Partial Public Class MainWindow
         'End Select
     End Sub
 
-    Private Sub BPMChangeTop(ByVal xRatio As Double, Optional ByVal bAddUndo As Boolean = True, Optional ByVal bOverWriteUndo As Boolean = False)
+    Private Sub BPMChangeTop(xRatio As Double, Optional bAddUndo As Boolean = True, Optional bOverWriteUndo As Boolean = False)
         'Dim xUndo As String = vbCrLf
         'Dim xRedo As String = vbCrLf
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
@@ -186,7 +186,7 @@ EndofSub:
         If bAddUndo Then AddUndo(xUndo, xBaseRedo.Next, bOverWriteUndo)
     End Sub
 
-    Private Sub BPMChangeHalf(ByVal dVPosition As Double, Optional ByVal bAddUndo As Boolean = True, Optional ByVal bOverWriteUndo As Boolean = False)
+    Private Sub BPMChangeHalf(dVPosition As Double, Optional bAddUndo As Boolean = True, Optional bOverWriteUndo As Boolean = False)
         'Dim xUndo As String = vbCrLf
         'Dim xRedo As String = vbCrLf
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
@@ -402,7 +402,7 @@ EndofSub:
         If bAddUndo Then AddUndo(xUndo, xBaseRedo.Next, bOverWriteUndo)
     End Sub
 
-    Private Sub BPMChangeByValue(ByVal xValue As Integer)
+    Private Sub BPMChangeByValue(xValue As Integer)
         'Dim xUndo As String = vbCrLf
         'Dim xRedo As String = vbCrLf
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing

@@ -1,5 +1,5 @@
 ﻿Partial Public Class MainWindow
-    Private Sub NewRecent(ByVal xFileName As String)
+    Private Sub NewRecent(xFileName As String)
         Dim xAlreadyExists As Boolean = False
         Dim xI1 As Integer
 
@@ -31,7 +31,7 @@
         SetRecent(0, Recent(0))
     End Sub
 
-    Private Sub SetRecent(ByVal Index As Integer, ByVal Text As String)
+    Private Sub SetRecent(Index As Integer, Text As String)
         Text = Text.Trim
 
         Dim xTBOpenR As ToolStripMenuItem
@@ -49,7 +49,7 @@
         xmnOpenR.Text = IIf(Text = "", "<" & Strings.None & ">", GetFileName(Text)) : xmnOpenR.ToolTipText = Text : xmnOpenR.Enabled = Not Text = ""
     End Sub
 
-    Private Sub OpenRecent(ByVal xFileName As String)
+    Private Sub OpenRecent(xFileName As String)
         'KMouseDown = -1
         ReDim SelectedNotes(-1)
         KMouseOver = -1
@@ -75,19 +75,19 @@
         End Select
     End Sub
 
-    Private Sub TBOpenR0_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBOpenR0.Click, mnOpenR0.Click
+    Private Sub TBOpenR0_Click(sender As Object, e As EventArgs) Handles TBOpenR0.Click, mnOpenR0.Click
         OpenRecent(Recent(0))
     End Sub
-    Private Sub TBOpenR1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBOpenR1.Click, mnOpenR1.Click
+    Private Sub TBOpenR1_Click(sender As Object, e As EventArgs) Handles TBOpenR1.Click, mnOpenR1.Click
         OpenRecent(Recent(1))
     End Sub
-    Private Sub TBOpenR2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBOpenR2.Click, mnOpenR2.Click
+    Private Sub TBOpenR2_Click(sender As Object, e As EventArgs) Handles TBOpenR2.Click, mnOpenR2.Click
         OpenRecent(Recent(2))
     End Sub
-    Private Sub TBOpenR3_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBOpenR3.Click, mnOpenR3.Click
+    Private Sub TBOpenR3_Click(sender As Object, e As EventArgs) Handles TBOpenR3.Click, mnOpenR3.Click
         OpenRecent(Recent(3))
     End Sub
-    Private Sub TBOpenR4_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBOpenR4.Click, mnOpenR4.Click
+    Private Sub TBOpenR4_Click(sender As Object, e As EventArgs) Handles TBOpenR4.Click, mnOpenR4.Click
         OpenRecent(Recent(4))
     End Sub
 

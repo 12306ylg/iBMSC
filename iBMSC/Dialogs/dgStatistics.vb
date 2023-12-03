@@ -1,16 +1,16 @@
 Public Class dgStatistics
 
-    Private Sub OK_Button_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles OK_Button.Click
-        DialogResult = System.Windows.Forms.DialogResult.OK
+    Private Sub OK_Button_Click(sender As Object, e As EventArgs) Handles OK_Button.Click
+        DialogResult = DialogResult.OK
         Close()
     End Sub
 
-    Private Sub Cancel_Button_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        DialogResult = System.Windows.Forms.DialogResult.Cancel
+    Private Sub Cancel_Button_Click(sender As Object, e As EventArgs)
+        DialogResult = DialogResult.Cancel
         Close()
     End Sub
 
-    Private Sub dgStatistics_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub dgStatistics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Font = MainWindow.Font
 
         Text = Strings.fStatistics.Title
@@ -30,7 +30,7 @@ Public Class dgStatistics
         OK_Button.Text = Strings.OK
     End Sub
 
-    Public Sub New(ByVal data(,) As Integer)
+    Public Sub New(data(,) As Integer)
         InitializeComponent()
 
         For row As Integer = 0 To 6

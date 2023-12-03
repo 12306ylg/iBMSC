@@ -28,7 +28,7 @@ Partial Public Class MainWindow
         End If
     End Function
 
-    Private Sub RefreshPanel(ByVal xIndex As Integer, ByVal DisplayRect As Rectangle)
+    Private Sub RefreshPanel(xIndex As Integer, DisplayRect As Rectangle)
         If WindowState = FormWindowState.Minimized Then Return
         If DisplayRect.Width <= 0 Or DisplayRect.Height <= 0 Then Return
         'If spMain.Count = 0 Then Return
@@ -160,7 +160,7 @@ Partial Public Class MainWindow
             Dim xBrush As New SolidBrush(Color.FromArgb(&HC0FFFFFF))
             Dim xCenterX As Single = spMain(xIndex).DisplayRectangle.Width / 2
             Dim xCenterY As Single = spMain(xIndex).DisplayRectangle.Height / 2
-            Dim xFormat As New System.Drawing.StringFormat With {
+            Dim xFormat As New StringFormat With {
                 .Alignment = StringAlignment.Center,
                 .LineAlignment = StringAlignment.Center
             }
@@ -521,7 +521,7 @@ Partial Public Class MainWindow
     ''' <param name="xVS">VS.Value.</param>
     ''' <param name="xHeight">Display height of the panel. (not ClipRectangle.Height)</param>
 
-    Private Sub DrawNote(ByVal sNote As Note, ByVal e As BufferedGraphics, ByVal xHS As Long, ByVal xVS As Long, ByVal xHeight As Integer) ', Optional ByVal CheckError As Boolean = True) ', Optional ByVal ConnectToIndex As Long = 0)
+    Private Sub DrawNote(sNote As Note, e As BufferedGraphics, xHS As Long, xVS As Long, xHeight As Integer) ', Optional ByVal CheckError As Boolean = True) ', Optional ByVal ConnectToIndex As Long = 0)
         If Not nEnabled(sNote.ColumnIndex) Then Exit Sub
         Dim xAlpha As Single = 1.0F
         If sNote.Hidden Then xAlpha = vo.kOpacity
@@ -630,7 +630,7 @@ Partial Public Class MainWindow
     ''' <param name="xVS">VS.Value.</param>
     ''' <param name="xHeight">Display height of the panel. (not ClipRectangle.Height)</param>
 
-    Private Sub DrawNoteNT(ByVal sNote As Note, ByVal e As BufferedGraphics, ByVal xHS As Long, ByVal xVS As Long, ByVal xHeight As Integer) ', Optional ByVal CheckError As Boolean = True)
+    Private Sub DrawNoteNT(sNote As Note, e As BufferedGraphics, xHS As Long, xVS As Long, xHeight As Integer) ', Optional ByVal CheckError As Boolean = True)
         If Not nEnabled(sNote.ColumnIndex) Then Exit Sub
         Dim xAlpha As Single = 1.0F
         If sNote.Hidden Then xAlpha = vo.kOpacity

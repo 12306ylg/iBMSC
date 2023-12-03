@@ -2,7 +2,7 @@
 
 Partial Public Class MainWindow
 
-    Private Sub PMainInPreviewKeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.PreviewKeyDownEventArgs) Handles PMainIn.PreviewKeyDown, PMainInL.PreviewKeyDown, PMainInR.PreviewKeyDown
+    Private Sub PMainInPreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles PMainIn.PreviewKeyDown, PMainInL.PreviewKeyDown, PMainInR.PreviewKeyDown
         If e.KeyCode = Keys.ShiftKey Or e.KeyCode = Keys.ControlKey Then
             RefreshPanelAll()
             POStatusRefresh()
@@ -133,7 +133,7 @@ Partial Public Class MainWindow
                 RefreshPanelAll()
 
             Case Keys.Delete
-                mnDelete_Click(mnDelete, New System.EventArgs)
+                mnDelete_Click(mnDelete, New EventArgs)
 
             Case Keys.Home
                 If PanelFocus = 0 Then LeftPanelScroll.Value = 0
@@ -387,7 +387,7 @@ Partial Public Class MainWindow
         RefreshPanelAll()
     End Sub
 
-    Private Sub PMainInResize(ByVal sender As Object, ByVal e As System.EventArgs) Handles PMainIn.Resize, PMainInL.Resize, PMainInR.Resize
+    Private Sub PMainInResize(sender As Object, e As EventArgs) Handles PMainIn.Resize, PMainInL.Resize, PMainInR.Resize
         If Not Created Then Exit Sub
 
         Dim iI As Integer = sender.Tag
@@ -415,11 +415,11 @@ Partial Public Class MainWindow
         RefreshPanel(iI, sender.DisplayRectangle)
     End Sub
 
-    Private Sub PMainInLostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles PMainIn.LostFocus, PMainInL.LostFocus, PMainInR.LostFocus
+    Private Sub PMainInLostFocus(sender As Object, e As EventArgs) Handles PMainIn.LostFocus, PMainInL.LostFocus, PMainInR.LostFocus
         RefreshPanelAll()
     End Sub
 
-    Private Sub PMainInMouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PMainIn.MouseDown, PMainInL.MouseDown, PMainInR.MouseDown
+    Private Sub PMainInMouseDown(sender As Object, e As MouseEventArgs) Handles PMainIn.MouseDown, PMainInL.MouseDown, PMainInR.MouseDown
         tempFirstMouseDown = FirstClickDisabled And Not sender.Focused
 
         PanelFocus = sender.Tag
@@ -437,7 +437,7 @@ Partial Public Class MainWindow
         Dim xHeight As Integer = spMain(PanelFocus).Height
 
         Select Case e.Button
-            Case Forms.MouseButtons.Left
+            Case MouseButtons.Left
                 If tempFirstMouseDown And Not TBTimeSelect.Checked Then RefreshPanelAll() : Exit Select
 
                 KMouseOver = -1
@@ -456,7 +456,7 @@ Partial Public Class MainWindow
                 RefreshPanelAll()
                 POStatusRefresh()
 
-            Case Forms.MouseButtons.Middle
+            Case MouseButtons.Middle
                 If MiddleButtonMoveMethod = 1 Then
                     tempX = e.X
                     tempY = e.Y
@@ -468,7 +468,7 @@ Partial Public Class MainWindow
                     TimerMiddle.Enabled = True
                 End If
 
-            Case Forms.MouseButtons.Right
+            Case MouseButtons.Right
                 DeselectOrRemove(e, xHS, xVS, xHeight)
         End Select
     End Sub
@@ -917,14 +917,14 @@ Partial Public Class MainWindow
                e.Y <= NoteRowToPanelHeight(note.VPosition, xVS, xHeight)
     End Function
 
-    Private Sub PMainInMouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles PMainIn.MouseEnter, PMainInL.MouseEnter, PMainInR.MouseEnter
+    Private Sub PMainInMouseEnter(sender As Object, e As EventArgs) Handles PMainIn.MouseEnter, PMainInL.MouseEnter, PMainInR.MouseEnter
         spMouseOver = sender.Tag
         Dim xPMainIn As Panel = sender
         If AutoFocusMouseEnter AndAlso Focused Then Dim unused1 = xPMainIn.Focus() : PanelFocus = spMouseOver
         If FirstMouseEnter Then FirstMouseEnter = False : Dim unused = xPMainIn.Focus() : PanelFocus = spMouseOver
     End Sub
 
-    Private Sub PMainInMouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles PMainIn.MouseLeave, PMainInL.MouseLeave, PMainInR.MouseLeave
+    Private Sub PMainInMouseLeave(sender As Object, e As EventArgs) Handles PMainIn.MouseLeave, PMainInL.MouseLeave, PMainInR.MouseLeave
         KMouseOver = -1
         'KMouseDown = -1
         ReDim SelectedNotes(-1)
@@ -933,12 +933,12 @@ Partial Public Class MainWindow
         RefreshPanelAll()
     End Sub
 
-    Private Sub PMainInMouseMove(ByVal sender As Panel)
+    Private Sub PMainInMouseMove(sender As Panel)
         Dim p As Point = sender.PointToClient(Cursor.Position)
         PMainInMouseMove(sender, New MouseEventArgs(MouseButtons.None, 0, p.X, p.Y, 0))
     End Sub
 
-    Private Sub PMainInMouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles PMainIn.MouseMove, PMainInL.MouseMove, PMainInR.MouseMove
+    Private Sub PMainInMouseMove(sender As Object, e As MouseEventArgs) Handles PMainIn.MouseMove, PMainInL.MouseMove, PMainInR.MouseMove
         MouseMoveStatus = e.Location
 
         Dim iI As Integer = sender.Tag
@@ -1633,7 +1633,7 @@ Partial Public Class MainWindow
     End Sub
 
 
-    Private Sub PMainInMouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles PMainIn.MouseUp, PMainInL.MouseUp, PMainInR.MouseUp
+    Private Sub PMainInMouseUp(sender As Object, e As MouseEventArgs) Handles PMainIn.MouseUp, PMainInL.MouseUp, PMainInR.MouseUp
         tempX = 0
         tempY = 0
         tempV = 0
@@ -1732,7 +1732,7 @@ Partial Public Class MainWindow
         RefreshPanelAll()
     End Sub
 
-    Private Sub PMainInMouseWheel(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PMainIn.MouseWheel, PMainInL.MouseWheel, PMainInR.MouseWheel
+    Private Sub PMainInMouseWheel(sender As Object, e As MouseEventArgs) Handles PMainIn.MouseWheel, PMainInL.MouseWheel, PMainInR.MouseWheel
         If MiddleButtonClicked Then MiddleButtonClicked = False
 
         Dim xI1 As Integer
@@ -1759,7 +1759,7 @@ Partial Public Class MainWindow
         End Select
     End Sub
 
-    Private Sub PMainInPaint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles PMainIn.Paint, PMainInL.Paint, PMainInR.Paint
+    Private Sub PMainInPaint(sender As Object, e As PaintEventArgs) Handles PMainIn.Paint, PMainInL.Paint, PMainInR.Paint
         RefreshPanel(sender.Tag, e.ClipRectangle)
     End Sub
 End Class

@@ -179,31 +179,31 @@ Partial Public Class MainWindow
         Return Add2Zeros(bmsBaseChannel)
     End Function
 
-    Private Function nLeft(ByVal iCol As Integer) As Integer
+    Private Function nLeft(iCol As Integer) As Integer
         If iCol < niB Then Return column(iCol).Left Else Return column(niB).Left + ((iCol - niB) * column(niB).Width)
     End Function
-    Private Function GetColumnWidth(ByVal iCol As Integer) As Integer
+    Private Function GetColumnWidth(iCol As Integer) As Integer
         If Not GetColumn(iCol).isVisible Then Return 0
         If iCol < niB Then Return column(iCol).Width Else Return column(niB).Width
     End Function
-    Private Function nTitle(ByVal iCol As Integer) As String
+    Private Function nTitle(iCol As Integer) As String
         If iCol < niB Then Return column(iCol).Title Else Return column(niB).Title & (iCol - niB + 1).ToString
     End Function
-    Private Function nEnabled(ByVal iCol As Integer) As Boolean
+    Private Function nEnabled(iCol As Integer) As Boolean
         'If iCol < niB Then Return col(iCol).Enabled And col(iCol).Visible Else Return col(niB).Enabled And col(niB).Visible
         If iCol < niB Then Return column(iCol).isEnabledAfterAll Else Return column(niB).isEnabledAfterAll
     End Function
-    Private Function IsColumnNumeric(ByVal iCol As Integer) As Boolean
+    Private Function IsColumnNumeric(iCol As Integer) As Boolean
         If iCol < niB Then Return column(iCol).isNumeric Else Return column(niB).isNumeric
     End Function
-    Private Function IsColumnSound(ByVal iCol As Integer) As Boolean
+    Private Function IsColumnSound(iCol As Integer) As Boolean
         If iCol < niB Then Return column(iCol).isSound Else Return column(niB).isSound
     End Function
-    Private Function IsColumnImage(ByVal iCol As Integer) As Boolean
+    Private Function IsColumnImage(iCol As Integer) As Boolean
         If iCol < niB Then Return Not (column(iCol).isNumeric Or column(iCol).isSound) Else Return Not (column(niB).isNumeric Or column(niB).isSound)
     End Function
 
-    Private Sub ChangePlaySide(ByVal swap As Boolean)
+    Private Sub ChangePlaySide(swap As Boolean)
         If Rscratch Then
             column(niA1).Identifier = 37
             column(niA2).Identifier = 38
@@ -247,7 +247,7 @@ Partial Public Class MainWindow
         ChangePlaySideSkin(swap)
     End Sub
 
-    Private Sub ChangePlaySideSkin(ByVal swap As Boolean)
+    Private Sub ChangePlaySideSkin(swap As Boolean)
         Dim tLeft(10)
         For i = 0 To 8 Step 1
             tLeft(i) = column(niA1 + i + 1).Left - column(niA1 + i).Left
@@ -338,11 +338,11 @@ Partial Public Class MainWindow
         Next
     End Sub
 
-    Private Function GetColumn(ByVal iCol As Integer) As Column
+    Private Function GetColumn(iCol As Integer) As Column
         If iCol < niB Then Return column(iCol) Else Return column(niB)
     End Function
 
-    Private Function BMSEChannelToColumnIndex(ByVal I As String)
+    Private Function BMSEChannelToColumnIndex(I As String)
         Dim Ivalue = Val(I)
         If Ivalue > 100 Then
             Return niB + Ivalue - 101
@@ -352,7 +352,7 @@ Partial Public Class MainWindow
         Return niB ' ??? how did a negative number get here?
     End Function
 
-    Private Function BMSChannelToColumn(ByVal I As String) As Integer
+    Private Function BMSChannelToColumn(I As String) As Integer
         Dim result As Integer = 0
         Select Case I
             Case "01" : Return niB

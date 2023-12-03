@@ -1,6 +1,6 @@
 ﻿Partial Public Class MainWindow
 
-    Public Sub MyO2ConstBPM(ByVal vBPM As Integer)
+    Public Sub MyO2ConstBPM(vBPM As Integer)
         SortByVPositionInsertion()
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
         Dim xRedo As UndoRedo.LinkedURCmd = New UndoRedo.Void
@@ -236,7 +236,7 @@
         Return xResult
     End Function
 
-    Public Sub MyO2GridAdjust(ByVal xaj() As dgMyO2.Adj)
+    Public Sub MyO2GridAdjust(xaj() As dgMyO2.Adj)
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
         Dim xRedo As UndoRedo.LinkedURCmd = New UndoRedo.Void
         Dim xBaseRedo As UndoRedo.LinkedURCmd = xRedo

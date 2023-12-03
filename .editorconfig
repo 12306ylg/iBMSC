@@ -4,13 +4,16 @@
 dotnet_diagnostic.CA1416.severity = none
 
 # IDE0001: 简化名称
-dotnet_diagnostic.IDE0001.severity = suggestion
+dotnet_diagnostic.IDE0001.severity = warning
 
 # IDE0002: 简化成员访问
-dotnet_diagnostic.IDE0002.severity = suggestion
+dotnet_diagnostic.IDE0002.severity = warning
 
 # IDE0081: "ByVal" 关键字是不必要的，可以删除。
 dotnet_diagnostic.IDE0081.severity = warning
 
 # IDE1006: 命名样式
 dotnet_diagnostic.IDE1006.severity = none
+
+# IDE0017: 简化对象初始化
+dotnet_diagnostic.IDE0017.severity = warning

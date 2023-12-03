@@ -1,7 +1,7 @@
 ﻿Imports iBMSC.Editor
 
 Partial Public Class MainWindow
-    Private Sub PerformCommand(ByVal sCmd As UndoRedo.LinkedURCmd)
+    Private Sub PerformCommand(sCmd As UndoRedo.LinkedURCmd)
         For xI2 As Integer = 1 To UBound(Notes)
             Notes(xI2).Selected = False
         Next
@@ -166,7 +166,7 @@ Partial Public Class MainWindow
         POStatusRefresh()
     End Sub
 
-    Private Sub AddUndo(ByVal sCUndo As UndoRedo.LinkedURCmd, ByVal sCRedo As UndoRedo.LinkedURCmd, Optional ByVal OverWrite As Boolean = False)
+    Private Sub AddUndo(sCUndo As UndoRedo.LinkedURCmd, sCRedo As UndoRedo.LinkedURCmd, Optional OverWrite As Boolean = False)
         If sCUndo Is Nothing And sCRedo Is Nothing Then Exit Sub
         If IsSaved Then SetIsSaved(False)
         If Not OverWrite Then sI = sIA()
@@ -204,7 +204,7 @@ Partial Public Class MainWindow
         mnRedo.Enabled = False
     End Sub
 
-    Private Sub RedoAddNote(ByVal note As Note,
+    Private Sub RedoAddNote(note As Note,
                             ByRef BaseUndo As UndoRedo.LinkedURCmd,
                             ByRef BaseRedo As UndoRedo.LinkedURCmd,
                             Optional autoinc As Boolean = False)
@@ -216,7 +216,7 @@ Partial Public Class MainWindow
         BaseRedo = xRedo
     End Sub
 
-    Private Sub RedoAddNote(ByVal xIndices() As Integer, ByVal xSel As Boolean, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
+    Private Sub RedoAddNote(xIndices() As Integer, xSel As Boolean, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
         For xI1 As Integer = 0 To UBound(xIndices)
             Dim xUndo As New UndoRedo.RemoveNote(Notes(xI1))
             Dim xRedo As New UndoRedo.AddNote(Notes(xI1))
@@ -227,7 +227,7 @@ Partial Public Class MainWindow
         Next
     End Sub
 
-    Private Sub RedoAddNoteSelected(ByVal xSel As Boolean, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
+    Private Sub RedoAddNoteSelected(xSel As Boolean, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
         For xI1 As Integer = 1 To UBound(Notes)
             If Not Notes(xI1).Selected Then Continue For
 
@@ -241,7 +241,7 @@ Partial Public Class MainWindow
         Next
     End Sub
 
-    Private Sub RedoAddNoteAll(ByVal xSel As Boolean, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
+    Private Sub RedoAddNoteAll(xSel As Boolean, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
         For xI1 As Integer = 1 To UBound(Notes)
 
             Dim xRedo As New UndoRedo.AddNote(Notes(xI1))
@@ -257,7 +257,7 @@ Partial Public Class MainWindow
     End Sub
 
 
-    Private Sub RedoRemoveNote(ByVal xN As Note, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
+    Private Sub RedoRemoveNote(xN As Note, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
         Dim xUndo As New UndoRedo.AddNote(xN)
         Dim xRedo As New UndoRedo.RemoveNote(xN)
         xUndo.Next = BaseUndo
@@ -266,7 +266,7 @@ Partial Public Class MainWindow
         BaseRedo = xRedo
     End Sub
 
-    Private Sub RedoRemoveNote(ByVal xIndices() As Integer, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
+    Private Sub RedoRemoveNote(xIndices() As Integer, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
         For xI1 As Integer = 0 To UBound(xIndices)
             Dim xUndo As New UndoRedo.AddNote(Notes(xIndices(xI1)))
             Dim xRedo As New UndoRedo.RemoveNote(Notes(xIndices(xI1)))
@@ -277,7 +277,7 @@ Partial Public Class MainWindow
         Next
     End Sub
 
-    Private Sub RedoRemoveNoteSelected(ByVal xSel As Boolean, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
+    Private Sub RedoRemoveNoteSelected(xSel As Boolean, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
         For xI1 As Integer = 1 To UBound(Notes)
             If Not Notes(xI1).Selected Then Continue For
             Dim xUndo As New UndoRedo.AddNote(Notes(xI1))
@@ -289,7 +289,7 @@ Partial Public Class MainWindow
         Next
     End Sub
 
-    Private Sub RedoRemoveNoteAll(ByVal xSel As Boolean, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
+    Private Sub RedoRemoveNoteAll(xSel As Boolean, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
         For xI1 As Integer = 1 To UBound(Notes)
             With Notes(xI1)
                 Dim xUndo As New UndoRedo.AddNote(Notes(xI1)) With {
@@ -351,7 +351,7 @@ Partial Public Class MainWindow
     End Sub
 
 
-    Private Sub RedoRelabelNote(ByVal xN As Note, ByVal nVal As Long, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
+    Private Sub RedoRelabelNote(xN As Note, nVal As Long, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
         Dim noteAfterModification = xN
         noteAfterModification.Value = nVal
         Dim xUndo As New UndoRedo.RelabelNote(noteAfterModification, xN.Value)
@@ -362,7 +362,7 @@ Partial Public Class MainWindow
         BaseRedo = xRedo
     End Sub
 
-    Private Sub RedoChangeMeasureLengthSelected(ByVal nVal As Double, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
+    Private Sub RedoChangeMeasureLengthSelected(nVal As Double, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
         Dim xIndices(LBeat.SelectedIndices.Count - 1) As Integer
         LBeat.SelectedIndices.CopyTo(xIndices, 0)
         If xIndices.Length = 0 Then Exit Sub
@@ -394,8 +394,8 @@ Partial Public Class MainWindow
         BaseRedo = xRedo
     End Sub
 
-    Private Sub RedoChangeTimeSelection(ByVal pStart As Double, ByVal pLen As Double, ByVal pHalf As Double,
-    ByVal nStart As Double, ByVal nLen As Double, ByVal nHalf As Double, ByVal xSel As Boolean, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
+    Private Sub RedoChangeTimeSelection(pStart As Double, pLen As Double, pHalf As Double,
+nStart As Double, nLen As Double, nHalf As Double, xSel As Boolean, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
         Dim xUndo As New UndoRedo.ChangeTimeSelection(pStart, pLen, pHalf, xSel)
         Dim xRedo As New UndoRedo.ChangeTimeSelection(nStart, nLen, nHalf, xSel)
         xUndo.Next = BaseUndo

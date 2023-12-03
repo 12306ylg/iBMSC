@@ -3,7 +3,7 @@ Public Class fLoadFileProgress
     Private CancelPressed As Boolean = False
     Private IsSaved As Boolean = False
 
-    Public Sub New(ByVal xxPath() As String, ByVal xIsSaved As Boolean, Optional ByVal TopMost As Boolean = True)
+    Public Sub New(xxPath() As String, xIsSaved As Boolean, Optional TopMost As Boolean = True)
         InitializeComponent()
         prog.Maximum = UBound(xxPath) + 1
         xPath = xxPath
@@ -11,13 +11,13 @@ Public Class fLoadFileProgress
         Me.TopMost = TopMost
     End Sub
 
-    Private Sub Cancel_Button_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
-        DialogResult = Forms.DialogResult.Cancel
+    Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
+        DialogResult = DialogResult.Cancel
         CancelPressed = True
         Close()
     End Sub
 
-    Private Sub fLoadFileProgress_Shown(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Shown
+    Private Sub fLoadFileProgress_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         On Error GoTo 0
         For xI1 = 0 To UBound(xPath)
             Label1.Text = "Currently loading ( " & (xI1 + 1) & " / " & (UBound(xPath) + 1) & " ): " & xPath(xI1)
@@ -33,7 +33,7 @@ Public Class fLoadFileProgress
         Close
     End Sub
 
-    Private Sub fLoadFileProgress_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub fLoadFileProgress_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Font = MainWindow.Font
         Cancel_Button.Text = Strings.Cancel
     End Sub

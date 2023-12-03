@@ -13,13 +13,13 @@ Public Class ColorPicker
         SetNewColor(xColor)
     End Sub
 
-    Private Sub OK_Button_Click(sender As Object, e As System.EventArgs) Handles OK_Button.Click
-        DialogResult = System.Windows.Forms.DialogResult.OK
+    Private Sub OK_Button_Click(sender As Object, e As EventArgs) Handles OK_Button.Click
+        DialogResult = DialogResult.OK
         Close()
     End Sub
 
-    Private Sub Cancel_Button_Click(sender As Object, e As System.EventArgs) Handles Cancel_Button.Click
-        DialogResult = System.Windows.Forms.DialogResult.Cancel
+    Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
+        DialogResult = DialogResult.Cancel
         Close()
     End Sub
 
@@ -89,11 +89,11 @@ Public Class ColorPicker
         Return Color.FromArgb(xA, xR, xG, xB)
     End Function
 
-    Private Sub PCMain_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles PCMain.MouseDown
+    Private Sub PCMain_MouseDown(sender As Object, e As MouseEventArgs) Handles PCMain.MouseDown
         PCMain_MouseMove(sender, e)
     End Sub
 
-    Private Sub PCMain_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles PCMain.MouseMove
+    Private Sub PCMain_MouseMove(sender As Object, e As MouseEventArgs) Handles PCMain.MouseMove
         If Not e.Button = Forms.MouseButtons.Left Then Exit Sub
         mMain = e.Location
         If mMain.X < 0 Then mMain.X = 0
@@ -123,7 +123,7 @@ Public Class ColorPicker
         End Select
     End Sub
 
-    Private Sub PCMain_Paint(sender As Object, e As System.Windows.Forms.PaintEventArgs) Handles PCMain.Paint
+    Private Sub PCMain_Paint(sender As Object, e As PaintEventArgs) Handles PCMain.Paint
         RefreshMain(e.ClipRectangle)
     End Sub
 
@@ -240,31 +240,31 @@ Public Class ColorPicker
         e1.Dispose()
     End Sub
 
-    Private Sub rbH_CheckedChanged(sender As Object, e As System.EventArgs) Handles rbH.CheckedChanged
+    Private Sub rbH_CheckedChanged(sender As Object, e As EventArgs) Handles rbH.CheckedChanged
         If sender.Checked Then DrawingIndex = 0 : SetCursor() : RefreshMain(PCMain.DisplayRectangle) : Refresh1(PC1.DisplayRectangle) : RefreshA(PCA.DisplayRectangle)
     End Sub
 
-    Private Sub rbS_CheckedChanged(sender As Object, e As System.EventArgs) Handles rbS.CheckedChanged
+    Private Sub rbS_CheckedChanged(sender As Object, e As EventArgs) Handles rbS.CheckedChanged
         If sender.Checked Then DrawingIndex = 1 : SetCursor() : RefreshMain(PCMain.DisplayRectangle) : Refresh1(PC1.DisplayRectangle) : RefreshA(PCA.DisplayRectangle)
     End Sub
 
-    Private Sub rbL_CheckedChanged(sender As Object, e As System.EventArgs) Handles rbL.CheckedChanged
+    Private Sub rbL_CheckedChanged(sender As Object, e As EventArgs) Handles rbL.CheckedChanged
         If sender.Checked Then DrawingIndex = 2 : SetCursor() : RefreshMain(PCMain.DisplayRectangle) : Refresh1(PC1.DisplayRectangle) : RefreshA(PCA.DisplayRectangle)
     End Sub
 
-    Private Sub rbR_CheckedChanged(sender As Object, e As System.EventArgs) Handles rbR.CheckedChanged
+    Private Sub rbR_CheckedChanged(sender As Object, e As EventArgs) Handles rbR.CheckedChanged
         If sender.Checked Then DrawingIndex = 3 : SetCursor() : RefreshMain(PCMain.DisplayRectangle) : Refresh1(PC1.DisplayRectangle) : RefreshA(PCA.DisplayRectangle)
     End Sub
 
-    Private Sub rbG_CheckedChanged(sender As Object, e As System.EventArgs) Handles rbG.CheckedChanged
+    Private Sub rbG_CheckedChanged(sender As Object, e As EventArgs) Handles rbG.CheckedChanged
         If sender.Checked Then DrawingIndex = 4 : SetCursor() : RefreshMain(PCMain.DisplayRectangle) : Refresh1(PC1.DisplayRectangle) : RefreshA(PCA.DisplayRectangle)
     End Sub
 
-    Private Sub rbB_CheckedChanged(sender As Object, e As System.EventArgs) Handles rbB.CheckedChanged
+    Private Sub rbB_CheckedChanged(sender As Object, e As EventArgs) Handles rbB.CheckedChanged
         If sender.Checked Then DrawingIndex = 5 : SetCursor() : RefreshMain(PCMain.DisplayRectangle) : Refresh1(PC1.DisplayRectangle) : RefreshA(PCA.DisplayRectangle)
     End Sub
 
-    Private Sub inH_ValueChanged(sender As Object, e As System.EventArgs) Handles inH.ValueChanged
+    Private Sub inH_ValueChanged(sender As Object, e As EventArgs) Handles inH.ValueChanged
         If inH.Value = 360 Then inH.Value = 0
 
         If PassiveValueChange Then Exit Sub
@@ -280,7 +280,7 @@ Public Class ColorPicker
         PassiveValueChange = False
     End Sub
 
-    Private Sub inS_ValueChanged(sender As Object, e As System.EventArgs) Handles inS.ValueChanged
+    Private Sub inS_ValueChanged(sender As Object, e As EventArgs) Handles inS.ValueChanged
         If PassiveValueChange Then Exit Sub
         PassiveValueChange = True
         SetNewColor(HSL2RGB(inH.Value, inS.Value, inL.Value, inA.Value))
@@ -294,7 +294,7 @@ Public Class ColorPicker
         PassiveValueChange = False
     End Sub
 
-    Private Sub inL_ValueChanged(sender As Object, e As System.EventArgs) Handles inL.ValueChanged
+    Private Sub inL_ValueChanged(sender As Object, e As EventArgs) Handles inL.ValueChanged
         If PassiveValueChange Then Exit Sub
         PassiveValueChange = True
         SetNewColor(HSL2RGB(inH.Value, inS.Value, inL.Value, inA.Value))
@@ -308,7 +308,7 @@ Public Class ColorPicker
         PassiveValueChange = False
     End Sub
 
-    Private Sub inR_ValueChanged(sender As Object, e As System.EventArgs) Handles inR.ValueChanged
+    Private Sub inR_ValueChanged(sender As Object, e As EventArgs) Handles inR.ValueChanged
         If PassiveValueChange Then Exit Sub
         PassiveValueChange = True
         SetNewColor(Color.FromArgb(inA.Value, inR.Value, inG.Value, inB.Value))
@@ -322,7 +322,7 @@ Public Class ColorPicker
         PassiveValueChange = False
     End Sub
 
-    Private Sub inG_ValueChanged(sender As Object, e As System.EventArgs) Handles inG.ValueChanged
+    Private Sub inG_ValueChanged(sender As Object, e As EventArgs) Handles inG.ValueChanged
         If PassiveValueChange Then Exit Sub
         PassiveValueChange = True
         SetNewColor(Color.FromArgb(inA.Value, inR.Value, inG.Value, inB.Value))
@@ -336,7 +336,7 @@ Public Class ColorPicker
         PassiveValueChange = False
     End Sub
 
-    Private Sub inB_ValueChanged(sender As Object, e As System.EventArgs) Handles inB.ValueChanged
+    Private Sub inB_ValueChanged(sender As Object, e As EventArgs) Handles inB.ValueChanged
         If PassiveValueChange Then Exit Sub
         PassiveValueChange = True
         SetNewColor(Color.FromArgb(inA.Value, inR.Value, inG.Value, inB.Value))
@@ -350,7 +350,7 @@ Public Class ColorPicker
         PassiveValueChange = False
     End Sub
 
-    Private Sub inA_ValueChanged(sender As Object, e As System.EventArgs) Handles inA.ValueChanged
+    Private Sub inA_ValueChanged(sender As Object, e As EventArgs) Handles inA.ValueChanged
         If PassiveValueChange Then Exit Sub
         PassiveValueChange = True
         SetNewColor(Color.FromArgb(inA.Value, inR.Value, inG.Value, inB.Value))
@@ -361,11 +361,11 @@ Public Class ColorPicker
         PassiveValueChange = False
     End Sub
 
-    Private Sub PC1_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles PC1.MouseDown
+    Private Sub PC1_MouseDown(sender As Object, e As MouseEventArgs) Handles PC1.MouseDown
         PC1_MouseMove(sender, e)
     End Sub
 
-    Private Sub PC1_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles PC1.MouseMove
+    Private Sub PC1_MouseMove(sender As Object, e As MouseEventArgs) Handles PC1.MouseMove
         If Not e.Button = Forms.MouseButtons.Left Then Exit Sub
         m1 = e.Y
         If m1 < 0 Then m1 = 0
@@ -387,7 +387,7 @@ Public Class ColorPicker
         End Select
     End Sub
 
-    Private Sub PC1_Paint(sender As Object, e As System.Windows.Forms.PaintEventArgs) Handles PC1.Paint
+    Private Sub PC1_Paint(sender As Object, e As PaintEventArgs) Handles PC1.Paint
         Refresh1(e.ClipRectangle)
     End Sub
 
@@ -402,7 +402,7 @@ Public Class ColorPicker
                 Dim xxS As Integer = inS.Value
                 Dim xxL As Integer = inL.Value
                 For xI1 = 0 To 255 Step xPrecision
-                    e1.Graphics.FillRectangle(New Drawing.SolidBrush(HSL2RGB((255 - xI1) / 255 * 360, xxS, xxL)), 0, xI1, xWidth, xPrecision)
+                    e1.Graphics.FillRectangle(New SolidBrush(HSL2RGB((255 - xI1) / 255 * 360, xxS, xxL)), 0, xI1, xWidth, xPrecision)
                 Next
             Case 1
                 Dim xxH As Integer = inH.Value
@@ -468,11 +468,11 @@ Public Class ColorPicker
         e1.Dispose()
     End Sub
 
-    Private Sub PCA_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles PCA.MouseDown
+    Private Sub PCA_MouseDown(sender As Object, e As MouseEventArgs) Handles PCA.MouseDown
         PCA_MouseMove(sender, e)
     End Sub
 
-    Private Sub PCA_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles PCA.MouseMove
+    Private Sub PCA_MouseMove(sender As Object, e As MouseEventArgs) Handles PCA.MouseMove
         If Not e.Button = Forms.MouseButtons.Left Then Exit Sub
         mAlpha = e.X
         If mAlpha < 0 Then mAlpha = 0
@@ -481,7 +481,7 @@ Public Class ColorPicker
         inA.Value = mAlpha
     End Sub
 
-    Private Sub PCA_Paint(sender As Object, e As System.Windows.Forms.PaintEventArgs) Handles PCA.Paint
+    Private Sub PCA_Paint(sender As Object, e As PaintEventArgs) Handles PCA.Paint
         RefreshA(e.ClipRectangle)
     End Sub
 
@@ -505,7 +505,7 @@ Public Class ColorPicker
         e1.Graphics.DrawImageUnscaledAndClipped(My.Resources.TransparentBG, xRegion)
 
         For xI1 = 0 To 255 Step xPrecision
-            e1.Graphics.FillRectangle(New Drawing.SolidBrush(Color.FromArgb(xI1, xColor)), xI1, 0, xPrecision, xHeight)
+            e1.Graphics.FillRectangle(New SolidBrush(Color.FromArgb(xI1, xColor)), xI1, 0, xPrecision, xHeight)
         Next
 
         Dim xTri1() As Point = {New Point(mAlpha, 4), New Point(mAlpha - 2, -1), New Point(mAlpha + 2, -1)}
@@ -520,13 +520,13 @@ Public Class ColorPicker
         e1.Dispose()
     End Sub
 
-    Private Sub tbPrecision_ValueChanged(sender As Object, e As System.EventArgs) Handles tbPrecision.ValueChanged
+    Private Sub tbPrecision_ValueChanged(sender As Object, e As EventArgs) Handles tbPrecision.ValueChanged
         RefreshMain(PCMain.DisplayRectangle)
         Refresh1(PC1.DisplayRectangle)
         RefreshA(PCA.DisplayRectangle)
     End Sub
 
-    Private Sub pPrev_Paint(sender As Object, e As System.Windows.Forms.PaintEventArgs) Handles pPrev.Paint
+    Private Sub pPrev_Paint(sender As Object, e As PaintEventArgs) Handles pPrev.Paint
         RefreshPrev(e.ClipRectangle)
     End Sub
 
@@ -536,14 +536,14 @@ Public Class ColorPicker
         e1.Graphics.DrawImageUnscaledAndClipped(My.Resources.TransparentBG, xRegion)
 
         If xRegion.X < 62 Then
-            e1.Graphics.FillRectangle(New Drawing.SolidBrush(OrigColor), 0, 0, 61, 28)
+            e1.Graphics.FillRectangle(New SolidBrush(OrigColor), 0, 0, 61, 28)
             e1.Graphics.DrawLine(New Pen(Color.FromKnownColor(KnownColor.WindowFrame)), 61, 0, 61, 28)
             Dim unused1 = e1.Graphics.DrawString("Orig", xFont, IIf(OrigColor.GetBrightness + ((255 - OrigColor.A) / 255) > 0.5, Brushes.Black, Brushes.White),
                                       31 - (e1.Graphics.MeasureString("Orig", xFont).Width / 2),
                                       14 - (e1.Graphics.MeasureString("Orig", xFont).Height / 2))
         End If
 
-        e1.Graphics.FillRectangle(New Drawing.SolidBrush(NewColor), 62, 0, 61, 28)
+        e1.Graphics.FillRectangle(New SolidBrush(NewColor), 62, 0, 61, 28)
         Dim unused = e1.Graphics.DrawString("New", xFont, IIf(NewColor.GetBrightness + ((255 - NewColor.A) / 255) > 0.5, Brushes.Black, Brushes.White),
                                93 - (e1.Graphics.MeasureString("New", xFont).Width / 2),
                                14 - (e1.Graphics.MeasureString("New", xFont).Height / 2))
@@ -552,11 +552,11 @@ Public Class ColorPicker
         e1.Dispose()
     End Sub
 
-    Private Sub tStr_GotFocus(sender As Object, e As System.EventArgs) Handles tStr.GotFocus
+    Private Sub tStr_GotFocus(sender As Object, e As EventArgs) Handles tStr.GotFocus
         tStr.SelectAll()
     End Sub
 
-    Private Sub tStr_LostFocus(sender As Object, e As System.EventArgs) Handles tStr.LostFocus
+    Private Sub tStr_LostFocus(sender As Object, e As EventArgs) Handles tStr.LostFocus
         Dim xI1 As Integer
 
         Try
@@ -586,7 +586,7 @@ Public Class ColorPicker
 
     End Sub
 
-    Private Sub tStr_TextChanged(sender As Object, e As System.EventArgs) Handles tStr.TextChanged
+    Private Sub tStr_TextChanged(sender As Object, e As EventArgs) Handles tStr.TextChanged
         If PassiveValueChange Then Exit Sub
         Dim xI1 As Integer
 
@@ -612,7 +612,7 @@ Public Class ColorPicker
         End Try
     End Sub
 
-    Private Sub ColorPicker_Load(sender As Object, e As System.EventArgs) Handles MyBase.Load
+    Private Sub ColorPicker_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Font = MainWindow.Font
     End Sub
 End Class

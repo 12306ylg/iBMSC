@@ -1273,7 +1273,8 @@ EndOfSub:
             format.info.genre = THGenre.Text
             format.info.mode_hint = If(CHPlayer.SelectedIndex = 0, "beat-5k", "popn-9k")
             format.info.chart_name = ""
-            format.info.judge_rank = If(THExRank.Text <> "", DirectCast(CDbl(THExRank.Text), Integer), (CHRank.SelectedIndex + 1) * 25)
+            'format.info.judge_rank = If(THExRank.Text <> "", DirectCast(CDbl(THExRank.Text), Integer), (CHRank.SelectedIndex + 1) * 25)
+            format.info.judge_rank = If(THExRank.Text <> "", CType(CDbl(THExRank.Text), Integer), (CHRank.SelectedIndex + 1) * 25)
             format.info.total = If(THTotal.Text <> "", CalcBMSONTotal(THTotal.Text), CalcBMSONTotal(CalcBMSTotal()))
             format.info.init_bpm = CDbl(THBPM.Text)
             format.info.level = If(THPlayLevel.Text <> "", CInt(THPlayLevel.Text), 0)

@@ -3,34 +3,34 @@ Public Class diagFind
     Private msg1 As String = "Error"
     Private msg2 As String = "Invalid label."
 
-    Public Sub New(ByVal xbCol As Integer, ByVal xmsg1 As String, ByVal xmsg2 As String)
+    Public Sub New(xbCol As Integer, xmsg1 As String, xmsg2 As String)
         InitializeComponent()
         bCol = xbCol
         msg1 = xmsg1
         msg2 = xmsg2
     End Sub
 
-    Private Sub CloseDialog(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBClose.Click
+    Private Sub CloseDialog(sender As Object, e As EventArgs) Handles TBClose.Click
         Close()
     End Sub
 
-    Private Sub BSAll_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BSAll.Click
+    Private Sub BSAll_Click(sender As Object, e As EventArgs) Handles BSAll.Click
         For Each xCB As CheckBox In Panel1.Controls
             xCB.Checked = True
         Next
     End Sub
-    Private Sub BSInv_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BSInv.Click
+    Private Sub BSInv_Click(sender As Object, e As EventArgs) Handles BSInv.Click
         For Each xCB As CheckBox In Panel1.Controls
             xCB.Checked = Not xCB.Checked
         Next
     End Sub
-    Private Sub BSNone_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BSNone.Click
+    Private Sub BSNone_Click(sender As Object, e As EventArgs) Handles BSNone.Click
         For Each xCB As CheckBox In Panel1.Controls
             xCB.Checked = False
         Next
     End Sub
 
-    Private Sub diagFind_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub diagFind_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Font = MainWindow.Font
         Dim xBold As New Font(Font, FontStyle.Bold)
 
@@ -150,7 +150,7 @@ Public Class diagFind
         AddHandler Ttl.KeyDown, AddressOf lblKeyDown
     End Sub
 
-    Private Function ValidLabel(ByVal xStr As String) As Boolean
+    Private Function ValidLabel(xStr As String) As Boolean
         xStr = UCase(Trim(xStr))
 
         If Len(xStr) = 0 Then Return False
@@ -167,12 +167,12 @@ Public Class diagFind
         Dim unused = MsgBox(msg2, MsgBoxStyle.Critical, msg1)
     End Function
 
-    Private Sub lblKeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs)
+    Private Sub lblKeyDown(sender As Object, e As KeyEventArgs)
         If Not e.KeyCode = Keys.Enter Then Exit Sub
         Dim unused = ValidateLabel(sender)
     End Sub
 
-    Private Function ValidateLabel(ByVal sender As Object) As Boolean
+    Private Function ValidateLabel(sender As Object) As Boolean
         Dim xBool As Boolean = ValidLabel(sender.Text)
         If Not xBool Then
             Dim unused2 = MsgBox(msg2, MsgBoxStyle.Critical, msg1)
@@ -182,7 +182,7 @@ Public Class diagFind
         ValidateLabel = xBool
     End Function
 
-    Private Sub TBSelect_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBSelect.Click
+    Private Sub TBSelect_Click(sender As Object, e As EventArgs) Handles TBSelect.Click
         If Not ValidateLabel(lr1) Then Exit Sub
         If Not ValidateLabel(lr2) Then Exit Sub
 
@@ -209,7 +209,7 @@ Public Class diagFind
                         xCol)
     End Sub
 
-    Private Sub TBUnselect_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBUnselect.Click
+    Private Sub TBUnselect_Click(sender As Object, e As EventArgs) Handles TBUnselect.Click
         If Not ValidateLabel(lr1) Then Exit Sub
         If Not ValidateLabel(lr2) Then Exit Sub
 
@@ -236,7 +236,7 @@ Public Class diagFind
                           xCol)
     End Sub
 
-    Private Sub TBDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBDelete.Click
+    Private Sub TBDelete_Click(sender As Object, e As EventArgs) Handles TBDelete.Click
         If Not ValidateLabel(lr1) Then Exit Sub
         If Not ValidateLabel(lr2) Then Exit Sub
 
@@ -263,7 +263,7 @@ Public Class diagFind
                         xCol)
     End Sub
 
-    Private Sub TBrl_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBrl.Click
+    Private Sub TBrl_Click(sender As Object, e As EventArgs) Handles TBrl.Click
         If Not ValidateLabel(lr1) Then Exit Sub
         If Not ValidateLabel(lr2) Then Exit Sub
         If Not ValidateLabel(Ttl) Then Exit Sub
@@ -291,7 +291,7 @@ Public Class diagFind
                           xCol, Ttl.Text)
     End Sub
 
-    Private Sub TBrv_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBrv.Click
+    Private Sub TBrv_Click(sender As Object, e As EventArgs) Handles TBrv.Click
         If Not ValidateLabel(lr1) Then Exit Sub
         If Not ValidateLabel(lr2) Then Exit Sub
 

@@ -2,7 +2,7 @@
 
 Partial Public Class MainWindow
 
-    Private Sub XMLWriteColumn(ByVal w As XmlTextWriter, ByVal I As Integer)
+    Private Sub XMLWriteColumn(w As XmlTextWriter, I As Integer)
         w.WriteStartElement("Column")
         w.WriteAttributeString("Index", I)
         With column(I)
@@ -24,7 +24,7 @@ Partial Public Class MainWindow
         w.WriteEndElement()
     End Sub
 
-    Private Sub XMLWriteFont(ByVal w As XmlTextWriter, ByVal local As String, ByVal f As Font)
+    Private Sub XMLWriteFont(w As XmlTextWriter, local As String, f As Font)
         w.WriteStartElement(local)
         w.WriteAttributeString("Name", f.FontFamily.Name)
         w.WriteAttributeString("Size", f.SizeInPoints)
@@ -32,7 +32,7 @@ Partial Public Class MainWindow
         w.WriteEndElement()
     End Sub
 
-    Private Sub XMLWritePlayerArguments(ByVal w As XmlTextWriter, ByVal I As Integer)
+    Private Sub XMLWritePlayerArguments(w As XmlTextWriter, I As Integer)
         w.WriteStartElement("Player")
         w.WriteAttributeString("Index", I)
         w.WriteAttributeString("Path", pArgs(I).Path)
@@ -42,7 +42,7 @@ Partial Public Class MainWindow
         w.WriteEndElement()
     End Sub
 
-    Private Sub SaveSettings(ByVal Path As String, ByVal ThemeOnly As Boolean)
+    Private Sub SaveSettings(Path As String, ThemeOnly As Boolean)
         Dim w As New XmlTextWriter(Path, System.Text.Encoding.Unicode)
         With w
             .WriteStartDocument()
@@ -194,20 +194,20 @@ Partial Public Class MainWindow
         End With
     End Sub
 
-    Private Sub XMLLoadElementValue(ByVal n As XmlElement, ByRef v As Integer)
+    Private Sub XMLLoadElementValue(n As XmlElement, ByRef v As Integer)
         If n Is Nothing Then Exit Sub
         XMLLoadAttribute(n.GetAttribute("Value"), v)
     End Sub
-    Private Sub XMLLoadElementValue(ByVal n As XmlElement, ByRef v As Single)
+    Private Sub XMLLoadElementValue(n As XmlElement, ByRef v As Single)
         If n Is Nothing Then Exit Sub
         XMLLoadAttribute(n.GetAttribute("Value"), v)
     End Sub
-    Private Sub XMLLoadElementValue(ByVal n As XmlElement, ByRef v As Color)
+    Private Sub XMLLoadElementValue(n As XmlElement, ByRef v As Color)
         If n Is Nothing Then Exit Sub
         XMLLoadAttribute(n.GetAttribute("Value"), v)
     End Sub
 
-    Private Sub XMLLoadElementValue(ByVal n As XmlElement, ByRef v As Font)
+    Private Sub XMLLoadElementValue(n As XmlElement, ByRef v As Font)
         If n Is Nothing Then Exit Sub
 
         Dim xName As String = Font.FontFamily.Name
@@ -216,10 +216,10 @@ Partial Public Class MainWindow
         XMLLoadAttribute(n.GetAttribute("Name"), xName)
         XMLLoadAttribute(n.GetAttribute("Size"), xSize)
         XMLLoadAttribute(n.GetAttribute("Style"), xStyle)
-        v = New Font(xName, xSize, xStyle)
+        'v = New Font(xName, xSize, xStyle)
     End Sub
 
-    Private Sub XMLLoadPlayer(ByVal n As XmlElement)
+    Private Sub XMLLoadPlayer(n As XmlElement)
         Dim i As Integer = -1
         XMLLoadAttribute(n.GetAttribute("Index"), i)
         If i < 0 Or i > UBound(pArgs) Then Exit Sub
@@ -230,7 +230,7 @@ Partial Public Class MainWindow
         XMLLoadAttribute(n.GetAttribute("Stop"), pArgs(i).aStop)
     End Sub
 
-    Private Sub XMLLoadColumn(ByVal n As XmlElement)
+    Private Sub XMLLoadColumn(n As XmlElement)
         Dim i As Integer = -1
         XMLLoadAttribute(n.GetAttribute("Index"), i)
         If i < 0 Or i > UBound(column) Then Exit Sub
@@ -258,7 +258,7 @@ Partial Public Class MainWindow
         End With
     End Sub
 
-    Private Sub LoadSettings(ByVal Path As String)
+    Private Sub LoadSettings(Path As String)
         If Not My.Computer.FileSystem.FileExists(Path) Then Return
 
         'Dim xTempFileName As String = ""
@@ -272,7 +272,7 @@ Partial Public Class MainWindow
         'Exit Do
         'Loop
         Dim Doc As New XmlDocument
-        Dim FileStream As New IO.FileStream(Path, FileMode.Open, FileAccess.Read)
+        Dim FileStream As New FileStream(Path, FileMode.Open, FileAccess.Read)
         Doc.Load(FileStream)
 
         Dim Root As XmlElement = Doc.Item("iBMSC")
@@ -337,11 +337,11 @@ Partial Public Class MainWindow
 
                 XMLLoadAttribute(.GetAttribute("ErrorCheck"), ErrorCheck)
                 TBErrorCheck.Checked = ErrorCheck
-                TBErrorCheck_Click(TBErrorCheck, New System.EventArgs)
+                TBErrorCheck_Click(TBErrorCheck, New EventArgs)
 
                 XMLLoadAttribute(.GetAttribute("ShowFileName"), ShowFileName)
                 TBShowFileName.Checked = ShowFileName
-                TBShowFileName_Click(TBShowFileName, New System.EventArgs)
+                TBShowFileName_Click(TBShowFileName, New EventArgs)
 
                 XMLLoadAttribute(.GetAttribute("MiddleButtonMoveMethod"), MiddleButtonMoveMethod)
                 XMLLoadAttribute(.GetAttribute("AutoFocusMouseEnter"), AutoFocusMouseEnter)
@@ -352,11 +352,11 @@ Partial Public Class MainWindow
 
                 XMLLoadAttribute(.GetAttribute("PreviewOnClick"), PreviewOnClick)
                 TBPreviewOnClick.Checked = PreviewOnClick
-                TBPreviewOnClick_Click(TBPreviewOnClick, New System.EventArgs)
+                TBPreviewOnClick_Click(TBPreviewOnClick, New EventArgs)
 
                 XMLLoadAttribute(.GetAttribute("ChangePlaySide"), Rscratch)
                 TBChangePlaySide.Checked = Rscratch
-                TBChangePlaySide_Click(TBChangePlaySide, New System.EventArgs)
+                TBChangePlaySide_Click(TBChangePlaySide, New EventArgs)
 
                 XMLLoadAttribute(.GetAttribute("ClickStopPreview"), ClickStopPreview)
             End With
@@ -407,7 +407,7 @@ Partial Public Class MainWindow
                 Dim xBeatOpList As RadioButton() = {CBeatPreserve, CBeatMeasure, CBeatCut, CBeatScale}
                 If xInt >= 0 And xInt < xBeatOpList.Length Then
                     xBeatOpList(xInt).Checked = True
-                    CBeatPreserve_Click(xBeatOpList(xInt), New System.EventArgs)
+                    CBeatPreserve_Click(xBeatOpList(xInt), New EventArgs)
                 End If
             End With
         End If
@@ -548,25 +548,25 @@ EndOfSub:
         'File.Delete(xTempFileName)
     End Sub
 
-    Private Sub XMLLoadLocaleMenu(ByVal n As XmlElement, ByRef target As String)
+    Private Sub XMLLoadLocaleMenu(n As XmlElement, ByRef target As String)
         If n Is Nothing Then Exit Sub
         target = If(n.HasAttribute("amp"), n.InnerText.Insert(Integer.Parse(n.GetAttribute("amp")), "&"), n.InnerText)
     End Sub
 
-    Private Sub XMLLoadLocale(ByVal n As XmlElement, ByRef target As String)
+    Private Sub XMLLoadLocale(n As XmlElement, ByRef target As String)
         If n IsNot Nothing Then target = n.InnerText
     End Sub
 
-    Private Sub XMLLoadLocaleToolTipUniversal(ByVal n As XmlElement, ByVal target As Control)
+    Private Sub XMLLoadLocaleToolTipUniversal(n As XmlElement, target As Control)
         If n Is Nothing Then Exit Sub
         ToolTipUniversal.SetToolTip(target, n.InnerText)
     End Sub
 
-    Private Sub LoadLocale(ByVal Path As String)
+    Private Sub LoadLocale(Path As String)
         If Not My.Computer.FileSystem.FileExists(Path) Then Return
 
         Dim Doc As XmlDocument = Nothing
-        Dim FileStream As IO.FileStream = Nothing
+        Dim FileStream As FileStream = Nothing
 
         Dim xPOHeaderPart2 As Boolean = POHeaderPart2.Visible
         Dim xPOGridPart2 As Boolean = POGridPart2.Visible
@@ -577,7 +577,7 @@ EndOfSub:
 
         Try
             Doc = New XmlDocument
-            FileStream = New IO.FileStream(Path, FileMode.Open, FileAccess.Read)
+            FileStream = New FileStream(Path, FileMode.Open, FileAccess.Read)
             Doc.Load(FileStream)
 
             Dim Root As XmlElement = Doc.Item("iBMSC.Locale")
@@ -1181,7 +1181,7 @@ EndOfSub:
         'File.Delete(xTempFileName)
     End Sub
 
-    Private Sub LoadThemeComptability(ByVal xPath As String)
+    Private Sub LoadThemeComptability(xPath As String)
         Try
             Dim xStrLine() As String = Split(My.Computer.FileSystem.ReadAllText(xPath), vbCrLf)
             If xStrLine(0).Trim <> "iBMSC Configuration Settings Format" And xStrLine(0).Trim <> "iBMSC Theme Format" Then Exit Sub
@@ -1281,13 +1281,13 @@ EndOfSub:
         End Try
     End Sub
 
-    Private Function LoadThemeComptability_SplitStringInto26Parts(ByVal xLine As String) As String()
+    Private Function LoadThemeComptability_SplitStringInto26Parts(xLine As String) As String()
         Dim xE() As String = Split(xLine, ",")
         ReDim Preserve xE(26)
         Return xE
     End Function
 
-    Private Sub LoadLang(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub LoadLang(sender As Object, e As EventArgs)
         Dim xFN2 As String = sender.ToolTipText
         'ReadLanguagePack(xFN2)
         LoadLocale(xFN2)
@@ -1313,7 +1313,7 @@ EndOfSub:
         fs.Close()
     End Sub
 
-    Private Sub LoadTheme(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub LoadTheme(sender As Object, e As EventArgs)
         'If Not File.Exists(My.Application.Info.DirectoryPath & "\Data\" & sender.Text) Then Exit Sub
         'SaveTheme = True
         'LoadCFF(My.Computer.FileSystem.ReadAllText(My.Application.Info.DirectoryPath & "\Theme\" & sender.Text, System.Text.Encoding.Unicode))
