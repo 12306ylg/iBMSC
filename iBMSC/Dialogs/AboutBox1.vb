@@ -1,5 +1,5 @@
 ﻿Public NotInheritable Class AboutBox1
-    Public Declare Function SendMessage Lib "user32.dll" Alias "SendMessageA" (ByVal hwnd As Integer, ByVal wMsg As Integer, ByVal wParam As Integer, ByVal lParam As Integer) As Integer
+    Public Declare Function SendMessage Lib "user32.dll" Alias "SendMessageA" (hwnd As Integer, wMsg As Integer, wParam As Integer, lParam As Integer) As Integer
     Public Declare Function ReleaseCapture Lib "user32.dll" Alias "ReleaseCapture" () As Integer
     Private Const WM_SYSCOMMAND As Integer = &H112
     Private Const SC_MOVE As Integer = &HF010
@@ -7,17 +7,17 @@
     Private Const HTCAPTION As Integer = 2
     Public bBitmap As Bitmap = My.Resources.SplashScreenx
 
-    Private Sub AboutBox1_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Me.KeyPress
-        Me.Close()
+    Private Sub AboutBox1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
+        Close()
     End Sub
 
-    Private Sub AboutBox1_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseDown
-        ReleaseCapture()
-        SendMessage(Me.Handle.ToInt32, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0)
+    Private Sub AboutBox1_MouseDown(sender As Object, e As MouseEventArgs) Handles Me.MouseDown
+        Dim unused1 = ReleaseCapture()
+        Dim unused = SendMessage(Handle.ToInt32, WM_SYSCOMMAND, SC_MOVE + HTCAPTION, 0)
     End Sub
 
-    Private Sub AboutBox1_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseUp
-        If e.Button = Forms.MouseButtons.Right Then Me.Close()
+    Private Sub AboutBox1_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
+        If e.Button = Forms.MouseButtons.Right Then Close()
     End Sub
 
     Public Sub SelectBitmap()
@@ -41,29 +41,30 @@
             Dim newSize As New APIHelp.Size(bBitmap.Width, bBitmap.Height)
             ' Size window to match bitmap
             Dim sourceLocation As New APIHelp.Point(0, 0)
-            Dim newLocation As New APIHelp.Point(Me.Left, Me.Top)
+            Dim newLocation As New APIHelp.Point(Left, Top)
             ' Same as this window
-            Dim blend As New APIHelp.BLENDFUNCTION()
-            blend.BlendOp = APIHelp.AC_SRC_OVER
             ' Only works with a 32bpp bitmap
-            blend.BlendFlags = 0
             ' Always 0
-            blend.SourceConstantAlpha = 255
             ' Set to 255 for per-pixel alpha values
-            blend.AlphaFormat = APIHelp.AC_SRC_ALPHA
+            Dim blend As New APIHelp.BLENDFUNCTION With {
+                .BlendOp = APIHelp.AC_SRC_OVER,
+                .BlendFlags = 0,
+                .SourceConstantAlpha = 255,
+                .AlphaFormat = APIHelp.AC_SRC_ALPHA
+            }
             ' Only works when the bitmap contains an alpha channel
             ' Update the window
-            APIHelp.UpdateLayeredWindow(Handle, screenDc, newLocation, newSize, memDc, sourceLocation, _
+            Dim unused4 = APIHelp.UpdateLayeredWindow(Handle, screenDc, newLocation, newSize, memDc, sourceLocation,
              0, blend, APIHelp.ULW_ALPHA)
         Finally
             ' Release device context
-            APIHelp.ReleaseDC(IntPtr.Zero, screenDc)
+            Dim unused3 = APIHelp.ReleaseDC(IntPtr.Zero, screenDc)
             If hBitmap <> IntPtr.Zero Then
-                APIHelp.SelectObject(memDc, hOldBitmap)
+                Dim unused2 = APIHelp.SelectObject(memDc, hOldBitmap)
                 ' Remove bitmap resources
-                APIHelp.DeleteObject(hBitmap)
+                Dim unused1 = APIHelp.DeleteObject(hBitmap)
             End If
-            APIHelp.DeleteDC(memDc)
+            Dim unused = APIHelp.DeleteDC(memDc)
         End Try
     End Sub
 
@@ -86,14 +87,14 @@
         End Get
     End Property
 
-    Private Sub ClickToCopy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClickToCopy.Click
+    Private Sub ClickToCopy_Click(sender As Object, e As EventArgs) Handles ClickToCopy.Click
         Clipboard.Clear()
         Clipboard.SetText("higan314doaz9@qq.com")
         Beep()
     End Sub
 
-    Private Sub AboutBox1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.SelectBitmap()
+    Private Sub AboutBox1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SelectBitmap()
     End Sub
 
     Public Sub New()
@@ -101,12 +102,12 @@
     End Sub
 End Class
 
-Class APIHelp
+Friend Class APIHelp
     ' Required constants
-    Public Const WS_EX_LAYERED As Int32 = &H80000
-    Public Const HTCAPTION As Int32 = &H2
-    Public Const WM_NCHITTEST As Int32 = &H84
-    Public Const ULW_ALPHA As Int32 = &H2
+    Public Const WS_EX_LAYERED As Integer = &H80000
+    Public Const HTCAPTION As Integer = &H2
+    Public Const WM_NCHITTEST As Integer = &H84
+    Public Const ULW_ALPHA As Integer = &H2
     Public Const AC_SRC_OVER As Byte = &H0
     Public Const AC_SRC_ALPHA As Byte = &H1
 
@@ -115,29 +116,29 @@ Class APIHelp
         [True] = 1
     End Enum
 
-    <StructLayout(LayoutKind.Sequential)> _
+    <StructLayout(LayoutKind.Sequential)>
     Public Structure Point
-        Public x As Int32
-        Public y As Int32
+        Public x As Integer
+        Public y As Integer
 
-        Public Sub New(ByVal x As Int32, ByVal y As Int32)
+        Public Sub New(x As Integer, y As Integer)
             Me.x = x
             Me.y = y
         End Sub
     End Structure
 
-    <StructLayout(LayoutKind.Sequential)> _
+    <StructLayout(LayoutKind.Sequential)>
     Public Structure Size
-        Public cx As Int32
-        Public cy As Int32
+        Public cx As Integer
+        Public cy As Integer
 
-        Public Sub New(ByVal cx As Int32, ByVal cy As Int32)
+        Public Sub New(cx As Integer, cy As Integer)
             Me.cx = cx
             Me.cy = cy
         End Sub
     End Structure
 
-    <StructLayout(LayoutKind.Sequential, Pack:=1)> _
+    <StructLayout(LayoutKind.Sequential, Pack:=1)>
     Private Structure ARGB
         Public Blue As Byte
         Public Green As Byte
@@ -145,7 +146,7 @@ Class APIHelp
         Public Alpha As Byte
     End Structure
 
-    <StructLayout(LayoutKind.Sequential, Pack:=1)> _
+    <StructLayout(LayoutKind.Sequential, Pack:=1)>
     Public Structure BLENDFUNCTION
         Public BlendOp As Byte
         Public BlendFlags As Byte
@@ -153,22 +154,22 @@ Class APIHelp
         Public AlphaFormat As Byte
     End Structure
 
-    Public Declare Auto Function UpdateLayeredWindow Lib "user32.dll" (ByVal hwnd As IntPtr, ByVal hdcDst As IntPtr, ByRef pptDst As Point, ByRef psize As Size, ByVal hdcSrc As IntPtr, ByRef pprSrc As Point, _
-    ByVal crKey As Int32, ByRef pblend As BLENDFUNCTION, ByVal dwFlags As Int32) As Bool
+    Public Declare Auto Function UpdateLayeredWindow Lib "user32.dll" (hwnd As IntPtr, hdcDst As IntPtr, ByRef pptDst As Point, ByRef psize As Size, hdcSrc As IntPtr, ByRef pprSrc As Point,
+     crKey As Integer, ByRef pblend As BLENDFUNCTION, dwFlags As Integer) As Bool
 
-    Public Declare Auto Function CreateCompatibleDC Lib "gdi32.dll" (ByVal hDC As IntPtr) As IntPtr
+    Public Declare Auto Function CreateCompatibleDC Lib "gdi32.dll" (hDC As IntPtr) As IntPtr
 
-    Public Declare Auto Function GetDC Lib "user32.dll" (ByVal hWnd As IntPtr) As IntPtr
+    Public Declare Auto Function GetDC Lib "user32.dll" (hWnd As IntPtr) As IntPtr
 
-    <DllImport("user32.dll", ExactSpelling:=True)> _
-    Public Shared Function ReleaseDC(ByVal hWnd As IntPtr, ByVal hDC As IntPtr) As Integer
+    <DllImport("user32.dll", ExactSpelling:=True)>
+    Public Shared Function ReleaseDC(hWnd As IntPtr, hDC As IntPtr) As Integer
     End Function
 
-    Public Declare Auto Function DeleteDC Lib "gdi32.dll" (ByVal hdc As IntPtr) As Bool
+    Public Declare Auto Function DeleteDC Lib "gdi32.dll" (hdc As IntPtr) As Bool
 
-    <DllImport("gdi32.dll", ExactSpelling:=True)> _
-    Public Shared Function SelectObject(ByVal hDC As IntPtr, ByVal hObject As IntPtr) As IntPtr
+    <DllImport("gdi32.dll", ExactSpelling:=True)>
+    Public Shared Function SelectObject(hDC As IntPtr, hObject As IntPtr) As IntPtr
     End Function
 
-    Public Declare Auto Function DeleteObject Lib "gdi32.dll" (ByVal hObject As IntPtr) As Bool
+    Public Declare Auto Function DeleteObject Lib "gdi32.dll" (hObject As IntPtr) As Bool
 End Class

@@ -1,21 +1,19 @@
-Imports System.Windows.Forms
-
 Public Class dgStatistics
 
-    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
-        Me.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.Close()
+    Private Sub OK_Button_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles OK_Button.Click
+        DialogResult = System.Windows.Forms.DialogResult.OK
+        Close()
     End Sub
 
-    Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Close()
+    Private Sub Cancel_Button_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Close()
     End Sub
 
-    Private Sub dgStatistics_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Font = MainWindow.Font
+    Private Sub dgStatistics_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Font = MainWindow.Font
 
-        Me.Text = Strings.fStatistics.Title
+        Text = Strings.fStatistics.Title
         Label6.Text = Strings.fStatistics.lBPM
         Label7.Text = Strings.fStatistics.lSTOP
         Label8.Text = Strings.fStatistics.lSCROLL
@@ -37,11 +35,12 @@ Public Class dgStatistics
 
         For row As Integer = 0 To 6
             For col As Integer = 0 To 5
-                Dim xLabel As New Label
-                xLabel.Dock = DockStyle.Fill
-                xLabel.TextAlign = ContentAlignment.MiddleCenter
-                xLabel.Margin = New Padding(0)
-                xLabel.Font = New Font(Me.Font, FontStyle.Bold)
+                Dim xLabel As New Label With {
+                    .Dock = DockStyle.Fill,
+                    .TextAlign = ContentAlignment.MiddleCenter,
+                    .Margin = New Padding(0),
+                    .Font = New Font(Font, FontStyle.Bold)
+                }
                 If data(row, col) <> 0 Then xLabel.Text = data(row, col)
                 If row Mod 2 = 0 Then xLabel.BackColor = Color.FromArgb(&H10000000)
                 TableLayoutPanel1.Controls.Add(xLabel, col + 1, row + 1)

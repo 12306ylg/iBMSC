@@ -1,7 +1,7 @@
 ﻿Imports iBMSC.Editor
 
-Module BMS
-    Public Function IsChannelLongNote(ByVal I As String) As Boolean
+Friend Module BMS
+    Public Function IsChannelLongNote(I As String) As Boolean
         Dim LongStart = C36to10("50")
         Dim LongEnd = C36to10("8Z")
 
@@ -10,7 +10,7 @@ Module BMS
         Return xI > LongStart And xI < LongEnd
     End Function
 
-    Public Function IsChannelHidden(ByVal I As String) As Boolean
+    Public Function IsChannelHidden(I As String) As Boolean
         Dim HiddenStart = C36to10("30")
         Dim HiddenEnd = C36to10("4Z")
         Dim OptionStart = C36to10("70")
@@ -21,7 +21,7 @@ Module BMS
         Return (xI > HiddenStart And xI < HiddenEnd) Or (xI > OptionStart And xI < OptionEnd)
     End Function
 
-    Public Function IsChannelLandmine(ByVal I As String) As Boolean
+    Public Function IsChannelLandmine(I As String) As Boolean
         Dim LandmineStart = C36to10("D0")
         Dim LandmineEnd = C36to10("EZ")
 

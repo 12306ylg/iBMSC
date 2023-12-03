@@ -1,5 +1,3 @@
-Imports System.Windows.Forms
-
 Public Class OpGeneral
     Public zWheel As Integer
     Public zPgUpDn As Integer
@@ -12,10 +10,10 @@ Public Class OpGeneral
     'Dim lpfa() As String
 
     <System.Runtime.InteropServices.DllImport("shell32.dll")> _
-    Shared Sub SHChangeNotify(ByVal wEventId As Integer, ByVal uFlags As Integer, ByVal dwItem1 As Integer, ByVal dwItem2 As Integer)
+    Public Shared Sub SHChangeNotify(ByVal wEventId As Integer, ByVal uFlags As Integer, ByVal dwItem1 As Integer, ByVal dwItem2 As Integer)
     End Sub
 
-    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
+    Private Sub OK_Button_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles OK_Button.Click
 
         Select Case CWheel.SelectedIndex
             Case 0 : zWheel = 192
@@ -47,13 +45,13 @@ Public Class OpGeneral
         zMiddle = IIf(rMiddleDrag.Checked, 1, 0)
         zAutoSave = IIf(cAutoSave.Checked, 1, 0) * NAutoSave.Value * 60000
         zGridPartition = nGridPartition.Value
-        Me.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.Close()
+        DialogResult = System.Windows.Forms.DialogResult.OK
+        Close()
     End Sub
 
-    Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
-        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Close()
+    Private Sub Cancel_Button_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Close()
     End Sub
 
     Public Sub New(ByVal xMsWheel As Integer, ByVal xPgUpDn As Integer, ByVal xMiddleButton As Integer, ByVal xTextEncoding As Integer, ByVal xGridPartition As Integer, _
@@ -100,12 +98,12 @@ Public Class OpGeneral
         cMStopPreview.Checked = xMStopPreview
     End Sub
 
-    Private Sub OpGeneral_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Font = MainWindow.Font
+    Private Sub OpGeneral_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Font = MainWindow.Font
 
         'lpfa = Form1.lpfa
         'Dim xL() As String = Form1.lpgo
-        Me.Text = Strings.fopGeneral.Title
+        Text = Strings.fopGeneral.Title
         Label1.Text = Strings.fopGeneral.MouseWheel
         Label2.Text = Strings.fopGeneral.TextEncoding
         'Label3.Text = Locale.fopGeneral.SortingMethod
@@ -137,23 +135,23 @@ Public Class OpGeneral
         Cancel_Button.Text = Strings.Cancel
     End Sub
 
-    Private Sub TBAssociate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBAssociate.Click
+    Private Sub TBAssociate_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBAssociate.Click
         Associate(".bms", "iBMSC.BMS", Strings.FileAssociation.BMS, False)
     End Sub
 
-    Private Sub TBAssociateIBMSC_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBAssociateIBMSC.Click
+    Private Sub TBAssociateIBMSC_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBAssociateIBMSC.Click
         Associate(".ibmsc", "iBMSC.iBMSC", Strings.FileAssociation.IBMSC, True)
     End Sub
 
-    Private Sub TBAssociateBME_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBAssociateBME.Click
+    Private Sub TBAssociateBME_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBAssociateBME.Click
         Associate(".bme", "iBMSC.BME", Strings.FileAssociation.BME, False)
     End Sub
 
-    Private Sub TBAssociateBML_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBAssociateBML.Click
+    Private Sub TBAssociateBML_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBAssociateBML.Click
         Associate(".bml", "iBMSC.BML", Strings.FileAssociation.BML, False)
     End Sub
 
-    Private Sub TBAssociatePMS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBAssociatePMS.Click
+    Private Sub TBAssociatePMS_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBAssociatePMS.Click
         Associate(".pms", "iBMSC.PMS", Strings.FileAssociation.PMS, False)
     End Sub
 
@@ -165,27 +163,27 @@ Public Class OpGeneral
         Try
             With Microsoft.Win32.Registry.ClassesRoot
                 If Array.IndexOf(.GetSubKeyNames(), xExt) <> -1 Then .DeleteSubKeyTree(xExt)
-                .CreateSubKey(xExt)
+                Dim unused9 = .CreateSubKey(xExt)
                 xReg = .OpenSubKey(xExt, True)
                 xReg.SetValue("", xClass, Microsoft.Win32.RegistryValueKind.String)
 
                 If Array.IndexOf(.GetSubKeyNames(), xClass) <> -1 Then .DeleteSubKeyTree(xClass)
-                .CreateSubKey(xClass)
+                Dim unused8 = .CreateSubKey(xClass)
                 xReg = .OpenSubKey(xClass, True)
                 xReg.SetValue("", xDescription, Microsoft.Win32.RegistryValueKind.String)
 
                 'Default Icon
-                xReg.CreateSubKey("DefaultIcon")
+                Dim unused7 = xReg.CreateSubKey("DefaultIcon")
                 xReg = .OpenSubKey(xClass & "\DefaultIcon", True)
                 xReg.SetValue("", My.Application.Info.DirectoryPath & "\TypeBMS.ico", Microsoft.Win32.RegistryValueKind.String)
 
                 xReg = .OpenSubKey(xClass, True)
-                xReg.CreateSubKey("shell")
+                Dim unused6 = xReg.CreateSubKey("shell")
                 xReg = .OpenSubKey(xClass & "\shell", True)
                 xReg.SetValue("", "open")
 
                 xReg = .OpenSubKey(xClass & "\shell", True)
-                xReg.CreateSubKey("open\command")
+                Dim unused5 = xReg.CreateSubKey("open\command")
                 xReg = .OpenSubKey(xClass & "\shell\open", True)
                 xReg.SetValue("", Strings.FileAssociation.Open)
                 xReg = .OpenSubKey(xClass & "\shell\open\command", True)
@@ -193,14 +191,14 @@ Public Class OpGeneral
 
                 If Not isIBMSC Then
                     xReg = .OpenSubKey(xClass & "\shell", True)
-                    xReg.CreateSubKey("preview\command")
+                    Dim unused4 = xReg.CreateSubKey("preview\command")
                     xReg = .OpenSubKey(xClass & "\shell\preview", True)
                     xReg.SetValue("", Strings.FileAssociation.Preview)
                     xReg = .OpenSubKey(xClass & "\shell\preview\command", True)
                     xReg.SetValue("", """" & My.Application.Info.DirectoryPath & "\uBMplay.exe" & """ ""%1""")
 
                     xReg = .OpenSubKey(xClass & "\shell", True)
-                    xReg.CreateSubKey("viewcode\command")
+                    Dim unused3 = xReg.CreateSubKey("viewcode\command")
                     xReg = .OpenSubKey(xClass & "\shell\viewcode", True)
                     xReg.SetValue("", Strings.FileAssociation.ViewCode)
                     xReg = .OpenSubKey(xClass & "\shell\viewcode\command", True)
@@ -209,17 +207,17 @@ Public Class OpGeneral
             End With
 
             With Microsoft.Win32.Registry.CurrentUser
-                .CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt)
+                Dim unused2 = .CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt)
 
                 xReg = .OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt, True)
                 'xReg.DeleteSubKey("UserChoice")
-                xReg.CreateSubKey("UserChoice")
+                Dim unused1 = xReg.CreateSubKey("UserChoice")
                 xReg = .OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt & "\UserChoice", True)
                 xReg.SetValue("Progid", xClass)
             End With
 
         Catch ex As Exception
-            MsgBox(Strings.Messages.FileAssociationError & vbCrLf & vbCrLf & ex.Message, MsgBoxStyle.Exclamation, Strings.Messages.Err)
+            Dim unused = MsgBox(Strings.Messages.FileAssociationError & vbCrLf & vbCrLf & ex.Message, MsgBoxStyle.Exclamation, Strings.Messages.Err)
         End Try
 
         SHChangeNotify(&H8000000, 0, 0, 0)
@@ -356,7 +354,7 @@ Public Class OpGeneral
     '        Beep()
     '    End Sub
 
-    Private Sub cAutoSave_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cAutoSave.CheckedChanged
+    Private Sub cAutoSave_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cAutoSave.CheckedChanged
         NAutoSave.Enabled = cAutoSave.Checked
     End Sub
 End Class

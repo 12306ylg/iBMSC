@@ -161,3 +161,4 @@ iBMSC/.vs/iBMSC.vbproj.dtbcache.json
 *.vsidx
 *.bin
 *.v2
+.editorconfig

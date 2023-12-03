@@ -1,11 +1,9 @@
-Imports System.Runtime.CompilerServices
-Imports System.Windows.Forms
 Imports iBMSC.Editor
 
 Public Class OpVisual
-    Dim niB As Integer = MainWindow.niB
+    Private niB As Integer = MainWindow.niB
 
-    Structure ColumnOptionSet
+    Public Structure ColumnOptionSet
         Public Width As NumericUpDown
         Public Title As TextBox
         Public SNote As Button
@@ -41,9 +39,9 @@ Public Class OpVisual
     'Dim WithEvents eaFont As New ArrayList
     'Dim WithEvents eaI As New ArrayList
 
-    Dim vo As visualSettings
-    Dim col() As Column
-    Dim co() As ColumnOptionSet
+    Private vo As visualSettings
+    Private col() As Column
+    Private co() As ColumnOptionSet
 
 
 
@@ -55,36 +53,36 @@ Public Class OpVisual
         'eI = xeI
         vo = xvo
 
-        cButtonChange(Me.cColumnTitle, vo.ColumnTitle.Color)
-        cButtonChange(Me.cBG, vo.Bg.Color)
-        cButtonChange(Me.cGrid, vo.pGrid.Color)
-        cButtonChange(Me.cSub, vo.pSub.Color)
-        cButtonChange(Me.cVerticalLine, vo.pVLine.Color)
-        cButtonChange(Me.cMeasureBarLine, vo.pMLine.Color)
-        cButtonChange(Me.cWaveForm, vo.pBGMWav.Color)
-        cButtonChange(Me.cMouseOver, vo.kMouseOver.Color)
-        cButtonChange(Me.cSelectedBorder, vo.kSelected.Color)
-        cButtonChange(Me.cAdjustLengthBorder, vo.kMouseOverE.Color)
-        cButtonChange(Me.cSelectionBox, vo.SelBox.Color)
-        cButtonChange(Me.cTSCursor, vo.PECursor.Color)
-        cButtonChange(Me.cTSSplitter, vo.PEHalf.Color)
-        cButtonChange(Me.cTSMouseOver, vo.PEMouseOver.Color)
-        cButtonChange(Me.cTSSelectionFill, vo.PESel.Color)
-        cButtonChange(Me.cTSBPM, vo.PEBPM.Color)
+        cButtonChange(cColumnTitle, vo.ColumnTitle.Color)
+        cButtonChange(cBG, vo.Bg.Color)
+        cButtonChange(cGrid, vo.pGrid.Color)
+        cButtonChange(cSub, vo.pSub.Color)
+        cButtonChange(cVerticalLine, vo.pVLine.Color)
+        cButtonChange(cMeasureBarLine, vo.pMLine.Color)
+        cButtonChange(cWaveForm, vo.pBGMWav.Color)
+        cButtonChange(cMouseOver, vo.kMouseOver.Color)
+        cButtonChange(cSelectedBorder, vo.kSelected.Color)
+        cButtonChange(cAdjustLengthBorder, vo.kMouseOverE.Color)
+        cButtonChange(cSelectionBox, vo.SelBox.Color)
+        cButtonChange(cTSCursor, vo.PECursor.Color)
+        cButtonChange(cTSSplitter, vo.PEHalf.Color)
+        cButtonChange(cTSMouseOver, vo.PEMouseOver.Color)
+        cButtonChange(cTSSelectionFill, vo.PESel.Color)
+        cButtonChange(cTSBPM, vo.PEBPM.Color)
 
-        fButtonChange(Me.fColumnTitle, vo.ColumnTitleFont)
-        fButtonChange(Me.fNoteLabel, vo.kFont)
-        fButtonChange(Me.fMeasureLabel, vo.kMFont)
-        fButtonChange(Me.fTSBPM, vo.PEBPMFont)
+        fButtonChange(fColumnTitle, vo.ColumnTitleFont)
+        fButtonChange(fNoteLabel, vo.kFont)
+        fButtonChange(fMeasureLabel, vo.kMFont)
+        fButtonChange(fTSBPM, vo.PEBPMFont)
 
 
-        Me.iNoteHeight.SetValClamped(vo.kHeight)
-        Me.iLabelVerticalShift.SetValClamped(vo.kLabelVShift)
-        Me.iLabelHorizShift.SetValClamped(vo.kLabelHShift)
-        Me.iLongLabelHorizShift.SetValClamped(vo.kLabelHShiftL)
-        Me.iHiddenNoteOpacity.SetValClamped(vo.kOpacity)
-        Me.iTSSensitivity.SetValClamped(vo.PEDeltaMouseOver)
-        Me.iMiddleSensitivity.SetValClamped(vo.MiddleDeltaRelease)
+        iNoteHeight.SetValClamped(vo.kHeight)
+        iLabelVerticalShift.SetValClamped(vo.kLabelVShift)
+        iLabelHorizShift.SetValClamped(vo.kLabelHShift)
+        iLongLabelHorizShift.SetValClamped(vo.kLabelHShiftL)
+        iHiddenNoteOpacity.SetValClamped(vo.kOpacity)
+        iTSSensitivity.SetValClamped(vo.PEDeltaMouseOver)
+        iMiddleSensitivity.SetValClamped(vo.MiddleDeltaRelease)
 
         'lWidth = xlWidth
         'lTitle = xlTitle
@@ -213,7 +211,7 @@ Public Class OpVisual
         xbutton.Font = f
     End Sub
 
-    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
+    Private Sub OK_Button_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles OK_Button.Click
         'With Form1
 
         '-----------------------------------------------
@@ -264,35 +262,35 @@ Public Class OpVisual
 
         'End With
 
-        vo.ColumnTitle.Color = Me.cColumnTitle.BackColor
-        vo.Bg.Color = Me.cBG.BackColor
-        vo.pGrid.Color = Me.cGrid.BackColor
-        vo.pSub.Color = Me.cSub.BackColor
-        vo.pVLine.Color = Me.cVerticalLine.BackColor
-        vo.pMLine.Color = Me.cMeasureBarLine.BackColor
-        vo.pBGMWav.Color = Me.cWaveForm.BackColor
-        vo.kMouseOver.Color = Me.cMouseOver.BackColor
-        vo.kSelected.Color = Me.cSelectedBorder.BackColor
-        vo.kMouseOverE.Color = Me.cAdjustLengthBorder.BackColor
-        vo.SelBox.Color = Me.cSelectionBox.BackColor
-        vo.PECursor.Color = Me.cTSCursor.BackColor
-        vo.PEHalf.Color = Me.cTSSplitter.BackColor
-        vo.PEMouseOver.Color = Me.cTSMouseOver.BackColor
-        vo.PESel.Color = Me.cTSSelectionFill.BackColor
-        vo.PEBPM.Color = Me.cTSBPM.BackColor
+        vo.ColumnTitle.Color = cColumnTitle.BackColor
+        vo.Bg.Color = cBG.BackColor
+        vo.pGrid.Color = cGrid.BackColor
+        vo.pSub.Color = cSub.BackColor
+        vo.pVLine.Color = cVerticalLine.BackColor
+        vo.pMLine.Color = cMeasureBarLine.BackColor
+        vo.pBGMWav.Color = cWaveForm.BackColor
+        vo.kMouseOver.Color = cMouseOver.BackColor
+        vo.kSelected.Color = cSelectedBorder.BackColor
+        vo.kMouseOverE.Color = cAdjustLengthBorder.BackColor
+        vo.SelBox.Color = cSelectionBox.BackColor
+        vo.PECursor.Color = cTSCursor.BackColor
+        vo.PEHalf.Color = cTSSplitter.BackColor
+        vo.PEMouseOver.Color = cTSMouseOver.BackColor
+        vo.PESel.Color = cTSSelectionFill.BackColor
+        vo.PEBPM.Color = cTSBPM.BackColor
 
-        vo.ColumnTitleFont = Me.fColumnTitle.Font
-        vo.kFont = Me.fNoteLabel.Font
-        vo.kMFont = Me.fMeasureLabel.Font
-        vo.PEBPMFont = Me.fTSBPM.Font
+        vo.ColumnTitleFont = fColumnTitle.Font
+        vo.kFont = fNoteLabel.Font
+        vo.kMFont = fMeasureLabel.Font
+        vo.PEBPMFont = fTSBPM.Font
 
-        vo.kHeight = CInt(Me.iNoteHeight.Value)
-        vo.kLabelVShift = CInt(Me.iLabelVerticalShift.Value)
-        vo.kLabelHShift = CInt(Me.iLabelHorizShift.Value)
-        vo.kLabelHShiftL = CInt(Me.iLongLabelHorizShift.Value)
-        vo.kOpacity = CSng(Me.iHiddenNoteOpacity.Value)
-        vo.PEDeltaMouseOver = CInt(Me.iTSSensitivity.Value)
-        vo.MiddleDeltaRelease = CInt(Me.iMiddleSensitivity.Value)
+        vo.kHeight = CInt(iNoteHeight.Value)
+        vo.kLabelVShift = CInt(iLabelVerticalShift.Value)
+        vo.kLabelHShift = CInt(iLabelHorizShift.Value)
+        vo.kLabelHShiftL = CInt(iLongLabelHorizShift.Value)
+        vo.kOpacity = iHiddenNoteOpacity.Value
+        vo.PEDeltaMouseOver = CInt(iTSSensitivity.Value)
+        vo.MiddleDeltaRelease = CInt(iMiddleSensitivity.Value)
 
         MainWindow.setVO(vo)
 
@@ -308,17 +306,17 @@ Public Class OpVisual
 
         MainWindow.column = col
 
-        Me.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.Close()
+        DialogResult = System.Windows.Forms.DialogResult.OK
+        Close()
     End Sub
 
-    Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
-        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Close()
+    Private Sub Cancel_Button_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Close()
     End Sub
 
-    Private Sub OpVisual_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Font = MainWindow.Font
+    Private Sub OpVisual_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Font = MainWindow.Font
 
         'Language
 
@@ -372,7 +370,7 @@ Public Class OpVisual
         'Cancel_Button.Text = xSA(43)
         'Label3.Text = xSA(44)
 
-        Me.Text = Strings.fopVisual.Title
+        Text = Strings.fopVisual.Title
 
         Label37.Text = Strings.fopVisual.ColumnCaption
         Label9.Text = Strings.fopVisual.ColumnCaptionFont
@@ -617,7 +615,7 @@ Public Class OpVisual
     '    Panel2.Visible = rb2.Checked
     'End Sub
     '
-    Private Sub BCClick(ByVal sender As System.Object, ByVal e As System.EventArgs) _
+    Private Sub BCClick(ByVal sender As Object, ByVal e As System.EventArgs) _
     Handles cColumnTitle.Click, _
             cBG.Click, _
             cGrid.Click, _
@@ -648,7 +646,7 @@ Public Class OpVisual
         'sender.ForeColor = IIf(eColor(xI).GetBrightness + (255 - eColor(xI).A) / 255 >= 0.5, Color.Black, Color.White)
     End Sub
 
-    Private Sub BFClick(ByVal sender As System.Object, ByVal e As System.EventArgs) _
+    Private Sub BFClick(ByVal sender As Object, ByVal e As System.EventArgs) _
     Handles fColumnTitle.Click, _
             fNoteLabel.Click, _
             fMeasureLabel.Click, _
@@ -656,8 +654,9 @@ Public Class OpVisual
 
         'Dim xI As Integer = Val(sender.Tag)
         Dim s As Button = CType(sender, Button)
-        Dim xDFont As New FontDialog
-        xDFont.Font = s.Font
+        Dim xDFont As New FontDialog With {
+            .Font = s.Font
+        }
         If xDFont.ShowDialog(Me) = Forms.DialogResult.Cancel Then Exit Sub
 
         fButtonChange(s, xDFont.Font)
@@ -731,7 +730,7 @@ Public Class OpVisual
     '    sender.BackColor = lBg(xI)
     '    sender.ForeColor = IIf(lBg(xI).GetBrightness + (255 - lBg(xI).A) / 255 >= 0.5, Color.Black, Color.White)
     'End Sub
-    Private Sub ButtonClick(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub ButtonClick(ByVal sender As Object, ByVal e As System.EventArgs)
         'Dim xI As Integer = Val(sender.Tag)
         Dim s As Button = CType(sender, Button)
         Dim xColorPicker As New ColorPicker

@@ -1,9 +1,7 @@
-Imports System.Windows.Forms
-
 Public Class diagFind
-    Dim bCol As Integer = 83
-    Dim msg1 As String = "Error"
-    Dim msg2 As String = "Invalid label."
+    Private bCol As Integer = 83
+    Private msg1 As String = "Error"
+    Private msg2 As String = "Invalid label."
 
     Public Sub New(ByVal xbCol As Integer, ByVal xmsg1 As String, ByVal xmsg2 As String)
         InitializeComponent()
@@ -12,36 +10,36 @@ Public Class diagFind
         msg2 = xmsg2
     End Sub
 
-    Private Sub CloseDialog(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBClose.Click
-        Me.Close()
+    Private Sub CloseDialog(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBClose.Click
+        Close()
     End Sub
 
-    Private Sub BSAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSAll.Click
+    Private Sub BSAll_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BSAll.Click
         For Each xCB As CheckBox In Panel1.Controls
             xCB.Checked = True
         Next
     End Sub
-    Private Sub BSInv_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSInv.Click
+    Private Sub BSInv_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BSInv.Click
         For Each xCB As CheckBox In Panel1.Controls
             xCB.Checked = Not xCB.Checked
         Next
     End Sub
-    Private Sub BSNone_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSNone.Click
+    Private Sub BSNone_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BSNone.Click
         For Each xCB As CheckBox In Panel1.Controls
             xCB.Checked = False
         Next
     End Sub
 
-    Private Sub diagFind_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Font = MainWindow.Font
-        Dim xBold As New Font(Me.Font, FontStyle.Bold)
+    Private Sub diagFind_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Font = MainWindow.Font
+        Dim xBold As New Font(Font, FontStyle.Bold)
 
         TBSelect.Font = xBold
         Label8.Font = xBold
         Label9.Font = xBold
 
         'Dim xS() As String = Form1.lpfdr
-        Me.Text = MainWindow.TBFind.Text
+        Text = MainWindow.TBFind.Text
 
         Label1.Text = Strings.fFind.NoteRange
         Label2.Text = Strings.fFind.MeasureRange
@@ -71,9 +69,9 @@ Public Class diagFind
         TBDelete.Text = Strings.fFind.Delete_
         TBClose.Text = Strings.fFind.Close_
 
-        Me.Panel1.Controls.Add(Me.cb1)
-        Me.Panel1.Controls.Add(Me.cb2)
-        Me.Panel1.Controls.Add(Me.cb3)
+        Panel1.Controls.Add(cb1)
+        Panel1.Controls.Add(cb2)
+        Panel1.Controls.Add(cb3)
 
         Dim xColumn = 1
         Dim xLow = 0
@@ -84,7 +82,7 @@ Public Class diagFind
                     .Appearance = Appearance.Button
                     .Checked = True
                     .FlatStyle = FlatStyle.System
-                    .Location = New Point((xLow Mod 8) * 35 + 3, xColumn * 25 + 2)
+                    .Location = New Point(((xLow Mod 8) * 35) + 3, (xColumn * 25) + 2)
                     .Size = New Size(35, 25)
                     .Tag = MainWindow.niA1 + xI1
                     .Text = MainWindow.column(MainWindow.niA1 + xI1).Title
@@ -106,7 +104,7 @@ Public Class diagFind
                     .Appearance = Appearance.Button
                     .Checked = True
                     .FlatStyle = FlatStyle.System
-                    .Location = New Point((xLow Mod 8) * 35 + 3, xColumn * 25 + 2)
+                    .Location = New Point(((xLow Mod 8) * 35) + 3, (xColumn * 25) + 2)
                     .Size = New Size(35, 25)
                     .Tag = MainWindow.niD1 + xI1
                     .Text = MainWindow.column(MainWindow.niD1 + xI1).Title
@@ -121,12 +119,12 @@ Public Class diagFind
         If xLow Mod 8 <> 0 Then xColumn += 1
         xLow = 0
 
-        Me.Panel1.Controls.Add(Me.cb4)
-        Me.cb4.Location = New Point(0 * 55 + 3, xColumn * 25 + 2)
-        Me.Panel1.Controls.Add(Me.cb5)
-        Me.cb5.Location = New Point(1 * 55 + 3, xColumn * 25 + 2)
-        Me.Panel1.Controls.Add(Me.cb6)
-        Me.cb6.Location = New Point(2 * 55 + 3, xColumn * 25 + 2)
+        Panel1.Controls.Add(cb4)
+        cb4.Location = New Point((0 * 55) + 3, (xColumn * 25) + 2)
+        Panel1.Controls.Add(cb5)
+        cb5.Location = New Point((1 * 55) + 3, (xColumn * 25) + 2)
+        Panel1.Controls.Add(cb6)
+        cb6.Location = New Point((2 * 55) + 3, (xColumn * 25) + 2)
 
         xColumn += 1
         For xI1 As Integer = 63 To bCol
@@ -135,7 +133,7 @@ Public Class diagFind
                 .Appearance = Appearance.Button
                 .Checked = True
                 .FlatStyle = FlatStyle.System
-                .Location = New Point((xLow Mod 8) * 35 + 3, xColumn * 25 + 2)
+                .Location = New Point(((xLow Mod 8) * 35) + 3, (xColumn * 25) + 2)
                 .Size = New Size(35, 25)
                 .Tag = xI1
                 .Text = "B" & (xI1 - 62).ToString
@@ -166,25 +164,25 @@ Public Class diagFind
             If Not ((xI4 >= 48 And xI4 <= 57) Or (xI4 >= 65 And xI4 <= 90)) Then Return False
         End If
         Return True
-        MsgBox(msg2, MsgBoxStyle.Critical, msg1)
+        Dim unused = MsgBox(msg2, MsgBoxStyle.Critical, msg1)
     End Function
 
     Private Sub lblKeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs)
         If Not e.KeyCode = Keys.Enter Then Exit Sub
-        ValidateLabel(sender)
+        Dim unused = ValidateLabel(sender)
     End Sub
 
     Private Function ValidateLabel(ByVal sender As Object) As Boolean
         Dim xBool As Boolean = ValidLabel(sender.Text)
         If Not xBool Then
-            MsgBox(msg2, MsgBoxStyle.Critical, msg1)
-            sender.Focus()
-            sender.SelectAll()
+            Dim unused2 = MsgBox(msg2, MsgBoxStyle.Critical, msg1)
+            Dim unused1 = sender.Focus()
+            Dim unused = sender.SelectAll()
         End If
         ValidateLabel = xBool
     End Function
 
-    Private Sub TBSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBSelect.Click
+    Private Sub TBSelect_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBSelect.Click
         If Not ValidateLabel(lr1) Then Exit Sub
         If Not ValidateLabel(lr2) Then Exit Sub
 
@@ -211,7 +209,7 @@ Public Class diagFind
                         xCol)
     End Sub
 
-    Private Sub TBUnselect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBUnselect.Click
+    Private Sub TBUnselect_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBUnselect.Click
         If Not ValidateLabel(lr1) Then Exit Sub
         If Not ValidateLabel(lr2) Then Exit Sub
 
@@ -238,7 +236,7 @@ Public Class diagFind
                           xCol)
     End Sub
 
-    Private Sub TBDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBDelete.Click
+    Private Sub TBDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBDelete.Click
         If Not ValidateLabel(lr1) Then Exit Sub
         If Not ValidateLabel(lr2) Then Exit Sub
 
@@ -265,7 +263,7 @@ Public Class diagFind
                         xCol)
     End Sub
 
-    Private Sub TBrl_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBrl.Click
+    Private Sub TBrl_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBrl.Click
         If Not ValidateLabel(lr1) Then Exit Sub
         If Not ValidateLabel(lr2) Then Exit Sub
         If Not ValidateLabel(Ttl) Then Exit Sub
@@ -293,7 +291,7 @@ Public Class diagFind
                           xCol, Ttl.Text)
     End Sub
 
-    Private Sub TBrv_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBrv.Click
+    Private Sub TBrv_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBrv.Click
         If Not ValidateLabel(lr1) Then Exit Sub
         If Not ValidateLabel(lr2) Then Exit Sub
 

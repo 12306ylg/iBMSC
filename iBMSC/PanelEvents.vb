@@ -42,7 +42,7 @@ Partial Public Class MainWindow
                     If Not Notes(xI1).Selected Then Continue For
 
                     xVPos = Notes(xI1).VPosition + xVPosition - muVPosition
-                    Me.RedoMoveNote(Notes(xI1), Notes(xI1).ColumnIndex, xVPos, xUndo, xRedo)
+                    RedoMoveNote(Notes(xI1), Notes(xI1).ColumnIndex, xVPos, xUndo, xRedo)
                     Notes(xI1).VPosition = xVPos
                 Next
                 'xUndo = sCmdKMs(0, -xVPosition + muVPosition, True)
@@ -75,7 +75,7 @@ Partial Public Class MainWindow
                     If Not Notes(xI1).Selected Then Continue For
 
                     xVPos = Notes(xI1).VPosition + xVPosition - mVPosition
-                    Me.RedoMoveNote(Notes(xI1), Notes(xI1).ColumnIndex, xVPos, xUndo, xRedo)
+                    RedoMoveNote(Notes(xI1), Notes(xI1).ColumnIndex, xVPos, xUndo, xRedo)
                     Notes(xI1).VPosition = xVPos
                 Next
                 'xUndo = sCmdKMs(0, -xVPosition + mVPosition, True)
@@ -105,7 +105,7 @@ Partial Public Class MainWindow
                     If Not Notes(xI1).Selected Then Continue For
 
                     xCol = EnabledColumnIndexToColumnArrayIndex(ColumnArrayIndexToEnabledColumnIndex(Notes(xI1).ColumnIndex) - 1 - mLeft)
-                    Me.RedoMoveNote(Notes(xI1), xCol, Notes(xI1).VPosition, xUndo, xRedo)
+                    RedoMoveNote(Notes(xI1), xCol, Notes(xI1).VPosition, xUndo, xRedo)
                     Notes(xI1).ColumnIndex = xCol
                 Next
                 'xUndo = sCmdKMs(1 + mLeft, 0, True)
@@ -122,7 +122,7 @@ Partial Public Class MainWindow
                     If Not Notes(xI1).Selected Then Continue For
 
                     xCol = EnabledColumnIndexToColumnArrayIndex(ColumnArrayIndexToEnabledColumnIndex(Notes(xI1).ColumnIndex) + 1)
-                    Me.RedoMoveNote(Notes(xI1), xCol, Notes(xI1).VPosition, xUndo, xRedo)
+                    RedoMoveNote(Notes(xI1), xCol, Notes(xI1).VPosition, xUndo, xRedo)
                     Notes(xI1).ColumnIndex = xCol
                 Next
                 'xUndo = sCmdKMs(-1, 0, True)
@@ -326,7 +326,7 @@ Partial Public Class MainWindow
                     Next
                 End If
 
-                Me.RedoMoveNote(Notes(xI2), currentBGMColumn, .VPosition, xUndo, xRedo)
+                RedoMoveNote(Notes(xI2), currentBGMColumn, .VPosition, xUndo, xRedo)
                 .ColumnIndex = currentBGMColumn
             End With
         Next
@@ -388,7 +388,7 @@ Partial Public Class MainWindow
     End Sub
 
     Private Sub PMainInResize(ByVal sender As Object, ByVal e As System.EventArgs) Handles PMainIn.Resize, PMainInL.Resize, PMainInR.Resize
-        If Not Me.Created Then Exit Sub
+        If Not Created Then Exit Sub
 
         Dim iI As Integer = sender.Tag
         PanelWidth(0) = PMainL.Width
@@ -423,12 +423,12 @@ Partial Public Class MainWindow
         tempFirstMouseDown = FirstClickDisabled And Not sender.Focused
 
         PanelFocus = sender.Tag
-        sender.Focus()
+        Dim unused = sender.Focus()
         LastMouseDownLocation = New Point(-1, -1)
         VSValue = PanelVScroll(PanelFocus)
 
         If NTInput Then bAdjustUpper = False : bAdjustLength = False
-        Me.ctrlPressed = False : Me.DuplicatedSelectedNotes = False
+        ctrlPressed = False : DuplicatedSelectedNotes = False
 
         If MiddleButtonClicked Then MiddleButtonClicked = False : Exit Sub
 
@@ -502,7 +502,7 @@ Partial Public Class MainWindow
                         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
                         Dim xRedo As UndoRedo.LinkedURCmd = Nothing
 
-                        Me.RedoRemoveNote(Notes(xI1), xUndo, xRedo)
+                        RedoRemoveNote(Notes(xI1), xUndo, xRedo)
                         RemoveNote(xI1)
 
                         AddUndo(xUndo, xRedo)
@@ -596,7 +596,7 @@ Partial Public Class MainWindow
                 Dim xRedo As UndoRedo.LinkedURCmd = Nothing
 
 
-                Me.RedoLongNoteModify(SelectedNotes(0), Notes(NoteIndex).VPosition, Notes(NoteIndex).Length, xUndo, xRedo)
+                RedoLongNoteModify(SelectedNotes(0), Notes(NoteIndex).VPosition, Notes(NoteIndex).Length, xUndo, xRedo)
                 AddUndo(xUndo, xRedo)
                 'With uNote
                 '    AddUndo(sCmdKL(.ColumnIndex, .VPosition, .Value, K(xITemp).Length, .Hidden, .Length, True, True), _
@@ -635,12 +635,7 @@ Partial Public Class MainWindow
                 ShouldDrawTempNote = True
 
             Else
-                Dim xLbl As Integer
-                If IsColumnSound(xColumn) Then
-                    xLbl = (LWAV.SelectedIndex + 1) * 10000
-                Else
-                    xLbl = (LBMP.SelectedIndex + 1) * 10000
-                End If
+                Dim xLbl = If(IsColumnSound(xColumn), (LWAV.SelectedIndex + 1) * 10000, (LBMP.SelectedIndex + 1) * 10000)
 
                 Dim Landmine As Boolean = ModifierLandmineActive()
 
@@ -686,7 +681,7 @@ Partial Public Class MainWindow
 
             Dim xL1 As Double
             If NoteIndex >= 0 Then xL1 = Notes(NoteIndex).VPosition _
-                           Else xL1 = (xHeight - xVS * gxHeight - e.Y - 1) / gxHeight
+                           Else xL1 = (xHeight - (xVS * gxHeight) - e.Y - 1) / gxHeight
 
             vSelAdjust = ModifierLongNoteActive()
 
@@ -881,7 +876,7 @@ Partial Public Class MainWindow
             If NoteColumn = niSCROLL Then xMessage = Strings.Messages.PromptEnterSCROLL
 
 
-            Dim valstr As String = InputBox(xMessage, Me.Text)
+            Dim valstr As String = InputBox(xMessage, Text)
             Dim PromptValue As Double = Val(valstr) * 10000
             If (NoteColumn = niSCROLL And valstr = "0") Or PromptValue <> 0 Then
 
@@ -897,7 +892,7 @@ Partial Public Class MainWindow
             End If
         Else
             'Label prompt
-            Dim xStr As String = UCase(Trim(InputBox(Strings.Messages.PromptEnter, Me.Text)))
+            Dim xStr As String = UCase(Trim(InputBox(Strings.Messages.PromptEnter, Text)))
 
             If Len(xStr) = 0 Then Return
 
@@ -909,7 +904,7 @@ Partial Public Class MainWindow
                 AddUndo(xUndo, xRedo)
                 Return
             Else
-                MsgBox(Strings.Messages.InvalidLabel, MsgBoxStyle.Critical, Strings.Messages.Err)
+                Dim unused = MsgBox(Strings.Messages.InvalidLabel, MsgBoxStyle.Critical, Strings.Messages.Err)
             End If
 
         End If
@@ -925,8 +920,8 @@ Partial Public Class MainWindow
     Private Sub PMainInMouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles PMainIn.MouseEnter, PMainInL.MouseEnter, PMainInR.MouseEnter
         spMouseOver = sender.Tag
         Dim xPMainIn As Panel = sender
-        If AutoFocusMouseEnter AndAlso Me.Focused Then xPMainIn.Focus() : PanelFocus = spMouseOver
-        If FirstMouseEnter Then FirstMouseEnter = False : xPMainIn.Focus() : PanelFocus = spMouseOver
+        If AutoFocusMouseEnter AndAlso Focused Then Dim unused1 = xPMainIn.Focus() : PanelFocus = spMouseOver
+        If FirstMouseEnter Then FirstMouseEnter = False : Dim unused = xPMainIn.Focus() : PanelFocus = spMouseOver
     End Sub
 
     Private Sub PMainInMouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles PMainIn.MouseLeave, PMainInL.MouseLeave, PMainInR.MouseLeave
@@ -995,7 +990,6 @@ Partial Public Class MainWindow
 
                     If xTempbTimeSelectionMode Then
 
-                        Dim xMouseOverLine As Integer = vSelMouseOverLine
                         vSelMouseOverLine = 0
 
                         If Math.Abs(e.Y - NoteRowToPanelHeight(vSelStart + vSelLength, xVS, xHeight)) <= vo.PEDeltaMouseOver Then
@@ -1016,7 +1010,7 @@ Partial Public Class MainWindow
                     KMouseOver = foundNoteIndex
 
                 ElseIf TBWrite.Checked Then
-                    TempVPosition = (xHeight - xVS * gxHeight - e.Y - 1) / gxHeight 'VPosition of the mouse
+                    TempVPosition = (xHeight - (xVS * gxHeight) - e.Y - 1) / gxHeight 'VPosition of the mouse
                     If gSnap Then TempVPosition = SnapToGrid(TempVPosition)
 
                     SelectedColumn = GetColumnAtEvent(e, xHS)  'get the enabled column where mouse is 
@@ -1065,7 +1059,7 @@ Partial Public Class MainWindow
                         OnWriteModeMouseMove(xHeight, xVS, e)
 
                     Else
-                        TempVPosition = (xHeight - xVS * gxHeight - e.Y - 1) / gxHeight 'VPosition of the mouse
+                        TempVPosition = (xHeight - (xVS * gxHeight) - e.Y - 1) / gxHeight 'VPosition of the mouse
                         If gSnap Then TempVPosition = SnapToGrid(TempVPosition)
                         SelectedColumn = GetColumnAtEvent(e, xHS)  'get the enabled column where mouse is 
 
@@ -1089,8 +1083,8 @@ Partial Public Class MainWindow
 
     End Sub
 
-    Dim lastVPos = -1
-    Dim lastColumn = -1
+    Private lastVPos = -1
+    Private lastColumn = -1
 
     Private Sub UpdateSelectedNotes(xHeight As Double, xvs As Double, xhs As Double, e As MouseEventArgs)
         Dim mouseVPosition As Double
@@ -1139,8 +1133,8 @@ Partial Public Class MainWindow
 
     Private Sub OnPanelMousePan(e As MouseEventArgs)
         If MiddleButtonMoveMethod = 1 Then
-            Dim xI1 As Integer = tempV + (tempY - e.Y) / gxHeight
-            Dim xI2 As Integer = tempH + (tempX - e.X) / gxWidth
+            Dim xI1 As Integer = tempV + ((tempY - e.Y) / gxHeight)
+            Dim xI2 As Integer = tempH + ((tempX - e.X) / gxWidth)
             If xI1 > 0 Then xI1 = 0
             If xI2 < 0 Then xI2 = 0
 
@@ -1184,7 +1178,7 @@ Partial Public Class MainWindow
 
         If Not vSelAdjust Then
             If vSelMouseOverLine = 1 Then
-                Dim xV As Double = (xHeight - xvs * gxHeight - e.Y - 1) / gxHeight
+                Dim xV As Double = (xHeight - (xvs * gxHeight) - e.Y - 1) / gxHeight
                 If xITemp >= 0 Then xV = Notes(xITemp).VPosition
                 If gSnap And xITemp <= 0 And Not My.Computer.Keyboard.CtrlKeyDown Then xV = SnapToGrid(xV)
                 vSelLength += vSelStart - xV
@@ -1192,13 +1186,13 @@ Partial Public Class MainWindow
                 vSelStart = xV
 
             ElseIf vSelMouseOverLine = 2 Then
-                vSelHalf = (xHeight - xvs * gxHeight - e.Y - 1) / gxHeight
+                vSelHalf = (xHeight - (xvs * gxHeight) - e.Y - 1) / gxHeight
                 If xITemp >= 0 Then vSelHalf = Notes(xITemp).VPosition
                 If gSnap And xITemp <= 0 And Not My.Computer.Keyboard.CtrlKeyDown Then vSelHalf = SnapToGrid(vSelHalf)
                 vSelHalf -= vSelStart
 
             ElseIf vSelMouseOverLine = 3 Then
-                vSelLength = (xHeight - xvs * gxHeight - e.Y - 1) / gxHeight
+                vSelLength = (xHeight - (xvs * gxHeight) - e.Y - 1) / gxHeight
                 If xITemp >= 0 Then vSelLength = Notes(xITemp).VPosition
                 If gSnap And xITemp <= 0 And Not My.Computer.Keyboard.CtrlKeyDown Then vSelLength = SnapToGrid(vSelLength)
                 vSelLength -= vSelStart
@@ -1207,7 +1201,7 @@ Partial Public Class MainWindow
                 If xITemp >= 0 Then
                     vSelLength = Notes(xITemp).VPosition
                 Else
-                    vSelLength = (xHeight - xvs * gxHeight - e.Y - 1) / gxHeight
+                    vSelLength = (xHeight - (xvs * gxHeight) - e.Y - 1) / gxHeight
                     If gSnap And Not My.Computer.Keyboard.CtrlKeyDown Then vSelLength = SnapToGrid(vSelLength)
                 End If
                 vSelLength -= vSelStart
@@ -1216,7 +1210,7 @@ Partial Public Class MainWindow
             ValidateSelection()
 
         Else
-            Dim xL1 As Double = (xHeight - xvs * gxHeight - e.Y - 1) / gxHeight
+            Dim xL1 As Double = (xHeight - (xvs * gxHeight) - e.Y - 1) / gxHeight
 
             If vSelMouseOverLine = 2 Then
                 vSelStart = vSelPStart
@@ -1333,7 +1327,7 @@ Partial Public Class MainWindow
 
             xVPos = Notes(xI1).VPosition + dVPosition + minLength - minVPosition
             xLen = Notes(xI1).Length - dVPosition - minLength + minVPosition
-            Me.RedoLongNoteModify(SelectedNotes(Notes(xI1).TempIndex), xVPos, xLen, xUndo, xRedo)
+            RedoLongNoteModify(SelectedNotes(Notes(xI1).TempIndex), xVPos, xLen, xUndo, xRedo)
 
             Notes(xI1).VPosition = xVPos
             Notes(xI1).Length = xLen
@@ -1398,7 +1392,7 @@ Partial Public Class MainWindow
 
                 Notes(i).ColumnIndex = EnabledColumnIndexToColumnArrayIndex(ColumnArrayIndexToEnabledColumnIndex(Notes(i).ColumnIndex) + colChange - dstColumn)
                 Notes(i).VPosition = Notes(i).VPosition + dVPosition - mVPosition - muVPosition
-                Me.RedoAddNote(Notes(i), xUndo, xRedo)
+                RedoAddNote(Notes(i), xUndo, xRedo)
             Next
 
             AddUndo(xUndo, xBaseRedo.Next, True)
@@ -1446,13 +1440,13 @@ Partial Public Class MainWindow
                 If SelectedNotes(0).LNPair = -1 Then 'If new note
                     Dim xUndo As UndoRedo.LinkedURCmd = Nothing
                     Dim xRedo As UndoRedo.LinkedURCmd = Nothing
-                    Me.RedoAddNote(Notes(xITemp), xUndo, xRedo)
+                    RedoAddNote(Notes(xITemp), xUndo, xRedo)
                     AddUndo(xUndo, xRedo, True)
 
                 Else 'If existing note
                     Dim xUndo As UndoRedo.LinkedURCmd = Nothing
                     Dim xRedo As UndoRedo.LinkedURCmd = Nothing
-                    Me.RedoLongNoteModify(SelectedNotes(0), .VPosition, .Length, xUndo, xRedo)
+                    RedoLongNoteModify(SelectedNotes(0), .VPosition, .Length, xUndo, xRedo)
                     AddUndo(xUndo, xRedo, True)
                 End If
 
@@ -1476,7 +1470,7 @@ Partial Public Class MainWindow
 
         Dim mouseColumn As Integer
         Dim xI1 = 0
-        Dim mLeft As Integer = e.X / gxWidth + xHS 'horizontal position of the mouse
+        Dim mLeft As Integer = (e.X / gxWidth) + xHS 'horizontal position of the mouse
         If mLeft >= 0 Then
             Do
                 If mLeft < nLeft(xI1 + 1) Or xI1 >= gColumns Then mouseColumn = ColumnArrayIndexToEnabledColumnIndex(xI1) : Exit Do 'get the column where mouse is 
@@ -1518,7 +1512,7 @@ Partial Public Class MainWindow
 
             xCol = EnabledColumnIndexToColumnArrayIndex(ColumnArrayIndexToEnabledColumnIndex(Notes(xI1).ColumnIndex) + dColumn - mLeft)
             xVPos = Notes(xI1).VPosition + dVPosition - mVPosition - muVPosition
-            Me.RedoMoveNote(SelectedNotes(Notes(xI1).TempIndex), xCol, xVPos, xUndo, xRedo)
+            RedoMoveNote(SelectedNotes(Notes(xI1).TempIndex), xCol, xVPos, xUndo, xRedo)
 
             Notes(xI1).ColumnIndex = xCol
             Notes(xI1).VPosition = xVPos
@@ -1542,15 +1536,13 @@ Partial Public Class MainWindow
         For xI1 = 1 To UBound(Notes)
             NoteRect = New Rectangle(HorizontalPositiontoDisplay(nLeft(Notes(xI1).ColumnIndex), xHS) + 1,
                                   NoteRowToPanelHeight(Notes(xI1).VPosition + IIf(NTInput, Notes(xI1).Length, 0), xVS, xHeight) - vo.kHeight,
-                                  GetColumnWidth(Notes(xI1).ColumnIndex) * gxWidth - 2,
+                                  (GetColumnWidth(Notes(xI1).ColumnIndex) * gxWidth) - 2,
                                   vo.kHeight + IIf(NTInput, Notes(xI1).Length * gxHeight, 0))
 
 
-            If NoteRect.IntersectsWith(SelectionBox) Then
-                Notes(xI1).Selected = Not Notes(xI1).TempSelected And nEnabled(Notes(xI1).ColumnIndex)
-            Else
-                Notes(xI1).Selected = Notes(xI1).TempSelected And nEnabled(Notes(xI1).ColumnIndex)
-            End If
+            Notes(xI1).Selected = If(NoteRect.IntersectsWith(SelectionBox),
+                Not Notes(xI1).TempSelected And nEnabled(Notes(xI1).ColumnIndex),
+                Notes(xI1).TempSelected And nEnabled(Notes(xI1).ColumnIndex))
         Next
     End Sub
 
@@ -1574,7 +1566,7 @@ Partial Public Class MainWindow
             xTempNotes(xI2) = Notes(i)
             xTempNotes(xI2).ColumnIndex = EnabledColumnIndexToColumnArrayIndex(ColumnArrayIndexToEnabledColumnIndex(Notes(i).ColumnIndex) + dColumn - mLeft)
             xTempNotes(xI2).VPosition = Notes(i).VPosition + dVPosition - mVPosition - muVPosition
-            Me.RedoAddNote(xTempNotes(xI2), xUndo, xRedo)
+            RedoAddNote(xTempNotes(xI2), xUndo, xRedo)
 
             Notes(i).Selected = False
             xI2 += 1
@@ -1598,17 +1590,17 @@ Partial Public Class MainWindow
         Dim xDispY As Integer = IIf(Not NTInput Or (bAdjustLength And Not bAdjustUpper),
                                     NoteRowToPanelHeight(Notes(foundNoteIndex).VPosition, xVS, xHeight) - vo.kHeight - 1,
                                     NoteRowToPanelHeight(Notes(foundNoteIndex).VPosition + Notes(foundNoteIndex).Length, xVS, xHeight) - vo.kHeight - 1)
-        Dim xDispW As Integer = GetColumnWidth(Notes(foundNoteIndex).ColumnIndex) * gxWidth + 1
+        Dim xDispW As Integer = (GetColumnWidth(Notes(foundNoteIndex).ColumnIndex) * gxWidth) + 1
         Dim xDispH As Integer = IIf(Not NTInput Or bAdjustLength,
                                     vo.kHeight + 3,
-                                    Notes(foundNoteIndex).Length * gxHeight + vo.kHeight + 3)
+                                    (Notes(foundNoteIndex).Length * gxHeight) + vo.kHeight + 3)
 
         Dim e1 As BufferedGraphics = BufferedGraphicsManager.Current.Allocate(spMain(iI).CreateGraphics, New Rectangle(xDispX, xDispY, xDispW, xDispH))
         e1.Graphics.FillRectangle(vo.Bg, New Rectangle(xDispX, xDispY, xDispW, xDispH))
 
         If NTInput Then DrawNoteNT(Notes(foundNoteIndex), e1, xHS, xVS, xHeight) Else DrawNote(Notes(foundNoteIndex), e1, xHS, xVS, xHeight)
 
-        e1.Graphics.DrawRectangle(IIf(bAdjustLength, vo.kMouseOverE, vo.kMouseOver), xDispX, xDispY, xDispW - 1, xDispH - 1)
+        Dim unused = e1.Graphics.DrawRectangle(IIf(bAdjustLength, vo.kMouseOverE, vo.kMouseOver), xDispX, xDispY, xDispW - 1, xDispH - 1)
 
         e1.Render(spMain(iI).CreateGraphics)
         e1.Dispose()
@@ -1616,7 +1608,7 @@ Partial Public Class MainWindow
 
     Private Function GetColumnAtX(x As Integer, xHS As Integer) As Integer
         Dim xI1 As Integer = 0
-        Dim mLeft As Integer = x / gxWidth + xHS 'horizontal position of the mouse
+        Dim mLeft As Integer = (x / gxWidth) + xHS 'horizontal position of the mouse
         Dim xColumn = 0
         If mLeft >= 0 Then
             Do
@@ -1635,7 +1627,7 @@ Partial Public Class MainWindow
     ' az: Handle zoom in/out. Should work with any of the three splitters.
     Private Sub PMain_Scroll(sender As Object, e As MouseEventArgs) Handles PMainIn.MouseWheel, PMainInL.MouseWheel, PMainInR.MouseWheel
         If Not My.Computer.Keyboard.CtrlKeyDown Then Exit Sub
-        Dim dv = Math.Round(CGHeight2.Value + e.Delta / 120)
+        Dim dv = Math.Round(CGHeight2.Value + (e.Delta / 120))
         CGHeight2.Value = Math.Min(CGHeight2.Maximum, Math.Max(CGHeight2.Minimum, dv))
         CGHeight.Value = CGHeight2.Value / 4
     End Sub
@@ -1655,7 +1647,7 @@ Partial Public Class MainWindow
         Dim iI As Integer = sender.Tag
 
         If MiddleButtonClicked AndAlso e.Button = Forms.MouseButtons.Middle AndAlso
-            (MiddleButtonLocation.X - Cursor.Position.X) ^ 2 + (MiddleButtonLocation.Y - Cursor.Position.Y) ^ 2 >= vo.MiddleDeltaRelease Then
+            ((MiddleButtonLocation.X - Cursor.Position.X) ^ 2) + ((MiddleButtonLocation.Y - Cursor.Position.Y) ^ 2) >= vo.MiddleDeltaRelease Then
             MiddleButtonClicked = False
         End If
 
@@ -1678,7 +1670,7 @@ Partial Public Class MainWindow
                 Dim xVPosition As Double
 
 
-                xVPosition = (sender.Height - PanelVScroll(iI) * gxHeight - e.Y - 1) / gxHeight 'VPosition of the mouse
+                xVPosition = (sender.Height - (PanelVScroll(iI) * gxHeight) - e.Y - 1) / gxHeight 'VPosition of the mouse
                 If gSnap Then xVPosition = SnapToGrid(xVPosition)
 
                 Dim xColumn = GetColumnAtEvent(e, PanelhBMSCROLL(iI))
@@ -1697,7 +1689,7 @@ Partial Public Class MainWindow
                         If xColumn = niSTOP Then xMessage = Strings.Messages.PromptEnterSTOP
                         If xColumn = niSCROLL Then xMessage = Strings.Messages.PromptEnterSCROLL
 
-                        Dim valstr As String = InputBox(xMessage, Me.Text)
+                        Dim valstr As String = InputBox(xMessage, Text)
                         Dim value As Long = Val(valstr) * 10000
 
                         If (xColumn = niSCROLL And valstr = "0") Or value <> 0 Then
@@ -1714,12 +1706,7 @@ Partial Public Class MainWindow
                         End If
 
                     Else
-                        Dim xValue As Integer
-                        If IsColumnSound(xColumn) Then
-                            xValue = (LWAV.SelectedIndex + 1) * 10000
-                        Else
-                            xValue = (LBMP.SelectedIndex + 1) * 10000
-                        End If
+                        Dim xValue = If(IsColumnSound(xColumn), (LWAV.SelectedIndex + 1) * 10000, (LBMP.SelectedIndex + 1) * 10000)
 
                         For xI1 = 1 To UBound(Notes)
                             If Notes(xI1).VPosition = xVPosition AndAlso Notes(xI1).ColumnIndex = xColumn Then _
@@ -1753,26 +1740,26 @@ Partial Public Class MainWindow
         Select Case spMouseOver
             Case 0
                 'xI1 = spV(iI) - Math.Sign(e.Delta) * VSL.SmallChange * 5 / gxHeight
-                xI1 = PanelVScroll(spMouseOver) - Math.Sign(e.Delta) * gWheel
+                xI1 = PanelVScroll(spMouseOver) - (Math.Sign(e.Delta) * gWheel)
                 If xI1 > 0 Then xI1 = 0
                 If xI1 < LeftPanelScroll.Minimum Then xI1 = LeftPanelScroll.Minimum
                 LeftPanelScroll.Value = xI1
             Case 1
                 'xI1 = spV(iI) - Math.Sign(e.Delta) * VS.SmallChange * 5 / gxHeight
-                xI1 = PanelVScroll(spMouseOver) - Math.Sign(e.Delta) * gWheel
+                xI1 = PanelVScroll(spMouseOver) - (Math.Sign(e.Delta) * gWheel)
                 If xI1 > 0 Then xI1 = 0
                 If xI1 < MainPanelScroll.Minimum Then xI1 = MainPanelScroll.Minimum
                 MainPanelScroll.Value = xI1
             Case 2
                 'xI1 = spV(iI) - Math.Sign(e.Delta) * VSR.SmallChange * 5 / gxHeight
-                xI1 = PanelVScroll(spMouseOver) - Math.Sign(e.Delta) * gWheel
+                xI1 = PanelVScroll(spMouseOver) - (Math.Sign(e.Delta) * gWheel)
                 If xI1 > 0 Then xI1 = 0
                 If xI1 < RightPanelScroll.Minimum Then xI1 = RightPanelScroll.Minimum
                 RightPanelScroll.Value = xI1
         End Select
     End Sub
 
-    Private Sub PMainInPaint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles PMainIn.Paint, PMainInL.Paint, PMainInR.Paint
+    Private Sub PMainInPaint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles PMainIn.Paint, PMainInL.Paint, PMainInR.Paint
         RefreshPanel(sender.Tag, e.ClipRectangle)
     End Sub
 End Class

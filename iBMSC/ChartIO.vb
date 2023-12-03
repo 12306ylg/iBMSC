@@ -1,7 +1,7 @@
-﻿Imports iBMSC.Editor
-Imports System.Text.Json
+﻿Imports System.Text.Json
+Imports iBMSC.Editor
 Partial Public Class MainWindow
-    Private Sub OpenBMS(ByVal xStrAll As String)
+    Private Sub OpenBMS(xStrAll As String)
         KMouseOver = -1
 
         'Line feed validation: will remove some empty lines
@@ -17,8 +17,8 @@ Partial Public Class MainWindow
         ReDim hBPM(1295)    'x10000
         ReDim hSTOP(1295)
         ReDim hBMSCROLL(1295)
-        Me.InitializeNewBMS()
-        Me.InitializeOpenBMS()
+        InitializeNewBMS()
+        InitializeOpenBMS()
 
         With Notes(0)
             .ColumnIndex = niBPM
@@ -47,7 +47,7 @@ Partial Public Class MainWindow
                 Dim xRatio As Double = Val(Mid(sLineTrim, 8))
                 Dim xxD As Long = GetDenominator(xRatio)
                 MeasureLength(xIndex) = xRatio * 192.0R
-                LBeat.Items(xIndex) = Add3Zeros(xIndex) & ": " & xRatio & IIf(xxD > 10000, "", " ( " & CLng(xRatio * xxD) & " / " & xxD & " ) ")
+                LBeat.Items(xIndex) = Add3Zeros(xIndex) & ": " & xRatio & IIf(xxD > 10000, "", " ( " & (xRatio * xxD) & " / " & xxD & " ) ")
 
             ElseIf sLineTrim.StartsWith("#WAV", StringComparison.CurrentCultureIgnoreCase) Then
                 hWAV(C36to10(Mid(sLineTrim, Len("#WAV") + 1, 2))) = Mid(sLineTrim, Len("#WAV") + 4)
@@ -199,12 +199,12 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
 
                 With Notes(UBound(Notes))
                     .ColumnIndex = BMSChannelToColumn(Channel) +
-                                        IIf(Channel = "01", 1, 0) * (mColumn(xMeasure) - 1)
+                                        (IIf(Channel = "01", 1, 0) * (mColumn(xMeasure) - 1))
                     .LongNote = IsChannelLongNote(Channel)
                     .Hidden = IsChannelHidden(Channel)
                     .Landmine = IsChannelLandmine(Channel)
                     .Selected = False
-                    .VPosition = MeasureBottom(xMeasure) + MeasureLength(xMeasure) * (xI1 / 2 - 4) / ((Len(sLineTrim) - 7) / 2)
+                    .VPosition = MeasureBottom(xMeasure) + (MeasureLength(xMeasure) * ((xI1 / 2) - 4) / ((Len(sLineTrim) - 7) / 2))
                     .Value = C36to10(Mid(sLineTrim, xI1, 2)) * 10000
 
                     If Channel = "03" Then .Value = Convert.ToInt32(Mid(sLineTrim, xI1, 2), 16) * 10000
@@ -223,8 +223,8 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
         LBMP.Visible = False
         LBMP.Items.Clear()
         For xI1 = 1 To 1295
-            LWAV.Items.Add(C10to36(xI1) & ": " & hWAV(xI1))
-            LBMP.Items.Add(C10to36(xI1) & ": " & hBMP(xI1))
+            Dim unused1 = LWAV.Items.Add(C10to36(xI1) & ": " & hWAV(xI1))
+            Dim unused = LBMP.Items.Add(C10to36(xI1) & ": " & hBMP(xI1))
         Next
         LWAV.SelectedIndex = 0
         LWAV.Visible = True
@@ -243,7 +243,7 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
         POStatusRefresh()
     End Sub
 
-    ReadOnly BMSChannelList() As String = {"01", "03", "04", "06", "07", "08", "09",
+    Private ReadOnly BMSChannelList() As String = {"01", "03", "04", "06", "07", "08", "09",
                                        "11", "12", "13", "14", "15", "16", "17", "18", "19", "1A", "1B", "1C", "1D", "1E", "1F", "1G", "1H", "1I", "1J", "1K", "1L", "1M", "1N", "1O", "1P", "1Q",
                                        "21", "22", "23", "24", "25", "26", "27", "28", "29", "2A", "2B", "2C", "2D", "2E", "2F", "2G", "2H", "2I", "2J", "2K", "2L", "2M", "2N", "2O", "2P", "2Q",
                                        "31", "32", "33", "34", "35", "36", "37", "38", "39", "3A", "3B", "3C", "3D", "3E", "3F", "3G", "3H", "3I", "3J", "3K", "3L", "3M", "3N", "3O", "3P", "3Q",
@@ -326,16 +326,16 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
         Next
 
         ' Warn about 255 limit if neccesary.
-        If hasOverlapping Then MsgBox(Strings.Messages.SaveWarning & vbCrLf &
+        If hasOverlapping Then Dim unused3 = MsgBox(Strings.Messages.SaveWarning & vbCrLf &
                                                           Strings.Messages.NoteOverlapError & vbCrLf &
                                                 Strings.Messages.SavedFileWillContainErrors, MsgBoxStyle.Exclamation)
-        If UBound(hBPM) > IIf(BPMx1296, 1295, 255) Then MsgBox(Strings.Messages.SaveWarning & vbCrLf &
+        If UBound(hBPM) > IIf(BPMx1296, 1295, 255) Then Dim unused2 = MsgBox(Strings.Messages.SaveWarning & vbCrLf &
                                                           Strings.Messages.BPMOverflowError & UBound(hBPM) & " > " & IIf(BPMx1296, 1295, 255) & vbCrLf &
                                                 Strings.Messages.SavedFileWillContainErrors, MsgBoxStyle.Exclamation)
-        If UBound(hSTOP) > IIf(STOPx1296, 1295, 255) Then MsgBox(Strings.Messages.SaveWarning & vbCrLf &
+        If UBound(hSTOP) > IIf(STOPx1296, 1295, 255) Then Dim unused1 = MsgBox(Strings.Messages.SaveWarning & vbCrLf &
                                                            Strings.Messages.STOPOverflowError & UBound(hSTOP) & " > " & IIf(STOPx1296, 1295, 255) & vbCrLf &
                                                   Strings.Messages.SavedFileWillContainErrors, MsgBoxStyle.Exclamation)
-        If UBound(hBMSCROLL) > 1295 Then MsgBox(Strings.Messages.SaveWarning & vbCrLf &
+        If UBound(hBMSCROLL) > 1295 Then Dim unused = MsgBox(Strings.Messages.SaveWarning & vbCrLf &
                                            Strings.Messages.SCROLLOverflowError & UBound(hBMSCROLL) & " > " & 1295 & vbCrLf &
                                          Strings.Messages.SavedFileWillContainErrors, MsgBoxStyle.Exclamation)
 
@@ -533,11 +533,11 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
                         xprevNotes(UBound(xprevNotes)).Value = hBMSCROLL(C36to10(NoteStrings(i)))
                     Continue For
                 End If
-                If xStrKey(CInt(relativeMeasurePos(i) / xGCD)) <> "00" Then
+                If xStrKey(relativeMeasurePos(i) / xGCD) <> "00" Then
                     hasOverlapping = True
                 End If
 
-                xStrKey(CInt(relativeMeasurePos(i) / xGCD)) = NoteStrings(i)
+                xStrKey(relativeMeasurePos(i) / xGCD) = NoteStrings(i)
             Next
 
             Ret &= "#" & Add3Zeros(MeasureIndex) & CurrentBMSChannel & ":" & Join(xStrKey, "") & vbCrLf
@@ -591,8 +591,8 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
 
                     Continue For
                 End If
-                If xStrKey(CInt(relativeNotePositions(i) / xGCD)) <> "00" Then hasOverlapping = True
-                xStrKey(CInt(relativeNotePositions(i) / xGCD)) = noteStrings(i)
+                If xStrKey(relativeNotePositions(i) / xGCD) <> "00" Then hasOverlapping = True
+                xStrKey(relativeNotePositions(i) / xGCD) = noteStrings(i)
             Next
 
             Ret &= "#" & Add3Zeros(MeasureIndex) & "01:" & Join(xStrKey, "") & vbCrLf
@@ -601,7 +601,7 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
         Return Ret
     End Function
 
-    Private Function OpenSM(ByVal xStrAll As String) As Boolean
+    Private Function OpenSM(xStrAll As String) As Boolean
         KMouseOver = -1
 
         Dim xStrLine() As String = Split(xStrAll, vbCrLf)
@@ -640,7 +640,7 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
         ReDim hBPM(1295)    'x10000
         ReDim hSTOP(1295)
         ReDim hBMSCROLL(1295)
-        Me.InitializeNewBMS()
+        InitializeNewBMS()
 
         With Notes(0)
             .ColumnIndex = niBPM
@@ -717,7 +717,7 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
                                 .LongNote = xM(xI1)(xI2) = "2" Or xM(xI1)(xI2) = "3"
                                 '.Hidden = False
                                 '.Selected = False
-                                .VPosition = (192 \ (Len(xM(xI1)) \ 4)) * xI2 \ 4 + xI1 * 192
+                                .VPosition = (((192 \ (Len(xM(xI1)) \ 4)) * xI2) \ 4) + (xI1 * 192)
                                 .Value = 10000
                             End With
                         End If
@@ -728,7 +728,7 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
                                 .LongNote = xM(xI1)(xI2 + 1) = "2" Or xM(xI1)(xI2 + 1) = "3"
                                 '.Hidden = False
                                 '.Selected = False
-                                .VPosition = (192 \ (Len(xM(xI1)) \ 4)) * xI2 \ 4 + xI1 * 192
+                                .VPosition = (((192 \ (Len(xM(xI1)) \ 4)) * xI2) \ 4) + (xI1 * 192)
                                 .Value = 10000
                             End With
                         End If
@@ -739,7 +739,7 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
                                 .LongNote = xM(xI1)(xI2 + 2) = "2" Or xM(xI1)(xI2 + 2) = "3"
                                 '.Hidden = False
                                 '.Selected = False
-                                .VPosition = (192 \ (Len(xM(xI1)) \ 4)) * xI2 \ 4 + xI1 * 192
+                                .VPosition = (((192 \ (Len(xM(xI1)) \ 4)) * xI2) \ 4) + (xI1 * 192)
                                 .Value = 10000
                             End With
                         End If
@@ -750,7 +750,7 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
                                 .LongNote = xM(xI1)(xI2 + 3) = "2" Or xM(xI1)(xI2 + 3) = "3"
                                 '.Hidden = False
                                 '.Selected = False
-                                .VPosition = (192 \ (Len(xM(xI1)) \ 4)) * xI2 \ 4 + xI1 * 192
+                                .VPosition = (((192 \ (Len(xM(xI1)) \ 4)) * xI2) \ 4) + (xI1 * 192)
                                 .Value = 10000
                             End With
                         End If
@@ -767,8 +767,8 @@ Jump1:
         LBMP.Visible = False
         LBMP.Items.Clear()
         For xI1 As Integer = 1 To 1295
-            LWAV.Items.Add(C10to36(xI1) & ": " & hWAV(xI1))
-            LBMP.Items.Add(C10to36(xI1) & ": " & hBMP(xI1))
+            Dim unused1 = LWAV.Items.Add(C10to36(xI1) & ": " & hWAV(xI1))
+            Dim unused = LBMP.Items.Add(C10to36(xI1) & ": " & hBMP(xI1))
         Next
         LWAV.SelectedIndex = 0
         LWAV.Visible = True
@@ -786,7 +786,7 @@ Jump1:
     End Function
 
     ''' <summary>Do not clear Undo.</summary>
-    Private Sub OpeniBMSC(ByVal Path As String)
+    Private Sub OpeniBMSC(Path As String)
         KMouseOver = -1
 
         Dim br As New BinaryReader(New FileStream(Path, FileMode.Open, FileAccess.Read), System.Text.Encoding.Unicode)
@@ -802,8 +802,8 @@ Jump1:
         ReDim mColumn(999)
         ReDim hWAV(1295)
         ReDim hBMP(1295)
-        Me.InitializeNewBMS()
-        Me.InitializeOpenBMS()
+        InitializeNewBMS()
+        InitializeOpenBMS()
 
         Notes(0) = New Note
         With Notes(0)
@@ -942,7 +942,7 @@ Jump1:
                     Dim xBeatChangeMode As Integer = br.ReadByte
                     Dim xBeatChangeList As RadioButton() = {CBeatPreserve, CBeatMeasure, CBeatCut, CBeatScale}
                     xBeatChangeList(xBeatChangeMode).Checked = True
-                    CBeatPreserve_Click(xBeatChangeList(xBeatChangeMode), New System.EventArgs)
+                    CBeatPreserve_Click(xBeatChangeList(xBeatChangeMode), New EventArgs)
 
                     Dim xBeatCount As Integer = br.ReadInt32
                     For xxi As Integer = 1 To xBeatCount
@@ -950,7 +950,7 @@ Jump1:
                         MeasureLength(xIndex) = br.ReadDouble
                         Dim xRatio As Double = MeasureLength(xIndex) / 192.0R
                         Dim xxD As Long = GetDenominator(xRatio)
-                        LBeat.Items(xIndex) = Add3Zeros(xIndex) & ": " & xRatio & IIf(xxD > 10000, "", " ( " & CLng(xRatio * xxD) & " / " & xxD & " ) ")
+                        LBeat.Items(xIndex) = Add3Zeros(xIndex) & ": " & xRatio & IIf(xxD > 10000, "", " ( " & (xRatio * xxD) & " / " & xxD & " ) ")
                     Next
 
                 Case &H6E707845     'Expansion Code
@@ -1010,8 +1010,8 @@ EndOfSub:
         LWAV.Visible = False
         LWAV.Items.Clear()
         For xI1 As Integer = 1 To 1295
-            LWAV.Items.Add(C10to36(xI1) & ": " & hWAV(xI1))
-            LBMP.Items.Add(C10to36(xI1) & ": " & hBMP(xI1))
+            Dim unused1 = LWAV.Items.Add(C10to36(xI1) & ": " & hWAV(xI1))
+            Dim unused = LBMP.Items.Add(C10to36(xI1) & ": " & hBMP(xI1))
         Next
         LWAV.SelectedIndex = 0
         LWAV.Visible = True
@@ -1031,7 +1031,7 @@ EndOfSub:
         POStatusRefresh()
     End Sub
 
-    Private Sub SaveiBMSC(ByVal Path As String)
+    Private Sub SaveiBMSC(Path As String)
         CalculateGreatestVPosition()
         SortByVPositionInsertion()
         UpdatePairing()
@@ -1236,17 +1236,17 @@ EndOfSub:
 
         Catch ex As Exception
 
-            MsgBox(ex.Message)
+            Dim unused = MsgBox(ex.Message)
 
         End Try
 
     End Sub
 
-    Private Sub SaveBMSON(ByVal Path As String)
+    Private Sub SaveBMSON(Path As String)
         CalculateGreatestVPosition()
         SortByVPositionInsertion()
         UpdatePairing()
-        Dim i = 0
+
         Try
             Dim format = New Bmson
             Dim options = New JsonSerializerOptions
@@ -1271,28 +1271,12 @@ EndOfSub:
             format.info.artist = THArtist.Text
             format.info.subartists(0) = THSubArtist.Text
             format.info.genre = THGenre.Text
-            If CHPlayer.SelectedIndex = 0 Then
-                format.info.mode_hint = "beat-5k"
-            Else
-                format.info.mode_hint = "popn-9k"
-            End If
+            format.info.mode_hint = If(CHPlayer.SelectedIndex = 0, "beat-5k", "popn-9k")
             format.info.chart_name = ""
-            If THExRank.Text <> "" Then
-                format.info.judge_rank = CDbl(THExRank.Text)
-            Else
-                format.info.judge_rank = (CHRank.SelectedIndex + 1) * 25
-            End If
-            If THTotal.Text <> "" Then
-                format.info.total = CalcBMSONTotal(CDbl(THTotal.Text))
-            Else
-                format.info.total = CalcBMSONTotal(CalcBMSTotal())
-            End If
+            format.info.judge_rank = If(THExRank.Text <> "", DirectCast(CDbl(THExRank.Text), Integer), (CHRank.SelectedIndex + 1) * 25)
+            format.info.total = If(THTotal.Text <> "", CalcBMSONTotal(THTotal.Text), CalcBMSONTotal(CalcBMSTotal()))
             format.info.init_bpm = CDbl(THBPM.Text)
-            If THPlayLevel.Text <> "" Then
-                format.info.level = CInt(THPlayLevel.Text)
-            Else
-                format.info.level = 0
-            End If
+            format.info.level = If(THPlayLevel.Text <> "", CInt(THPlayLevel.Text), 0)
             format.info.back_image = THBackBMP.Text
             format.info.eyecatch_image = THStageFile.Text
             format.info.banner_image = THBanner.Text
@@ -1301,6 +1285,7 @@ EndOfSub:
 
             ' 必要な分解能を計算
             Dim xGCD As Double = 192.0R
+            Dim i As Integer
             For i = 0 To UBound(Notes)
                 xGCD = GCD(xGCD, Notes(i).VPosition, 1920000)
                 ' ついでにプレイモードを検出
@@ -1320,7 +1305,7 @@ EndOfSub:
                    GetColumn(Notes(i).ColumnIndex).Identifier >= (36 + 8) AndAlso GetColumn(Notes(i).ColumnIndex).Identifier <= (36 + 8) Then
                     format.info.mode_hint = "beat-14k"
                 End If
-                If (format.info.mode_hint <> "beat-14k" AndAlso format.info.mode_hint <> "keyboard-24k" AndAlso format.info.mode_hint <> "keyboard-24k-double") AndAlso
+                If format.info.mode_hint <> "beat-14k" AndAlso format.info.mode_hint <> "keyboard-24k" AndAlso format.info.mode_hint <> "keyboard-24k-double" AndAlso
                    GetColumn(Notes(i).ColumnIndex).Identifier >= (72 + 8) AndAlso GetColumn(Notes(i).ColumnIndex).Identifier <= (72 + 9) Then
                     format.info.mode_hint = "beat-14k"
                 End If
@@ -1380,7 +1365,7 @@ EndOfSub:
                         ElseIf (lane Mod 36) >= 8 Then
                             lane -= 2
                         End If
-                        If (lane >= 36) Then
+                        If lane >= 36 Then
                             lane -= 10
                         End If
                     Else
@@ -1389,7 +1374,7 @@ EndOfSub:
                         ElseIf (lane Mod 36) >= 8 Then
                             lane -= 2
                         End If
-                        If (lane >= 36) Then
+                        If lane >= 36 Then
                             lane -= 28
                         End If
                     End If
@@ -1401,7 +1386,7 @@ EndOfSub:
                             hidden_note_list(value) = New List(Of MineNote)
                         End If
                         hidden_note_list(value).Add(New MineNote(position, lane, 0))
-                    ElseIf Notes(i).length > 0 AndAlso NTInput Then
+                    ElseIf Notes(i).Length > 0 AndAlso NTInput Then
                         If Not note_list.ContainsKey(value) Then
                             note_list(value) = New List(Of BmsonNote)
                         End If
@@ -1417,8 +1402,9 @@ EndOfSub:
                             note_list(value).Add(note)
                         Else
                             If Notes(i).Value \ 10000 <> LnObj AndAlso Notes(i).Value <> Notes(Notes(i).LNPair).Value Then
-                                Dim note = New BmsonNote(position, lane)
-                                note.up = True
+                                Dim note = New BmsonNote(position, lane) With {
+                                    .up = True
+                                }
                                 note_list(value).Add(note)
                             End If
                         End If
@@ -1446,11 +1432,7 @@ EndOfSub:
                 End If
             Next
             ReDim format.mine_channels(0)
-            If hWAV(0) <> "" Then
-                format.mine_channels(0) = New MineChannel(hWAV(0))
-            Else
-                format.mine_channels(0) = New MineChannel("")
-            End If
+            format.mine_channels(0) = If(hWAV(0) <> "", New MineChannel(hWAV(0)), New MineChannel(""))
             For i = 1 To UBound(hBMP)
                 If hBMP(i) <> "" Then
                     bmp_list.Add(New BGAHeader(i, hBMP(i)))
@@ -1493,18 +1475,18 @@ EndOfSub:
             bw.Write(str)
             bw.Close()
         Catch ex As Exception
-            MsgBox(ex.Message)
+            Dim unused = MsgBox(ex.Message)
         End Try
     End Sub
 
-    Function CalcBMSTotal() As Double
+    Public Function CalcBMSTotal() As Double
         Dim notes = CalculateTotalNotes()
-        Return System.Math.Max((720.0 / (800 + notes) * notes), 200.0)
+        Return Math.Max(720.0 / (800 + notes) * notes, 200.0)
     End Function
 
-    Function CalcBMSONTotal(total As Double) As Double
+    Public Function CalcBMSONTotal(total As Double) As Double
         Dim notes = CalculateTotalNotes()
-        Return total / System.Math.Max((800.0 / (700 + notes) * notes), 250.0) * 100
+        Return total / Math.Max(800.0 / (700 + notes) * notes, 250.0) * 100
     End Function
 
 End Class

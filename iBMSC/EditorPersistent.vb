@@ -57,11 +57,11 @@ Partial Public Class MainWindow
             If ThemeOnly Then GoTo 5000
 
             .WriteStartElement("Form")
-            .WriteAttributeString("WindowState", IIf(isFullScreen, previousWindowState, Me.WindowState))
-            .WriteAttributeString("Width", IIf(isFullScreen, previousWindowPosition.Width, Me.Width))
-            .WriteAttributeString("Height", IIf(isFullScreen, previousWindowPosition.Height, Me.Height))
-            .WriteAttributeString("Top", IIf(isFullScreen, previousWindowPosition.Top, Me.Top))
-            .WriteAttributeString("Left", IIf(isFullScreen, previousWindowPosition.Left, Me.Left))
+            .WriteAttributeString("WindowState", IIf(isFullScreen, previousWindowState, WindowState))
+            .WriteAttributeString("Width", IIf(isFullScreen, previousWindowPosition.Width, Width))
+            .WriteAttributeString("Height", IIf(isFullScreen, previousWindowPosition.Height, Height))
+            .WriteAttributeString("Top", IIf(isFullScreen, previousWindowPosition.Top, Top))
+            .WriteAttributeString("Left", IIf(isFullScreen, previousWindowPosition.Left, Left))
             .WriteEndElement()
 
             .WriteStartElement("Recent")
@@ -210,13 +210,13 @@ Partial Public Class MainWindow
     Private Sub XMLLoadElementValue(ByVal n As XmlElement, ByRef v As Font)
         If n Is Nothing Then Exit Sub
 
-        Dim xName As String = Me.Font.FontFamily.Name
-        Dim xSize As Integer = Me.Font.Size
-        Dim xStyle As Integer = Me.Font.Style
+        Dim xName As String = Font.FontFamily.Name
+        Dim xSize As Integer = Font.Size
+        Dim xStyle As Integer = Font.Style
         XMLLoadAttribute(n.GetAttribute("Name"), xName)
         XMLLoadAttribute(n.GetAttribute("Size"), xSize)
         XMLLoadAttribute(n.GetAttribute("Style"), xStyle)
-        v = New Font(xName, xSize, CType(xStyle, System.Drawing.FontStyle))
+        v = New Font(xName, xSize, xStyle)
     End Sub
 
     Private Sub XMLLoadPlayer(ByVal n As XmlElement)
@@ -298,13 +298,13 @@ Partial Public Class MainWindow
             With eForm
                 Select Case Val(.GetAttribute("WindowState"))
                     Case FormWindowState.Normal
-                        Me.WindowState = FormWindowState.Normal
-                        XMLLoadAttribute(.GetAttribute("Width"), Me.Width)
-                        XMLLoadAttribute(.GetAttribute("Height"), Me.Height)
-                        XMLLoadAttribute(.GetAttribute("Top"), Me.Top)
-                        XMLLoadAttribute(.GetAttribute("Left"), Me.Left)
+                        WindowState = FormWindowState.Normal
+                        XMLLoadAttribute(.GetAttribute("Width"), Width)
+                        XMLLoadAttribute(.GetAttribute("Height"), Height)
+                        XMLLoadAttribute(.GetAttribute("Top"), Top)
+                        XMLLoadAttribute(.GetAttribute("Left"), Left)
                     Case FormWindowState.Maximized
-                        Me.WindowState = FormWindowState.Maximized
+                        WindowState = FormWindowState.Maximized
                 End Select
             End With
         End If
@@ -403,7 +403,7 @@ Partial Public Class MainWindow
                 CWAVEmptyfill.Checked = WAVEmptyfill
                 CWAVEmptyfill_CheckedChanged(CWAVEmptyfill, New EventArgs)
 
-                Dim xInt As Integer = CInt(.GetAttribute("BeatChangeMode"))
+                Dim xInt As Integer = .GetAttribute("BeatChangeMode")
                 Dim xBeatOpList As RadioButton() = {CBeatPreserve, CBeatMeasure, CBeatCut, CBeatScale}
                 If xInt >= 0 And xInt < xBeatOpList.Length Then
                     xBeatOpList(xInt).Checked = True
@@ -450,10 +450,10 @@ Partial Public Class MainWindow
                 XMLLoadAttribute(.GetAttribute("gxWidth"), CGWidth.Value)
                 XMLLoadAttribute(.GetAttribute("gSlash"), gSlash)
 
-                Dim xgDivide As Integer = CInt(.GetAttribute("gDivide"))
+                Dim xgDivide As Integer = .GetAttribute("gDivide")
                 If xgDivide >= CGDivide.Minimum And xgDivide <= CGDivide.Maximum Then CGDivide.Value = xgDivide
 
-                Dim xgSub As Integer = CInt(.GetAttribute("gSub"))
+                Dim xgSub As Integer = .GetAttribute("gSub")
                 If xgSub >= CGSub.Minimum And xgSub <= CGSub.Maximum Then CGSub.Value = xgSub
             End With
         End If
@@ -481,7 +481,7 @@ Partial Public Class MainWindow
             End With
 
             For Each eePlayer As XmlElement In ePlayer.ChildNodes
-                Me.XMLLoadPlayer(eePlayer)
+                XMLLoadPlayer(eePlayer)
             Next
         End If
 
@@ -493,7 +493,7 @@ Partial Public Class MainWindow
         Next
         If eColumns IsNot Nothing Then
             For Each eeCol As XmlElement In eColumns.ChildNodes
-                Me.XMLLoadColumn(eeCol)
+                XMLLoadColumn(eeCol)
             Next
         End If
         If iPlayer = 0 Then
@@ -550,11 +550,7 @@ EndOfSub:
 
     Private Sub XMLLoadLocaleMenu(ByVal n As XmlElement, ByRef target As String)
         If n Is Nothing Then Exit Sub
-        If n.HasAttribute("amp") Then
-            target = n.InnerText.Insert(Integer.Parse(n.GetAttribute("amp")), "&")
-        Else
-            target = n.InnerText
-        End If
+        target = If(n.HasAttribute("amp"), n.InnerText.Insert(Integer.Parse(n.GetAttribute("amp")), "&"), n.InnerText)
     End Sub
 
     Private Sub XMLLoadLocale(ByVal n As XmlElement, ByRef target As String)
@@ -596,7 +592,7 @@ EndOfSub:
                 Dim xSize As Integer = 9
                 If eFont.HasAttribute("Size") Then xSize = Val(eFont.GetAttribute("Size"))
 
-                Dim fRegular As New Font(Me.Font.FontFamily, xSize, FontStyle.Regular)
+                Dim fRegular As New Font(Font.FontFamily, xSize, FontStyle.Regular)
                 Dim xChildNode As XmlNode = eFont.LastChild
                 Do While xChildNode IsNot Nothing
                     If xChildNode.LocalName <> "Family" Then Continue Do
@@ -1172,7 +1168,7 @@ EndOfSub:
             DispLang = Path.Replace(My.Application.Info.DirectoryPath & "\", "")
 
         Catch ex As Exception
-            MsgBox(Path & vbCrLf & vbCrLf & ex.Message, MsgBoxStyle.Exclamation)
+            Dim unused = MsgBox(Path & vbCrLf & vbCrLf & ex.Message, MsgBoxStyle.Exclamation)
 
         Finally
             If FileStream IsNot Nothing Then FileStream.Close()
@@ -1199,7 +1195,7 @@ EndOfSub:
 
                 Select Case xW1
                     Case "VOTITLE" : vo.ColumnTitle.Color = Color.FromArgb(Val(xW2))
-                    Case "VOTITLEFONT" : vo.ColumnTitleFont = StringToFont(xW2, Me.Font)
+                    Case "VOTITLEFONT" : vo.ColumnTitleFont = StringToFont(xW2, Font)
                     Case "VOBG" : vo.Bg.Color = Color.FromArgb(Val(xW2))
                     Case "VOGRID" : vo.pGrid.Color = Color.FromArgb(Val(xW2))
                     Case "VOSUB" : vo.pSub.Color = Color.FromArgb(Val(xW2))
@@ -1218,10 +1214,10 @@ EndOfSub:
                     Case "VOPEMOUSEOVER" : vo.PEMouseOver.Color = Color.FromArgb(Val(xW2))
                     Case "VOPESEL" : vo.PESel.Color = Color.FromArgb(Val(xW2))
                     Case "VOPEBPM" : vo.PEBPM.Color = Color.FromArgb(Val(xW2))
-                    Case "VOPEBPMFONT" : vo.PEBPMFont = StringToFont(xW2, Me.Font)
+                    Case "VOPEBPMFONT" : vo.PEBPMFont = StringToFont(xW2, Font)
                     Case "VKHEIGHT" : vo.kHeight = Val(xW2)
-                    Case "VKFONT" : vo.kFont = StringToFont(xW2, Me.Font)
-                    Case "VKMFONT" : vo.kMFont = StringToFont(xW2, Me.Font)
+                    Case "VKFONT" : vo.kFont = StringToFont(xW2, Font)
+                    Case "VKMFONT" : vo.kMFont = StringToFont(xW2, Font)
                     Case "VKLABELVSHIFT" : vo.kLabelVShift = Val(xW2)
                     Case "VKLABELHSHIFT" : vo.kLabelHShift = Val(xW2)
                     Case "VKLABELHSHIFTL" : vo.kLabelHShiftL = Val(xW2)
@@ -1277,7 +1273,7 @@ EndOfSub:
             Next
 
         Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Exclamation, Strings.Messages.Err)
+            Dim unused = MsgBox(ex.Message, MsgBoxStyle.Exclamation, Strings.Messages.Err)
 
         Finally
             UpdateColumnsX()
@@ -1291,7 +1287,7 @@ EndOfSub:
         Return xE
     End Function
 
-    Private Sub LoadLang(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub LoadLang(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim xFN2 As String = sender.ToolTipText
         'ReadLanguagePack(xFN2)
         LoadLocale(xFN2)
@@ -1306,18 +1302,18 @@ EndOfSub:
             Dim xName As String = d.Item("iBMSC.Locale").GetAttribute("Name")
             If xName = "" Then xName = xStr.Name
 
-            cmnLanguage.Items.Add(xName, Nothing, AddressOf LoadLang)
+            Dim unused1 = cmnLanguage.Items.Add(xName, Nothing, AddressOf LoadLang)
             cmnLanguage.Items(cmnLanguage.Items.Count - 1).ToolTipText = xStr.FullName
 
         Catch ex As Exception
-            MsgBox(xStr.FullName & vbCrLf & vbCrLf & ex.Message, MsgBoxStyle.Exclamation)
+            Dim unused = MsgBox(xStr.FullName & vbCrLf & vbCrLf & ex.Message, MsgBoxStyle.Exclamation)
 
         End Try
 
         fs.Close()
     End Sub
 
-    Private Sub LoadTheme(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub LoadTheme(ByVal sender As Object, ByVal e As System.EventArgs)
         'If Not File.Exists(My.Application.Info.DirectoryPath & "\Data\" & sender.Text) Then Exit Sub
         'SaveTheme = True
         'LoadCFF(My.Computer.FileSystem.ReadAllText(My.Application.Info.DirectoryPath & "\Theme\" & sender.Text, System.Text.Encoding.Unicode))

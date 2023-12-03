@@ -15,16 +15,16 @@ Public Class MainWindow
     'Public Shared Function DwmIsCompositionEnabled(ByRef en As Integer) As Integer
     'End Function
     '<System.Runtime.InteropServices.DllImport("dwmapi.dll")> _
-    'Public Shared Function DwmExtendFrameIntoClientArea(ByVal hwnd As IntPtr, ByRef margin As MARGINS) As Integer
+    'Public Shared Function DwmExtendFrameIntoClientArea( hwnd As IntPtr, ByRef margin As MARGINS) As Integer
     'End Function
-    Public Declare Function SendMessage Lib "user32.dll" Alias "SendMessageA" (ByVal hwnd As IntPtr, ByVal wMsg As Integer, ByVal wParam As Integer, ByVal lParam As Integer) As Integer
+    Public Declare Function SendMessage Lib "user32.dll" Alias "SendMessageA" (hwnd As IntPtr, wMsg As Integer, wParam As Integer, lParam As Integer) As Integer
     Public Declare Function ReleaseCapture Lib "user32.dll" Alias "ReleaseCapture" () As Integer
 
-    'Private Declare Auto Function GetWindowLong Lib "user32" (ByVal hWnd As IntPtr, ByVal nIndex As Integer) As Integer
-    'Private Declare Auto Function SetWindowLong Lib "user32" (ByVal hWnd As IntPtr, ByVal nIndex As Integer, ByVal dwNewLong As Integer) As Integer
-    'Private Declare Function SetWindowPos Lib "user32.dll" (ByVal hWnd As IntPtr, ByVal hWndInsertAfter As IntPtr, ByVal x As Integer, ByVal y As Integer, ByVal cx As Integer, ByVal cy As Integer, ByVal wFlags As Integer) As Integer
+    'Private Declare Auto Function GetWindowLong Lib "user32" ( hWnd As IntPtr,  nIndex As Integer) As Integer
+    'Private Declare Auto Function SetWindowLong Lib "user32" ( hWnd As IntPtr,  nIndex As Integer,  dwNewLong As Integer) As Integer
+    'Private Declare Function SetWindowPos Lib "user32.dll" ( hWnd As IntPtr,  hWndInsertAfter As IntPtr,  x As Integer,  y As Integer,  cx As Integer,  cy As Integer,  wFlags As Integer) As Integer
     '<DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
-    'Private Shared Function SetWindowText(ByVal hwnd As IntPtr, ByVal lpString As String) As Boolean
+    'Private Shared Function SetWindowText( hwnd As IntPtr,  lpString As String) As Boolean
     'End Function
 
     'Private Const GWL_STYLE As Integer = -16
@@ -37,171 +37,170 @@ Public Class MainWindow
     'Private Const SWP_REFRESH As Integer = SWP_NOZORDER Or SWP_NOSIZE Or SWP_NOMOVE Or SWP_NOACTIVATE Or SWP_FRAMECHANGED
 
 
-    Dim MeasureLength(999) As Double
-    Dim MeasureBottom(999) As Double
+    Private MeasureLength(999) As Double
+    Private MeasureBottom(999) As Double
 
     Public Function MeasureUpper(idx As Integer) As Double
         Return MeasureBottom(idx) + MeasureLength(idx)
     End Function
 
+    Private Notes() As Note = {New Note(niBPM, -1, 1200000, 0, False)}
+    Private mColumn(999) As Integer  '0 = no column, 1 = 1 column, etc.
+    Private GreatestVPosition As Double    '+ 2000 = -VS.Minimum
 
-    Dim Notes() As Note = {New Note(niBPM, -1, 1200000, 0, False)}
-    Dim mColumn(999) As Integer  '0 = no column, 1 = 1 column, etc.
-    Dim GreatestVPosition As Double    '+ 2000 = -VS.Minimum
-
-    Dim VSValue As Integer = 0 'Store value before ValueChange event
-    Dim HSValue As Integer = 0 'Store value before ValueChange event
+    Private VSValue As Integer = 0 'Store value before ValueChange event
+    Private HSValue As Integer = 0 'Store value before ValueChange event
 
     'Dim SortingMethod As Integer = 1
-    Dim MiddleButtonMoveMethod As Integer = 0
-    Dim TextEncoding As System.Text.Encoding = System.Text.Encoding.UTF8
-    Dim DispLang As String = ""     'Display Language
-    Dim Recent() As String = {"", "", "", "", ""}
-    Dim NTInput As Boolean = True
-    Dim ShowFileName As Boolean = False
+    Private MiddleButtonMoveMethod As Integer = 0
+    Private TextEncoding As System.Text.Encoding = System.Text.Encoding.UTF8
+    Private DispLang As String = ""     'Display Language
+    Private Recent() As String = {"", "", "", "", ""}
+    Private NTInput As Boolean = True
+    Private ShowFileName As Boolean = False
 
-    Dim BeepWhileSaved As Boolean = True
-    Dim BPMx1296 As Boolean = False
-    Dim STOPx1296 As Boolean = False
+    Private BeepWhileSaved As Boolean = True
+    Private BPMx1296 As Boolean = False
+    Private STOPx1296 As Boolean = False
 
-    Dim IsInitializing As Boolean = True
-    Dim FirstMouseEnter As Boolean = True
+    Private IsInitializing As Boolean = True
+    Private FirstMouseEnter As Boolean = True
 
-    Dim WAVMultiSelect As Boolean = True
-    Dim WAVChangeLabel As Boolean = True
-    Dim WAVEmptyfill As Boolean = True
-    Dim BeatChangeMode As Integer = 0
+    Private WAVMultiSelect As Boolean = True
+    Private WAVChangeLabel As Boolean = True
+    Private WAVEmptyfill As Boolean = True
+    Private BeatChangeMode As Integer = 0
 
     'Dim FloatTolerance As Double = 0.0001R
-    Dim BMSGridLimit As Double = 1.0R
+    Private BMSGridLimit As Double = 1.0R
 
-    Dim LnObj As Integer = 0    '0 for none, 1-1295 for 01-ZZ
+    Private LnObj As Integer = 0    '0 for none, 1-1295 for 01-ZZ
 
     'IO
-    Dim FileName As String = "Untitled.bms"
+    Private FileName As String = "Untitled.bms"
     'Dim TitlePath As New Drawing2D.GraphicsPath
-    Dim InitPath As String = ""
-    Dim IsSaved As Boolean = True
+    Private InitPath As String = ""
+    Private IsSaved As Boolean = True
 
     'Variables for Drag/Drop
-    Dim DDFileName() As String = {}
-    Dim SupportedFileExtension() As String = {".bms", ".bme", ".bml", ".pms", ".txt", ".sm", ".ibmsc"}
-    Dim SupportedAudioExtension() As String = {".wav", ".mp3", ".ogg", ".flac"}
-    Dim SupportedImageExtension() As String = {".bmp", ".png", ".jpg", ".jpeg", ".gif", ".mpg", ".mpeg", ".avi", ".m1v", ".m2v", ".m4v", ".mp4", ".webm", ".wmv"}
+    Private DDFileName() As String = {}
+    Private SupportedFileExtension() As String = {".bms", ".bme", ".bml", ".pms", ".txt", ".sm", ".ibmsc"}
+    Private SupportedAudioExtension() As String = {".wav", ".mp3", ".ogg", ".flac"}
+    Private SupportedImageExtension() As String = {".bmp", ".png", ".jpg", ".jpeg", ".gif", ".mpg", ".mpeg", ".avi", ".m1v", ".m2v", ".m4v", ".mp4", ".webm", ".wmv"}
 
     'Variables for theme
     'Dim SaveTheme As Boolean = True
 
     'Variables for undo/redo
-    Dim sUndo(99) As UndoRedo.LinkedURCmd
-    Dim sRedo(99) As UndoRedo.LinkedURCmd
-    Dim sI As Integer = 0
+    Private sUndo(99) As UndoRedo.LinkedURCmd
+    Private sRedo(99) As UndoRedo.LinkedURCmd
+    Private sI As Integer = 0
 
     'Variables for select tool
-    Dim DisableVerticalMove As Boolean = False
-    Dim KMouseOver As Integer = -1   'Mouse is on which note (for drawing green outline)
-    Dim LastMouseDownLocation As PointF = New Point(-1, -1)          'Mouse is clicked on which point (location for display) (for selection box)
-    Dim pMouseMove As PointF = New Point(-1, -1)          'Mouse is moved to which point   (location for display) (for selection box)
+    Private DisableVerticalMove As Boolean = False
+    Private KMouseOver As Integer = -1   'Mouse is on which note (for drawing green outline)
+    Private LastMouseDownLocation As PointF = New Point(-1, -1)          'Mouse is clicked on which point (location for display) (for selection box)
+    Private pMouseMove As PointF = New Point(-1, -1)          'Mouse is moved to which point   (location for display) (for selection box)
     'Dim KMouseDown As Integer = -1   'Mouse is clicked on which note (for moving)
-    Dim deltaVPosition As Double = 0   'difference between mouse and VPosition of K
-    Dim bAdjustLength As Boolean     'If adjusting note length instead of moving it
-    Dim bAdjustUpper As Boolean      'true = Adjusting upper end, false = adjusting lower end
-    Dim bAdjustSingle As Boolean     'true if there is only one note to be adjusted
-    Dim tempY As Integer
-    Dim tempV As Integer
-    Dim tempX As Integer
-    Dim tempH As Integer
-    Dim MiddleButtonLocation As New Point(0, 0)
-    Dim MiddleButtonClicked As Boolean = False
-    Dim MouseMoveStatus As New Point(0, 0)  'mouse is moved to which point (For Status Panel)
+    Private deltaVPosition As Double = 0   'difference between mouse and VPosition of K
+    Private bAdjustLength As Boolean     'If adjusting note length instead of moving it
+    Private bAdjustUpper As Boolean      'true = Adjusting upper end, false = adjusting lower end
+    Private bAdjustSingle As Boolean     'true if there is only one note to be adjusted
+    Private tempY As Integer
+    Private tempV As Integer
+    Private tempX As Integer
+    Private tempH As Integer
+    Private MiddleButtonLocation As New Point(0, 0)
+    Private MiddleButtonClicked As Boolean = False
+    Private MouseMoveStatus As New Point(0, 0)  'mouse is moved to which point (For Status Panel)
     'Dim uCol As Integer         'temp variables for undo, original enabled columnindex
     'Dim uVPos As Double         'temp variables for undo, original vposition
     'Dim uPairWithI As Double    'temp variables for undo, original note length
-    Dim uAdded As Boolean       'temp variables for undo, if undo command is added
+    Private uAdded As Boolean       'temp variables for undo, if undo command is added
     'Dim uNote As Note           'temp variables for undo, original note
-    Dim SelectedNotes(-1) As Note        'temp notes for undo
-    Dim ctrlPressed As Boolean = False          'Indicates if the CTRL key is pressed while mousedown
-    Dim DuplicatedSelectedNotes As Boolean = False     'Indicates if duplicate notes of select/unselect note
+    Private SelectedNotes(-1) As Note        'temp notes for undo
+    Private ctrlPressed As Boolean = False          'Indicates if the CTRL key is pressed while mousedown
+    Private DuplicatedSelectedNotes As Boolean = False     'Indicates if duplicate notes of select/unselect note
 
     'Variables for write tool
-    Dim ShouldDrawTempNote As Boolean = False
-    Dim SelectedColumn As Integer = -1
-    Dim TempVPosition As Double = -1.0#
-    Dim TempLength As Double = 0.0#
+    Private ShouldDrawTempNote As Boolean = False
+    Private SelectedColumn As Integer = -1
+    Private TempVPosition As Double = -1.0#
+    Private TempLength As Double = 0.0#
 
     'Variables for post effects tool
-    Dim vSelStart As Double = 192.0#
-    Dim vSelLength As Double = 0.0#
-    Dim vSelHalf As Double = 0.0#
-    Dim vSelMouseOverLine As Integer = 0  '0 = nothing, 1 = start, 2 = half, 3 = end
-    Dim vSelAdjust As Boolean = False
-    Dim vSelK() As Note = {}
-    Dim vSelPStart As Double = 192.0#
-    Dim vSelPLength As Double = 0.0#
-    Dim vSelPHalf As Double = 0.0#
+    Private vSelStart As Double = 192.0#
+    Private vSelLength As Double = 0.0#
+    Private vSelHalf As Double = 0.0#
+    Private vSelMouseOverLine As Integer = 0  '0 = nothing, 1 = start, 2 = half, 3 = end
+    Private vSelAdjust As Boolean = False
+    Private vSelK() As Note = {}
+    Private vSelPStart As Double = 192.0#
+    Private vSelPLength As Double = 0.0#
+    Private vSelPHalf As Double = 0.0#
 
     'Variables for Full-Screen Mode
-    Dim isFullScreen As Boolean = False
-    Dim previousWindowState As FormWindowState = FormWindowState.Normal
-    Dim previousWindowPosition As New Rectangle(0, 0, 0, 0)
+    Private isFullScreen As Boolean = False
+    Private previousWindowState As FormWindowState = FormWindowState.Normal
+    Private previousWindowPosition As New Rectangle(0, 0, 0, 0)
 
     'Variables misc
-    Dim menuVPosition As Double = 0.0#
-    Dim tempResize As Integer = 0
+    Private menuVPosition As Double = 0.0#
+    Private tempResize As Integer = 0
 
     '----AutoSave Options
-    Dim PreviousAutoSavedFileName As String = ""
-    Dim AutoSaveInterval As Integer = 120000
+    Private PreviousAutoSavedFileName As String = ""
+    Private AutoSaveInterval As Integer = 120000
 
     '----ErrorCheck Options
-    Dim ErrorCheck As Boolean = True
+    Private ErrorCheck As Boolean = True
 
     '----Header Options
-    Dim hWAV(1295) As String
-    Dim hBMP(1295) As String
-    Dim hBPM(1295) As Long   'x10000
-    Dim hSTOP(1295) As Long
-    Dim hBMSCROLL(1295) As Long
+    Private hWAV(1295) As String
+    Private hBMP(1295) As String
+    Private hBPM(1295) As Long   'x10000
+    Private hSTOP(1295) As Long
+    Private hBMSCROLL(1295) As Long
 
     '----Grid Options
-    Dim gSnap As Boolean = True
-    Dim gShowGrid As Boolean = True 'Grid
-    Dim gShowSubGrid As Boolean = True 'Sub
-    Dim gShowBG As Boolean = True 'BG Color
-    Dim gShowMeasureNumber As Boolean = True 'Measure Label
-    Dim gShowVerticalLine As Boolean = True 'Vertical
-    Dim gShowMeasureBar As Boolean = True 'Measure Barline
-    Dim gShowC As Boolean = True 'Column Caption
-    Dim gDivide As Integer = 16
-    Dim gSub As Integer = 4
-    Dim gSlash As Integer = 192
-    Dim gxHeight As Single = 1.0!
-    Dim gxWidth As Single = 1.0!
-    Dim gWheel As Integer = 96
-    Dim gPgUpDn As Integer = 384
+    Private gSnap As Boolean = True
+    Private gShowGrid As Boolean = True 'Grid
+    Private gShowSubGrid As Boolean = True 'Sub
+    Private gShowBG As Boolean = True 'BG Color
+    Private gShowMeasureNumber As Boolean = True 'Measure Label
+    Private gShowVerticalLine As Boolean = True 'Vertical
+    Private gShowMeasureBar As Boolean = True 'Measure Barline
+    Private gShowC As Boolean = True 'Column Caption
+    Private gDivide As Integer = 16
+    Private gSub As Integer = 4
+    Private gSlash As Integer = 192
+    Private gxHeight As Single = 1.0!
+    Private gxWidth As Single = 1.0!
+    Private gWheel As Integer = 96
+    Private gPgUpDn As Integer = 384
 
-    Dim gDisplayBGAColumn As Boolean = True
-    Dim gSCROLL As Boolean = True
-    Dim gSTOP As Boolean = True
-    Dim gBPM As Boolean = True
+    Private gDisplayBGAColumn As Boolean = True
+    Private gSCROLL As Boolean = True
+    Private gSTOP As Boolean = True
+    Private gBPM As Boolean = True
     'Dim gA8 As Boolean = False
-    Dim iPlayer As Integer = 0
-    Dim gColumns As Integer = 82
+    Private iPlayer As Integer = 0
+    Private gColumns As Integer = 82
 
     '----Visual Options
-    Dim vo As New visualSettings()
+    Private vo As New visualSettings()
 
-    Public Sub setVO(ByVal xvo As visualSettings)
+    Public Sub setVO(xvo As visualSettings)
         vo = xvo
     End Sub
 
     '----Preview Options
-    Structure PlayerArguments
+    Public Structure PlayerArguments
         Public Path As String
         Public aBegin As String
         Public aHere As String
         Public aStop As String
-        Public Sub New(ByVal xPath As String, ByVal xBegin As String, ByVal xHere As String, ByVal xStop As String)
+        Public Sub New(xPath As String, xBegin As String, xHere As String, xStop As String)
             Path = xPath
             aBegin = xBegin
             aHere = xHere
@@ -218,40 +217,40 @@ Public Class MainWindow
                                                              "-P -N<measure> ""<filename>""",
                                                              "-S")}
     Public CurrentPlayer As Integer = 0
-    Dim PreviewOnClick As Boolean = True
-    Dim PreviewErrorCheck As Boolean = False
-    Dim Rscratch As Boolean = False
-    Dim ClickStopPreview As Boolean = True
-    Dim pTempFileNames() As String = {}
+    Private PreviewOnClick As Boolean = True
+    Private PreviewErrorCheck As Boolean = False
+    Private Rscratch As Boolean = False
+    Private ClickStopPreview As Boolean = True
+    Private pTempFileNames() As String = {}
 
     '----Split Panel Options
-    Dim PanelWidth() As Single = {0, 100, 0}
-    Dim PanelhBMSCROLL() As Integer = {0, 0, 0}
-    Dim PanelVScroll() As Integer = {0, 0, 0}
-    Dim spLock() As Boolean = {False, False, False}
-    Dim spDiff() As Integer = {0, 0, 0}
-    Dim PanelFocus As Integer = 1 '0 = Left, 1 = Middle, 2 = Right
-    Dim spMouseOver As Integer = 1
+    Private PanelWidth() As Single = {0, 100, 0}
+    Private PanelhBMSCROLL() As Integer = {0, 0, 0}
+    Private PanelVScroll() As Integer = {0, 0, 0}
+    Private spLock() As Boolean = {False, False, False}
+    Private spDiff() As Integer = {0, 0, 0}
+    Private PanelFocus As Integer = 1 '0 = Left, 1 = Middle, 2 = Right
+    Private spMouseOver As Integer = 1
 
-    Dim AutoFocusMouseEnter As Boolean = False
-    Dim FirstClickDisabled As Boolean = True
-    Dim tempFirstMouseDown As Boolean = False
+    Private AutoFocusMouseEnter As Boolean = False
+    Private FirstClickDisabled As Boolean = True
+    Private tempFirstMouseDown As Boolean = False
 
-    Dim spMain() As Panel = {}
+    Private spMain() As Panel = {}
 
     '----Find Delete Replace Options
-    Dim fdriMesL As Integer
-    Dim fdriMesU As Integer
-    Dim fdriLblL As Integer
-    Dim fdriLblU As Integer
-    Dim fdriValL As Integer
-    Dim fdriValU As Integer
-    Dim fdriCol() As Integer
+    Private fdriMesL As Integer
+    Private fdriMesU As Integer
+    Private fdriLblL As Integer
+    Private fdriLblU As Integer
+    Private fdriValL As Integer
+    Private fdriValU As Integer
+    Private fdriCol() As Integer
 
 
     Public Sub New()
         InitializeComponent()
-        Audio.Initialize()
+        Initialize()
     End Sub
 
     ''' <summary>
@@ -261,8 +260,8 @@ Public Class MainWindow
     ''' <param name="xHSVal">HS.Value</param>
 
 
-    Private Function HorizontalPositiontoDisplay(ByVal xHPosition As Integer, ByVal xHSVal As Long) As Integer
-        Return CInt(xHPosition * gxWidth - xHSVal * gxWidth)
+    Private Function HorizontalPositiontoDisplay(xHPosition As Integer, xHSVal As Long) As Integer
+        Return (xHPosition * gxWidth) - (xHSVal * gxWidth)
     End Function
 
     ''' <summary>
@@ -273,11 +272,11 @@ Public Class MainWindow
     ''' <param name="xTHeight">Height of the panel. (DisplayRectangle, but not ClipRectangle)</param>
 
 
-    Private Function NoteRowToPanelHeight(ByVal xVPosition As Double, ByVal xVSVal As Long, ByVal xTHeight As Integer) As Integer
+    Private Function NoteRowToPanelHeight(xVPosition As Double, xVSVal As Long, xTHeight As Integer) As Integer
         Return xTHeight - CInt((xVPosition + xVSVal) * gxHeight) - 1
     End Function
 
-    Public Function MeasureAtDisplacement(ByVal xVPos As Double) As Integer
+    Public Function MeasureAtDisplacement(xVPos As Double) As Integer
         'Return Math.Floor((xVPos + FloatTolerance) / 192)
         'Return Math.Floor(xVPos / 192)
         Dim xI1 As Integer
@@ -291,10 +290,10 @@ Public Class MainWindow
         Return MeasureUpper(999)
     End Function
 
-    Private Function SnapToGrid(ByVal xVPos As Double) As Double
+    Private Function SnapToGrid(xVPos As Double) As Double
         Dim xOffset As Double = MeasureBottom(MeasureAtDisplacement(xVPos))
         Dim xRatio As Double = 192.0R / gDivide
-        Return Math.Floor((xVPos - xOffset) / xRatio) * xRatio + xOffset
+        Return (Math.Floor((xVPos - xOffset) / xRatio) * xRatio) + xOffset
     End Function
 
     Private Sub CalculateGreatestVPosition()
@@ -345,7 +344,7 @@ Public Class MainWindow
 
     End Sub
 
-    Private Sub SortByVPositionQuick(ByVal xMin As Integer, ByVal xMax As Integer) 'Quick Sort
+    Private Sub SortByVPositionQuick(xMin As Integer, xMax As Integer) 'Quick Sort
         Dim xNote As Note
         Dim iHi As Integer
         Dim iLo As Integer
@@ -398,7 +397,7 @@ Public Class MainWindow
         SortByVPositionQuick(iLo + 1, xMax)
     End Sub
 
-    Private Sub SortByVPositionQuick3(ByVal xMin As Integer, ByVal xMax As Integer)
+    Private Sub SortByVPositionQuick3(xMin As Integer, xMax As Integer)
         Dim xxMin As Integer
         Dim xxMax As Integer
         Dim xxMid As Integer
@@ -418,15 +417,9 @@ Public Class MainWindow
         xI1 = CInt(Int(xxMid * Rnd())) + xMin
         xI2 = CInt(Int(xxMid * Rnd())) + xMin
         xI3 = CInt(Int(xxMid * Rnd())) + xMin
-        If Notes(xI1).VPosition <= Notes(xI2).VPosition And Notes(xI2).VPosition <= Notes(xI3).VPosition Then
-            xxMid = xI2
-        Else
-            If Notes(xI2).VPosition <= Notes(xI1).VPosition And Notes(xI1).VPosition <= Notes(xI3).VPosition Then
-                xxMid = xI1
-            Else
-                xxMid = xI3
-            End If
-        End If
+        xxMid = If(Notes(xI1).VPosition <= Notes(xI2).VPosition And Notes(xI2).VPosition <= Notes(xI3).VPosition,
+            xI2,
+            If(Notes(xI2).VPosition <= Notes(xI1).VPosition And Notes(xI1).VPosition <= Notes(xI3).VPosition, xI1, xI3))
         xNoteMid = Notes(xxMid)
         Do
             Do While Notes(xxMin).VPosition < xNoteMid.VPosition And xxMin < xMax
@@ -460,11 +453,11 @@ Public Class MainWindow
         Next
     End Sub
 
-    Private Function PathIsValid(ByVal sPath As String) As Boolean
+    Private Function PathIsValid(sPath As String) As Boolean
         Return File.Exists(sPath) Or Directory.Exists(sPath)
     End Function
 
-    Public Function PrevCodeToReal(ByVal InitStr As String) As String
+    Public Function PrevCodeToReal(InitStr As String) As String
         Dim xFileName As String = IIf(Not PathIsValid(FileName),
                                         IIf(InitPath = "", My.Application.Info.DirectoryPath, InitPath),
                                         ExcludeFileName(FileName)) _
@@ -476,13 +469,13 @@ Public Class MainWindow
         Return xS3
     End Function
 
-    Private Sub SetFileName(ByVal xFileName As String)
+    Private Sub SetFileName(xFileName As String)
         FileName = xFileName.Trim
         InitPath = ExcludeFileName(FileName)
         SetIsSaved(IsSaved)
     End Sub
 
-    Private Sub SetIsSaved(ByVal isSaved As Boolean)
+    Private Sub SetIsSaved(isSaved As Boolean)
         'pttl.Refresh()
         'pIsSaved.Visible = Not xBool
         Dim xVersion As String = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor &
@@ -491,17 +484,17 @@ Public Class MainWindow
         Me.IsSaved = isSaved
     End Sub
 
-    Private Sub PreviewNote(ByVal xFileLocation As String, ByVal bStop As Boolean)
+    Private Sub PreviewNote(xFileLocation As String, bStop As Boolean)
         If bStop Then
-            Audio.StopPlaying()
+            StopPlaying()
         End If
-        Audio.Play(xFileLocation)
+        Play(xFileLocation)
     End Sub
 
     Private Sub AddNote(note As Note,
-               Optional ByVal xSelected As Boolean = False,
-               Optional ByVal OverWrite As Boolean = True,
-               Optional ByVal SortAndUpdatePairing As Boolean = True)
+               Optional xSelected As Boolean = False,
+               Optional OverWrite As Boolean = True,
+               Optional SortAndUpdatePairing As Boolean = True)
 
         If note.VPosition < 0 Or note.VPosition >= GetMaxVPosition() Then Exit Sub
 
@@ -535,7 +528,7 @@ Public Class MainWindow
         CalculateTotalPlayableNotes()
     End Sub
 
-    Private Sub RemoveNote(ByVal I As Integer, Optional ByVal SortAndUpdatePairing As Boolean = True)
+    Private Sub RemoveNote(I As Integer, Optional SortAndUpdatePairing As Boolean = True)
         KMouseOver = -1
         Dim xI2 As Integer
 
@@ -559,7 +552,7 @@ Public Class MainWindow
 
     End Sub
 
-    Private Sub AddNotesFromClipboard(Optional ByVal xSelected As Boolean = True, Optional ByVal SortAndUpdatePairing As Boolean = True)
+    Private Sub AddNotesFromClipboard(Optional xSelected As Boolean = True, Optional SortAndUpdatePairing As Boolean = True)
         Dim xStrLine() As String = Split(Clipboard.GetText, vbCrLf)
 
         Dim xI1 As Integer
@@ -714,7 +707,7 @@ Public Class MainWindow
         CalculateTotalPlayableNotes()
     End Sub
 
-    Private Sub CopyNotes(Optional ByVal Unselect As Boolean = True)
+    Private Sub CopyNotes(Optional Unselect As Boolean = True)
         Dim xStrAll As String = "iBMSC Clipboard Data" & IIf(NTInput, " xNT", "")
         Dim xI1 As Integer
         Dim MinMeasure As Double = 999
@@ -754,7 +747,7 @@ Public Class MainWindow
         Clipboard.SetText(xStrAll)
     End Sub
 
-    Private Sub RemoveNotes(Optional ByVal SortAndUpdatePairing As Boolean = True)
+    Private Sub RemoveNotes(Optional SortAndUpdatePairing As Boolean = True)
         If UBound(Notes) = 0 Then Exit Sub
 
         KMouseOver = -1
@@ -774,7 +767,7 @@ Public Class MainWindow
         CalculateTotalPlayableNotes()
     End Sub
 
-    Private Function EnabledColumnIndexToColumnArrayIndex(ByVal cEnabled As Integer) As Integer
+    Private Function EnabledColumnIndexToColumnArrayIndex(cEnabled As Integer) As Integer
         Dim xI1 As Integer = 0
         Do
             If xI1 >= gColumns Then Exit Do
@@ -785,7 +778,7 @@ Public Class MainWindow
         Return cEnabled
     End Function
 
-    Private Function ColumnArrayIndexToEnabledColumnIndex(ByVal cReal As Integer) As Integer
+    Private Function ColumnArrayIndexToEnabledColumnIndex(cReal As Integer) As Integer
         Dim xI1 As Integer
         For xI1 = 0 To cReal - 1
             If Not nEnabled(xI1) Then cReal -= 1
@@ -793,7 +786,7 @@ Public Class MainWindow
         Return cReal
     End Function
 
-    Private Sub Form1_FormClosed(ByVal sender As Object, ByVal e As FormClosedEventArgs) Handles MyBase.FormClosed
+    Private Sub Form1_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         If pTempFileNames IsNot Nothing Then
             For Each xStr In pTempFileNames
                 File.Delete(xStr)
@@ -802,7 +795,7 @@ Public Class MainWindow
         If PreviousAutoSavedFileName <> "" Then File.Delete(PreviousAutoSavedFileName)
     End Sub
 
-    Private Sub Form1_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles MyBase.FormClosing
+    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         If Not IsSaved Then
             Dim xStr = Strings.Messages.SaveOnExit
             If e.CloseReason = CloseReason.WindowsShutDown Then xStr = Strings.Messages.SaveOnExit1
@@ -812,24 +805,25 @@ Public Class MainWindow
 
             If xResult = MsgBoxResult.Yes Then
                 If ExcludeFileName(FileName) = "" Then
-                    Dim xDSave As New SaveFileDialog
-                    xDSave.Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt|" &
+                    Dim xDSave As New SaveFileDialog With {
+                        .Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt|" &
                                     Strings.FileType.BMS & "|*.bms|" &
                                     Strings.FileType.BME & "|*.bme|" &
                                     Strings.FileType.BML & "|*.bml|" &
                                     Strings.FileType.PMS & "|*.pms|" &
                                     Strings.FileType.TXT & "|*.txt|" &
-                                    Strings.FileType._all & "|*.*"
-                    xDSave.DefaultExt = "bms"
-                    xDSave.InitialDirectory = InitPath
+                                    Strings.FileType._all & "|*.*",
+                        .DefaultExt = "bms",
+                        .InitialDirectory = InitPath
+                    }
 
                     If xDSave.ShowDialog = Forms.DialogResult.Cancel Then e.Cancel = True : Exit Sub
                     SetFileName(xDSave.FileName)
                 End If
-                Dim xStrAll = SaveBMS
+                Dim xStrAll = SaveBMS()
                 My.Computer.FileSystem.WriteAllText(FileName, xStrAll, False, TextEncoding)
                 NewRecent(FileName)
-                If BeepWhileSaved Then Beep
+                If BeepWhileSaved Then Beep()
             End If
 
             If xResult = MsgBoxResult.Cancel Then e.Cancel = True
@@ -849,7 +843,7 @@ Public Class MainWindow
         End If
     End Sub
 
-    Private Function FilterFileBySupported(ByVal xFile() As String, ByVal xFilter() As String) As String()
+    Private Function FilterFileBySupported(xFile() As String, xFilter() As String) As String()
         Dim xPath(-1) As String
         For xI1 As Integer = 0 To UBound(xFile)
             If My.Computer.FileSystem.FileExists(xFile(xI1)) And Array.IndexOf(xFilter, Path.GetExtension(xFile(xI1))) <> -1 Then
@@ -910,7 +904,7 @@ Public Class MainWindow
         For xI1 As Integer = 0 To 999
             MeasureLength(xI1) = 192.0R
             MeasureBottom(xI1) = xI1 * 192.0R
-            LBeat.Items.Add(Add3Zeros(xI1) & ": 1 ( 4 / 4 )")
+            Dim unused = LBeat.Items.Add(Add3Zeros(xI1) & ": 1 ( 4 / 4 )")
         Next
     End Sub
 
@@ -919,22 +913,22 @@ Public Class MainWindow
         'THLnType.Text = ""
     End Sub
 
-    Private Sub Form1_DragEnter(ByVal sender As Object, ByVal e As DragEventArgs) Handles MyBase.DragEnter
+    Private Sub Form1_DragEnter(sender As Object, e As DragEventArgs) Handles MyBase.DragEnter
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
             e.Effect = DragDropEffects.Copy
             DDFileName = FilterFileBySupported(CType(e.Data.GetData(DataFormats.FileDrop), String()), SupportedFileExtension)
         Else
             e.Effect = DragDropEffects.None
         End If
-        RefreshPanelAll
+        RefreshPanelAll()
     End Sub
 
-    Private Sub Form1_DragLeave(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.DragLeave
+    Private Sub Form1_DragLeave(sender As Object, e As EventArgs) Handles MyBase.DragLeave
         ReDim DDFileName(-1)
-        RefreshPanelAll
+        RefreshPanelAll()
     End Sub
 
-    Private Sub Form1_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles MyBase.DragDrop
+    Private Sub Form1_DragDrop(sender As Object, e As DragEventArgs) Handles MyBase.DragDrop
         ReDim DDFileName(-1)
         If Not e.Data.GetDataPresent(DataFormats.FileDrop) Then Return
 
@@ -942,58 +936,58 @@ Public Class MainWindow
         Dim xPath = FilterFileBySupported(xOrigPath, SupportedFileExtension)
         If xPath.Length > 0 Then
             Dim xProg As New fLoadFileProgress(xPath, IsSaved)
-            xProg.ShowDialog(Me)
+            Dim unused = xProg.ShowDialog(Me)
         End If
 
-        RefreshPanelAll
+        RefreshPanelAll()
     End Sub
 
-    Private Sub setFullScreen(ByVal value As Boolean)
+    Private Sub setFullScreen(value As Boolean)
         If value Then
-            If Me.WindowState = FormWindowState.Minimized Then Exit Sub
+            If WindowState = FormWindowState.Minimized Then Exit Sub
 
-            Me.SuspendLayout()
-            previousWindowPosition.Location = Me.Location
-            previousWindowPosition.Size = Me.Size
-            previousWindowState = Me.WindowState
+            SuspendLayout()
+            previousWindowPosition.Location = Location
+            previousWindowPosition.Size = Size
+            previousWindowState = WindowState
 
-            Me.WindowState = FormWindowState.Normal
-            Me.FormBorderStyle = FormBorderStyle.None
-            Me.WindowState = FormWindowState.Maximized
+            WindowState = FormWindowState.Normal
+            FormBorderStyle = FormBorderStyle.None
+            WindowState = FormWindowState.Maximized
             ToolStripContainer1.TopToolStripPanelVisible = False
 
-            Me.ResumeLayout()
+            ResumeLayout()
             isFullScreen = True
         Else
-            Me.SuspendLayout()
-            Me.FormBorderStyle = FormBorderStyle.Sizable
+            SuspendLayout()
+            FormBorderStyle = FormBorderStyle.Sizable
             ToolStripContainer1.TopToolStripPanelVisible = True
-            Me.WindowState = FormWindowState.Normal
+            WindowState = FormWindowState.Normal
 
-            Me.WindowState = previousWindowState
-            If Me.WindowState = FormWindowState.Normal Then
-                Me.Location = previousWindowPosition.Location
-                Me.Size = previousWindowPosition.Size
+            WindowState = previousWindowState
+            If WindowState = FormWindowState.Normal Then
+                Location = previousWindowPosition.Location
+                Size = previousWindowPosition.Size
             End If
 
-            Me.ResumeLayout()
+            ResumeLayout()
             isFullScreen = False
         End If
     End Sub
 
-    Private Sub Form1_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyDown
+    Private Sub Form1_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
         Select Case e.KeyCode
             Case Keys.F11
                 setFullScreen(Not isFullScreen)
         End Select
     End Sub
 
-    Private Sub Form1_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyUp
-        RefreshPanelAll
-        POStatusRefresh
+    Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles MyBase.KeyUp
+        RefreshPanelAll()
+        POStatusRefresh()
     End Sub
 
-    Friend Sub ReadFile(ByVal xPath As String)
+    Friend Sub ReadFile(xPath As String)
         Select Case LCase(Path.GetExtension(xPath))
             Case ".bms", ".bme", ".bml", ".pms", ".txt"
                 OpenBMS(My.Computer.FileSystem.ReadAllText(xPath, TextEncoding))
@@ -1017,12 +1011,12 @@ Public Class MainWindow
                 SetIsSaved(False)
 
             Case ".bmson"
-                MsgBox(Strings.fImportBMSON.Message)
+                Dim unused = MsgBox(Strings.fImportBMSON.Message)
         End Select
     End Sub
 
 
-    Public Function GCD(ByVal NumA As Double, ByVal NumB As Double) As Double
+    Public Function GCD(NumA As Double, NumB As Double) As Double
         Dim xNMax As Double = NumA
         Dim xNMin As Double = NumB
         If NumA < NumB Then
@@ -1030,43 +1024,43 @@ Public Class MainWindow
             xNMin = NumA
         End If
         Do While xNMin >= BMSGridLimit
-            GCD = xNMax - Math.Floor(xNMax / xNMin) * xNMin
+            GCD = xNMax - (Math.Floor(xNMax / xNMin) * xNMin)
             xNMax = xNMin
             xNMin = GCD
         Loop
         GCD = xNMax
     End Function
-    Public Function GCD(ByVal NumA As Double, ByVal NumB As Double, res As Integer) As Double
+    Public Function GCD(NumA As Double, NumB As Double, res As Integer) As Double
         Dim xNMax As Double = NumA
         Dim xNMin As Double = NumB
-        Dim minLimit = (192.0R / res)
+        Dim minLimit = 192.0R / res
         If NumA < NumB Then
             xNMax = NumB
             xNMin = NumA
         End If
         Do While xNMin >= minLimit
-            GCD = xNMax - Math.Floor(xNMax / xNMin) * xNMin
+            GCD = xNMax - (Math.Floor(xNMax / xNMin) * xNMin)
             xNMax = xNMin
             xNMin = GCD
         Loop
         GCD = xNMax
     End Function
 
-    <DllImport("user32.dll")> Private Shared Function LoadCursorFromFile(ByVal fileName As String) As IntPtr
+    <DllImport("user32.dll")> Private Shared Function LoadCursorFromFile(fileName As String) As IntPtr
     End Function
-    Public Shared Function ActuallyLoadCursor(ByVal path As String) As Cursor
+    Public Shared Function ActuallyLoadCursor(path As String) As Cursor
         Return New Cursor(LoadCursorFromFile(path))
     End Function
 
     Private Sub Unload()
-        Audio.Finalize
+        Audio.Finalize()
     End Sub
 
-    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'On Error Resume Next
-        Me.TopMost = True
-        Me.SuspendLayout()
-        Me.Visible = False
+        TopMost = True
+        SuspendLayout()
+        Visible = False
 
         'POBMP.Dispose()
         'POBGA.Dispose()
@@ -1116,8 +1110,8 @@ Public Class MainWindow
         LWAV.Items.Clear()
         LBMP.Items.Clear()
         For xI1 = 1 To 1295
-            LWAV.Items.Add(C10to36(xI1) & ":")
-            LBMP.Items.Add(C10to36(xI1) & ":")
+            Dim unused2 = LWAV.Items.Add(C10to36(xI1) & ":")
+            Dim unused1 = LBMP.Items.Add(C10to36(xI1) & ":")
         Next
         LWAV.SelectedIndex = 0
         LBMP.SelectedIndex = 0
@@ -1160,7 +1154,7 @@ Public Class MainWindow
         If MsgBox(Replace(Strings.Messages.RestoreAutosavedFile, "{}", xFiles.Length), MsgBoxStyle.YesNo Or MsgBoxStyle.MsgBoxSetForeground) = MsgBoxResult.Yes Then
             For Each xF As FileInfo In xFiles
                 'MsgBox(xF.FullName)
-                System.Diagnostics.Process.Start(Application.ExecutablePath, """" & xF.FullName & """")
+                Dim unused = Process.Start(Application.ExecutablePath, """" & xF.FullName & """")
             Next
         End If
 
@@ -1172,13 +1166,13 @@ Public Class MainWindow
 1000:
         IsInitializing = False
         POStatusRefresh()
-        Me.ResumeLayout()
+        ResumeLayout()
 
-        tempResize = Me.WindowState
-        Me.TopMost = False
-        Me.WindowState = tempResize
+        tempResize = WindowState
+        TopMost = False
+        WindowState = tempResize
 
-        Me.Visible = True
+        Visible = True
     End Sub
 
     Private Sub UpdatePairing()
@@ -1332,7 +1326,7 @@ EndSearch:
 
 
 
-    Public Sub ExceptionSave(ByVal Path As String)
+    Public Sub ExceptionSave(Path As String)
         SaveiBMSC(Path)
     End Sub
 
@@ -1343,20 +1337,21 @@ EndSearch:
 
     Private Function ClosingPopSave() As Boolean
         If Not IsSaved Then
-            Dim xResult As MsgBoxResult = MsgBox(Strings.Messages.SaveOnExit, MsgBoxStyle.YesNoCancel Or MsgBoxStyle.Question, Me.Text)
+            Dim xResult As MsgBoxResult = MsgBox(Strings.Messages.SaveOnExit, MsgBoxStyle.YesNoCancel Or MsgBoxStyle.Question, Text)
 
             If xResult = MsgBoxResult.Yes Then
                 If ExcludeFileName(FileName) = "" Then
-                    Dim xDSave As New SaveFileDialog
-                    xDSave.Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt|" &
+                    Dim xDSave As New SaveFileDialog With {
+                        .Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt|" &
                                     Strings.FileType.BMS & "|*.bms|" &
                                     Strings.FileType.BME & "|*.bme|" &
                                     Strings.FileType.BML & "|*.bml|" &
                                     Strings.FileType.PMS & "|*.pms|" &
                                     Strings.FileType.TXT & "|*.txt|" &
-                                    Strings.FileType._all & "|*.*"
-                    xDSave.DefaultExt = "bms"
-                    xDSave.InitialDirectory = InitPath
+                                    Strings.FileType._all & "|*.*",
+                        .DefaultExt = "bms",
+                        .InitialDirectory = InitPath
+                    }
 
                     If xDSave.ShowDialog = Forms.DialogResult.Cancel Then Return True
                     SetFileName(xDSave.FileName)
@@ -1372,7 +1367,7 @@ EndSearch:
         Return False
     End Function
 
-    Private Sub TBNew_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles TBNew.Click, mnNew.Click
+    Private Sub TBNew_Click(sender As Object, e As EventArgs) Handles TBNew.Click, mnNew.Click
 
         'KMouseDown = -1
         ReDim SelectedNotes(-1)
@@ -1407,8 +1402,8 @@ EndSearch:
         LBMP.Items.Clear()
         Dim xI1 As Integer
         For xI1 = 1 To 1295
-            LWAV.Items.Add(C10to36(xI1) & ": " & hWAV(xI1))
-            LBMP.Items.Add(C10to36(xI1) & ": " & hBMP(xI1))
+            Dim unused1 = LWAV.Items.Add(C10to36(xI1) & ": " & hWAV(xI1))
+            Dim unused = LBMP.Items.Add(C10to36(xI1) & ": " & hBMP(xI1))
         Next
         LWAV.SelectedIndex = 0
         LBMP.SelectedIndex = 0
@@ -1423,7 +1418,7 @@ EndSearch:
         POStatusRefresh()
     End Sub
 
-    Private Sub TBNewC_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 'Handles TBNewC.Click
+    Private Sub TBNewC_Click(sender As Object, e As EventArgs) 'Handles TBNewC.Click
         'KMouseDown = -1
         ReDim SelectedNotes(-1)
         KMouseOver = -1
@@ -1460,16 +1455,17 @@ EndSearch:
         OpenBMS(Clipboard.GetText)
     End Sub
 
-    Private Sub TBOpen_ButtonClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBOpen.ButtonClick, mnOpen.Click
+    Private Sub TBOpen_ButtonClick(sender As Object, e As EventArgs) Handles TBOpen.ButtonClick, mnOpen.Click
         'KMouseDown = -1
         ReDim SelectedNotes(-1)
         KMouseOver = -1
         If ClosingPopSave() Then Exit Sub
 
-        Dim xDOpen As New OpenFileDialog
-        xDOpen.Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt"
-        xDOpen.DefaultExt = "bms"
-        xDOpen.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
+        Dim xDOpen As New OpenFileDialog With {
+            .Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt",
+            .DefaultExt = "bms",
+            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
+        }
 
         If xDOpen.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDOpen.FileName)
@@ -1481,16 +1477,17 @@ EndSearch:
         'pIsSaved.Visible = Not IsSaved
     End Sub
 
-    Private Sub TBImportIBMSC_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBImportIBMSC.Click, mnImportIBMSC.Click
+    Private Sub TBImportIBMSC_Click(sender As Object, e As EventArgs) Handles TBImportIBMSC.Click, mnImportIBMSC.Click
         'KMouseDown = -1
         ReDim SelectedNotes(-1)
         KMouseOver = -1
         If ClosingPopSave() Then Return
 
-        Dim xDOpen As New OpenFileDialog
-        xDOpen.Filter = Strings.FileType.IBMSC & "|*.ibmsc"
-        xDOpen.DefaultExt = "ibmsc"
-        xDOpen.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
+        Dim xDOpen As New OpenFileDialog With {
+            .Filter = Strings.FileType.IBMSC & "|*.ibmsc",
+            .DefaultExt = "ibmsc",
+            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
+        }
 
         If xDOpen.ShowDialog = Forms.DialogResult.Cancel Then Return
         InitPath = ExcludeFileName(xDOpen.FileName)
@@ -1501,16 +1498,17 @@ EndSearch:
         'pIsSaved.Visible = Not IsSaved
     End Sub
 
-    Private Sub TBImportSM_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBImportSM.Click, mnImportSM.Click
+    Private Sub TBImportSM_Click(sender As Object, e As EventArgs) Handles TBImportSM.Click, mnImportSM.Click
         'KMouseDown = -1
         ReDim SelectedNotes(-1)
         KMouseOver = -1
         If ClosingPopSave() Then Exit Sub
 
-        Dim xDOpen As New OpenFileDialog
-        xDOpen.Filter = Strings.FileType.SM & "|*.sm"
-        xDOpen.DefaultExt = "sm"
-        xDOpen.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
+        Dim xDOpen As New OpenFileDialog With {
+            .Filter = Strings.FileType.SM & "|*.sm",
+            .DefaultExt = "sm",
+            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
+        }
 
         If xDOpen.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         If OpenSM(My.Computer.FileSystem.ReadAllText(xDOpen.FileName, TextEncoding)) Then Exit Sub
@@ -1521,22 +1519,23 @@ EndSearch:
         'pIsSaved.Visible = Not IsSaved
     End Sub
 
-    Private Sub TBSave_ButtonClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBSave.ButtonClick, mnSave.Click
+    Private Sub TBSave_ButtonClick(sender As Object, e As EventArgs) Handles TBSave.ButtonClick, mnSave.Click
         'KMouseDown = -1
         ReDim SelectedNotes(-1)
         KMouseOver = -1
 
         If ExcludeFileName(FileName) = "" Then
-            Dim xDSave As New SaveFileDialog
-            xDSave.Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt|" &
+            Dim xDSave As New SaveFileDialog With {
+                .Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt|" &
                             Strings.FileType.BMS & "|*.bms|" &
                             Strings.FileType.BME & "|*.bme|" &
                             Strings.FileType.BML & "|*.bml|" &
                             Strings.FileType.PMS & "|*.pms|" &
                             Strings.FileType.TXT & "|*.txt|" &
-                            Strings.FileType._all & "|*.*"
-            xDSave.DefaultExt = "bms"
-            xDSave.InitialDirectory = InitPath
+                            Strings.FileType._all & "|*.*",
+                .DefaultExt = "bms",
+                .InitialDirectory = InitPath
+            }
 
             If xDSave.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
             InitPath = ExcludeFileName(xDSave.FileName)
@@ -1551,21 +1550,22 @@ EndSearch:
         If BeepWhileSaved Then Beep()
     End Sub
 
-    Private Sub TBSaveAs_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBSaveAs.Click, mnSaveAs.Click
+    Private Sub TBSaveAs_Click(sender As Object, e As EventArgs) Handles TBSaveAs.Click, mnSaveAs.Click
         'KMouseDown = -1
         ReDim SelectedNotes(-1)
         KMouseOver = -1
 
-        Dim xDSave As New SaveFileDialog
-        xDSave.Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt|" &
+        Dim xDSave As New SaveFileDialog With {
+            .Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt|" &
                         Strings.FileType.BMS & "|*.bms|" &
                         Strings.FileType.BME & "|*.bme|" &
                         Strings.FileType.BML & "|*.bml|" &
                         Strings.FileType.PMS & "|*.pms|" &
                         Strings.FileType.TXT & "|*.txt|" &
-                        Strings.FileType._all & "|*.*"
-        xDSave.DefaultExt = "bms"
-        xDSave.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
+                        Strings.FileType._all & "|*.*",
+            .DefaultExt = "bms",
+            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
+        }
 
         If xDSave.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDSave.FileName)
@@ -1579,15 +1579,16 @@ EndSearch:
         If BeepWhileSaved Then Beep()
     End Sub
 
-    Private Sub TBExportIBMSC_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBExportIBMSC.Click, mnExportIBMSC.Click
+    Private Sub TBExportIBMSC_Click(sender As Object, e As EventArgs) Handles TBExportIBMSC.Click, mnExportIBMSC.Click
         'KMouseDown = -1
         ReDim SelectedNotes(-1)
         KMouseOver = -1
 
-        Dim xDSave As New SaveFileDialog
-        xDSave.Filter = Strings.FileType.IBMSC & "|*.ibmsc"
-        xDSave.DefaultExt = "ibmsc"
-        xDSave.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
+        Dim xDSave As New SaveFileDialog With {
+            .Filter = Strings.FileType.IBMSC & "|*.ibmsc",
+            .DefaultExt = "ibmsc",
+            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
+        }
         If xDSave.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
 
         SaveiBMSC(xDSave.FileName)
@@ -1596,15 +1597,16 @@ EndSearch:
         If BeepWhileSaved Then Beep()
     End Sub
 
-    Private Sub TBExportBMSON_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBExportBMSON.Click, mnExportBMSON.Click
+    Private Sub TBExportBMSON_Click(sender As Object, e As EventArgs) Handles TBExportBMSON.Click, mnExportBMSON.Click
         'KMouseDown = -1
         ReDim SelectedNotes(-1)
         KMouseOver = -1
 
-        Dim xDSave As New SaveFileDialog
-        xDSave.Filter = Strings.FileType.BMSON & "|*.bmson"
-        xDSave.DefaultExt = "bmson"
-        xDSave.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
+        Dim xDSave As New SaveFileDialog With {
+            .Filter = Strings.FileType.BMSON & "|*.bmson",
+            .DefaultExt = "bmson",
+            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
+        }
         If xDSave.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
 
         SaveBMSON(xDSave.FileName)
@@ -1613,12 +1615,12 @@ EndSearch:
         If BeepWhileSaved Then Beep()
     End Sub
 
-    Private Sub VSGotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles MainPanelScroll.GotFocus, LeftPanelScroll.GotFocus, RightPanelScroll.GotFocus
+    Private Sub VSGotFocus(sender As Object, e As EventArgs) Handles MainPanelScroll.GotFocus, LeftPanelScroll.GotFocus, RightPanelScroll.GotFocus
         PanelFocus = sender.Tag
-        spMain(PanelFocus).Focus()
+        Dim unused = spMain(PanelFocus).Focus()
     End Sub
 
-    Private Sub VSValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles MainPanelScroll.ValueChanged, LeftPanelScroll.ValueChanged, RightPanelScroll.ValueChanged
+    Private Sub VSValueChanged(sender As Object, e As EventArgs) Handles MainPanelScroll.ValueChanged, LeftPanelScroll.ValueChanged, RightPanelScroll.ValueChanged
         Dim iI As Integer = sender.Tag
 
         ' az: We got a wheel event when we're zooming in/out
@@ -1659,7 +1661,7 @@ EndSearch:
         RefreshPanel(iI, spMain(iI).DisplayRectangle)
     End Sub
 
-    Private Sub cVSLock_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cVSLockL.CheckedChanged, cVSLock.CheckedChanged, cVSLockR.CheckedChanged
+    Private Sub cVSLock_CheckedChanged(sender As Object, e As EventArgs) Handles cVSLockL.CheckedChanged, cVSLock.CheckedChanged, cVSLockR.CheckedChanged
         Dim iI As Integer = sender.Tag
         spLock(iI) = sender.Checked
         If Not spLock(iI) Then Return
@@ -1670,12 +1672,12 @@ EndSearch:
         'POHeaderB.Text = spDiff(0) & "_" & spDiff(1) & "_" & spDiff(2)
     End Sub
 
-    Private Sub HSGotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles HS.GotFocus, HSL.GotFocus, HSR.GotFocus
+    Private Sub HSGotFocus(sender As Object, e As EventArgs) Handles HS.GotFocus, HSL.GotFocus, HSR.GotFocus
         PanelFocus = sender.Tag
-        spMain(PanelFocus).Focus()
+        Dim unused = spMain(PanelFocus).Focus()
     End Sub
 
-    Private Sub HSValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles HS.ValueChanged, HSL.ValueChanged, HSR.ValueChanged
+    Private Sub HSValueChanged(sender As Object, e As EventArgs) Handles HS.ValueChanged, HSL.ValueChanged, HSR.ValueChanged
         Dim iI As Integer = sender.Tag
         If Not LastMouseDownLocation = New Point(-1, -1) And Not HSValue = -1 Then LastMouseDownLocation.X += (HSValue - sender.Value) * gxWidth
         PanelhBMSCROLL(iI) = sender.Value
@@ -1683,7 +1685,7 @@ EndSearch:
         RefreshPanel(iI, spMain(iI).DisplayRectangle)
     End Sub
 
-    Private Sub TBSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBSelect.Click, mnSelect.Click
+    Private Sub TBSelect_Click(sender As Object, e As EventArgs) Handles TBSelect.Click, mnSelect.Click
         TBSelect.Checked = True
         TBWrite.Checked = False
         TBTimeSelect.Checked = False
@@ -1706,7 +1708,7 @@ EndSearch:
         POStatusRefresh()
     End Sub
 
-    Private Sub TBWrite_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBWrite.Click, mnWrite.Click
+    Private Sub TBWrite_Click(sender As Object, e As EventArgs) Handles TBWrite.Click, mnWrite.Click
         TBSelect.Checked = False
         TBWrite.Checked = True
         TBTimeSelect.Checked = False
@@ -1729,7 +1731,7 @@ EndSearch:
         POStatusRefresh()
     End Sub
 
-    Private Sub TBPostEffects_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBTimeSelect.Click, mnTimeSelect.Click
+    Private Sub TBPostEffects_Click(sender As Object, e As EventArgs) Handles TBTimeSelect.Click, mnTimeSelect.Click
         TBSelect.Checked = False
         TBWrite.Checked = False
         TBTimeSelect.Checked = True
@@ -1755,19 +1757,19 @@ EndSearch:
         POStatusRefresh()
     End Sub
 
-    Private Sub CGHeight_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles CGHeight.ValueChanged
-        gxHeight = CSng(CGHeight.Value)
-        CGHeight2.Value = IIf(CGHeight.Value * 4 < CGHeight2.Maximum, CDec(CGHeight.Value * 4), CGHeight2.Maximum)
+    Private Sub CGHeight_ValueChanged(sender As Object, e As EventArgs) Handles CGHeight.ValueChanged
+        gxHeight = CGHeight.Value
+        CGHeight2.Value = IIf(CGHeight.Value * 4 < CGHeight2.Maximum, CGHeight.Value * 4, CGHeight2.Maximum)
         RefreshPanelAll()
     End Sub
 
-    Private Sub CGHeight2_Scroll(ByVal sender As Object, ByVal e As System.EventArgs) Handles CGHeight2.Scroll
+    Private Sub CGHeight2_Scroll(sender As Object, e As EventArgs) Handles CGHeight2.Scroll
         CGHeight.Value = CGHeight2.Value / 4
     End Sub
 
-    Private Sub CGWidth_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles CGWidth.ValueChanged
-        gxWidth = CSng(CGWidth.Value)
-        CGWidth2.Value = IIf(CGWidth.Value * 4 < CGWidth2.Maximum, CDec(CGWidth.Value * 4), CGWidth2.Maximum)
+    Private Sub CGWidth_ValueChanged(sender As Object, e As EventArgs) Handles CGWidth.ValueChanged
+        gxWidth = CGWidth.Value
+        CGWidth2.Value = IIf(CGWidth.Value * 4 < CGWidth2.Maximum, CGWidth.Value * 4, CGWidth2.Maximum)
 
         HS.LargeChange = PMainIn.Width / gxWidth
         If HS.Value > HS.Maximum - HS.LargeChange + 1 Then HS.Value = HS.Maximum - HS.LargeChange + 1
@@ -1779,19 +1781,19 @@ EndSearch:
         RefreshPanelAll()
     End Sub
 
-    Private Sub CGWidth2_Scroll(ByVal sender As Object, ByVal e As System.EventArgs) Handles CGWidth2.Scroll
+    Private Sub CGWidth2_Scroll(sender As Object, e As EventArgs) Handles CGWidth2.Scroll
         CGWidth.Value = CGWidth2.Value / 4
     End Sub
 
-    Private Sub CGDivide_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CGDivide.ValueChanged
+    Private Sub CGDivide_ValueChanged(sender As Object, e As EventArgs) Handles CGDivide.ValueChanged
         gDivide = CGDivide.Value
         RefreshPanelAll()
     End Sub
-    Private Sub CGSub_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CGSub.ValueChanged
+    Private Sub CGSub_ValueChanged(sender As Object, e As EventArgs) Handles CGSub.ValueChanged
         gSub = CGSub.Value
         RefreshPanelAll()
     End Sub
-    Private Sub BGSlash_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BGSlash.Click
+    Private Sub BGSlash_Click(sender As Object, e As EventArgs) Handles BGSlash.Click
         Dim xd As Integer = Val(InputBox(Strings.Messages.PromptSlashValue, , gSlash))
         If xd = 0 Then Exit Sub
         If xd > CGDivide.Maximum Then xd = CGDivide.Maximum
@@ -1800,24 +1802,24 @@ EndSearch:
     End Sub
 
 
-    Private Sub CGSnap_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CGSnap.CheckedChanged
+    Private Sub CGSnap_CheckedChanged(sender As Object, e As EventArgs) Handles CGSnap.CheckedChanged
         gSnap = CGSnap.Checked
         RefreshPanelAll()
     End Sub
 
-    Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Dim xI1 As Integer
 
         Select Case PanelFocus
             Case 0
                 With LeftPanelScroll
-                    xI1 = .Value + (tempY / 5) / gxHeight
+                    xI1 = .Value + (tempY / 5 / gxHeight)
                     If xI1 > 0 Then xI1 = 0
                     If xI1 < .Minimum Then xI1 = .Minimum
                     .Value = xI1
                 End With
                 With HSL
-                    xI1 = .Value + (tempX / 10) / gxWidth
+                    xI1 = .Value + (tempX / 10 / gxWidth)
                     If xI1 > .Maximum - .LargeChange + 1 Then xI1 = .Maximum - .LargeChange + 1
                     If xI1 < .Minimum Then xI1 = .Minimum
                     .Value = xI1
@@ -1825,13 +1827,13 @@ EndSearch:
 
             Case 1
                 With MainPanelScroll
-                    xI1 = .Value + (tempY / 5) / gxHeight
+                    xI1 = .Value + (tempY / 5 / gxHeight)
                     If xI1 > 0 Then xI1 = 0
                     If xI1 < .Minimum Then xI1 = .Minimum
                     .Value = xI1
                 End With
                 With HS
-                    xI1 = .Value + (tempX / 10) / gxWidth
+                    xI1 = .Value + (tempX / 10 / gxWidth)
                     If xI1 > .Maximum - .LargeChange + 1 Then xI1 = .Maximum - .LargeChange + 1
                     If xI1 < .Minimum Then xI1 = .Minimum
                     .Value = xI1
@@ -1839,25 +1841,25 @@ EndSearch:
 
             Case 2
                 With RightPanelScroll
-                    xI1 = .Value + (tempY / 5) / gxHeight
+                    xI1 = .Value + (tempY / 5 / gxHeight)
                     If xI1 > 0 Then xI1 = 0
                     If xI1 < .Minimum Then xI1 = .Minimum
                     .Value = xI1
                 End With
                 With HSR
-                    xI1 = .Value + (tempX / 10) / gxWidth
+                    xI1 = .Value + (tempX / 10 / gxWidth)
                     If xI1 > .Maximum - .LargeChange + 1 Then xI1 = .Maximum - .LargeChange + 1
                     If xI1 < .Minimum Then xI1 = .Minimum
                     .Value = xI1
                 End With
         End Select
 
-        Dim xMEArgs As New System.Windows.Forms.MouseEventArgs(Forms.MouseButtons.Left, 0, MouseMoveStatus.X, MouseMoveStatus.Y, 0)
+        Dim xMEArgs As New MouseEventArgs(MouseButtons.Left, 0, MouseMoveStatus.X, MouseMoveStatus.Y, 0)
         PMainInMouseMove(spMain(PanelFocus), xMEArgs)
 
     End Sub
 
-    Private Sub TimerMiddle_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TimerMiddle.Tick
+    Private Sub TimerMiddle_Tick(sender As Object, e As EventArgs) Handles TimerMiddle.Tick
         If Not MiddleButtonClicked Then TimerMiddle.Enabled = False : Return
 
         Dim xI1 As Integer
@@ -1865,13 +1867,13 @@ EndSearch:
         Select Case PanelFocus
             Case 0
                 With LeftPanelScroll
-                    xI1 = .Value + (Cursor.Position.Y - MiddleButtonLocation.Y) / 5 / gxHeight
+                    xI1 = .Value + ((Cursor.Position.Y - MiddleButtonLocation.Y) / 5 / gxHeight)
                     If xI1 > 0 Then xI1 = 0
                     If xI1 < .Minimum Then xI1 = .Minimum
                     .Value = xI1
                 End With
                 With HSL
-                    xI1 = .Value + (Cursor.Position.X - MiddleButtonLocation.X) / 5 / gxWidth
+                    xI1 = .Value + ((Cursor.Position.X - MiddleButtonLocation.X) / 5 / gxWidth)
                     If xI1 > .Maximum - .LargeChange + 1 Then xI1 = .Maximum - .LargeChange + 1
                     If xI1 < .Minimum Then xI1 = .Minimum
                     .Value = xI1
@@ -1879,13 +1881,13 @@ EndSearch:
 
             Case 1
                 With MainPanelScroll
-                    xI1 = .Value + (Cursor.Position.Y - MiddleButtonLocation.Y) / 5 / gxHeight
+                    xI1 = .Value + ((Cursor.Position.Y - MiddleButtonLocation.Y) / 5 / gxHeight)
                     If xI1 > 0 Then xI1 = 0
                     If xI1 < .Minimum Then xI1 = .Minimum
                     .Value = xI1
                 End With
                 With HS
-                    xI1 = .Value + (Cursor.Position.X - MiddleButtonLocation.X) / 5 / gxWidth
+                    xI1 = .Value + ((Cursor.Position.X - MiddleButtonLocation.X) / 5 / gxWidth)
                     If xI1 > .Maximum - .LargeChange + 1 Then xI1 = .Maximum - .LargeChange + 1
                     If xI1 < .Minimum Then xI1 = .Minimum
                     .Value = xI1
@@ -1893,27 +1895,27 @@ EndSearch:
 
             Case 2
                 With RightPanelScroll
-                    xI1 = .Value + (Cursor.Position.Y - MiddleButtonLocation.Y) / 5 / gxHeight
+                    xI1 = .Value + ((Cursor.Position.Y - MiddleButtonLocation.Y) / 5 / gxHeight)
                     If xI1 > 0 Then xI1 = 0
                     If xI1 < .Minimum Then xI1 = .Minimum
                     .Value = xI1
                 End With
                 With HSR
-                    xI1 = .Value + (Cursor.Position.X - MiddleButtonLocation.X) / 5 / gxWidth
+                    xI1 = .Value + ((Cursor.Position.X - MiddleButtonLocation.X) / 5 / gxWidth)
                     If xI1 > .Maximum - .LargeChange + 1 Then xI1 = .Maximum - .LargeChange + 1
                     If xI1 < .Minimum Then xI1 = .Minimum
                     .Value = xI1
                 End With
         End Select
 
-        Dim xMEArgs As New System.Windows.Forms.MouseEventArgs(Forms.MouseButtons.Left, 0, MouseMoveStatus.X, MouseMoveStatus.Y, 0)
+        Dim xMEArgs As New MouseEventArgs(MouseButtons.Left, 0, MouseMoveStatus.X, MouseMoveStatus.Y, 0)
         PMainInMouseMove(spMain(PanelFocus), xMEArgs)
     End Sub
 
     Private Sub ValidateWavListView()
         Try
             Dim xRect As Rectangle = LWAV.GetItemRectangle(LWAV.SelectedIndex)
-            If xRect.Top + xRect.Height > LWAV.DisplayRectangle.Height Then SendMessage(LWAV.Handle, &H115, 1, 0)
+            If xRect.Top + xRect.Height > LWAV.DisplayRectangle.Height Then Dim unused = SendMessage(LWAV.Handle, &H115, 1, 0)
         Catch ex As Exception
         End Try
     End Sub
@@ -1921,12 +1923,12 @@ EndSearch:
     Private Sub ValidateBmpListView()
         Try
             Dim xRect As Rectangle = LBMP.GetItemRectangle(LBMP.SelectedIndex)
-            If xRect.Top + xRect.Height > LBMP.DisplayRectangle.Height Then SendMessage(LBMP.Handle, &H115, 1, 0)
+            If xRect.Top + xRect.Height > LBMP.DisplayRectangle.Height Then Dim unused = SendMessage(LBMP.Handle, &H115, 1, 0)
         Catch ex As Exception
         End Try
     End Sub
 
-    Private Sub LWAV_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles LWAV.Click
+    Private Sub LWAV_Click(sender As Object, e As EventArgs) Handles LWAV.Click
         If TBWrite.Checked Then FSW.Text = C10to36(LWAV.SelectedIndex + 1)
 
         PreviewNote("", True)
@@ -1937,16 +1939,17 @@ EndSearch:
         PreviewNote(xFileLocation, False)
     End Sub
 
-    Private Sub LWAV_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles LWAV.DoubleClick
-        Dim xDWAV As New OpenFileDialog
-        xDWAV.DefaultExt = "wav"
-        xDWAV.Filter = Strings.FileType._wave & "|*.wav;*.ogg;*.mp3;*.flac|" &
+    Private Sub LWAV_DoubleClick(sender As Object, e As EventArgs) Handles LWAV.DoubleClick
+        Dim xDWAV As New OpenFileDialog With {
+            .DefaultExt = "wav",
+            .Filter = Strings.FileType._wave & "|*.wav;*.ogg;*.mp3;*.flac|" &
                        Strings.FileType.WAV & "|*.wav|" &
                        Strings.FileType.OGG & "|*.ogg|" &
                        Strings.FileType.MP3 & "|*.mp3|" &
                        Strings.FileType.FLAC & "|*.flac|" &
-                       Strings.FileType._all & "|*.*"
-        xDWAV.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
+                       Strings.FileType._all & "|*.*",
+            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
+        }
 
         If xDWAV.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDWAV.FileName)
@@ -1955,7 +1958,7 @@ EndSearch:
         If IsSaved Then SetIsSaved(False)
     End Sub
 
-    Private Sub LWAV_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles LWAV.KeyDown
+    Private Sub LWAV_KeyDown(sender As Object, e As KeyEventArgs) Handles LWAV.KeyDown
         Select Case e.KeyCode
             Case Keys.Delete
                 hWAV(LWAV.SelectedIndex + 1) = ""
@@ -1964,10 +1967,10 @@ EndSearch:
         End Select
     End Sub
 
-    Private Sub LBMP_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles LBMP.DoubleClick
-        Dim xDBMP As New OpenFileDialog
-        xDBMP.DefaultExt = "bmp"
-        xDBMP.Filter = Strings.FileType._image & "|*.bmp;*.png;*.jpg;*.jpeg;.gif|" &
+    Private Sub LBMP_DoubleClick(sender As Object, e As EventArgs) Handles LBMP.DoubleClick
+        Dim xDBMP As New OpenFileDialog With {
+            .DefaultExt = "bmp",
+            .Filter = Strings.FileType._image & "|*.bmp;*.png;*.jpg;*.jpeg;.gif|" &
                        Strings.FileType._movie & "|*.mpg;*.m1v;*.m2v;*.avi;*.mp4;*.m4v;*.wmv;*.webm|" &
                        Strings.FileType.BMP & "|*.bmp|" &
                        Strings.FileType.PNG & "|*.png|" &
@@ -1978,8 +1981,9 @@ EndSearch:
                        Strings.FileType.MPG & "|*.mpg;*.m1v;*.m2v|" &
                        Strings.FileType.WMV & "|*.wmv|" &
                        Strings.FileType.WEBM & "|*.webm|" &
-                       Strings.FileType._all & "|*.*"
-        xDBMP.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
+                       Strings.FileType._all & "|*.*",
+            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
+        }
 
         If xDBMP.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDBMP.FileName)
@@ -1988,7 +1992,7 @@ EndSearch:
         If IsSaved Then SetIsSaved(False)
     End Sub
 
-    Private Sub LBMP_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles LBMP.KeyDown
+    Private Sub LBMP_KeyDown(sender As Object, e As KeyEventArgs) Handles LBMP.KeyDown
         Select Case e.KeyCode
             Case Keys.Delete
                 hBMP(LBMP.SelectedIndex + 1) = ""
@@ -1997,7 +2001,7 @@ EndSearch:
         End Select
     End Sub
 
-    Private Sub TBErrorCheck_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBErrorCheck.Click, mnErrorCheck.Click
+    Private Sub TBErrorCheck_Click(sender As Object, e As EventArgs) Handles TBErrorCheck.Click, mnErrorCheck.Click
         ErrorCheck = sender.Checked
         TBErrorCheck.Checked = ErrorCheck
         mnErrorCheck.Checked = ErrorCheck
@@ -2006,7 +2010,7 @@ EndSearch:
         RefreshPanelAll()
     End Sub
 
-    Private Sub TBPreviewOnClick_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBPreviewOnClick.Click, mnPreviewOnClick.Click
+    Private Sub TBPreviewOnClick_Click(sender As Object, e As EventArgs) Handles TBPreviewOnClick.Click, mnPreviewOnClick.Click
         PreviewNote("", True)
         PreviewOnClick = sender.Checked
         TBPreviewOnClick.Checked = PreviewOnClick
@@ -2015,7 +2019,7 @@ EndSearch:
         mnPreviewOnClick.Image = IIf(PreviewOnClick, My.Resources.x16PreviewOnClick, My.Resources.x16PreviewOnClickN)
     End Sub
 
-    Private Sub TBChangePlaySide_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBChangePlaySide.Click, mnChangePlaySide.Click
+    Private Sub TBChangePlaySide_Click(sender As Object, e As EventArgs) Handles TBChangePlaySide.Click, mnChangePlaySide.Click
         Rscratch = sender.Checked
         ChangePlaySide(True)
         TBChangePlaySide.Checked = Rscratch
@@ -2025,12 +2029,12 @@ EndSearch:
         RefreshPanelAll()
     End Sub
 
-    'Private Sub TBPreviewErrorCheck_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    'Private Sub TBPreviewErrorCheck_Click( sender As System.Object,  e As EventArgs)
     '    PreviewErrorCheck = TBPreviewErrorCheck.Checked
     '    TBPreviewErrorCheck.Image = IIf(PreviewErrorCheck, My.Resources.x16PreviewCheck, My.Resources.x16PreviewCheckN)
     'End Sub
 
-    Private Sub TBShowFileName_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBShowFileName.Click, mnShowFileName.Click
+    Private Sub TBShowFileName_Click(sender As Object, e As EventArgs) Handles TBShowFileName.Click, mnShowFileName.Click
         ShowFileName = sender.Checked
         TBShowFileName.Checked = ShowFileName
         mnShowFileName.Checked = ShowFileName
@@ -2039,11 +2043,11 @@ EndSearch:
         RefreshPanelAll()
     End Sub
 
-    Private Sub TBCut_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBCut.Click, mnCut.Click
+    Private Sub TBCut_Click(sender As Object, e As EventArgs) Handles TBCut.Click, mnCut.Click
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
         Dim xRedo As UndoRedo.LinkedURCmd = New UndoRedo.Void
         Dim xBaseRedo As UndoRedo.LinkedURCmd = xRedo
-        Me.RedoRemoveNoteSelected(True, xUndo, xRedo)
+        RedoRemoveNoteSelected(True, xUndo, xRedo)
         'Dim xRedo As String = sCmdKDs()
         'Dim xUndo As String = sCmdKs(True)
 
@@ -2052,7 +2056,7 @@ EndSearch:
             RemoveNotes(False)
             AddUndo(xUndo, xBaseRedo.Next)
         Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Exclamation, Strings.Messages.Err)
+            Dim unused = MsgBox(ex.Message, MsgBoxStyle.Exclamation, Strings.Messages.Err)
         End Try
         SortByVPositionInsertion()
         UpdatePairing()
@@ -2062,23 +2066,23 @@ EndSearch:
         CalculateGreatestVPosition()
     End Sub
 
-    Private Sub TBCopy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBCopy.Click, mnCopy.Click
+    Private Sub TBCopy_Click(sender As Object, e As EventArgs) Handles TBCopy.Click, mnCopy.Click
         Try
             CopyNotes()
         Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Exclamation, Strings.Messages.Err)
+            Dim unused = MsgBox(ex.Message, MsgBoxStyle.Exclamation, Strings.Messages.Err)
         End Try
         RefreshPanelAll()
         POStatusRefresh()
     End Sub
 
-    Private Sub TBPaste_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBPaste.Click, mnPaste.Click
+    Private Sub TBPaste_Click(sender As Object, e As EventArgs) Handles TBPaste.Click, mnPaste.Click
         AddNotesFromClipboard()
 
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
         Dim xRedo As UndoRedo.LinkedURCmd = New UndoRedo.Void
         Dim xBaseRedo As UndoRedo.LinkedURCmd = xRedo
-        Me.RedoAddNoteSelected(True, xUndo, xRedo)
+        RedoAddNoteSelected(True, xUndo, xRedo)
         AddUndo(xUndo, xBaseRedo.Next)
 
         'AddUndo(sCmdKDs(), sCmdKs(True))
@@ -2091,17 +2095,17 @@ EndSearch:
         CalculateGreatestVPosition()
     End Sub
 
-    'Private Function pArgPath(ByVal I As Integer)
+    'Private Function pArgPath( I As Integer)
     '    Return Mid(pArgs(I), 1, InStr(pArgs(I), vbCrLf) - 1)
     'End Function
 
-    Private Function GetFileName(ByVal s As String) As String
+    Private Function GetFileName(s As String) As String
         Dim fslash As Integer = InStrRev(s, "/")
         Dim bslash As Integer = InStrRev(s, "\")
         Return Mid(s, IIf(fslash > bslash, fslash, bslash) + 1)
     End Function
 
-    Private Function ExcludeFileName(ByVal s As String) As String
+    Private Function ExcludeFileName(s As String) As String
         Dim fslash As Integer = InStrRev(s, "/")
         Dim bslash As Integer = InStrRev(s, "\")
         If (bslash Or fslash) = 0 Then Return ""
@@ -2109,17 +2113,18 @@ EndSearch:
     End Function
 
     Private Sub PlayerMissingPrompt()
-        Dim xArg As MainWindow.PlayerArguments = pArgs(CurrentPlayer)
-        MsgBox(Strings.Messages.CannotFind.Replace("{}", PrevCodeToReal(xArg.Path)) & vbCrLf &
+        Dim xArg As PlayerArguments = pArgs(CurrentPlayer)
+        Dim unused = MsgBox(Strings.Messages.CannotFind.Replace("{}", PrevCodeToReal(xArg.Path)) & vbCrLf &
                Strings.Messages.PleaseRespecifyPath, MsgBoxStyle.Critical, Strings.Messages.PlayerNotFound)
 
-        Dim xDOpen As New OpenFileDialog
-        xDOpen.InitialDirectory = IIf(ExcludeFileName(PrevCodeToReal(xArg.Path)) = "",
+        Dim xDOpen As New OpenFileDialog With {
+            .InitialDirectory = IIf(ExcludeFileName(PrevCodeToReal(xArg.Path)) = "",
                                       My.Application.Info.DirectoryPath,
-                                      ExcludeFileName(PrevCodeToReal(xArg.Path)))
-        xDOpen.FileName = PrevCodeToReal(xArg.Path)
-        xDOpen.Filter = Strings.FileType.EXE & "|*.exe"
-        xDOpen.DefaultExt = "exe"
+                                      ExcludeFileName(PrevCodeToReal(xArg.Path))),
+            .FileName = PrevCodeToReal(xArg.Path),
+            .Filter = Strings.FileType.EXE & "|*.exe",
+            .DefaultExt = "exe"
+        }
         If xDOpen.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
 
         'pArgs(CurrentPlayer) = Replace(xDOpen.FileName, My.Application.Info.DirectoryPath, "<apppath>") & _
@@ -2129,9 +2134,9 @@ EndSearch:
         xArg = pArgs(CurrentPlayer)
     End Sub
 
-    Private Sub TBPlay_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBPlay.Click, mnPlay.Click
+    Private Sub TBPlay_Click(sender As Object, e As EventArgs) Handles TBPlay.Click, mnPlay.Click
         'Dim xStr() As String = Split(pArgs(CurrentPlayer), vbCrLf)
-        Dim xArg As MainWindow.PlayerArguments = pArgs(CurrentPlayer)
+        Dim xArg As PlayerArguments = pArgs(CurrentPlayer)
 
         If Not File.Exists(PrevCodeToReal(xArg.Path)) Then
             PlayerMissingPrompt()
@@ -2150,12 +2155,12 @@ EndSearch:
         My.Computer.FileSystem.WriteAllText(xFileName, xStrAll, False, TextEncoding)
 
         AddTempFileList(xFileName)
-        System.Diagnostics.Process.Start(PrevCodeToReal(xArg.Path), PrevCodeToReal(xArg.aHere))
+        Dim unused = Process.Start(PrevCodeToReal(xArg.Path), PrevCodeToReal(xArg.aHere))
     End Sub
 
-    Private Sub TBPlayB_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBPlayB.Click, mnPlayB.Click
+    Private Sub TBPlayB_Click(sender As Object, e As EventArgs) Handles TBPlayB.Click, mnPlayB.Click
         'Dim xStr() As String = Split(pArgs(CurrentPlayer), vbCrLf)
-        Dim xArg As MainWindow.PlayerArguments = pArgs(CurrentPlayer)
+        Dim xArg As PlayerArguments = pArgs(CurrentPlayer)
 
         If Not File.Exists(PrevCodeToReal(xArg.Path)) Then
             PlayerMissingPrompt()
@@ -2174,12 +2179,12 @@ EndSearch:
 
         AddTempFileList(xFileName)
 
-        System.Diagnostics.Process.Start(PrevCodeToReal(xArg.Path), PrevCodeToReal(xArg.aBegin))
+        Dim unused = Process.Start(PrevCodeToReal(xArg.Path), PrevCodeToReal(xArg.aBegin))
     End Sub
 
-    Private Sub TBStop_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBStop.Click, mnStop.Click
+    Private Sub TBStop_Click(sender As Object, e As EventArgs) Handles TBStop.Click, mnStop.Click
         'Dim xStr() As String = Split(pArgs(CurrentPlayer), vbCrLf)
-        Dim xArg As MainWindow.PlayerArguments = pArgs(CurrentPlayer)
+        Dim xArg As PlayerArguments = pArgs(CurrentPlayer)
 
         If Not File.Exists(PrevCodeToReal(xArg.Path)) Then
             PlayerMissingPrompt()
@@ -2190,10 +2195,10 @@ EndSearch:
             Exit Sub
         End If
 
-        System.Diagnostics.Process.Start(PrevCodeToReal(xArg.Path), PrevCodeToReal(xArg.aStop))
+        Dim unused = Process.Start(PrevCodeToReal(xArg.Path), PrevCodeToReal(xArg.aStop))
     End Sub
 
-    Private Sub AddTempFileList(ByVal s As String)
+    Private Sub AddTempFileList(s As String)
         Dim xAdd As Boolean = True
         If pTempFileNames IsNot Nothing Then
             For Each xStr1 As String In pTempFileNames
@@ -2207,7 +2212,7 @@ EndSearch:
         End If
     End Sub
 
-    Private Sub TBStatistics_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBStatistics.Click, mnStatistics.Click
+    Private Sub TBStatistics_Click(sender As Object, e As EventArgs) Handles TBStatistics.Click, mnStatistics.Click
         SortByVPositionInsertion()
         UpdatePairing()
 
@@ -2259,7 +2264,7 @@ StartCount:     If Not NTInput Then
         Next
 
         Dim dStat As New dgStatistics(data)
-        dStat.ShowDialog()
+        Dim unused = dStat.ShowDialog()
     End Sub
 
     ''' <summary>
@@ -2273,7 +2278,7 @@ StartCount:     If Not NTInput Then
         If Not NTInput Then
             For xI1 = 1 To UBound(Notes)
                 If Notes(xI1).ColumnIndex >= niA1 AndAlso Notes(xI1).ColumnIndex <= niAQ Then xIAll += 1
-                If (Notes(xI1).ColumnIndex >= niD1 AndAlso Notes(xI1).ColumnIndex <= niDQ) AndAlso column(Notes(xI1).ColumnIndex).isVisible Then xIAll += 1
+                If Notes(xI1).ColumnIndex >= niD1 AndAlso Notes(xI1).ColumnIndex <= niDQ AndAlso column(Notes(xI1).ColumnIndex).isVisible Then xIAll += 1
             Next
 
         Else
@@ -2282,7 +2287,7 @@ StartCount:     If Not NTInput Then
                     xIAll += 1
                     If Notes(xI1).Length <> 0 Then xIAll += 1
                 End If
-                If (Notes(xI1).ColumnIndex >= niD1 And Notes(xI1).ColumnIndex <= niDQ) AndAlso column(Notes(xI1).ColumnIndex).isVisible Then
+                If Notes(xI1).ColumnIndex >= niD1 And Notes(xI1).ColumnIndex <= niDQ AndAlso column(Notes(xI1).ColumnIndex).isVisible Then
                     xIAll += 1
                     If Notes(xI1).Length <> 0 Then xIAll += 1
                 End If
@@ -2298,11 +2303,11 @@ StartCount:     If Not NTInput Then
         Dim xIAll As Integer = 0
 
         For xI1 = 1 To UBound(Notes)
-            If (Notes(xI1).ColumnIndex >= niA1 AndAlso Notes(xI1).ColumnIndex <= niAQ) AndAlso
+            If Notes(xI1).ColumnIndex >= niA1 AndAlso Notes(xI1).ColumnIndex <= niAQ AndAlso
                    Not Notes(xI1).Hidden AndAlso Not Notes(xI1).Landmine AndAlso column(Notes(xI1).ColumnIndex).isVisible Then
                 xIAll += 1
             End If
-            If (Notes(xI1).ColumnIndex >= niD1 AndAlso Notes(xI1).ColumnIndex <= niDQ) AndAlso
+            If Notes(xI1).ColumnIndex >= niD1 AndAlso Notes(xI1).ColumnIndex <= niDQ AndAlso
                    Not Notes(xI1).Hidden AndAlso Not Notes(xI1).Landmine AndAlso column(Notes(xI1).ColumnIndex).isVisible Then
                 xIAll += 1
             End If
@@ -2314,12 +2319,8 @@ StartCount:     If Not NTInput Then
     Public Function GetMouseVPosition(Optional snap As Boolean = True)
         Dim panHeight = spMain(PanelFocus).Height
         Dim panDisplacement = PanelVScroll(PanelFocus)
-        Dim vpos = (panHeight - panDisplacement * gxHeight - MouseMoveStatus.Y - 1) / gxHeight
-        If snap Then
-            Return SnapToGrid(vpos)
-        Else
-            Return vpos
-        End If
+        Dim vpos = (panHeight - (panDisplacement * gxHeight) - MouseMoveStatus.Y - 1) / gxHeight
+        Return If(snap, SnapToGrid(vpos), DirectCast(vpos, Object))
     End Function
 
     Private Sub POStatusRefresh()
@@ -2418,8 +2419,9 @@ StartCount:     If Not NTInput Then
 
         Dim stop_notes As IEnumerable(Of Note) = Nothing
 
-        If timing_notes.ContainsKey(niSTOP) Then
-            stop_notes = timing_notes.Item(niSTOP)
+        Dim value As IEnumerable(Of Note) = Nothing
+        If timing_notes.TryGetValue(niSTOP, value) Then
+            stop_notes = value
         End If
 
 
@@ -2456,21 +2458,22 @@ StartCount:     If Not NTInput Then
         Return stop_contrib + bpm_contrib
     End Function
 
-    Private Sub POBStorm_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub POBStorm_Click(sender As Object, e As EventArgs)
 
     End Sub
 
-    Private Sub POBMirror_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles POBMirror.Click
+    Private Sub POBMirror_Click(sender As Object, e As EventArgs) Handles POBMirror.Click
         Dim xI1 As Integer
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
         Dim xRedo As UndoRedo.LinkedURCmd = New UndoRedo.Void
         Dim xBaseRedo As UndoRedo.LinkedURCmd = xRedo
-        'xRedo &= sCmdKM(niA1, .VPosition, .Value, IIf(NTInput, .Length, .LongNote), .Hidden, RealColumnToEnabled(niA7) - RealColumnToEnabled(niA1), 0, True) & vbCrLf
-        'xUndo &= sCmdKM(niA7, .VPosition, .Value, IIf(NTInput, .Length, .LongNote), .Hidden, RealColumnToEnabled(niA1) - RealColumnToEnabled(niA7), 0, True) & vbCrLf
 
-        Dim xCol As Integer = 0
         For xI1 = 1 To UBound(Notes)
             If Not Notes(xI1).Selected Then Continue For
+            'xRedo &= sCmdKM(niA1, .VPosition, .Value, IIf(NTInput, .Length, .LongNote), .Hidden, RealColumnToEnabled(niA7) - RealColumnToEnabled(niA1), 0, True) & vbCrLf
+            'xUndo &= sCmdKM(niA7, .VPosition, .Value, IIf(NTInput, .Length, .LongNote), .Hidden, RealColumnToEnabled(niA1) - RealColumnToEnabled(niA7), 0, True) & vbCrLf
+
+            Dim xCol As Integer
             If Rscratch Then
                 Select Case Notes(xI1).ColumnIndex
                     Case niA1 : xCol = niA7
@@ -2509,7 +2512,7 @@ StartCount:     If Not NTInput Then
                 End Select
             End If
 
-            Me.RedoMoveNote(Notes(xI1), xCol, Notes(xI1).VPosition, xUndo, xRedo)
+            RedoMoveNote(Notes(xI1), xCol, Notes(xI1).VPosition, xUndo, xRedo)
             Notes(xI1).ColumnIndex = xCol
         Next
 
@@ -2536,72 +2539,72 @@ StartCount:     If Not NTInput Then
 
 
 
-    Private Sub TVCM_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TVCM.KeyDown
+    Private Sub TVCM_KeyDown(sender As Object, e As KeyEventArgs) Handles TVCM.KeyDown
         If e.KeyCode = Keys.Enter Then
             TVCM.Text = Val(TVCM.Text)
             If Val(TVCM.Text) <= 0 Then
-                MsgBox(Strings.Messages.NegativeFactorError, MsgBoxStyle.Critical, Strings.Messages.Err)
+                Dim unused = MsgBox(Strings.Messages.NegativeFactorError, MsgBoxStyle.Critical, Strings.Messages.Err)
                 TVCM.Text = 1
                 TVCM.Focus()
                 TVCM.SelectAll()
             Else
-                BVCApply_Click(BVCApply, New System.EventArgs)
+                BVCApply_Click(BVCApply, New EventArgs)
             End If
         End If
     End Sub
 
-    Private Sub TVCM_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles TVCM.LostFocus
+    Private Sub TVCM_LostFocus(sender As Object, e As EventArgs) Handles TVCM.LostFocus
         TVCM.Text = Val(TVCM.Text)
         If Val(TVCM.Text) <= 0 Then
-            MsgBox(Strings.Messages.NegativeFactorError, MsgBoxStyle.Critical, Strings.Messages.Err)
+            Dim unused = MsgBox(Strings.Messages.NegativeFactorError, MsgBoxStyle.Critical, Strings.Messages.Err)
             TVCM.Text = 1
             TVCM.Focus()
             TVCM.SelectAll()
         End If
     End Sub
 
-    Private Sub TVCD_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TVCD.KeyDown
+    Private Sub TVCD_KeyDown(sender As Object, e As KeyEventArgs) Handles TVCD.KeyDown
         If e.KeyCode = Keys.Enter Then
             TVCD.Text = Val(TVCD.Text)
             If Val(TVCD.Text) <= 0 Then
-                MsgBox(Strings.Messages.NegativeDivisorError, MsgBoxStyle.Critical, Strings.Messages.Err)
+                Dim unused = MsgBox(Strings.Messages.NegativeDivisorError, MsgBoxStyle.Critical, Strings.Messages.Err)
                 TVCD.Text = 1
                 TVCD.Focus()
                 TVCD.SelectAll()
             Else
-                BVCApply_Click(BVCApply, New System.EventArgs)
+                BVCApply_Click(BVCApply, New EventArgs)
             End If
         End If
     End Sub
 
-    Private Sub TVCD_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles TVCD.LostFocus
+    Private Sub TVCD_LostFocus(sender As Object, e As EventArgs) Handles TVCD.LostFocus
         TVCD.Text = Val(TVCD.Text)
         If Val(TVCD.Text) <= 0 Then
-            MsgBox(Strings.Messages.NegativeDivisorError, MsgBoxStyle.Critical, Strings.Messages.Err)
+            Dim unused = MsgBox(Strings.Messages.NegativeDivisorError, MsgBoxStyle.Critical, Strings.Messages.Err)
             TVCD.Text = 1
             TVCD.Focus()
             TVCD.SelectAll()
         End If
     End Sub
 
-    Private Sub TVCBPM_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TVCBPM.KeyDown
+    Private Sub TVCBPM_KeyDown(sender As Object, e As KeyEventArgs) Handles TVCBPM.KeyDown
         If e.KeyCode = Keys.Enter Then
             TVCBPM.Text = Val(TVCBPM.Text)
             If Val(TVCBPM.Text) <= 0 Then
-                MsgBox(Strings.Messages.NegativeDivisorError, MsgBoxStyle.Critical, Strings.Messages.Err)
+                Dim unused = MsgBox(Strings.Messages.NegativeDivisorError, MsgBoxStyle.Critical, Strings.Messages.Err)
                 TVCBPM.Text = Notes(0).Value / 10000
                 TVCBPM.Focus()
                 TVCBPM.SelectAll()
             Else
-                BVCCalculate_Click(BVCCalculate, New System.EventArgs)
+                BVCCalculate_Click(BVCCalculate, New EventArgs)
             End If
         End If
     End Sub
 
-    Private Sub TVCBPM_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles TVCBPM.LostFocus
+    Private Sub TVCBPM_LostFocus(sender As Object, e As EventArgs) Handles TVCBPM.LostFocus
         TVCBPM.Text = Val(TVCBPM.Text)
         If Val(TVCBPM.Text) <= 0 Then
-            MsgBox(Strings.Messages.NegativeDivisorError, MsgBoxStyle.Critical, Strings.Messages.Err)
+            Dim unused = MsgBox(Strings.Messages.NegativeDivisorError, MsgBoxStyle.Critical, Strings.Messages.Err)
             TVCBPM.Text = Notes(0).Value / 10000
             TVCBPM.Focus()
             TVCBPM.SelectAll()
@@ -2635,7 +2638,7 @@ StartCount:     If Not NTInput Then
 
 
 
-    Private Sub TBUndo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBUndo.Click, mnUndo.Click
+    Private Sub TBUndo_Click(sender As Object, e As EventArgs) Handles TBUndo.Click, mnUndo.Click
         KMouseOver = -1
         'KMouseDown = -1
         ReDim SelectedNotes(-1)
@@ -2649,7 +2652,7 @@ StartCount:     If Not NTInput Then
         mnRedo.Enabled = sRedo(sIA).ofType <> UndoRedo.opNoOperation
     End Sub
 
-    Private Sub TBRedo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBRedo.Click, mnRedo.Click
+    Private Sub TBRedo_Click(sender As Object, e As EventArgs) Handles TBRedo.Click, mnRedo.Click
         KMouseOver = -1
         'KMouseDown = -1
         ReDim SelectedNotes(-1)
@@ -2691,28 +2694,29 @@ StartCount:     If Not NTInput Then
 
 
 
-    Private Sub TBAbout_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Dim Aboutboxx1 As New AboutBox1()
+    Private Sub TBAbout_Click(sender As Object, e As EventArgs)
         'If My.Computer.FileSystem.FileExists(My.Application.Info.DirectoryPath & "\About.png") Then
-        Aboutboxx1.bBitmap = My.Resources.About0
         'Aboutboxx1.SelectBitmap()
-        Aboutboxx1.ClientSize = New Size(1000, 500)
+        Dim Aboutboxx1 As New AboutBox1 With {
+            .bBitmap = My.Resources.About0,
+            .ClientSize = New Size(1000, 500)
+        }
         Aboutboxx1.ClickToCopy.Visible = True
-        Aboutboxx1.ShowDialog(Me)
+        Dim unused = Aboutboxx1.ShowDialog(Me)
         'Else
         '    MsgBox(locale.Messages.cannotfind & " ""About.png""", MsgBoxStyle.Critical, locale.Messages.err)
         'End If
     End Sub
 
-    Private Sub TBOptions_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBVOptions.Click, mnVOptions.Click
+    Private Sub TBOptions_Click(sender As Object, e As EventArgs) Handles TBVOptions.Click, mnVOptions.Click
 
         Dim xDiag As New OpVisual(vo, column, LWAV.Font)
-        xDiag.ShowDialog(Me)
+        Dim unused = xDiag.ShowDialog(Me)
         UpdateColumnsX()
         RefreshPanelAll()
     End Sub
 
-    Private Sub AddToPOWAV(ByVal xPath() As String)
+    Private Sub AddToPOWAV(xPath() As String)
         Dim xIndices(LWAV.SelectedIndices.Count - 1) As Integer
         LWAV.SelectedIndices.CopyTo(xIndices, 0)
         If xIndices.Length = 0 Then Exit Sub
@@ -2780,7 +2784,7 @@ StartCount:     If Not NTInput Then
         RefreshPanelAll()
     End Sub
 
-    Private Sub POWAV_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles POWAV.DragDrop
+    Private Sub POWAV_DragDrop(sender As Object, e As DragEventArgs) Handles POWAV.DragDrop
         ReDim DDFileName(-1)
         If Not e.Data.GetDataPresent(DataFormats.FileDrop) Then Return
 
@@ -2795,7 +2799,7 @@ StartCount:     If Not NTInput Then
         AddToPOWAV(xPath)
     End Sub
 
-    Private Sub POWAV_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles POWAV.DragEnter
+    Private Sub POWAV_DragEnter(sender As Object, e As DragEventArgs) Handles POWAV.DragEnter
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
             e.Effect = DragDropEffects.Copy
             DDFileName = FilterFileBySupported(CType(e.Data.GetData(DataFormats.FileDrop), String()), SupportedAudioExtension)
@@ -2805,16 +2809,16 @@ StartCount:     If Not NTInput Then
         RefreshPanelAll()
     End Sub
 
-    Private Sub POWAV_DragLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles POWAV.DragLeave
+    Private Sub POWAV_DragLeave(sender As Object, e As EventArgs) Handles POWAV.DragLeave
         ReDim DDFileName(-1)
         RefreshPanelAll()
     End Sub
 
-    Private Sub POWAV_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles POWAV.Resize
+    Private Sub POWAV_Resize(sender As Object, e As EventArgs) Handles POWAV.Resize
         LWAV.Height = sender.Height - 25
     End Sub
 
-    Private Sub AddToPOBMP(ByVal xPath() As String)
+    Private Sub AddToPOBMP(xPath() As String)
         Dim xIndices(LBMP.SelectedIndices.Count - 1) As Integer
         LBMP.SelectedIndices.CopyTo(xIndices, 0)
         If xIndices.Length = 0 Then Exit Sub
@@ -2882,7 +2886,7 @@ StartCount:     If Not NTInput Then
         RefreshPanelAll()
     End Sub
 
-    Private Sub POBMP_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles POBMP.DragDrop
+    Private Sub POBMP_DragDrop(sender As Object, e As DragEventArgs) Handles POBMP.DragDrop
         ReDim DDFileName(-1)
         If Not e.Data.GetDataPresent(DataFormats.FileDrop) Then Return
 
@@ -2897,7 +2901,7 @@ StartCount:     If Not NTInput Then
         AddToPOBMP(xPath)
     End Sub
 
-    Private Sub POBMP_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles POBMP.DragEnter
+    Private Sub POBMP_DragEnter(sender As Object, e As DragEventArgs) Handles POBMP.DragEnter
         If e.Data.GetDataPresent(DataFormats.FileDrop) Then
             e.Effect = DragDropEffects.Copy
             DDFileName = FilterFileBySupported(CType(e.Data.GetData(DataFormats.FileDrop), String()), SupportedImageExtension)
@@ -2907,55 +2911,55 @@ StartCount:     If Not NTInput Then
         RefreshPanelAll()
     End Sub
 
-    Private Sub POBMP_DragLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles POBMP.DragLeave
+    Private Sub POBMP_DragLeave(sender As Object, e As EventArgs) Handles POBMP.DragLeave
         ReDim DDFileName(-1)
         RefreshPanelAll()
     End Sub
 
-    Private Sub POBMP_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles POBMP.Resize
+    Private Sub POBMP_Resize(sender As Object, e As EventArgs) Handles POBMP.Resize
         LBMP.Height = sender.Height - 25
     End Sub
-    Private Sub POBeat_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles POBeat.Resize
+    Private Sub POBeat_Resize(sender As Object, e As EventArgs) Handles POBeat.Resize
         LBeat.Height = POBeat.Height - 25
     End Sub
-    Private Sub POExpansion_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles POExpansion.Resize
+    Private Sub POExpansion_Resize(sender As Object, e As EventArgs) Handles POExpansion.Resize
         TExpansion.Height = POExpansion.Height - 2
     End Sub
 
-    Private Sub mn_DropDownClosed(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub mn_DropDownClosed(sender As Object, e As EventArgs)
         sender.ForeColor = Color.White
     End Sub
-    Private Sub mn_DropDownOpened(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub mn_DropDownOpened(sender As Object, e As EventArgs)
         sender.ForeColor = Color.Black
     End Sub
-    Private Sub mn_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub mn_MouseEnter(sender As Object, e As EventArgs)
         If sender.Pressed Then Return
         sender.ForeColor = Color.Black
     End Sub
-    Private Sub mn_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub mn_MouseLeave(sender As Object, e As EventArgs)
         If sender.Pressed Then Return
         sender.ForeColor = Color.White
     End Sub
 
-    Private Sub TBPOptions_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBPOptions.Click, mnPOptions.Click
+    Private Sub TBPOptions_Click(sender As Object, e As EventArgs) Handles TBPOptions.Click, mnPOptions.Click
         Dim xDOp As New OpPlayer(CurrentPlayer)
-        xDOp.ShowDialog(Me)
+        Dim unused = xDOp.ShowDialog(Me)
     End Sub
 
-    Private Sub THGenre_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles _
+    Private Sub THGenre_TextChanged(sender As Object, e As EventArgs) Handles _
     THGenre.TextChanged, THTitle.TextChanged, THArtist.TextChanged, THPlayLevel.TextChanged, CHRank.SelectedIndexChanged, TExpansion.TextChanged,
     THSubTitle.TextChanged, THSubArtist.TextChanged, THStageFile.TextChanged, THBanner.TextChanged, THBackBMP.TextChanged,
     CHDifficulty.SelectedIndexChanged, THExRank.TextChanged, THTotal.TextChanged, THComment.TextChanged, THPreview.TextChanged, CHLnmode.SelectedIndexChanged
         If IsSaved Then SetIsSaved(False)
 
-        If [Object].ReferenceEquals(sender, THLandMine) Then
+        If ReferenceEquals(sender, THLandMine) Then
             hWAV(0) = THLandMine.Text
-        ElseIf [Object].ReferenceEquals(sender, THMissBMP) Then
+        ElseIf ReferenceEquals(sender, THMissBMP) Then
             hBMP(0) = THMissBMP.Text
         End If
     End Sub
 
-    Private Sub CHLnObj_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CHLnObj.SelectedIndexChanged
+    Private Sub CHLnObj_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CHLnObj.SelectedIndexChanged
         If IsSaved Then SetIsSaved(False)
         LnObj = CHLnObj.SelectedIndex
         UpdatePairing()
@@ -3046,24 +3050,24 @@ StartCount:     If Not NTInput Then
         CalculateTotalPlayableNotes()
     End Sub
 
-    Private Sub TBWavIncrease_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBWavIncrease.Click
+    Private Sub TBWavIncrease_Click(sender As Object, e As EventArgs) Handles TBWavIncrease.Click
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
         Dim xRedo As UndoRedo.LinkedURCmd = New UndoRedo.Void
         Dim xBaseRedo As UndoRedo.LinkedURCmd = xRedo
 
         TBWavIncrease.Checked = Not sender.Checked
-        Me.RedoWavIncrease(TBWavIncrease.Checked, xUndo, xRedo)
+        RedoWavIncrease(TBWavIncrease.Checked, xUndo, xRedo)
         AddUndo(xUndo, xBaseRedo.Next)
     End Sub
 
-    Private Sub TBNTInput_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBNTInput.Click, mnNTInput.Click
+    Private Sub TBNTInput_Click(sender As Object, e As EventArgs) Handles TBNTInput.Click, mnNTInput.Click
         'Dim xUndo As String = "NT_" & CInt(NTInput) & "_0" & vbCrLf & "KZ" & vbCrLf & sCmdKsAll(False)
         'Dim xRedo As String = "NT_" & CInt(Not NTInput) & "_1"
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
         Dim xRedo As UndoRedo.LinkedURCmd = New UndoRedo.Void
         Dim xBaseRedo As UndoRedo.LinkedURCmd = xRedo
 
-        Me.RedoRemoveNoteAll(False, xUndo, xRedo)
+        RedoRemoveNoteAll(False, xUndo, xRedo)
 
         NTInput = sender.Checked
 
@@ -3075,90 +3079,90 @@ StartCount:     If Not NTInput Then
         bAdjustLength = False
         bAdjustUpper = False
 
-        Me.RedoNT(NTInput, False, xUndo, xRedo)
+        RedoNT(NTInput, False, xUndo, xRedo)
         If NTInput Then
             ConvertBMSE2NT()
         Else
             ConvertNT2BMSE()
         End If
-        Me.RedoAddNoteAll(False, xUndo, xRedo)
+        RedoAddNoteAll(False, xUndo, xRedo)
 
         AddUndo(xUndo, xBaseRedo.Next)
         RefreshPanelAll()
     End Sub
 
-    Private Sub THBPM_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles THBPM.ValueChanged
+    Private Sub THBPM_ValueChanged(sender As Object, e As EventArgs) Handles THBPM.ValueChanged
         If Notes IsNot Nothing Then Notes(0).Value = THBPM.Value * 10000 : RefreshPanelAll()
         If IsSaved Then SetIsSaved(False)
     End Sub
 
-    Private Sub TWPosition_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TWPosition.ValueChanged
+    Private Sub TWPosition_ValueChanged(sender As Object, e As EventArgs) Handles TWPosition.ValueChanged
         wPosition = TWPosition.Value
         TWPosition2.Value = IIf(wPosition > TWPosition2.Maximum, TWPosition2.Maximum, wPosition)
         RefreshPanelAll()
     End Sub
 
-    Private Sub TWLeft_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TWLeft.ValueChanged
+    Private Sub TWLeft_ValueChanged(sender As Object, e As EventArgs) Handles TWLeft.ValueChanged
         wLeft = TWLeft.Value
         TWLeft2.Value = IIf(wLeft > TWLeft2.Maximum, TWLeft2.Maximum, wLeft)
         RefreshPanelAll()
     End Sub
 
-    Private Sub TWWidth_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TWWidth.ValueChanged
+    Private Sub TWWidth_ValueChanged(sender As Object, e As EventArgs) Handles TWWidth.ValueChanged
         wWidth = TWWidth.Value
         TWWidth2.Value = IIf(wWidth > TWWidth2.Maximum, TWWidth2.Maximum, wWidth)
         RefreshPanelAll()
     End Sub
 
-    Private Sub TWPrecision_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TWPrecision.ValueChanged
+    Private Sub TWPrecision_ValueChanged(sender As Object, e As EventArgs) Handles TWPrecision.ValueChanged
         wPrecision = TWPrecision.Value
         TWPrecision2.Value = IIf(wPrecision > TWPrecision2.Maximum, TWPrecision2.Maximum, wPrecision)
         RefreshPanelAll()
     End Sub
 
-    Private Sub TWTransparency_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TWTransparency.ValueChanged
+    Private Sub TWTransparency_ValueChanged(sender As Object, e As EventArgs) Handles TWTransparency.ValueChanged
         TWTransparency2.Value = TWTransparency.Value
         vo.pBGMWav.Color = Color.FromArgb(TWTransparency.Value, vo.pBGMWav.Color)
         RefreshPanelAll()
     End Sub
 
-    Private Sub TWSaturation_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TWSaturation.ValueChanged
+    Private Sub TWSaturation_ValueChanged(sender As Object, e As EventArgs) Handles TWSaturation.ValueChanged
         Dim xColor As Color = vo.pBGMWav.Color
         TWSaturation2.Value = TWSaturation.Value
         vo.pBGMWav.Color = HSL2RGB(xColor.GetHue, TWSaturation.Value, xColor.GetBrightness * 1000, xColor.A)
         RefreshPanelAll()
     End Sub
 
-    Private Sub TWPosition2_Scroll(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TWPosition2.Scroll
+    Private Sub TWPosition2_Scroll(sender As Object, e As EventArgs) Handles TWPosition2.Scroll
         TWPosition.Value = TWPosition2.Value
     End Sub
 
-    Private Sub TWLeft2_Scroll(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TWLeft2.Scroll
+    Private Sub TWLeft2_Scroll(sender As Object, e As EventArgs) Handles TWLeft2.Scroll
         TWLeft.Value = TWLeft2.Value
     End Sub
 
-    Private Sub TWWidth2_Scroll(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TWWidth2.Scroll
+    Private Sub TWWidth2_Scroll(sender As Object, e As EventArgs) Handles TWWidth2.Scroll
         TWWidth.Value = TWWidth2.Value
     End Sub
 
-    Private Sub TWPrecision2_Scroll(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TWPrecision2.Scroll
+    Private Sub TWPrecision2_Scroll(sender As Object, e As EventArgs) Handles TWPrecision2.Scroll
         TWPrecision.Value = TWPrecision2.Value
     End Sub
 
-    Private Sub TWTransparency2_Scroll(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TWTransparency2.Scroll
+    Private Sub TWTransparency2_Scroll(sender As Object, e As EventArgs) Handles TWTransparency2.Scroll
         TWTransparency.Value = TWTransparency2.Value
     End Sub
 
-    Private Sub TWSaturation2_Scroll(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TWSaturation2.Scroll
+    Private Sub TWSaturation2_Scroll(sender As Object, e As EventArgs) Handles TWSaturation2.Scroll
         TWSaturation.Value = TWSaturation2.Value
     End Sub
 
-    Private Sub TBLangDef_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBLangDef.Click
+    Private Sub TBLangDef_Click(sender As Object, e As EventArgs) Handles TBLangDef.Click
         DispLang = ""
-        MsgBox(Strings.Messages.PreferencePostpone, MsgBoxStyle.Information)
+        Dim unused = MsgBox(Strings.Messages.PreferencePostpone, MsgBoxStyle.Information)
     End Sub
 
-    Private Sub TBLangRefresh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBLangRefresh.Click
+    Private Sub TBLangRefresh_Click(sender As Object, e As EventArgs) Handles TBLangRefresh.Click
         For xI1 As Integer = cmnLanguage.Items.Count - 1 To 3 Step -1
             Try
                 cmnLanguage.Items.RemoveAt(xI1)
@@ -3188,48 +3192,48 @@ StartCount:     If Not NTInput Then
         HSR.Maximum = nLeft(gColumns) + column(niB).Width
     End Sub
 
-    Private Sub CHPlayer_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CHPlayer.SelectedIndexChanged
+    Private Sub CHPlayer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CHPlayer.SelectedIndexChanged
         If CHPlayer.SelectedIndex = -1 Then CHPlayer.SelectedIndex = 0
 
         iPlayer = CHPlayer.SelectedIndex
         Dim xGP2 As Boolean = iPlayer <> 0
-        column(niD8).isVisible = (xGP2 And column(niAA).isVisible)
-        column(niD9).isVisible = (xGP2 And column(niAB).isVisible)
-        column(niDA).isVisible = (xGP2 And column(niAC).isVisible)
-        column(niDB).isVisible = (xGP2 And column(niAD).isVisible)
-        column(niDC).isVisible = (xGP2 And column(niAE).isVisible)
-        column(niDD).isVisible = (xGP2 And column(niAF).isVisible)
-        column(niDE).isVisible = (xGP2 And column(niAG).isVisible)
-        column(niDF).isVisible = (xGP2 And column(niAH).isVisible)
-        column(niDG).isVisible = (xGP2 And column(niAI).isVisible)
-        column(niDH).isVisible = (xGP2 And column(niAJ).isVisible)
-        column(niDI).isVisible = (xGP2 And column(niAK).isVisible)
-        column(niDJ).isVisible = (xGP2 And column(niAL).isVisible)
-        column(niDK).isVisible = (xGP2 And column(niAM).isVisible)
-        column(niDL).isVisible = (xGP2 And column(niAN).isVisible)
-        column(niDM).isVisible = (xGP2 And column(niAO).isVisible)
-        column(niDN).isVisible = (xGP2 And column(niAP).isVisible)
-        column(niDO).isVisible = (xGP2 And column(niAQ).isVisible)
+        column(niD8).isVisible = xGP2 And column(niAA).isVisible
+        column(niD9).isVisible = xGP2 And column(niAB).isVisible
+        column(niDA).isVisible = xGP2 And column(niAC).isVisible
+        column(niDB).isVisible = xGP2 And column(niAD).isVisible
+        column(niDC).isVisible = xGP2 And column(niAE).isVisible
+        column(niDD).isVisible = xGP2 And column(niAF).isVisible
+        column(niDE).isVisible = xGP2 And column(niAG).isVisible
+        column(niDF).isVisible = xGP2 And column(niAH).isVisible
+        column(niDG).isVisible = xGP2 And column(niAI).isVisible
+        column(niDH).isVisible = xGP2 And column(niAJ).isVisible
+        column(niDI).isVisible = xGP2 And column(niAK).isVisible
+        column(niDJ).isVisible = xGP2 And column(niAL).isVisible
+        column(niDK).isVisible = xGP2 And column(niAM).isVisible
+        column(niDL).isVisible = xGP2 And column(niAN).isVisible
+        column(niDM).isVisible = xGP2 And column(niAO).isVisible
+        column(niDN).isVisible = xGP2 And column(niAP).isVisible
+        column(niDO).isVisible = xGP2 And column(niAQ).isVisible
         If Rscratch Then
-            column(niD1).isVisible = (xGP2 And column(niA1).isVisible)
-            column(niD2).isVisible = (xGP2 And column(niA2).isVisible)
-            column(niD3).isVisible = (xGP2 And column(niA3).isVisible)
-            column(niD4).isVisible = (xGP2 And column(niA4).isVisible)
-            column(niD5).isVisible = (xGP2 And column(niA5).isVisible)
-            column(niD6).isVisible = (xGP2 And column(niA6).isVisible)
-            column(niD7).isVisible = (xGP2 And column(niA7).isVisible)
-            column(niDP).isVisible = (xGP2 And column(niA8).isVisible)
-            column(niDQ).isVisible = (xGP2 And column(niA9).isVisible)
+            column(niD1).isVisible = xGP2 And column(niA1).isVisible
+            column(niD2).isVisible = xGP2 And column(niA2).isVisible
+            column(niD3).isVisible = xGP2 And column(niA3).isVisible
+            column(niD4).isVisible = xGP2 And column(niA4).isVisible
+            column(niD5).isVisible = xGP2 And column(niA5).isVisible
+            column(niD6).isVisible = xGP2 And column(niA6).isVisible
+            column(niD7).isVisible = xGP2 And column(niA7).isVisible
+            column(niDP).isVisible = xGP2 And column(niA8).isVisible
+            column(niDQ).isVisible = xGP2 And column(niA9).isVisible
         Else
-            column(niD1).isVisible = (xGP2 And column(niA3).isVisible)
-            column(niD2).isVisible = (xGP2 And column(niA4).isVisible)
-            column(niD3).isVisible = (xGP2 And column(niA5).isVisible)
-            column(niD4).isVisible = (xGP2 And column(niA6).isVisible)
-            column(niD5).isVisible = (xGP2 And column(niA7).isVisible)
-            column(niD6).isVisible = (xGP2 And column(niA8).isVisible)
-            column(niD7).isVisible = (xGP2 And column(niA9).isVisible)
-            column(niDP).isVisible = (xGP2 And column(niA1).isVisible)
-            column(niDQ).isVisible = (xGP2 And column(niA2).isVisible)
+            column(niD1).isVisible = xGP2 And column(niA3).isVisible
+            column(niD2).isVisible = xGP2 And column(niA4).isVisible
+            column(niD3).isVisible = xGP2 And column(niA5).isVisible
+            column(niD4).isVisible = xGP2 And column(niA6).isVisible
+            column(niD5).isVisible = xGP2 And column(niA7).isVisible
+            column(niD6).isVisible = xGP2 And column(niA8).isVisible
+            column(niD7).isVisible = xGP2 And column(niA9).isVisible
+            column(niDP).isVisible = xGP2 And column(niA1).isVisible
+            column(niDQ).isVisible = xGP2 And column(niA2).isVisible
         End If
         column(niS3).isVisible = xGP2
 
@@ -3243,13 +3247,13 @@ StartCount:     If Not NTInput Then
         RefreshPanelAll()
     End Sub
 
-    Private Sub CGB_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CGB.ValueChanged
+    Private Sub CGB_ValueChanged(sender As Object, e As EventArgs) Handles CGB.ValueChanged
         gColumns = niB + CGB.Value - 1
         UpdateColumnsX()
         RefreshPanelAll()
     End Sub
 
-    Private Sub TBGOptions_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBGOptions.Click, mnGOptions.Click
+    Private Sub TBGOptions_Click(sender As Object, e As EventArgs) Handles TBGOptions.Click, mnGOptions.Click
         Dim xTE As Integer
         Select Case UCase(EncodingToString(TextEncoding)) ' az: wow seriously? is there really no better way? 
             Case "SYSTEM ANSI" : xTE = 0
@@ -3289,7 +3293,7 @@ StartCount:     If Not NTInput Then
         End If
     End Sub
 
-    Private Sub POBLong_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles POBLong.Click
+    Private Sub POBLong_Click(sender As Object, e As EventArgs) Handles POBLong.Click
         If NTInput Then Exit Sub
 
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
@@ -3299,7 +3303,7 @@ StartCount:     If Not NTInput Then
         For xI1 As Integer = 1 To UBound(Notes)
             If Not Notes(xI1).Selected Then Continue For
 
-            Me.RedoLongNoteModify(Notes(xI1), Notes(xI1).VPosition, True, xUndo, xRedo)
+            RedoLongNoteModify(Notes(xI1), Notes(xI1).VPosition, True, xUndo, xRedo)
             Notes(xI1).LongNote = True
         Next
         AddUndo(xUndo, xBaseRedo.Next)
@@ -3308,7 +3312,7 @@ StartCount:     If Not NTInput Then
         RefreshPanelAll()
     End Sub
 
-    Private Sub POBNormal_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles POBShort.Click
+    Private Sub POBNormal_Click(sender As Object, e As EventArgs) Handles POBShort.Click
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
         Dim xRedo As UndoRedo.LinkedURCmd = New UndoRedo.Void
         Dim xBaseRedo As UndoRedo.LinkedURCmd = xRedo
@@ -3317,7 +3321,7 @@ StartCount:     If Not NTInput Then
             For xI1 As Integer = 1 To UBound(Notes)
                 If Not Notes(xI1).Selected Then Continue For
 
-                Me.RedoLongNoteModify(Notes(xI1), Notes(xI1).VPosition, 0, xUndo, xRedo)
+                RedoLongNoteModify(Notes(xI1), Notes(xI1).VPosition, 0, xUndo, xRedo)
                 Notes(xI1).LongNote = False
             Next
 
@@ -3325,7 +3329,7 @@ StartCount:     If Not NTInput Then
             For xI1 As Integer = 1 To UBound(Notes)
                 If Not Notes(xI1).Selected Then Continue For
 
-                Me.RedoLongNoteModify(Notes(xI1), Notes(xI1).VPosition, 0, xUndo, xRedo)
+                RedoLongNoteModify(Notes(xI1), Notes(xI1).VPosition, 0, xUndo, xRedo)
                 Notes(xI1).Length = 0
             Next
         End If
@@ -3336,7 +3340,7 @@ StartCount:     If Not NTInput Then
         RefreshPanelAll()
     End Sub
 
-    Private Sub POBNormalLong_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles POBLongShort.Click
+    Private Sub POBNormalLong_Click(sender As Object, e As EventArgs) Handles POBLongShort.Click
         If NTInput Then Exit Sub
 
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
@@ -3346,7 +3350,7 @@ StartCount:     If Not NTInput Then
         For xI1 As Integer = 1 To UBound(Notes)
             If Not Notes(xI1).Selected Then Continue For
 
-            Me.RedoLongNoteModify(Notes(xI1), Notes(xI1).VPosition, Not Notes(xI1).LongNote, xUndo, xRedo)
+            RedoLongNoteModify(Notes(xI1), Notes(xI1).VPosition, Not Notes(xI1).LongNote, xUndo, xRedo)
             Notes(xI1).LongNote = Not Notes(xI1).LongNote
         Next
 
@@ -3356,7 +3360,7 @@ StartCount:     If Not NTInput Then
         RefreshPanelAll()
     End Sub
 
-    Private Sub POBHidden_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles POBHidden.Click
+    Private Sub POBHidden_Click(sender As Object, e As EventArgs) Handles POBHidden.Click
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
         Dim xRedo As UndoRedo.LinkedURCmd = New UndoRedo.Void
         Dim xBaseRedo As UndoRedo.LinkedURCmd = xRedo
@@ -3364,7 +3368,7 @@ StartCount:     If Not NTInput Then
         For xI1 As Integer = 1 To UBound(Notes)
             If Not Notes(xI1).Selected Then Continue For
 
-            Me.RedoHiddenNoteModify(Notes(xI1), True, True, xUndo, xRedo)
+            RedoHiddenNoteModify(Notes(xI1), True, True, xUndo, xRedo)
             Notes(xI1).Hidden = True
         Next
         AddUndo(xUndo, xBaseRedo.Next)
@@ -3373,7 +3377,7 @@ StartCount:     If Not NTInput Then
         RefreshPanelAll()
     End Sub
 
-    Private Sub POBVisible_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles POBVisible.Click
+    Private Sub POBVisible_Click(sender As Object, e As EventArgs) Handles POBVisible.Click
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
         Dim xRedo As UndoRedo.LinkedURCmd = New UndoRedo.Void
         Dim xBaseRedo As UndoRedo.LinkedURCmd = xRedo
@@ -3381,7 +3385,7 @@ StartCount:     If Not NTInput Then
         For xI1 As Integer = 1 To UBound(Notes)
             If Not Notes(xI1).Selected Then Continue For
 
-            Me.RedoHiddenNoteModify(Notes(xI1), False, True, xUndo, xRedo)
+            RedoHiddenNoteModify(Notes(xI1), False, True, xUndo, xRedo)
             Notes(xI1).Hidden = False
         Next
         AddUndo(xUndo, xBaseRedo.Next)
@@ -3390,7 +3394,7 @@ StartCount:     If Not NTInput Then
         RefreshPanelAll()
     End Sub
 
-    Private Sub POBHiddenVisible_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles POBHiddenVisible.Click
+    Private Sub POBHiddenVisible_Click(sender As Object, e As EventArgs) Handles POBHiddenVisible.Click
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
         Dim xRedo As UndoRedo.LinkedURCmd = New UndoRedo.Void
         Dim xBaseRedo As UndoRedo.LinkedURCmd = xRedo
@@ -3398,7 +3402,7 @@ StartCount:     If Not NTInput Then
         For xI1 As Integer = 1 To UBound(Notes)
             If Not Notes(xI1).Selected Then Continue For
 
-            Me.RedoHiddenNoteModify(Notes(xI1), Not Notes(xI1).Hidden, True, xUndo, xRedo)
+            RedoHiddenNoteModify(Notes(xI1), Not Notes(xI1).Hidden, True, xUndo, xRedo)
             Notes(xI1).Hidden = Not Notes(xI1).Hidden
         Next
         AddUndo(xUndo, xBaseRedo.Next)
@@ -3407,7 +3411,7 @@ StartCount:     If Not NTInput Then
         RefreshPanelAll()
     End Sub
 
-    Private Sub POBModify_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles POBModify.Click
+    Private Sub POBModify_Click(sender As Object, e As EventArgs) Handles POBModify.Click
         Dim xNum As Boolean = False
         Dim xLbl As Boolean = False
         Dim xI1 As Integer
@@ -3433,7 +3437,7 @@ StartCount:     If Not NTInput Then
                     If Not IsColumnNumeric(Notes(xI1).ColumnIndex) Then Continue For
                     If Not Notes(xI1).Selected Then Continue For
 
-                    Me.RedoRelabelNote(Notes(xI1), xD1, xUndo, xRedo)
+                    RedoRelabelNote(Notes(xI1), xD1, xUndo, xRedo)
                     Notes(xI1).Value = xD1
                 Next
                 AddUndo(xUndo, xBaseRedo.Next)
@@ -3441,7 +3445,7 @@ StartCount:     If Not NTInput Then
         End If
 
         If xLbl Then
-            Dim xStr As String = UCase(Trim(InputBox(Strings.Messages.PromptEnter, Me.Text)))
+            Dim xStr As String = UCase(Trim(InputBox(Strings.Messages.PromptEnter, Text)))
 
             If Len(xStr) = 0 Then GoTo Jump2
             If xStr = "00" Or xStr = "0" Then GoTo Jump1
@@ -3463,31 +3467,31 @@ StartCount:     If Not NTInput Then
                 If IsColumnNumeric(Notes(xI1).ColumnIndex) Then Continue For
                 If Not Notes(xI1).Selected Then Continue For
 
-                Me.RedoRelabelNote(Notes(xI1), xVal, xUndo, xRedo)
+                RedoRelabelNote(Notes(xI1), xVal, xUndo, xRedo)
                 Notes(xI1).Value = xVal
             Next
             AddUndo(xUndo, xBaseRedo.Next)
             GoTo Jump2
 Jump1:
-            MsgBox(Strings.Messages.InvalidLabel, MsgBoxStyle.Critical, Strings.Messages.Err)
+            Dim unused = MsgBox(Strings.Messages.InvalidLabel, MsgBoxStyle.Critical, Strings.Messages.Err)
 Jump2:
         End If
 
         RefreshPanelAll()
     End Sub
 
-    Private Sub TBMyO2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBMyO2.Click, mnMyO2.Click
+    Private Sub TBMyO2_Click(sender As Object, e As EventArgs) Handles TBMyO2.Click, mnMyO2.Click
         Dim xDiag As New dgMyO2
         xDiag.Show()
     End Sub
 
 
-    Private Sub TBFind_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBFind.Click, mnFind.Click
+    Private Sub TBFind_Click(sender As Object, e As EventArgs) Handles TBFind.Click, mnFind.Click
         Dim xDiag As New diagFind(gColumns, Strings.Messages.Err, Strings.Messages.InvalidLabel)
         xDiag.Show()
     End Sub
 
-    Private Function fdrCheck(ByVal xNote As Note) As Boolean
+    Private Function fdrCheck(xNote As Note) As Boolean
         Return xNote.VPosition >= MeasureBottom(fdriMesL) And xNote.VPosition < MeasureBottom(fdriMesU) + MeasureLength(fdriMesU) AndAlso
                IIf(IsColumnNumeric(xNote.ColumnIndex),
                    xNote.Value >= fdriValL And xNote.Value <= fdriValU,
@@ -3495,15 +3499,15 @@ Jump2:
                Array.IndexOf(fdriCol, xNote.ColumnIndex) <> -1
     End Function
 
-    Private Function fdrRangeS(ByVal xbLim1 As Boolean, ByVal xbLim2 As Boolean, ByVal xVal As Boolean) As Boolean
+    Private Function fdrRangeS(xbLim1 As Boolean, xbLim2 As Boolean, xVal As Boolean) As Boolean
         Return (Not xbLim1 And xbLim2 And xVal) Or (xbLim1 And Not xbLim2 And Not xVal) Or (xbLim1 And xbLim2)
     End Function
 
-    Public Sub fdrSelect(ByVal iRange As Integer,
-                         ByVal xMesL As Integer, ByVal xMesU As Integer,
-                         ByVal xLblL As String, ByVal xLblU As String,
-                         ByVal xValL As Integer, ByVal xValU As Integer,
-                         ByVal iCol() As Integer)
+    Public Sub fdrSelect(iRange As Integer,
+                          xMesL As Integer, xMesU As Integer,
+                          xLblL As String, xLblU As String,
+                          xValL As Integer, xValU As Integer,
+                          iCol() As Integer)
 
         fdriMesL = xMesL
         fdriMesU = xMesU
@@ -3544,11 +3548,11 @@ Jump2:
         Beep()
     End Sub
 
-    Public Sub fdrUnselect(ByVal iRange As Integer,
-                           ByVal xMesL As Integer, ByVal xMesU As Integer,
-                           ByVal xLblL As String, ByVal xLblU As String,
-                           ByVal xValL As Integer, ByVal xValU As Integer,
-                           ByVal iCol() As Integer)
+    Public Sub fdrUnselect(iRange As Integer,
+                            xMesL As Integer, xMesU As Integer,
+                            xLblL As String, xLblU As String,
+                            xValL As Integer, xValU As Integer,
+                            iCol() As Integer)
 
         fdriMesL = xMesL
         fdriMesU = xMesU
@@ -3582,11 +3586,11 @@ Jump2:
         Beep()
     End Sub
 
-    Public Sub fdrDelete(ByVal iRange As Integer,
-                         ByVal xMesL As Integer, ByVal xMesU As Integer,
-                         ByVal xLblL As String, ByVal xLblU As String,
-                         ByVal xValL As Integer, ByVal xValU As Integer,
-                         ByVal iCol() As Integer)
+    Public Sub fdrDelete(iRange As Integer,
+                          xMesL As Integer, xMesU As Integer,
+                          xLblL As String, xLblU As String,
+                          xValL As Integer, xValU As Integer,
+                          iCol() As Integer)
 
         fdriMesL = xMesL
         fdriMesU = xMesU
@@ -3627,11 +3631,11 @@ Jump2:
         Beep()
     End Sub
 
-    Public Sub fdrReplaceL(ByVal iRange As Integer,
-                           ByVal xMesL As Integer, ByVal xMesU As Integer,
-                           ByVal xLblL As String, ByVal xLblU As String,
-                           ByVal xValL As Integer, ByVal xValU As Integer,
-                           ByVal iCol() As Integer, ByVal xReplaceLbl As String)
+    Public Sub fdrReplaceL(iRange As Integer,
+                            xMesL As Integer, xMesU As Integer,
+                            xLblL As String, xLblU As String,
+                            xValL As Integer, xValU As Integer,
+                            iCol() As Integer, xReplaceLbl As String)
 
         fdriMesL = xMesL
         fdriMesU = xMesU
@@ -3660,7 +3664,7 @@ Jump2:
                     fdrCheck(Notes(xI1)) AndAlso nEnabled(Notes(xI1).ColumnIndex) And Not IsColumnNumeric(Notes(xI1).ColumnIndex) AndAlso fdrRangeS(xbShort, xbLong, IIf(NTInput, Notes(xI1).Length, Notes(xI1).LongNote)) And fdrRangeS(xbVisible, xbHidden, Notes(xI1).Hidden) Then
                 'xUndo &= sCmdKC(K(xI1).ColumnIndex, K(xI1).VPosition, xxLbl, IIf(NTInput, K(xI1).Length, K(xI1).LongNote), K(xI1).Hidden, 0, 0, K(xI1).Value, IIf(NTInput, K(xI1).Length, K(xI1).LongNote), K(xI1).Hidden, True) & vbCrLf
                 'xRedo &= sCmdKC(K(xI1).ColumnIndex, K(xI1).VPosition, K(xI1).Value, IIf(NTInput, K(xI1).Length, K(xI1).LongNote), K(xI1).Hidden, 0, 0, xxLbl, IIf(NTInput, K(xI1).Length, K(xI1).LongNote), K(xI1).Hidden, True) & vbCrLf
-                Me.RedoRelabelNote(Notes(xI1), xxLbl, xUndo, xRedo)
+                RedoRelabelNote(Notes(xI1), xxLbl, xUndo, xRedo)
                 Notes(xI1).Value = xxLbl
             End If
         Next
@@ -3670,11 +3674,11 @@ Jump2:
         Beep()
     End Sub
 
-    Public Sub fdrReplaceV(ByVal iRange As Integer,
-                           ByVal xMesL As Integer, ByVal xMesU As Integer,
-                           ByVal xLblL As String, ByVal xLblU As String,
-                           ByVal xValL As Integer, ByVal xValU As Integer,
-                           ByVal iCol() As Integer, ByVal xReplaceVal As Integer)
+    Public Sub fdrReplaceV(iRange As Integer,
+                            xMesL As Integer, xMesU As Integer,
+                            xLblL As String, xLblU As String,
+                            xValL As Integer, xValU As Integer,
+                            iCol() As Integer, xReplaceVal As Integer)
 
         fdriMesL = xMesL
         fdriMesU = xMesU
@@ -3701,7 +3705,7 @@ Jump2:
                     fdrCheck(Notes(xI1)) AndAlso nEnabled(Notes(xI1).ColumnIndex) And IsColumnNumeric(Notes(xI1).ColumnIndex) AndAlso fdrRangeS(xbShort, xbLong, IIf(NTInput, Notes(xI1).Length, Notes(xI1).LongNote)) And fdrRangeS(xbVisible, xbHidden, Notes(xI1).Hidden) Then
                 'xUndo &= sCmdKC(K(xI1).ColumnIndex, K(xI1).VPosition, xReplaceVal, IIf(NTInput, K(xI1).Length, K(xI1).LongNote), K(xI1).Hidden, 0, 0, K(xI1).Value, IIf(NTInput, K(xI1).Length, K(xI1).LongNote), K(xI1).Hidden, True) & vbCrLf
                 'xRedo &= sCmdKC(K(xI1).ColumnIndex, K(xI1).VPosition, K(xI1).Value, IIf(NTInput, K(xI1).Length, K(xI1).LongNote), K(xI1).Hidden, 0, 0, xReplaceVal, IIf(NTInput, K(xI1).Length, K(xI1).LongNote), K(xI1).Hidden, True) & vbCrLf
-                Me.RedoRelabelNote(Notes(xI1), xReplaceVal, xUndo, xRedo)
+                RedoRelabelNote(Notes(xI1), xReplaceVal, xUndo, xRedo)
                 Notes(xI1).Value = xReplaceVal
             End If
         Next
@@ -3711,7 +3715,7 @@ Jump2:
         Beep()
     End Sub
 
-    Private Sub MInsert_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MInsert.Click
+    Private Sub MInsert_Click(sender As Object, e As EventArgs) Handles MInsert.Click
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
         Dim xRedo As UndoRedo.LinkedURCmd = New UndoRedo.Void
         Dim xBaseRedo As UndoRedo.LinkedURCmd = xRedo
@@ -3724,7 +3728,7 @@ Jump2:
             Dim xI1 As Integer = 1
             Do While xI1 <= UBound(Notes)
                 If MeasureAtDisplacement(Notes(xI1).VPosition) >= 999 Then
-                    Me.RedoRemoveNote(Notes(xI1), xUndo, xRedo)
+                    RedoRemoveNote(Notes(xI1), xUndo, xRedo)
                     RemoveNote(xI1, False)
                 Else
                     xI1 += 1
@@ -3734,18 +3738,18 @@ Jump2:
             Dim xdVP As Double
             For xI1 = 1 To UBound(Notes)
                 If Notes(xI1).VPosition >= xVP And Notes(xI1).VPosition + Notes(xI1).Length <= MeasureBottom(999) Then
-                    Me.RedoMoveNote(Notes(xI1), Notes(xI1).ColumnIndex, Notes(xI1).VPosition + xMLength, xUndo, xRedo)
+                    RedoMoveNote(Notes(xI1), Notes(xI1).ColumnIndex, Notes(xI1).VPosition + xMLength, xUndo, xRedo)
                     Notes(xI1).VPosition += xMLength
 
                 ElseIf Notes(xI1).VPosition >= xVP Then
                     xdVP = MeasureBottom(999) - 1 - Notes(xI1).VPosition - Notes(xI1).Length
-                    Me.RedoLongNoteModify(Notes(xI1), Notes(xI1).VPosition + xMLength, Notes(xI1).Length + xdVP, xUndo, xRedo)
+                    RedoLongNoteModify(Notes(xI1), Notes(xI1).VPosition + xMLength, Notes(xI1).Length + xdVP, xUndo, xRedo)
                     Notes(xI1).VPosition += xMLength
                     Notes(xI1).Length += xdVP
 
                 ElseIf Notes(xI1).VPosition + Notes(xI1).Length >= xVP Then
                     xdVP = IIf(Notes(xI1).VPosition + Notes(xI1).Length > MeasureBottom(999) - 1, GetMaxVPosition() - 1 - Notes(xI1).VPosition - Notes(xI1).Length, xMLength)
-                    Me.RedoLongNoteModify(Notes(xI1), Notes(xI1).VPosition, Notes(xI1).Length + xdVP, xUndo, xRedo)
+                    RedoLongNoteModify(Notes(xI1), Notes(xI1).VPosition, Notes(xI1).Length + xdVP, xUndo, xRedo)
                     Notes(xI1).Length += xdVP
                 End If
             Next
@@ -3754,7 +3758,7 @@ Jump2:
             Dim xI1 As Integer = 1
             Do While xI1 <= UBound(Notes)
                 If MeasureAtDisplacement(Notes(xI1).VPosition) >= 999 Then
-                    Me.RedoRemoveNote(Notes(xI1), xUndo, xRedo)
+                    RedoRemoveNote(Notes(xI1), xUndo, xRedo)
                     RemoveNote(xI1, False)
                 Else
                     xI1 += 1
@@ -3763,7 +3767,7 @@ Jump2:
 
             For xI1 = 1 To UBound(Notes)
                 If Notes(xI1).VPosition >= xVP Then
-                    Me.RedoMoveNote(Notes(xI1), Notes(xI1).ColumnIndex, Notes(xI1).VPosition + xMLength, xUndo, xRedo)
+                    RedoMoveNote(Notes(xI1), Notes(xI1).ColumnIndex, Notes(xI1).VPosition + xMLength, xUndo, xRedo)
                     Notes(xI1).VPosition += xMLength
                 End If
             Next
@@ -3781,20 +3785,23 @@ Jump2:
         RefreshPanelAll()
     End Sub
 
-    Private Sub MRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MRemove.Click
+    Private Sub MRemove_Click(sender As Object, e As EventArgs) Handles MRemove.Click
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
         Dim xRedo As UndoRedo.LinkedURCmd = New UndoRedo.Void
         Dim xBaseRedo As UndoRedo.LinkedURCmd = xRedo
 
         Dim xMeasure As Integer = MeasureAtDisplacement(menuVPosition)
         Dim xMLength As Double = MeasureLength(xMeasure)
-        Dim xVP As Double = MeasureBottom(xMeasure)
 
+        Dim unused As Double = MeasureBottom(xMeasure)
+
+
+        Dim xVP As Double
         If NTInput Then
             Dim xI1 As Integer = 1
             Do While xI1 <= UBound(Notes)
                 If MeasureAtDisplacement(Notes(xI1).VPosition) = xMeasure And MeasureAtDisplacement(Notes(xI1).VPosition + Notes(xI1).Length) = xMeasure Then
-                    Me.RedoRemoveNote(Notes(xI1), xUndo, xRedo)
+                    RedoRemoveNote(Notes(xI1), xUndo, xRedo)
                     RemoveNote(xI1, False)
                 Else
                     xI1 += 1
@@ -3805,18 +3812,18 @@ Jump2:
             xVP = MeasureBottom(xMeasure)
             For xI1 = 1 To UBound(Notes)
                 If Notes(xI1).VPosition >= xVP + xMLength Then
-                    Me.RedoMoveNote(Notes(xI1), Notes(xI1).ColumnIndex, Notes(xI1).VPosition - xMLength, xUndo, xRedo)
+                    RedoMoveNote(Notes(xI1), Notes(xI1).ColumnIndex, Notes(xI1).VPosition - xMLength, xUndo, xRedo)
                     Notes(xI1).VPosition -= xMLength
 
                 ElseIf Notes(xI1).VPosition >= xVP Then
                     xdVP = xMLength + xVP - Notes(xI1).VPosition
-                    Me.RedoLongNoteModify(Notes(xI1), Notes(xI1).VPosition + xdVP - xMLength, Notes(xI1).Length - xdVP, xUndo, xRedo)
+                    RedoLongNoteModify(Notes(xI1), Notes(xI1).VPosition + xdVP - xMLength, Notes(xI1).Length - xdVP, xUndo, xRedo)
                     Notes(xI1).VPosition += xdVP - xMLength
                     Notes(xI1).Length -= xdVP
 
                 ElseIf Notes(xI1).VPosition + Notes(xI1).Length >= xVP Then
                     xdVP = IIf(Notes(xI1).VPosition + Notes(xI1).Length >= xVP + xMLength, xMLength, Notes(xI1).VPosition + Notes(xI1).Length - xVP + 1)
-                    Me.RedoLongNoteModify(Notes(xI1), Notes(xI1).VPosition, Notes(xI1).Length - xdVP, xUndo, xRedo)
+                    RedoLongNoteModify(Notes(xI1), Notes(xI1).VPosition, Notes(xI1).Length - xdVP, xUndo, xRedo)
                     Notes(xI1).Length -= xdVP
                 End If
             Next
@@ -3825,7 +3832,7 @@ Jump2:
             Dim xI1 As Integer = 1
             Do While xI1 <= UBound(Notes)
                 If MeasureAtDisplacement(Notes(xI1).VPosition) = xMeasure Then
-                    Me.RedoRemoveNote(Notes(xI1), xUndo, xRedo)
+                    RedoRemoveNote(Notes(xI1), xUndo, xRedo)
                     RemoveNote(xI1, False)
                 Else
                     xI1 += 1
@@ -3835,7 +3842,7 @@ Jump2:
             xVP = MeasureBottom(xMeasure)
             For xI1 = 1 To UBound(Notes)
                 If Notes(xI1).VPosition >= xVP Then
-                    Me.RedoMoveNote(Notes(xI1), Notes(xI1).ColumnIndex, Notes(xI1).VPosition - xMLength, xUndo, xRedo)
+                    RedoMoveNote(Notes(xI1), Notes(xI1).ColumnIndex, Notes(xI1).VPosition - xMLength, xUndo, xRedo)
                     Notes(xI1).VPosition -= xMLength
                 End If
             Next
@@ -3854,29 +3861,30 @@ Jump2:
         RefreshPanelAll()
     End Sub
 
-    Private Sub TBThemeDef_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBThemeDef.Click
+    Private Sub TBThemeDef_Click(sender As Object, e As EventArgs) Handles TBThemeDef.Click
         Dim xTempFileName As String = My.Application.Info.DirectoryPath & "\____TempFile.Theme.xml"
         My.Computer.FileSystem.WriteAllText(xTempFileName, My.Resources.O2Mania_Theme, False, System.Text.Encoding.Unicode)
         LoadSettings(xTempFileName)
         ChangePlaySideSkin(False)
-        System.IO.File.Delete(xTempFileName)
+        File.Delete(xTempFileName)
 
         RefreshPanelAll()
     End Sub
 
-    Private Sub TBThemeSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBThemeSave.Click
-        Dim xDiag As New SaveFileDialog
-        xDiag.Filter = Strings.FileType.THEME_XML & "|*.Theme.xml"
-        xDiag.DefaultExt = "Theme.xml"
-        xDiag.InitialDirectory = My.Application.Info.DirectoryPath & "\Data"
+    Private Sub TBThemeSave_Click(sender As Object, e As EventArgs) Handles TBThemeSave.Click
+        Dim xDiag As New SaveFileDialog With {
+            .Filter = Strings.FileType.THEME_XML & "|*.Theme.xml",
+            .DefaultExt = "Theme.xml",
+            .InitialDirectory = My.Application.Info.DirectoryPath & "\Data"
+        }
         If xDiag.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
 
-        Me.SaveSettings(xDiag.FileName, True)
+        SaveSettings(xDiag.FileName, True)
         If BeepWhileSaved Then Beep()
-        TBThemeRefresh_Click(TBThemeRefresh, New System.EventArgs)
+        TBThemeRefresh_Click(TBThemeRefresh, New EventArgs)
     End Sub
 
-    Private Sub TBThemeRefresh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBThemeRefresh.Click
+    Private Sub TBThemeRefresh_Click(sender As Object, e As EventArgs) Handles TBThemeRefresh.Click
         For xI1 As Integer = cmnTheme.Items.Count - 1 To 5 Step -1
             Try
                 cmnTheme.Items.RemoveAt(xI1)
@@ -3887,26 +3895,27 @@ Jump2:
         If Not Directory.Exists(My.Application.Info.DirectoryPath & "\Data") Then My.Computer.FileSystem.CreateDirectory(My.Application.Info.DirectoryPath & "\Data")
         Dim xFileNames() As FileInfo = My.Computer.FileSystem.GetDirectoryInfo(My.Application.Info.DirectoryPath & "\Data").GetFiles("*.Theme.xml")
         For Each xStr As FileInfo In xFileNames
-            cmnTheme.Items.Add(xStr.Name, Nothing, AddressOf LoadTheme)
+            Dim unused = cmnTheme.Items.Add(xStr.Name, Nothing, AddressOf LoadTheme)
         Next
     End Sub
 
-    Private Sub TBThemeLoadComptability_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBThemeLoadComptability.Click
-        Dim xDiag As New OpenFileDialog
-        xDiag.Filter = Strings.FileType.TH & "|*.th"
-        xDiag.DefaultExt = "th"
-        xDiag.InitialDirectory = My.Application.Info.DirectoryPath
+    Private Sub TBThemeLoadComptability_Click(sender As Object, e As EventArgs) Handles TBThemeLoadComptability.Click
+        Dim xDiag As New OpenFileDialog With {
+            .Filter = Strings.FileType.TH & "|*.th",
+            .DefaultExt = "th",
+            .InitialDirectory = My.Application.Info.DirectoryPath
+        }
         If My.Computer.FileSystem.DirectoryExists(My.Application.Info.DirectoryPath & "\Theme") Then xDiag.InitialDirectory = My.Application.Info.DirectoryPath & "\Theme"
         If xDiag.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
 
-        Me.LoadThemeComptability(xDiag.FileName)
+        LoadThemeComptability(xDiag.FileName)
         RefreshPanelAll()
     End Sub
 
     ''' <summary>
     ''' Will return Double.PositiveInfinity if canceled.
     ''' </summary>
-    Private Function InputBoxDouble(ByVal Prompt As String, ByVal LBound As Double, ByVal UBound As Double, Optional ByVal Title As String = "", Optional ByVal DefaultResponse As String = "") As Double
+    Private Function InputBoxDouble(Prompt As String, LBound As Double, UBound As Double, Optional Title As String = "", Optional DefaultResponse As String = "") As Double
         Dim xStr As String = InputBox(Prompt, Title, DefaultResponse)
         If xStr = "" Then Return Double.PositiveInfinity
 
@@ -3915,7 +3924,7 @@ Jump2:
         If InputBoxDouble < LBound Then InputBoxDouble = LBound
     End Function
 
-    Private Sub FSSS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FSSS.Click
+    Private Sub FSSS_Click(sender As Object, e As EventArgs) Handles FSSS.Click
         Dim xMax As Double = IIf(vSelLength > 0, GetMaxVPosition() - vSelLength, GetMaxVPosition)
         Dim xMin As Double = IIf(vSelLength < 0, -vSelLength, 0)
         Dim xDouble As Double = InputBoxDouble("Please enter a number between " & xMin & " and " & xMax & ".", xMin, xMax, , vSelStart)
@@ -3927,7 +3936,7 @@ Jump2:
         POStatusRefresh()
     End Sub
 
-    Private Sub FSSL_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FSSL.Click
+    Private Sub FSSL_Click(sender As Object, e As EventArgs) Handles FSSL.Click
         Dim xMax As Double = GetMaxVPosition() - vSelStart
         Dim xMin As Double = -vSelStart
         Dim xDouble As Double = InputBoxDouble("Please enter a number between " & xMin & " and " & xMax & ".", xMin, xMax, , vSelLength)
@@ -3939,7 +3948,7 @@ Jump2:
         POStatusRefresh()
     End Sub
 
-    Private Sub FSSH_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FSSH.Click
+    Private Sub FSSH_Click(sender As Object, e As EventArgs) Handles FSSH.Click
         Dim xMax As Double = IIf(vSelLength > 0, vSelLength, 0)
         Dim xMin As Double = IIf(vSelLength > 0, 0, -vSelLength)
         Dim xDouble As Double = InputBoxDouble("Please enter a number between " & xMin & " and " & xMax & ".", xMin, xMax, , vSelHalf)
@@ -3951,7 +3960,7 @@ Jump2:
         POStatusRefresh()
     End Sub
 
-    Private Sub BVCReverse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BVCReverse.Click
+    Private Sub BVCReverse_Click(sender As Object, e As EventArgs) Handles BVCReverse.Click
         vSelStart += vSelLength
         vSelHalf -= vSelLength
         vSelLength *= -1
@@ -3960,7 +3969,7 @@ Jump2:
         POStatusRefresh()
     End Sub
 
-    Private Sub AutoSaveTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutoSaveTimer.Tick
+    Private Sub AutoSaveTimer_Tick(sender As Object, e As EventArgs) Handles AutoSaveTimer.Tick
         Dim xTime As Date = Now
         Dim xFileName As String
         With xTime
@@ -3971,26 +3980,26 @@ Jump2:
         SaveiBMSC(xFileName)
 
         On Error Resume Next
-        If PreviousAutoSavedFileName <> "" Then IO.File.Delete(PreviousAutoSavedFileName)
+        If PreviousAutoSavedFileName <> "" Then File.Delete(PreviousAutoSavedFileName)
         On Error GoTo 0
 
         PreviousAutoSavedFileName = xFileName
     End Sub
 
-    Private Sub CWAVMultiSelect_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CWAVMultiSelect.CheckedChanged
+    Private Sub CWAVMultiSelect_CheckedChanged(sender As Object, e As EventArgs) Handles CWAVMultiSelect.CheckedChanged
         WAVMultiSelect = CWAVMultiSelect.Checked
         LWAV.SelectionMode = IIf(WAVMultiSelect, SelectionMode.MultiExtended, SelectionMode.One)
         LBMP.SelectionMode = IIf(WAVMultiSelect, SelectionMode.MultiExtended, SelectionMode.One)
     End Sub
 
-    Private Sub CWAVChangeLabel_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CWAVChangeLabel.CheckedChanged
+    Private Sub CWAVChangeLabel_CheckedChanged(sender As Object, e As EventArgs) Handles CWAVChangeLabel.CheckedChanged
         WAVChangeLabel = CWAVChangeLabel.Checked
     End Sub
-    Private Sub CWAVEmptyfill_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CWAVEmptyfill.CheckedChanged
+    Private Sub CWAVEmptyfill_CheckedChanged(sender As Object, e As EventArgs) Handles CWAVEmptyfill.CheckedChanged
         WAVEmptyfill = CWAVEmptyfill.Checked
     End Sub
 
-    Private Sub BWAVUp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BWAVUp.Click
+    Private Sub BWAVUp_Click(sender As Object, e As EventArgs) Handles BWAVUp.Click
         If LWAV.SelectedIndex = -1 Then Return
 
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
@@ -4005,12 +4014,10 @@ Jump2:
             If Array.IndexOf(xIndices, xS) = -1 Then Exit For
         Next
 
-        Dim xStr As String = ""
-        Dim xIndex As Integer = -1
         For xI1 As Integer = xS To 1294
-            xIndex = Array.IndexOf(xIndices, xI1)
+            Dim xIndex As Integer = Array.IndexOf(xIndices, xI1)
             If xIndex <> -1 Then
-                xStr = hWAV(xI1 + 1)
+                Dim xStr As String = hWAV(xI1 + 1)
                 hWAV(xI1 + 1) = hWAV(xI1)
                 hWAV(xI1) = xStr
 
@@ -4025,11 +4032,11 @@ Jump2:
                     If Not IsColumnSound(Notes(xI2).ColumnIndex) Then Continue For
 
                     If C10to36(Notes(xI2).Value \ 10000) = xL1 Then
-                        Me.RedoRelabelNote(Notes(xI2), xI1 * 10000 + 10000, xUndo, xRedo)
-                        Notes(xI2).Value = xI1 * 10000 + 10000
+                        RedoRelabelNote(Notes(xI2), (xI1 * 10000) + 10000, xUndo, xRedo)
+                        Notes(xI2).Value = (xI1 * 10000) + 10000
 
                     ElseIf C10to36(Notes(xI2).Value \ 10000) = xL2 Then
-                        Me.RedoRelabelNote(Notes(xI2), xI1 * 10000, xUndo, xRedo)
+                        RedoRelabelNote(Notes(xI2), xI1 * 10000, xUndo, xRedo)
                         Notes(xI2).Value = xI1 * 10000
 
                     End If
@@ -4049,7 +4056,7 @@ Jump2:
         POStatusRefresh()
     End Sub
 
-    Private Sub BWAVDown_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BWAVDown.Click
+    Private Sub BWAVDown_Click(sender As Object, e As EventArgs) Handles BWAVDown.Click
         If LWAV.SelectedIndex = -1 Then Return
 
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
@@ -4064,12 +4071,10 @@ Jump2:
             If Array.IndexOf(xIndices, xS) = -1 Then Exit For
         Next
 
-        Dim xStr As String = ""
-        Dim xIndex As Integer = -1
         For xI1 As Integer = xS To 0 Step -1
-            xIndex = Array.IndexOf(xIndices, xI1)
+            Dim xIndex As Integer = Array.IndexOf(xIndices, xI1)
             If xIndex <> -1 Then
-                xStr = hWAV(xI1 + 1)
+                Dim xStr As String = hWAV(xI1 + 1)
                 hWAV(xI1 + 1) = hWAV(xI1 + 2)
                 hWAV(xI1 + 2) = xStr
 
@@ -4084,12 +4089,12 @@ Jump2:
                     If Not IsColumnSound(Notes(xI2).ColumnIndex) Then Continue For
 
                     If C10to36(Notes(xI2).Value \ 10000) = xL1 Then
-                        Me.RedoRelabelNote(Notes(xI2), xI1 * 10000 + 10000, xUndo, xRedo)
-                        Notes(xI2).Value = xI1 * 10000 + 10000
+                        RedoRelabelNote(Notes(xI2), (xI1 * 10000) + 10000, xUndo, xRedo)
+                        Notes(xI2).Value = (xI1 * 10000) + 10000
 
                     ElseIf C10to36(Notes(xI2).Value \ 10000) = xL2 Then
-                        Me.RedoRelabelNote(Notes(xI2), xI1 * 10000 + 20000, xUndo, xRedo)
-                        Notes(xI2).Value = xI1 * 10000 + 20000
+                        RedoRelabelNote(Notes(xI2), (xI1 * 10000) + 20000, xUndo, xRedo)
+                        Notes(xI2).Value = (xI1 * 10000) + 20000
 
                     End If
                 Next
@@ -4108,17 +4113,18 @@ Jump2:
         POStatusRefresh()
     End Sub
 
-    Private Sub BWAVBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BWAVBrowse.Click
-        Dim xDWAV As New OpenFileDialog
-        xDWAV.DefaultExt = "wav"
-        xDWAV.Filter = Strings.FileType._wave & "|*.wav;*.ogg;*.mp3;*.flac|" &
+    Private Sub BWAVBrowse_Click(sender As Object, e As EventArgs) Handles BWAVBrowse.Click
+        Dim xDWAV As New OpenFileDialog With {
+            .DefaultExt = "wav",
+            .Filter = Strings.FileType._wave & "|*.wav;*.ogg;*.mp3;*.flac|" &
                        Strings.FileType.WAV & "|*.wav|" &
                        Strings.FileType.OGG & "|*.ogg|" &
                        Strings.FileType.MP3 & "|*.mp3|" &
                        Strings.FileType.FLAC & "|*.flac|" &
-                       Strings.FileType._all & "|*.*"
-        xDWAV.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
-        xDWAV.Multiselect = WAVMultiSelect
+                       Strings.FileType._all & "|*.*",
+            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName)),
+            .Multiselect = WAVMultiSelect
+        }
 
         If xDWAV.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDWAV.FileName)
@@ -4126,7 +4132,7 @@ Jump2:
         AddToPOWAV(xDWAV.FileNames)
     End Sub
 
-    Private Sub BWAVRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BWAVRemove.Click
+    Private Sub BWAVRemove_Click(sender As Object, e As EventArgs) Handles BWAVRemove.Click
         Dim xIndices(LWAV.SelectedIndices.Count - 1) As Integer
         LWAV.SelectedIndices.CopyTo(xIndices, 0)
         For xI1 As Integer = 0 To UBound(xIndices)
@@ -4144,7 +4150,7 @@ Jump2:
         POStatusRefresh()
     End Sub
 
-    Private Sub BBMPUp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BBMPUp.Click
+    Private Sub BBMPUp_Click(sender As Object, e As EventArgs) Handles BBMPUp.Click
         If LBMP.SelectedIndex = -1 Then Return
 
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
@@ -4159,12 +4165,10 @@ Jump2:
             If Array.IndexOf(xIndices, xS) = -1 Then Exit For
         Next
 
-        Dim xStr As String = ""
-        Dim xIndex As Integer = -1
         For xI1 As Integer = xS To 1294
-            xIndex = Array.IndexOf(xIndices, xI1)
+            Dim xIndex As Integer = Array.IndexOf(xIndices, xI1)
             If xIndex <> -1 Then
-                xStr = hBMP(xI1 + 1)
+                Dim xStr As String = hBMP(xI1 + 1)
                 hBMP(xI1 + 1) = hBMP(xI1)
                 hBMP(xI1) = xStr
 
@@ -4179,11 +4183,11 @@ Jump2:
                     If Not IsColumnImage(Notes(xI2).ColumnIndex) Then Continue For
 
                     If C10to36(Notes(xI2).Value \ 10000) = xL1 Then
-                        Me.RedoRelabelNote(Notes(xI2), xI1 * 10000 + 10000, xUndo, xRedo)
-                        Notes(xI2).Value = xI1 * 10000 + 10000
+                        RedoRelabelNote(Notes(xI2), (xI1 * 10000) + 10000, xUndo, xRedo)
+                        Notes(xI2).Value = (xI1 * 10000) + 10000
 
                     ElseIf C10to36(Notes(xI2).Value \ 10000) = xL2 Then
-                        Me.RedoRelabelNote(Notes(xI2), xI1 * 10000, xUndo, xRedo)
+                        RedoRelabelNote(Notes(xI2), xI1 * 10000, xUndo, xRedo)
                         Notes(xI2).Value = xI1 * 10000
 
                     End If
@@ -4203,7 +4207,7 @@ Jump2:
         POStatusRefresh()
     End Sub
 
-    Private Sub BBMPDown_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BBMPDown.Click
+    Private Sub BBMPDown_Click(sender As Object, e As EventArgs) Handles BBMPDown.Click
         If LBMP.SelectedIndex = -1 Then Return
 
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
@@ -4218,12 +4222,10 @@ Jump2:
             If Array.IndexOf(xIndices, xS) = -1 Then Exit For
         Next
 
-        Dim xStr As String = ""
-        Dim xIndex As Integer = -1
         For xI1 As Integer = xS To 0 Step -1
-            xIndex = Array.IndexOf(xIndices, xI1)
+            Dim xIndex As Integer = Array.IndexOf(xIndices, xI1)
             If xIndex <> -1 Then
-                xStr = hBMP(xI1 + 1)
+                Dim xStr As String = hBMP(xI1 + 1)
                 hBMP(xI1 + 1) = hBMP(xI1 + 2)
                 hBMP(xI1 + 2) = xStr
 
@@ -4238,12 +4240,12 @@ Jump2:
                     If Not IsColumnImage(Notes(xI2).ColumnIndex) Then Continue For
 
                     If C10to36(Notes(xI2).Value \ 10000) = xL1 Then
-                        Me.RedoRelabelNote(Notes(xI2), xI1 * 10000 + 10000, xUndo, xRedo)
-                        Notes(xI2).Value = xI1 * 10000 + 10000
+                        RedoRelabelNote(Notes(xI2), (xI1 * 10000) + 10000, xUndo, xRedo)
+                        Notes(xI2).Value = (xI1 * 10000) + 10000
 
                     ElseIf C10to36(Notes(xI2).Value \ 10000) = xL2 Then
-                        Me.RedoRelabelNote(Notes(xI2), xI1 * 10000 + 20000, xUndo, xRedo)
-                        Notes(xI2).Value = xI1 * 10000 + 20000
+                        RedoRelabelNote(Notes(xI2), (xI1 * 10000) + 20000, xUndo, xRedo)
+                        Notes(xI2).Value = (xI1 * 10000) + 20000
 
                     End If
                 Next
@@ -4262,10 +4264,10 @@ Jump2:
         POStatusRefresh()
     End Sub
 
-    Private Sub BBMPBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BBMPBrowse.Click
-        Dim xDBMP As New OpenFileDialog
-        xDBMP.DefaultExt = "bmp"
-        xDBMP.Filter = Strings.FileType._image & "|*.bmp;*.png;*.jpg;*.jpeg;.gif|" &
+    Private Sub BBMPBrowse_Click(sender As Object, e As EventArgs) Handles BBMPBrowse.Click
+        Dim xDBMP As New OpenFileDialog With {
+            .DefaultExt = "bmp",
+            .Filter = Strings.FileType._image & "|*.bmp;*.png;*.jpg;*.jpeg;.gif|" &
                        Strings.FileType._movie & "|*.mpg;*.m1v;*.m2v;*.avi;*.mp4;*.m4v;*.wmv;*.webm|" &
                        Strings.FileType.BMP & "|*.bmp|" &
                        Strings.FileType.PNG & "|*.png|" &
@@ -4276,9 +4278,10 @@ Jump2:
                        Strings.FileType.MPG & "|*.mpg;*.m1v;*.m2v|" &
                        Strings.FileType.WMV & "|*.wmv|" &
                        Strings.FileType.WEBM & "|*.webm|" &
-                       Strings.FileType._all & "|*.*"
-        xDBMP.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
-        xDBMP.Multiselect = WAVMultiSelect
+                       Strings.FileType._all & "|*.*",
+            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName)),
+            .Multiselect = WAVMultiSelect
+        }
 
         If xDBMP.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDBMP.FileName)
@@ -4286,7 +4289,7 @@ Jump2:
         AddToPOBMP(xDBMP.FileNames)
     End Sub
 
-    Private Sub BBMPRemove_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BBMPRemove.Click
+    Private Sub BBMPRemove_Click(sender As Object, e As EventArgs) Handles BBMPRemove.Click
         Dim xIndices(LBMP.SelectedIndices.Count - 1) As Integer
         LBMP.SelectedIndices.CopyTo(xIndices, 0)
         For xI1 As Integer = 0 To UBound(xIndices)
@@ -4304,19 +4307,19 @@ Jump2:
         POStatusRefresh()
     End Sub
 
-    Private Sub mnMain_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles mnMain.MouseDown ', TBMain.MouseDown  ', pttl.MouseDown, pIsSaved.MouseDown
-        If e.Button = Forms.MouseButtons.Left Then
-            ReleaseCapture()
-            SendMessage(Me.Handle, &H112, &HF012, 0)
+    Private Sub mnMain_MouseDown(sender As Object, e As MouseEventArgs) Handles mnMain.MouseDown ', TBMain.MouseDown  ', pttl.MouseDown, pIsSaved.MouseDown
+        If e.Button = MouseButtons.Left Then
+            Dim unused1 = ReleaseCapture()
+            Dim unused = SendMessage(Handle, &H112, &HF012, 0)
             If e.Clicks = 2 Then
-                If Me.WindowState = FormWindowState.Maximized Then Me.WindowState = FormWindowState.Normal Else Me.WindowState = FormWindowState.Maximized
+                If WindowState = FormWindowState.Maximized Then WindowState = FormWindowState.Normal Else WindowState = FormWindowState.Maximized
             End If
-        ElseIf e.Button = Forms.MouseButtons.Right Then
+        ElseIf e.Button = MouseButtons.Right Then
             'mnSys.Show(sender, e.Location)
         End If
     End Sub
 
-    Private Sub mnSelectAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnSelectAll.Click
+    Private Sub mnSelectAll_Click(sender As Object, e As EventArgs) Handles mnSelectAll.Click
         If Not (PMainIn.Focused OrElse PMainInL.Focused Or PMainInR.Focused) Then Exit Sub
         For xI1 As Integer = 1 To UBound(Notes)
             Notes(xI1).Selected = nEnabled(Notes(xI1).ColumnIndex)
@@ -4330,14 +4333,14 @@ Jump2:
         POStatusRefresh()
     End Sub
 
-    Private Sub mnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnDelete.Click
+    Private Sub mnDelete_Click(sender As Object, e As EventArgs) Handles mnDelete.Click
         If Not (PMainIn.Focused OrElse PMainInL.Focused Or PMainInR.Focused) Then Exit Sub
 
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
         Dim xRedo As UndoRedo.LinkedURCmd = New UndoRedo.Void
         Dim xBaseRedo As UndoRedo.LinkedURCmd = xRedo
 
-        Me.RedoRemoveNoteSelected(True, xUndo, xRedo)
+        RedoRemoveNoteSelected(True, xUndo, xRedo)
         RemoveNotes(True)
 
         AddUndo(xUndo, xBaseRedo.Next)
@@ -4347,15 +4350,15 @@ Jump2:
         POStatusRefresh()
     End Sub
 
-    Private Sub mnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Process.Start("http://www.cs.mcgill.ca/~ryang6/iBMSC/")
+    Private Sub mnUpdate_Click(sender As Object, e As EventArgs)
+        Dim unused = Process.Start("http://www.cs.mcgill.ca/~ryang6/iBMSC/")
     End Sub
 
-    Private Sub mnUpdateC_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Process.Start("http://bbs.rohome.net/thread-1074065-1-1.html")
+    Private Sub mnUpdateC_Click(sender As Object, e As EventArgs)
+        Dim unused = Process.Start("http://bbs.rohome.net/thread-1074065-1-1.html")
     End Sub
 
-    Private Sub mnQuit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnQuit.Click
+    Private Sub mnQuit_Click(sender As Object, e As EventArgs) Handles mnQuit.Click
         Close()
     End Sub
 
@@ -4386,64 +4389,64 @@ Jump2:
         Next
     End Sub
 
-    Private Sub ttlIcon_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs)
+    Private Sub ttlIcon_MouseDown(sender As Object, e As MouseEventArgs)
         'ttlIcon.Image = My.Resources.icon2_16
         'mnSys.Show(ttlIcon, 0, ttlIcon.Height)
     End Sub
-    Private Sub ttlIcon_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub ttlIcon_MouseEnter(sender As Object, e As EventArgs)
         'ttlIcon.Image = My.Resources.icon2_16_highlight
     End Sub
-    Private Sub ttlIcon_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub ttlIcon_MouseLeave(sender As Object, e As EventArgs)
         'ttlIcon.Image = My.Resources.icon2_16
     End Sub
 
-    Private Sub mnSMenu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnSMenu.CheckedChanged
+    Private Sub mnSMenu_Click(sender As Object, e As EventArgs) Handles mnSMenu.CheckedChanged
         mnMain.Visible = mnSMenu.Checked
     End Sub
-    Private Sub mnSTB_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnSTB.CheckedChanged
+    Private Sub mnSTB_Click(sender As Object, e As EventArgs) Handles mnSTB.CheckedChanged
         TBMain.Visible = mnSTB.Checked
     End Sub
-    Private Sub mnSOP_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnSOP.CheckedChanged
+    Private Sub mnSOP_Click(sender As Object, e As EventArgs) Handles mnSOP.CheckedChanged
         POptions.Visible = mnSOP.Checked
     End Sub
-    Private Sub mnSStatus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnSStatus.CheckedChanged
+    Private Sub mnSStatus_Click(sender As Object, e As EventArgs) Handles mnSStatus.CheckedChanged
         pStatus.Visible = mnSStatus.Checked
     End Sub
-    Private Sub mnSLSplitter_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnSLSplitter.CheckedChanged
+    Private Sub mnSLSplitter_Click(sender As Object, e As EventArgs) Handles mnSLSplitter.CheckedChanged
         SpL.Visible = mnSLSplitter.Checked
     End Sub
-    Private Sub mnSRSplitter_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnSRSplitter.CheckedChanged
+    Private Sub mnSRSplitter_Click(sender As Object, e As EventArgs) Handles mnSRSplitter.CheckedChanged
         SpR.Visible = mnSRSplitter.Checked
     End Sub
-    Private Sub CGShow_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CGShow.CheckedChanged
+    Private Sub CGShow_CheckedChanged(sender As Object, e As EventArgs) Handles CGShow.CheckedChanged
         gShowGrid = CGShow.Checked
         RefreshPanelAll()
     End Sub
-    Private Sub CGShowS_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CGShowS.CheckedChanged
+    Private Sub CGShowS_CheckedChanged(sender As Object, e As EventArgs) Handles CGShowS.CheckedChanged
         gShowSubGrid = CGShowS.Checked
         RefreshPanelAll()
     End Sub
-    Private Sub CGShowBG_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CGShowBG.CheckedChanged
+    Private Sub CGShowBG_CheckedChanged(sender As Object, e As EventArgs) Handles CGShowBG.CheckedChanged
         gShowBG = CGShowBG.Checked
         RefreshPanelAll()
     End Sub
-    Private Sub CGShowM_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CGShowM.CheckedChanged
+    Private Sub CGShowM_CheckedChanged(sender As Object, e As EventArgs) Handles CGShowM.CheckedChanged
         gShowMeasureNumber = CGShowM.Checked
         RefreshPanelAll()
     End Sub
-    Private Sub CGShowV_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CGShowV.CheckedChanged
+    Private Sub CGShowV_CheckedChanged(sender As Object, e As EventArgs) Handles CGShowV.CheckedChanged
         gShowVerticalLine = CGShowV.Checked
         RefreshPanelAll()
     End Sub
-    Private Sub CGShowMB_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CGShowMB.CheckedChanged
+    Private Sub CGShowMB_CheckedChanged(sender As Object, e As EventArgs) Handles CGShowMB.CheckedChanged
         gShowMeasureBar = CGShowMB.Checked
         RefreshPanelAll()
     End Sub
-    Private Sub CGShowC_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CGShowC.CheckedChanged
+    Private Sub CGShowC_CheckedChanged(sender As Object, e As EventArgs) Handles CGShowC.CheckedChanged
         gShowC = CGShowC.Checked
         RefreshPanelAll()
     End Sub
-    Private Sub CGBLP_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CGBLP.CheckedChanged
+    Private Sub CGBLP_CheckedChanged(sender As Object, e As EventArgs) Handles CGBLP.CheckedChanged
         gDisplayBGAColumn = CGBLP.Checked
 
         column(niBGA).isVisible = gDisplayBGAColumn
@@ -4459,7 +4462,7 @@ Jump2:
         UpdateColumnsX()
         RefreshPanelAll()
     End Sub
-    Private Sub CGSCROLL_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CGSCROLL.CheckedChanged
+    Private Sub CGSCROLL_CheckedChanged(sender As Object, e As EventArgs) Handles CGSCROLL.CheckedChanged
         gSCROLL = CGSCROLL.Checked
 
         column(niSCROLL).isVisible = gSCROLL
@@ -4472,7 +4475,7 @@ Jump2:
         UpdateColumnsX()
         RefreshPanelAll()
     End Sub
-    Private Sub CGSTOP_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CGSTOP.CheckedChanged
+    Private Sub CGSTOP_CheckedChanged(sender As Object, e As EventArgs) Handles CGSTOP.CheckedChanged
         gSTOP = CGSTOP.Checked
 
         column(niSTOP).isVisible = gSTOP
@@ -4485,7 +4488,7 @@ Jump2:
         UpdateColumnsX()
         RefreshPanelAll()
     End Sub
-    Private Sub CGBPM_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CGBPM.CheckedChanged
+    Private Sub CGBPM_CheckedChanged(sender As Object, e As EventArgs) Handles CGBPM.CheckedChanged
         'Dim xUndo As UndoRedo.LinkedURCmd = Nothing
         'Dim xRedo As UndoRedo.LinkedURCmd = Nothing
         'Me.RedoChangeVisibleColumns(gBLP, gSTOP, iPlayer, gBLP, CGSTOP.Checked, iPlayer, xUndo, xRedo)
@@ -4502,11 +4505,11 @@ Jump2:
         RefreshPanelAll()
     End Sub
 
-    Private Sub CGDisableVertical_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CGDisableVertical.CheckedChanged
+    Private Sub CGDisableVertical_CheckedChanged(sender As Object, e As EventArgs) Handles CGDisableVertical.CheckedChanged
         DisableVerticalMove = CGDisableVertical.Checked
     End Sub
 
-    Private Sub CBeatPreserve_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CBeatPreserve.Click, CBeatMeasure.Click, CBeatCut.Click, CBeatScale.Click
+    Private Sub CBeatPreserve_Click(sender As Object, e As EventArgs) Handles CBeatPreserve.Click, CBeatMeasure.Click, CBeatCut.Click, CBeatScale.Click
         'If Not sender.Checked Then Exit Sub
         Dim xBeatList() As RadioButton = {CBeatPreserve, CBeatMeasure, CBeatCut, CBeatScale}
         BeatChangeMode = Array.IndexOf(Of RadioButton)(xBeatList, sender)
@@ -4517,7 +4520,7 @@ Jump2:
     End Sub
 
 
-    Private Sub tBeatValue_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles tBeatValue.LostFocus
+    Private Sub tBeatValue_LostFocus(sender As Object, e As EventArgs) Handles tBeatValue.LostFocus
         Dim a As Double
         If Double.TryParse(tBeatValue.Text, a) Then
             If a <= 0.0# Or a >= 1000.0# Then tBeatValue.BackColor = Color.FromArgb(&HFFFFC0C0) Else tBeatValue.BackColor = Nothing
@@ -4528,21 +4531,21 @@ Jump2:
 
 
 
-    Private Sub ApplyBeat(ByVal xRatio As Double, ByVal xDisplay As String)
+    Private Sub ApplyBeat(xRatio As Double, xDisplay As String)
         SortByVPositionInsertion()
 
         Dim xUndo As UndoRedo.LinkedURCmd = Nothing
         Dim xRedo As UndoRedo.LinkedURCmd = New UndoRedo.Void
         Dim xBaseRedo As UndoRedo.LinkedURCmd = xRedo
 
-        Me.RedoChangeMeasureLengthSelected(192 * xRatio, xUndo, xRedo)
+        RedoChangeMeasureLengthSelected(192 * xRatio, xUndo, xRedo)
 
         Dim xIndices(LBeat.SelectedIndices.Count - 1) As Integer
         LBeat.SelectedIndices.CopyTo(xIndices, 0)
 
 
         For Each xI1 As Integer In xIndices
-            Dim dLength As Double = xRatio * 192.0R - MeasureLength(xI1)
+            Dim dLength As Double = (xRatio * 192.0R) - MeasureLength(xI1)
             Dim dRatio As Double = xRatio * 192.0R / MeasureLength(xI1)
 
             Dim xBottom As Double = 0
@@ -4560,7 +4563,7 @@ case2:              Dim xI0 As Integer
                         For xI0 = 1 To UBound(Notes)
                             If Notes(xI0).VPosition >= xUpBefore Then Exit For
                             If Notes(xI0).VPosition + Notes(xI0).Length >= xUpBefore Then
-                                Me.RedoLongNoteModify(Notes(xI0), Notes(xI0).VPosition, Notes(xI0).Length + dLength, xUndo, xRedo)
+                                RedoLongNoteModify(Notes(xI0), Notes(xI0).VPosition, Notes(xI0).Length + dLength, xUndo, xRedo)
                                 Notes(xI0).Length += dLength
                             End If
                         Next
@@ -4571,7 +4574,7 @@ case2:              Dim xI0 As Integer
                     End If
 
                     For xI9 As Integer = xI0 To UBound(Notes)
-                        Me.RedoLongNoteModify(Notes(xI9), Notes(xI9).VPosition + dLength, Notes(xI9).Length, xUndo, xRedo)
+                        RedoLongNoteModify(Notes(xI9), Notes(xI9).VPosition + dLength, Notes(xI9).Length, xUndo, xRedo)
                         Notes(xI9).VPosition += dLength
                     Next
 
@@ -4584,18 +4587,18 @@ case2:              Dim xI0 As Integer
                                 If Notes(xI0).VPosition < xUpAfter Then
                                     If Notes(xI0).VPosition + Notes(xI0).Length >= xUpAfter And Notes(xI0).VPosition + Notes(xI0).Length < xUpBefore Then
                                         Dim nLen As Double = xUpAfter - Notes(xI0).VPosition - 1.0R
-                                        Me.RedoLongNoteModify(Notes(xI0), Notes(xI0).VPosition, nLen, xUndo, xRedo)
+                                        RedoLongNoteModify(Notes(xI0), Notes(xI0).VPosition, nLen, xUndo, xRedo)
                                         Notes(xI0).Length = nLen
                                     End If
                                 ElseIf Notes(xI0).VPosition < xUpBefore Then
                                     If Notes(xI0).VPosition + Notes(xI0).Length < xUpBefore Then
-                                        Me.RedoRemoveNote(Notes(xI0), xUndo, xRedo)
+                                        RedoRemoveNote(Notes(xI0), xUndo, xRedo)
                                         RemoveNote(xI0)
                                         xI0 -= 1
                                         xU -= 1
                                     Else
                                         Dim nLen As Double = Notes(xI0).Length - xUpBefore + Notes(xI0).VPosition
-                                        Me.RedoLongNoteModify(Notes(xI0), xUpBefore, nLen, xUndo, xRedo)
+                                        RedoLongNoteModify(Notes(xI0), xUpBefore, nLen, xUndo, xRedo)
                                         Notes(xI0).Length = nLen
                                         Notes(xI0).VPosition = xUpBefore
                                     End If
@@ -4613,7 +4616,7 @@ case2:              Dim xI0 As Integer
                             Next
 
                             For xI8 As Integer = xI0 To xI9 - 1
-                                Me.RedoRemoveNote(Notes(xI8), xUndo, xRedo)
+                                RedoRemoveNote(Notes(xI8), xUndo, xRedo)
                             Next
                             For xI8 As Integer = xI9 To UBound(Notes)
                                 Notes(xI8 - xI9 + xI0) = Notes(xI8)
@@ -4629,29 +4632,29 @@ case2:              Dim xI0 As Integer
                         For xI0 As Integer = 1 To UBound(Notes)
                             If Notes(xI0).VPosition < xBottom Then
                                 If Notes(xI0).VPosition + Notes(xI0).Length > xUpBefore Then
-                                    Me.RedoLongNoteModify(Notes(xI0), Notes(xI0).VPosition, Notes(xI0).Length + dLength, xUndo, xRedo)
+                                    RedoLongNoteModify(Notes(xI0), Notes(xI0).VPosition, Notes(xI0).Length + dLength, xUndo, xRedo)
                                     Notes(xI0).Length += dLength
                                 ElseIf Notes(xI0).VPosition + Notes(xI0).Length > xBottom Then
-                                    Dim nLen As Double = (Notes(xI0).Length + Notes(xI0).VPosition - xBottom) * dRatio + xBottom - Notes(xI0).VPosition
-                                    Me.RedoLongNoteModify(Notes(xI0), Notes(xI0).VPosition, nLen, xUndo, xRedo)
+                                    Dim nLen As Double = ((Notes(xI0).Length + Notes(xI0).VPosition - xBottom) * dRatio) + xBottom - Notes(xI0).VPosition
+                                    RedoLongNoteModify(Notes(xI0), Notes(xI0).VPosition, nLen, xUndo, xRedo)
                                     Notes(xI0).Length = nLen
                                 End If
                             ElseIf Notes(xI0).VPosition < xUpBefore Then
                                 If Notes(xI0).VPosition + Notes(xI0).Length > xUpBefore Then
-                                    Dim nLen As Double = (xUpBefore - Notes(xI0).VPosition) * dRatio + Notes(xI0).VPosition + Notes(xI0).Length - xUpBefore
-                                    Dim nVPos As Double = (Notes(xI0).VPosition - xBottom) * dRatio + xBottom
-                                    Me.RedoLongNoteModify(Notes(xI0), nVPos, nLen, xUndo, xRedo)
+                                    Dim nLen As Double = ((xUpBefore - Notes(xI0).VPosition) * dRatio) + Notes(xI0).VPosition + Notes(xI0).Length - xUpBefore
+                                    Dim nVPos As Double = ((Notes(xI0).VPosition - xBottom) * dRatio) + xBottom
+                                    RedoLongNoteModify(Notes(xI0), nVPos, nLen, xUndo, xRedo)
                                     Notes(xI0).Length = nLen
                                     Notes(xI0).VPosition = nVPos
                                 Else
                                     Dim nLen As Double = Notes(xI0).Length * dRatio
-                                    Dim nVPos As Double = (Notes(xI0).VPosition - xBottom) * dRatio + xBottom
-                                    Me.RedoLongNoteModify(Notes(xI0), nVPos, nLen, xUndo, xRedo)
+                                    Dim nVPos As Double = ((Notes(xI0).VPosition - xBottom) * dRatio) + xBottom
+                                    RedoLongNoteModify(Notes(xI0), nVPos, nLen, xUndo, xRedo)
                                     Notes(xI0).Length = nLen
                                     Notes(xI0).VPosition = nVPos
                                 End If
                             Else
-                                Me.RedoLongNoteModify(Notes(xI0), Notes(xI0).VPosition + dLength, Notes(xI0).Length, xUndo, xRedo)
+                                RedoLongNoteModify(Notes(xI0), Notes(xI0).VPosition + dLength, Notes(xI0).Length, xUndo, xRedo)
                                 Notes(xI0).VPosition += dLength
                             End If
                         Next
@@ -4666,15 +4669,15 @@ case2:              Dim xI0 As Integer
                         Next
 
                         For xI8 As Integer = xI0 To xI9 - 1
-                            Dim nVP As Double = (Notes(xI8).VPosition - xBottom) * dRatio + xBottom
-                            Me.RedoLongNoteModify(Notes(xI0), nVP, Notes(xI0).Length, xUndo, xRedo)
+                            Dim nVP As Double = ((Notes(xI8).VPosition - xBottom) * dRatio) + xBottom
+                            RedoLongNoteModify(Notes(xI0), nVP, Notes(xI0).Length, xUndo, xRedo)
                             Notes(xI8).VPosition = nVP
                         Next
 
                         'GoTo case2
 
                         For xI8 As Integer = xI9 To UBound(Notes)
-                            Me.RedoLongNoteModify(Notes(xI8), Notes(xI8).VPosition + dLength, Notes(xI8).Length, xUndo, xRedo)
+                            RedoLongNoteModify(Notes(xI8), Notes(xI8).VPosition + dLength, Notes(xI8).Length, xUndo, xRedo)
                             Notes(xI8).VPosition += dLength
                         Next
                     End If
@@ -4702,7 +4705,7 @@ case2:              Dim xI0 As Integer
         POStatusRefresh()
     End Sub
 
-    Private Sub BBeatApply_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BBeatApply.Click
+    Private Sub BBeatApply_Click(sender As Object, e As EventArgs) Handles BBeatApply.Click
         Dim xxD As Integer = nBeatD.Value
         Dim xxN As Integer = nBeatN.Value
         Dim xxRatio As Double = xxN / xxD
@@ -4710,64 +4713,66 @@ case2:              Dim xI0 As Integer
         ApplyBeat(xxRatio, xxRatio & " ( " & xxN & " / " & xxD & " ) ")
     End Sub
 
-    Private Sub BBeatApplyV_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BBeatApplyV.Click
+    Private Sub BBeatApplyV_Click(sender As Object, e As EventArgs) Handles BBeatApplyV.Click
         Dim a As Double
         If Double.TryParse(tBeatValue.Text, a) Then
-            If a <= 0.0# Or a >= 1000.0# Then System.Media.SystemSounds.Hand.Play() : Exit Sub
+            If a <= 0.0# Or a >= 1000.0# Then Media.SystemSounds.Hand.Play() : Exit Sub
 
             Dim xxD As Long = GetDenominator(a)
 
-            ApplyBeat(a, a & IIf(xxD > 10000, "", " ( " & CLng(a * xxD) & " / " & xxD & " ) "))
+            ApplyBeat(a, a & IIf(xxD > 10000, "", " ( " & (a * xxD) & " / " & xxD & " ) "))
         End If
     End Sub
 
 
-    Private Sub BHStageFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BHStageFile.Click, BHBanner.Click, BHBackBMP.Click, BHMissBMP.Click
-        Dim xDiag As New OpenFileDialog
-        xDiag.Filter = Strings.FileType._image & "|*.bmp;*.png;*.jpeg;*.jpg;*.gif|" &
-                       Strings.FileType._all & "|*.*"
-        xDiag.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
-        xDiag.DefaultExt = "png"
+    Private Sub BHStageFile_Click(sender As Object, e As EventArgs) Handles BHStageFile.Click, BHBanner.Click, BHBackBMP.Click, BHMissBMP.Click
+        Dim xDiag As New OpenFileDialog With {
+            .Filter = Strings.FileType._image & "|*.bmp;*.png;*.jpeg;*.jpg;*.gif|" &
+                       Strings.FileType._all & "|*.*",
+            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName)),
+            .DefaultExt = "png"
+        }
 
         If xDiag.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDiag.FileName)
 
-        If [Object].ReferenceEquals(sender, BHStageFile) Then
+        If ReferenceEquals(sender, BHStageFile) Then
             THStageFile.Text = GetFileName(xDiag.FileName)
-        ElseIf [Object].ReferenceEquals(sender, BHBanner) Then
+        ElseIf ReferenceEquals(sender, BHBanner) Then
             THBanner.Text = GetFileName(xDiag.FileName)
-        ElseIf [Object].ReferenceEquals(sender, BHBackBMP) Then
+        ElseIf ReferenceEquals(sender, BHBackBMP) Then
             THBackBMP.Text = GetFileName(xDiag.FileName)
-        ElseIf [Object].ReferenceEquals(sender, BHMissBMP) Then
+        ElseIf ReferenceEquals(sender, BHMissBMP) Then
             THMissBMP.Text = GetFileName(xDiag.FileName)
             hBMP(0) = THMissBMP.Text
         End If
     End Sub
 
-    Private Sub BHWavFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BHLandMine.Click, BHPreview.Click
-        Dim xDiag As New OpenFileDialog
-        xDiag.Filter = Strings.FileType._wave & "|*.wav;*.ogg;*.mp3;*.flac|" &
+    Private Sub BHWavFile_Click(sender As Object, e As EventArgs) Handles BHLandMine.Click, BHPreview.Click
+        Dim xDiag As New OpenFileDialog With {
+            .Filter = Strings.FileType._wave & "|*.wav;*.ogg;*.mp3;*.flac|" &
                        Strings.FileType.WAV & "|*.wav|" &
                        Strings.FileType.OGG & "|*.ogg|" &
                        Strings.FileType.MP3 & "|*.mp3|" &
                        Strings.FileType.FLAC & "|*.flac|" &
-                       Strings.FileType._all & "|*.*"
-        xDiag.InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
-        xDiag.DefaultExt = "wav"
+                       Strings.FileType._all & "|*.*",
+            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName)),
+            .DefaultExt = "wav"
+        }
 
         If xDiag.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
 
-        If [Object].ReferenceEquals(sender, BHLandMine) Then
+        If ReferenceEquals(sender, BHLandMine) Then
             InitPath = ExcludeFileName(xDiag.FileName)
             THLandMine.Text = GetFileName(xDiag.FileName)
             hWAV(0) = THLandMine.Text
-        ElseIf [Object].ReferenceEquals(sender, BHPreview) Then
+        ElseIf ReferenceEquals(sender, BHPreview) Then
             InitPath = ExcludeFileName(xDiag.FileName)
             THPreview.Text = GetFileName(xDiag.FileName)
         End If
     End Sub
 
-    Private Sub Switches_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles _
+    Private Sub Switches_CheckedChanged(sender As Object, e As EventArgs) Handles _
     POHeaderSwitch.CheckedChanged,
     POGridSwitch.CheckedChanged,
     POWaveFormSwitch.CheckedChanged,
@@ -4780,28 +4785,24 @@ case2:              Dim xI0 As Integer
             Dim Source As CheckBox = CType(sender, CheckBox)
             Dim Target As Panel = Nothing
 
-            If Object.ReferenceEquals(sender, Nothing) Then : Exit Sub
-            ElseIf Object.ReferenceEquals(sender, POHeaderSwitch) Then : Target = POHeaderInner
-            ElseIf Object.ReferenceEquals(sender, POGridSwitch) Then : Target = POGridInner
-            ElseIf Object.ReferenceEquals(sender, POWaveFormSwitch) Then : Target = POWaveFormInner
-            ElseIf Object.ReferenceEquals(sender, POWAVSwitch) Then : Target = POWAVInner
-            ElseIf Object.ReferenceEquals(sender, POBMPSwitch) Then : Target = POBMPInner
-            ElseIf Object.ReferenceEquals(sender, POBeatSwitch) Then : Target = POBeatInner
-            ElseIf Object.ReferenceEquals(sender, POExpansionSwitch) Then : Target = POExpansionInner
+            If sender Is Nothing Then : Exit Sub
+            ElseIf sender Is POHeaderSwitch Then : Target = POHeaderInner
+            ElseIf sender Is POGridSwitch Then : Target = POGridInner
+            ElseIf sender Is POWaveFormSwitch Then : Target = POWaveFormInner
+            ElseIf sender Is POWAVSwitch Then : Target = POWAVInner
+            ElseIf sender Is POBMPSwitch Then : Target = POBMPInner
+            ElseIf sender Is POBeatSwitch Then : Target = POBeatInner
+            ElseIf sender Is POExpansionSwitch Then : Target = POExpansionInner
             End If
 
-            If Source.Checked Then
-                Target.Visible = True
-            Else
-                Target.Visible = False
-            End If
+            Target.Visible = Source.Checked
 
         Catch ex As Exception
 
         End Try
     End Sub
 
-    Private Sub Expanders_CheckChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles _
+    Private Sub Expanders_CheckChanged(sender As Object, e As EventArgs) Handles _
     POHeaderExpander.CheckedChanged,
     POGridExpander.CheckedChanged,
     POWaveFormExpander.CheckedChanged,
@@ -4813,21 +4814,15 @@ case2:              Dim xI0 As Integer
             Dim Target As Panel = Nothing
             'Dim TargetParent As Panel = Nothing
 
-            If Object.ReferenceEquals(sender, Nothing) Then : Exit Sub
-            ElseIf Object.ReferenceEquals(sender, POHeaderExpander) Then : Target = POHeaderPart2 ' : TargetParent = POHeaderInner
-            ElseIf Object.ReferenceEquals(sender, POGridExpander) Then : Target = POGridPart2 ' : TargetParent = POGridInner
-            ElseIf Object.ReferenceEquals(sender, POWaveFormExpander) Then : Target = POWaveFormPart2 ' : TargetParent = POWaveFormInner
-            ElseIf Object.ReferenceEquals(sender, POWAVExpander) Then : Target = POWAVPart2 ' : TargetParent = POWaveFormInner
-            ElseIf Object.ReferenceEquals(sender, POBeatExpander) Then : Target = POBeatPart2 ' : TargetParent = POWaveFormInner
+            If sender Is Nothing Then : Exit Sub
+            ElseIf ReferenceEquals(sender, POHeaderExpander) Then : Target = POHeaderPart2 ' : TargetParent = POHeaderInner
+            ElseIf ReferenceEquals(sender, POGridExpander) Then : Target = POGridPart2 ' : TargetParent = POGridInner
+            ElseIf ReferenceEquals(sender, POWaveFormExpander) Then : Target = POWaveFormPart2 ' : TargetParent = POWaveFormInner
+            ElseIf ReferenceEquals(sender, POWAVExpander) Then : Target = POWAVPart2 ' : TargetParent = POWaveFormInner
+            ElseIf ReferenceEquals(sender, POBeatExpander) Then : Target = POBeatPart2 ' : TargetParent = POWaveFormInner
             End If
 
-            If Source.Checked Then
-                Target.Visible = True
-                'Source.Image = My.Resources.Collapse
-            Else
-                Target.Visible = False
-                'Source.Image = My.Resources.Expand
-            End If
+            Target.Visible = Source.Checked
 
         Catch ex As Exception
 
@@ -4835,16 +4830,16 @@ case2:              Dim xI0 As Integer
 
     End Sub
 
-    Private Sub VerticalResizer_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles POWAVResizer.MouseDown, POBMPResizer.MouseDown, POBeatResizer.MouseDown, POExpansionResizer.MouseDown
+    Private Sub VerticalResizer_MouseDown(sender As Object, e As MouseEventArgs) Handles POWAVResizer.MouseDown, POBMPResizer.MouseDown, POBeatResizer.MouseDown, POExpansionResizer.MouseDown
         tempResize = e.Y
     End Sub
 
-    Private Sub HorizontalResizer_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles POptionsResizer.MouseDown, SpL.MouseDown, SpR.MouseDown
+    Private Sub HorizontalResizer_MouseDown(sender As Object, e As MouseEventArgs) Handles POptionsResizer.MouseDown, SpL.MouseDown, SpR.MouseDown
         tempResize = e.X
     End Sub
 
-    Private Sub POResizer_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles POWAVResizer.MouseMove, POBMPResizer.MouseMove, POBeatResizer.MouseMove, POExpansionResizer.MouseMove
-        If e.Button <> Forms.MouseButtons.Left Then Exit Sub
+    Private Sub POResizer_MouseMove(sender As Object, e As MouseEventArgs) Handles POWAVResizer.MouseMove, POBMPResizer.MouseMove, POBeatResizer.MouseMove, POExpansionResizer.MouseMove
+        If e.Button <> MouseButtons.Left Then Exit Sub
         If e.Y = tempResize Then Exit Sub
 
         Try
@@ -4861,8 +4856,8 @@ case2:              Dim xI0 As Integer
         End Try
     End Sub
 
-    Private Sub POptionsResizer_MouseMove(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles POptionsResizer.MouseMove
-        If e.Button <> Forms.MouseButtons.Left Then Exit Sub
+    Private Sub POptionsResizer_MouseMove(sender As Object, e As MouseEventArgs) Handles POptionsResizer.MouseMove
+        If e.Button <> MouseButtons.Left Then Exit Sub
         If e.X = tempResize Then Exit Sub
 
         Try
@@ -4870,15 +4865,15 @@ case2:              Dim xI0 As Integer
             If xWidth < 25 Then xWidth = 25
             POptionsScroll.Width = xWidth
 
-            Me.Refresh()
+            Refresh()
             Application.DoEvents()
         Catch ex As Exception
 
         End Try
     End Sub
 
-    Private Sub SpR_MouseMove(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles SpR.MouseMove
-        If e.Button <> Forms.MouseButtons.Left Then Exit Sub
+    Private Sub SpR_MouseMove(sender As Object, e As MouseEventArgs) Handles SpR.MouseMove
+        If e.Button <> MouseButtons.Left Then Exit Sub
         If e.X = tempResize Then Exit Sub
 
         Try
@@ -4886,15 +4881,15 @@ case2:              Dim xI0 As Integer
             If xWidth < 0 Then xWidth = 0
             PMainR.Width = xWidth
 
-            Me.ToolStripContainer1.Refresh()
+            ToolStripContainer1.Refresh()
             Application.DoEvents()
         Catch ex As Exception
 
         End Try
     End Sub
 
-    Private Sub SpL_MouseMove(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles SpL.MouseMove
-        If e.Button <> Forms.MouseButtons.Left Then Exit Sub
+    Private Sub SpL_MouseMove(sender As Object, e As MouseEventArgs) Handles SpL.MouseMove
+        If e.Button <> MouseButtons.Left Then Exit Sub
         If e.X = tempResize Then Exit Sub
 
         Try
@@ -4902,7 +4897,7 @@ case2:              Dim xI0 As Integer
             If xWidth < 0 Then xWidth = 0
             PMainL.Width = xWidth
 
-            Me.ToolStripContainer1.Refresh()
+            ToolStripContainer1.Refresh()
             Application.DoEvents()
         Catch ex As Exception
 
@@ -4913,7 +4908,7 @@ case2:              Dim xI0 As Integer
         Dim s = InputBox(Strings.Messages.PromptEnterMeasure, "Enter Measure")
 
         Dim i As Integer
-        If Int32.TryParse(s, i) Then
+        If Integer.TryParse(s, i) Then
             If i < 0 Or i > 999 Then
                 Exit Sub
             End If

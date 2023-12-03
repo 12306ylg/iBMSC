@@ -1,9 +1,8 @@
-Imports System.Linq
 Imports iBMSC.Editor
 
 Partial Public Class MainWindow
 
-    Private Sub BVCCalculate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BVCCalculate.Click
+    Private Sub BVCCalculate_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BVCCalculate.Click
         If Not TBTimeSelect.Checked Then Exit Sub
 
         SortByVPositionInsertion()
@@ -18,7 +17,7 @@ Partial Public Class MainWindow
         TVCBPM.Focus()
     End Sub
 
-    Private Sub BVCApply_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BVCApply.Click
+    Private Sub BVCApply_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BVCApply.Click
         If Not TBTimeSelect.Checked Then Exit Sub
 
         SortByVPositionInsertion()
@@ -70,7 +69,7 @@ Partial Public Class MainWindow
         '        sCmdKs(False) & vbCrLf & _
         '        "SA_" & vSelStart & "_" & vSelLength & "_" & vSelHalf & "_1"
 
-        Me.RedoRemoveNoteAll(False, xUndo, xRedo)
+        RedoRemoveNoteAll(False, xUndo, xRedo)
 
         'Start
         If Not NTInput Then
@@ -89,7 +88,7 @@ Partial Public Class MainWindow
                     xBPM = Notes(xI1).Value
                     Notes(xI1).Value = Notes(xI1).Value * xRatio
                 End If
-                Notes(xI1).VPosition = (Notes(xI1).VPosition - xVLower) * xRatio + xVLower
+                Notes(xI1).VPosition = ((Notes(xI1).VPosition - xVLower) * xRatio) + xVLower
             Next
             xValueU = xBPM
             xI2 = xI1
@@ -101,7 +100,7 @@ Partial Public Class MainWindow
 
             'Add BPMs
             AddNote(New Note(niBPM, xVLower, xValueL * xRatio), False, True, False)
-            AddNote(New Note(niBPM, xVUpper + (xRatio - 1) * (xVUpper - xVLower), xValueU), False, True, False)
+            AddNote(New Note(niBPM, xVUpper + ((xRatio - 1) * (xVUpper - xVLower)), xValueU), False, True, False)
 
         Else
             Dim xAddBPML As Boolean = True
@@ -133,7 +132,7 @@ Partial Public Class MainWindow
                     Notes(xI1).Length += (IIf(xVUpper < Notes(xI1).Length + Notes(xI1).VPosition, xVUpper, Notes(xI1).Length + Notes(xI1).VPosition) - Notes(xI1).VPosition) * (xRatio - 1)
 
                     'Adjust VPosition
-                    Notes(xI1).VPosition = (Notes(xI1).VPosition - xVLower) * xRatio + xVLower
+                    Notes(xI1).VPosition = ((Notes(xI1).VPosition - xVLower) * xRatio) + xVLower
 
                 Else
                     Notes(xI1).VPosition += (xVUpper - xVLower) * (xRatio - 1)
@@ -142,7 +141,7 @@ Partial Public Class MainWindow
 
             'Add BPMs
             If xAddBPML Then AddNote(New Note(niBPM, xVLower, xValueL * xRatio), False, True, False)
-            If xAddBPMU Then AddNote(New Note(niBPM, (xVUpper - xVLower) * xRatio + xVLower, xValueU), False, True, False)
+            If xAddBPMU Then AddNote(New Note(niBPM, ((xVUpper - xVLower) * xRatio) + xVLower, xValueU), False, True, False)
         End If
 
         'Check BPM Overflow
@@ -150,17 +149,17 @@ Partial Public Class MainWindow
             If Notes(xI3).ColumnIndex = niBPM AndAlso Notes(xI3).Value < 1 Then Notes(xI3).Value = 1
         Next
 
-        Me.RedoAddNoteAll(False, xUndo, xRedo)
+        RedoAddNoteAll(False, xUndo, xRedo)
 
         'Restore selection
         Dim pSelStart As Double = vSelStart
         Dim pSelLength As Double = vSelLength
         Dim pSelHalf As Double = vSelHalf
         If vSelLength < 0 Then vSelStart += (xRatio - 1) * (xVUpper - xVLower)
-        vSelLength = vSelLength * xRatio
-        vSelHalf = vSelHalf * xRatio
+        vSelLength *= xRatio
+        vSelHalf *= xRatio
         ValidateSelection()
-        Me.RedoChangeTimeSelection(pSelStart, pSelLength, pSelHalf, vSelStart, vSelLength, vSelHalf, True, xUndo, xRedo)
+        RedoChangeTimeSelection(pSelStart, pSelLength, pSelHalf, vSelStart, vSelLength, vSelHalf, True, xUndo, xRedo)
 
         'Save redo
         'For xI3 = 1 To UBound(K)
@@ -227,7 +226,7 @@ EndofSub:
         '        sCmdKs(False) & vbCrLf & _
         '        "SA_" & vSelStart & "_" & vSelLength & "_" & vSelHalf & "_1"
 
-        Me.RedoRemoveNoteAll(False, xUndo, xRedo)
+        RedoRemoveNoteAll(False, xUndo, xRedo)
 
         If Not NTInput Then
             'Below Selection
@@ -245,7 +244,7 @@ EndofSub:
                     xBPM = Notes(xI1).Value
                     Notes(xI1).Value = Notes(xI1).Value * xRatio1
                 End If
-                Notes(xI1).VPosition = (Notes(xI1).VPosition - xVLower) * xRatio1 + xVLower
+                Notes(xI1).VPosition = ((Notes(xI1).VPosition - xVLower) * xRatio1) + xVLower
             Next
             xValueM = xBPM
             xI2 = xI1
@@ -257,10 +256,9 @@ EndofSub:
                     xBPM = Notes(xI1).Value
                     Notes(xI1).Value = IIf(Notes(xI1).Value * xRatio2 <= 655359999, Notes(xI1).Value * xRatio2, 655359999)
                 End If
-                Notes(xI1).VPosition = (Notes(xI1).VPosition - xVHalf) * xRatio2 + xVHalf + dVPosition
+                Notes(xI1).VPosition = ((Notes(xI1).VPosition - xVHalf) * xRatio2) + xVHalf + dVPosition
             Next
             xValueU = xBPM
-            xI2 = xI1
 
             'Above Selection
             'For xI1 = xI2 To UBound(K)
@@ -302,9 +300,9 @@ EndofSub:
                     Dim xEnd As Double = Notes(xI1).VPosition + Notes(xI1).Length
                     If xEnd > xVUpper Then
                     ElseIf xEnd > xVHalf Then
-                        Notes(xI1).Length = (xEnd - xVHalf) * xRatio2 + xVHalf + dVPosition - Notes(xI1).VPosition
+                        Notes(xI1).Length = ((xEnd - xVHalf) * xRatio2) + xVHalf + dVPosition - Notes(xI1).VPosition
                     ElseIf xEnd > xVLower Then
-                        Notes(xI1).Length = (xEnd - xVLower) * xRatio1 + xVLower - Notes(xI1).VPosition
+                        Notes(xI1).Length = ((xEnd - xVLower) * xRatio1) + xVLower - Notes(xI1).VPosition
                     End If
 
                 ElseIf Notes(xI1).VPosition <= xVHalf Then
@@ -327,15 +325,15 @@ EndofSub:
                     'Adjust Length
                     Dim xEnd As Double = Notes(xI1).VPosition + Notes(xI1).Length
                     If xEnd > xVUpper Then
-                        Notes(xI1).Length = xEnd - xVLower - (Notes(xI1).VPosition - xVLower) * xRatio1
+                        Notes(xI1).Length = xEnd - xVLower - ((Notes(xI1).VPosition - xVLower) * xRatio1)
                     ElseIf xEnd > xVHalf Then
-                        Notes(xI1).Length = (xVHalf - Notes(xI1).VPosition) * xRatio1 + (xEnd - xVHalf) * xRatio2
+                        Notes(xI1).Length = ((xVHalf - Notes(xI1).VPosition) * xRatio1) + ((xEnd - xVHalf) * xRatio2)
                     Else
                         Notes(xI1).Length *= xRatio1
                     End If
 
                     'Adjust VPosition
-                    Notes(xI1).VPosition = (Notes(xI1).VPosition - xVLower) * xRatio1 + xVLower
+                    Notes(xI1).VPosition = ((Notes(xI1).VPosition - xVLower) * xRatio1) + xVLower
 
                 ElseIf Notes(xI1).VPosition <= xVUpper Then
                     'check BPM
@@ -347,13 +345,13 @@ EndofSub:
                     'Adjust Length
                     Dim xEnd As Double = Notes(xI1).VPosition + Notes(xI1).Length
                     If xEnd > xVUpper Then
-                        Notes(xI1).Length = (xVUpper - Notes(xI1).VPosition) * xRatio2 + xEnd - xVUpper
+                        Notes(xI1).Length = ((xVUpper - Notes(xI1).VPosition) * xRatio2) + xEnd - xVUpper
                     Else
                         Notes(xI1).Length *= xRatio2
                     End If
 
                     'Adjust VPosition
-                    Notes(xI1).VPosition = (Notes(xI1).VPosition - xVHalf) * xRatio2 + xVHalf + dVPosition
+                    Notes(xI1).VPosition = ((Notes(xI1).VPosition - xVHalf) * xRatio2) + xVHalf + dVPosition
 
                     'Else
                     '    K(xI1).VPosition += (xVUpper - xVLower) * (xRatio - 1)
@@ -382,9 +380,9 @@ EndofSub:
         Dim pSelHalf As Double = vSelHalf
         vSelHalf += dVPosition
         ValidateSelection()
-        Me.RedoChangeTimeSelection(vSelStart, vSelLength, pSelHalf, vSelStart, vSelStart, vSelHalf, True, xUndo, xRedo)
+        RedoChangeTimeSelection(vSelStart, vSelLength, pSelHalf, vSelStart, vSelStart, vSelHalf, True, xUndo, xRedo)
 
-        Me.RedoAddNoteAll(False, xUndo, xRedo)
+        RedoAddNoteAll(False, xUndo, xRedo)
 
 
         'Restore note selection
@@ -464,11 +462,11 @@ EndofSub:
 
         'Compare BPM        '(xVHalf - xVLower) / xValue + (xVUpper - xVHalf) / xResult = (xVUpper - xVLower) / xConstBPM
         If (xVUpper - xVLower) / xConstBPM <= (xVHalf - xVLower) / xValue Then
-            Dim Limit = ((xVHalf - xVLower) * xConstBPM / (xVUpper - xVLower) / 10000)
-            MsgBox("Please enter a value that is greater than " & Limit & ".", MsgBoxStyle.Critical, Strings.Messages.Err)
+            Dim Limit = (xVHalf - xVLower) * xConstBPM / (xVUpper - xVLower) / 10000
+            Dim unused = MsgBox("Please enter a value that is greater than " & Limit & ".", MsgBoxStyle.Critical, Strings.Messages.Err)
             Return
         End If
-        Dim xTempDivider As Double = xConstBPM * (xVHalf - xVLower) - xValue * (xVUpper - xVLower)
+        Dim xTempDivider As Double = (xConstBPM * (xVHalf - xVLower)) - (xValue * (xVUpper - xVLower))
 
         ' az: I want to allow negative values, maybe...
         If xTempDivider = 0 Then
@@ -503,11 +501,9 @@ EndofSub:
                 Next
                 xTempTime += (xTempVPos - xVPos(xI3)) / xVal(xI3)
 
-                If xTempTime - (xVHalf - xVLower) / xValue > 0 Then
-                    Notes(xI1).VPosition = (xTempTime - (xVHalf - xVLower) / xValue) * xResult + xVHalf
-                Else
-                    Notes(xI1).VPosition = xTempTime * xValue + xVLower
-                End If
+                Notes(xI1).VPosition = If(xTempTime - ((xVHalf - xVLower) / xValue) > 0,
+                    ((xTempTime - ((xVHalf - xVLower) / xValue)) * xResult) + xVHalf,
+                    (xTempTime * xValue) + xVLower)
             Next
 
         Else
@@ -528,11 +524,9 @@ EndofSub:
                     Next
                     xTempTime += (xTempVPos - xVPos(xI3)) / xVal(xI3)
 
-                    If xTempTime - (xVHalf - xVLower) / xValue > 0 Then
-                        Notes(xI1).VPosition = (xTempTime - (xVHalf - xVLower) / xValue) * xResult + xVHalf
-                    Else
-                        Notes(xI1).VPosition = xTempTime * xValue + xVLower
-                    End If
+                    Notes(xI1).VPosition = If(xTempTime - ((xVHalf - xVLower) / xValue) > 0,
+                        ((xTempTime - ((xVHalf - xVLower) / xValue)) * xResult) + xVHalf,
+                        (xTempTime * xValue) + xVLower)
                 End If
 
                 If Notes(xI1).Length Then
@@ -545,11 +539,9 @@ EndofSub:
                         Next
                         xTempTime += (xTempEnd - xVPos(xI3)) / xVal(xI3)
 
-                        If xTempTime - (xVHalf - xVLower) / xValue > 0 Then
-                            Notes(xI1).Length = (xTempTime - (xVHalf - xVLower) / xValue) * xResult + xVHalf - Notes(xI1).VPosition
-                        Else
-                            Notes(xI1).Length = xTempTime * xValue + xVLower - Notes(xI1).VPosition
-                        End If
+                        Notes(xI1).Length = If(xTempTime - ((xVHalf - xVLower) / xValue) > 0,
+                            ((xTempTime - ((xVHalf - xVLower) / xValue)) * xResult) + xVHalf - Notes(xI1).VPosition,
+                            (xTempTime * xValue) + xVLower - Notes(xI1).VPosition)
 
                     Else
                         Notes(xI1).Length = xTempEnd - Notes(xI1).VPosition
@@ -603,7 +595,7 @@ EndOfAdjustment:
         'xRedo = "KZ" & vbCrLf & _
         '                      sCmdKs(False) & vbCrLf & _
         '                      "SA_" & vSelStart & "_" & vSelLength & "_" & vSelHalf & "_1"
-        Me.RedoAddNoteAll(False, xUndo, xRedo)
+        RedoAddNoteAll(False, xUndo, xRedo)
 
         'Restore note selection
         xVLower = IIf(vSelLength > 0, vSelStart, vSelStart + vSelLength)
@@ -637,7 +629,7 @@ EndOfAdjustment:
                            Select note
 
         If notesInRange.Count() > 0 Then
-            MessageBox.Show("The selected area can't have notes anywhere but at the start.")
+            Dim unused = MessageBox.Show("The selected area can't have notes anywhere but at the start.")
             Return
         End If
 
@@ -658,7 +650,7 @@ EndOfAdjustment:
             .Value = vSelLength * 10000
         End With
 
-        Me.RedoAddNoteAll(False, xUndo, xRedo)
+        RedoAddNoteAll(False, xUndo, xRedo)
 
         AddUndo(xUndo, xBaseRedo.Next)
 

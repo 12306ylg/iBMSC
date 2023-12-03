@@ -9,7 +9,7 @@
             Get
                 Return _Width
             End Get
-            Set(ByVal value As Integer)
+            Set(value As Integer)
                 _Width = value
                 _isEnabledAfterAll = _isVisible And _isNoteCol And (_Width <> 0)
             End Set
@@ -19,7 +19,7 @@
             Get
                 Return _isVisible
             End Get
-            Set(ByVal value As Boolean)
+            Set(value As Boolean)
                 _isVisible = value
                 _isEnabledAfterAll = _isVisible And _isNoteCol And (_Width <> 0)
             End Set
@@ -29,7 +29,7 @@
             Get
                 Return _isNoteCol
             End Get
-            Set(ByVal value As Boolean)
+            Set(value As Boolean)
                 _isNoteCol = value
                 _isEnabledAfterAll = _isVisible And _isNoteCol And (_Width <> 0)
             End Set
@@ -46,7 +46,7 @@
         '    Get
         '        Return Not (Visibility And ColumnVisibility.Invisible)
         '    End Get
-        '    Set(ByVal value As Boolean)
+        '    Set( value As Boolean)
         '        If value Then
         '            Visibility = Visibility Or ColumnVisibility.Invisible
         '        Else
@@ -72,27 +72,27 @@
         Private cCacheLB As Integer
         Private cCacheLD As Integer
 
-        Public Function getBright(ByVal opacity As Single) As Color
+        Public Function getBright(opacity As Single) As Color
             Return Color.FromArgb((CInt(((cCacheB >> 24) And &HFF) * opacity) << 24) Or (cCacheB And &HFFFFFF))
         End Function
-        Public Function getDark(ByVal opacity As Single) As Color
+        Public Function getDark(opacity As Single) As Color
             Return Color.FromArgb((CInt(((cCacheD >> 24) And &HFF) * opacity) << 24) Or (cCacheD And &HFFFFFF))
         End Function
-        Public Function getLongBright(ByVal opacity As Single) As Color
+        Public Function getLongBright(opacity As Single) As Color
             Return Color.FromArgb((CInt(((cCacheLB >> 24) And &HFF) * opacity) << 24) Or (cCacheLB And &HFFFFFF))
         End Function
-        Public Function getLongDark(ByVal opacity As Single) As Color
+        Public Function getLongDark(opacity As Single) As Color
             Return Color.FromArgb((CInt(((cCacheLD >> 24) And &HFF) * opacity) << 24) Or (cCacheLD And &HFFFFFF))
         End Function
 
-        Public Sub setNoteColor(ByVal c As Integer)
+        Public Sub setNoteColor(c As Integer)
             cNote = c
             'cCacheB = (c And &HFF000000) Or &H808080 Or ((c And &HFFFFFF) >> 1)
             'cCacheD = (c And &HFF000000) Or ((c And &HFEFEFE) >> 1)
             cCacheB = AdjustBrightness(Color.FromArgb(c), 50, ((c >> 24) And &HFF) / 255).ToArgb
             cCacheD = AdjustBrightness(Color.FromArgb(c), -25, ((c >> 24) And &HFF) / 255).ToArgb
         End Sub
-        Public Sub setLNoteColor(ByVal c As Integer)
+        Public Sub setLNoteColor(c As Integer)
             cLNote = c
             'cCacheLB = (c And &HFF000000) Or &H808080 Or ((c And &HFFFFFF) >> 1)
             'cCacheLD = (c And &HFF000000) Or ((c And &HFEFEFE) >> 1)
@@ -100,9 +100,9 @@
             cCacheLD = AdjustBrightness(Color.FromArgb(c), -25, ((c >> 24) And &HFF) / 255).ToArgb
         End Sub
 
-        Public Sub New(ByVal xLeft As Integer, ByVal xWidth As Integer, ByVal xTitle As String,
-        ByVal xNoteCol As Boolean, ByVal xisNumeric As Boolean, ByVal xisSound As Boolean, ByVal xVisible As Boolean, ByVal xIdentifier As Integer,
-        ByVal xcNote As Integer, ByVal xcText As Integer, ByVal xcLNote As Integer, ByVal xcLText As Integer, ByVal xcBG As Integer)
+        Public Sub New(xLeft As Integer, xWidth As Integer, xTitle As String,
+         xNoteCol As Boolean, xisNumeric As Boolean, xisSound As Boolean, xVisible As Boolean, xIdentifier As Integer,
+         xcNote As Integer, xcText As Integer, xcLNote As Integer, xcLText As Integer, xcBG As Integer)
             Left = xLeft
             Title = xTitle
             isNumeric = xisNumeric

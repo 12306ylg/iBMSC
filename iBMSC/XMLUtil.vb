@@ -1,4 +1,4 @@
-﻿Module XMLUtil
+﻿Friend Module XMLUtil
     Public Sub XMLWriteValue(ByVal w As XmlTextWriter, ByVal local As String, ByVal val As String)
         w.WriteStartElement(local)
         w.WriteAttributeString("Value", Editor.WriteDecimalWithDot(val))
@@ -20,15 +20,17 @@
     Public Sub XMLLoadAttribute(ByVal s As String, ByRef v As Single)
         If s.Length = 0 Then Exit Sub
 
-        Static nfi As New System.Globalization.NumberFormatInfo()
-        nfi.NumberDecimalSeparator = "."
+        Static nfi As New System.Globalization.NumberFormatInfo With {
+            .NumberDecimalSeparator = "."
+        }
         v = Double.Parse(s, nfi)
     End Sub
     Public Sub XMLLoadAttribute(ByVal s As String, ByRef v As Double)
         If s.Length = 0 Then Exit Sub
 
-        Static nfi As New System.Globalization.NumberFormatInfo()
-        nfi.NumberDecimalSeparator = "."
+        Static nfi As New System.Globalization.NumberFormatInfo With {
+            .NumberDecimalSeparator = "."
+        }
         v = Double.Parse(s, nfi)
     End Sub
     Public Sub XMLLoadAttribute(ByVal s As String, ByRef v As Long)
@@ -41,7 +43,7 @@
     End Sub
     Public Sub XMLLoadAttribute(ByVal s As String, ByRef v As Color)
         If s.Length = 0 Then Exit Sub
-        v = Color.FromArgb(CInt(s))
+        v = Color.FromArgb(s)
     End Sub
 
     Public Sub XMLLoadElementValue(ByVal n As XmlElement, ByRef v As Integer)

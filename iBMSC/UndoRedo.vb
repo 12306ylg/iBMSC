@@ -27,12 +27,12 @@ Public Class UndoRedo
         Public [Next] As LinkedURCmd = Nothing
         Public MustOverride Function ofType() As Byte
         Public MustOverride Function toBytes() As Byte()
-        'Public MustOverride Sub fromBytes(ByVal b As Byte())
+        'Public MustOverride Sub fromBytes( b As Byte())
     End Class
 
 
 
-    Public Shared Function fromBytes(ByVal b() As Byte) As LinkedURCmd
+    Public Shared Function fromBytes(b() As Byte) As LinkedURCmd
         If b Is Nothing Then Return Nothing
         If b.Length = 0 Then Return Nothing
 
@@ -66,7 +66,7 @@ Public Class UndoRedo
         Public Sub New()
         End Sub
 
-        Public Sub New(ByVal b() As Byte)
+        Public Sub New(b() As Byte)
         End Sub
 
         Public Overrides Function ofType() As Byte
@@ -81,16 +81,16 @@ Public Class UndoRedo
 
         End Sub
 
-        Public Sub New(ByVal b As Note)
+        Public Sub New(b As Note)
             note = b
         End Sub
 
-        Public Sub New(ByVal b() As Byte)
+        Public Sub New(b() As Byte)
             FromBinaryReader(New BinaryReader(New MemoryStream(b)))
         End Sub
 
         Public Sub FromBinaryReader(ByRef br As BinaryReader)
-            br.ReadByte()
+            Dim unused = br.ReadByte()
             note.FromBinReader(br)
         End Sub
 
@@ -115,7 +115,7 @@ Public Class UndoRedo
             note = _note
         End Sub
 
-        Public Sub New(ByVal b() As Byte)
+        Public Sub New(b() As Byte)
             MyBase.New(b)
         End Sub
 
@@ -131,7 +131,7 @@ Public Class UndoRedo
             note = _note
         End Sub
 
-        Public Sub New(ByVal b() As Byte)
+        Public Sub New(b() As Byte)
             MyBase.New(b)
         End Sub
 
@@ -153,7 +153,7 @@ Public Class UndoRedo
             Return ms.GetBuffer()
         End Function
 
-        Public Sub New(ByVal b() As Byte)
+        Public Sub New(b() As Byte)
             Dim br = New BinaryReader(New MemoryStream(b))
             FromBinaryReader(br)
             NNote.FromBinReader(br)
@@ -185,7 +185,7 @@ Public Class UndoRedo
             Return ms.GetBuffer()
         End Function
 
-        Public Sub New(ByVal b() As Byte)
+        Public Sub New(b() As Byte)
             Dim br As New BinaryReader(New MemoryStream(b))
             FromBinaryReader(br)
             NColumnIndex = br.ReadInt32()
@@ -219,14 +219,14 @@ Public Class UndoRedo
             Return ms.GetBuffer()
         End Function
 
-        Public Sub New(ByVal b() As Byte)
+        Public Sub New(b() As Byte)
             Dim br = New BinaryReader(New MemoryStream(b))
             FromBinaryReader(br)
             NLongNote = br.ReadDouble()
             NVPosition = br.ReadDouble()
         End Sub
 
-        Public Sub New(_note As Note, ByVal xNVPosition As Double, ByVal xNLongNote As Double)
+        Public Sub New(_note As Note, xNVPosition As Double, xNLongNote As Double)
             note = _note
             NVPosition = xNVPosition
             NLongNote = xNLongNote
@@ -250,13 +250,13 @@ Public Class UndoRedo
             Return MS.GetBuffer()
         End Function
 
-        Public Sub New(ByVal b() As Byte)
+        Public Sub New(b() As Byte)
             Dim br = New BinaryReader(New MemoryStream(b))
             FromBinaryReader(br)
             NHidden = br.ReadBoolean()
         End Sub
 
-        Public Sub New(_note As Note, ByVal xNHidden As Boolean)
+        Public Sub New(_note As Note, xNHidden As Boolean)
             note = _note
             NHidden = xNHidden
         End Sub
@@ -282,13 +282,13 @@ Public Class UndoRedo
             Return ms.GetBuffer()
         End Function
 
-        Public Sub New(ByVal b() As Byte)
+        Public Sub New(b() As Byte)
             Dim br = New BinaryReader(New MemoryStream(b))
             FromBinaryReader(br)
             NValue = br.ReadInt64
         End Sub
 
-        Public Sub New(_note As Note, ByVal xNValue As Long)
+        Public Sub New(_note As Note, xNValue As Long)
             note = _note
             NValue = xNValue
         End Sub
@@ -306,7 +306,7 @@ Public Class UndoRedo
             toBytes = New Byte() {opRemoveAllNotes}
         End Function
 
-        Public Sub New(ByVal b() As Byte)
+        Public Sub New(b() As Byte)
         End Sub
 
         Public Sub New()
@@ -330,7 +330,7 @@ Public Class UndoRedo
             Dim xToBytes() As Byte = {opChangeMeasureLength,
                                       xVal(0), xVal(1), xVal(2), xVal(3), xVal(4), xVal(5), xVal(6), xVal(7),
                                       xUbound(0), xUbound(1), xUbound(2), xUbound(3)}
-            ReDim Preserve xToBytes(12 + 4 * Indices.Length)
+            ReDim Preserve xToBytes(12 + (4 * Indices.Length))
             For xI1 As Integer = 13 To UBound(xToBytes) Step 4
                 Dim xId() As Byte = BitConverter.GetBytes(Indices((xI1 - 13) \ 4))
                 xToBytes(xI1 + 0) = xId(0)
@@ -341,7 +341,7 @@ Public Class UndoRedo
             Return xToBytes
         End Function
 
-        Public Sub New(ByVal b() As Byte)
+        Public Sub New(b() As Byte)
             Value = BitConverter.ToDouble(b, 1)
             Dim xUbound As Integer = BitConverter.ToInt32(b, 9)
             ReDim Preserve Indices(xUbound)
@@ -350,7 +350,7 @@ Public Class UndoRedo
             Next
         End Sub
 
-        Public Sub New(ByVal xValue As Double, ByVal xIndices() As Integer)
+        Public Sub New(xValue As Double, xIndices() As Integer)
             Value = xValue
             Indices = xIndices
         End Sub
@@ -380,14 +380,14 @@ Public Class UndoRedo
                                   IIf(Selected, trueByte, falseByte)}
         End Function
 
-        Public Sub New(ByVal b() As Byte)
+        Public Sub New(b() As Byte)
             SelStart = BitConverter.ToDouble(b, 1)
             SelLength = BitConverter.ToDouble(b, 9)
             SelHalf = BitConverter.ToDouble(b, 17)
             Selected = CBool(b(25))
         End Sub
 
-        Public Sub New(ByVal xSelStart As Double, ByVal xSelLength As Double, ByVal xSelHalf As Double, ByVal xSelected As Boolean)
+        Public Sub New(xSelStart As Double, xSelLength As Double, xSelHalf As Double, xSelected As Boolean)
             SelStart = xSelStart
             SelLength = xSelLength
             SelHalf = xSelHalf
@@ -412,12 +412,12 @@ Public Class UndoRedo
                                   IIf(AutoConvert, trueByte, falseByte)}
         End Function
 
-        Public Sub New(ByVal b() As Byte)
+        Public Sub New(b() As Byte)
             BecomeNT = CBool(b(1))
             AutoConvert = CBool(b(2))
         End Sub
 
-        Public Sub New(ByVal xBecomeNT As Boolean, ByVal xAutoConvert As Boolean)
+        Public Sub New(xBecomeNT As Boolean, xAutoConvert As Boolean)
             BecomeNT = xBecomeNT
             AutoConvert = xAutoConvert
         End Sub
@@ -430,7 +430,7 @@ Public Class UndoRedo
     Public Class WavAutoincFlag : Inherits LinkedURCmd
         Public Checked As Boolean = False
 
-        Public Sub New(ByVal _checked As Boolean)
+        Public Sub New(_checked As Boolean)
             Checked = _checked
         End Sub
         Public Overrides Function toBytes() As Byte()
@@ -438,7 +438,7 @@ Public Class UndoRedo
                                   IIf(Checked, trueByte, falseByte)}
         End Function
 
-        Public Sub New(ByVal b() As Byte)
+        Public Sub New(b() As Byte)
             Checked = CBool(b(1))
         End Sub
 
@@ -460,7 +460,7 @@ Public Class UndoRedo
         Public Sub New()
         End Sub
 
-        Public Sub New(ByVal b() As Byte)
+        Public Sub New(b() As Byte)
         End Sub
 
         Public Overrides Function ofType() As Byte

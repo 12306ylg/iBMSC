@@ -1,11 +1,9 @@
-Imports System.Windows.Forms
-
 Public Class OpPlayer
-    Dim pArg() As MainWindow.PlayerArguments
+    Private pArg() As MainWindow.PlayerArguments
     'Dim ImplicitChange As Boolean = False
-    Dim CurrPlayer As Integer = -1
+    Private CurrPlayer As Integer = -1
 
-    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
+    Private Sub OK_Button_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles OK_Button.Click
         DialogResult = DialogResult.OK
         Close()
 
@@ -15,16 +13,16 @@ Public Class OpPlayer
         Dispose()
     End Sub
 
-    Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
-        Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Close()
-        Me.Dispose()
+    Private Sub Cancel_Button_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
+        DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Close()
+        Dispose()
     End Sub
 
-    Private Sub OpPlayer_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Font = MainWindow.Font
+    Private Sub OpPlayer_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Font = MainWindow.Font
 
-        Me.Text = Strings.fopPlayer.Title
+        Text = Strings.fopPlayer.Title
         Label1.Text = Strings.fopPlayer.Path
         Label2.Text = Strings.fopPlayer.PlayFromBeginning
         Label3.Text = Strings.fopPlayer.PlayFromHere
@@ -51,7 +49,7 @@ Public Class OpPlayer
         LPlayer_Click(sender, New EventArgs)
     End Sub
 
-    Private Sub BPrevAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BAdd.Click
+    Private Sub BPrevAdd_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BAdd.Click
         ReDim Preserve pArg(UBound(pArg) + 1)
         CurrPlayer += 1
         For xI1 As Integer = UBound(pArg) To CurrPlayer Step -1
@@ -63,9 +61,9 @@ Public Class OpPlayer
         LPlayer.SelectedIndex += 1
     End Sub
 
-    Private Sub BPrevDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BRemove.Click
+    Private Sub BPrevDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BRemove.Click
         If LPlayer.Items.Count = 1 Then
-            MsgBox(Strings.Messages.PreviewDelError, MsgBoxStyle.Exclamation)
+            Dim unused = MsgBox(Strings.Messages.PreviewDelError, MsgBoxStyle.Exclamation)
             Exit Sub
         End If
 
@@ -83,18 +81,19 @@ Public Class OpPlayer
         ShowInTextbox()
     End Sub
 
-    Private Sub BPrevBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BBrowse.Click
-        Dim xDOpen As New OpenFileDialog
-        xDOpen.InitialDirectory = IIf(Path.GetDirectoryName(Replace(TPath.Text, "<apppath>", My.Application.Info.DirectoryPath)) = "", _
+    Private Sub BPrevBrowse_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BBrowse.Click
+        Dim xDOpen As New OpenFileDialog With {
+            .InitialDirectory = IIf(Path.GetDirectoryName(Replace(TPath.Text, "<apppath>", My.Application.Info.DirectoryPath)) = "", _
                                       My.Application.Info.DirectoryPath, _
-                                      Path.GetDirectoryName(Replace(TPath.Text, "<apppath>", My.Application.Info.DirectoryPath)))
-        xDOpen.Filter = Strings.FileType.EXE & "|*.exe"
-        xDOpen.DefaultExt = "exe"
+                                      Path.GetDirectoryName(Replace(TPath.Text, "<apppath>", My.Application.Info.DirectoryPath))),
+            .Filter = Strings.FileType.EXE & "|*.exe",
+            .DefaultExt = "exe"
+        }
         If xDOpen.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         TPath.Text = Replace(xDOpen.FileName, My.Application.Info.DirectoryPath, "<apppath>")
     End Sub
 
-    Private Sub BPrevDefault_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BDefault.Click
+    Private Sub BPrevDefault_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles BDefault.Click
         'ImplicitChange = True
         If MsgBox(Strings.Messages.RestoreDefaultSettings, MsgBoxStyle.Question + MsgBoxStyle.YesNo) = MsgBoxResult.No Then Exit Sub
 
@@ -115,7 +114,7 @@ Public Class OpPlayer
     Private Sub ResetLPlayer_ShowInTextbox()
         LPlayer.Items.Clear()
         For xI1 As Integer = 0 To UBound(pArg)
-            LPlayer.Items.Add(GetFileName(pArg(xI1).Path))
+            Dim unused = LPlayer.Items.Add(GetFileName(pArg(xI1).Path))
         Next
         'RemoveHandler LPlayer.SelectedIndexChanged, AddressOf LPlayer_SelectedIndexChanged
         LPlayer.SelectedIndex = CurrPlayer
@@ -168,11 +167,7 @@ Public Class OpPlayer
                 End If
             Next
 
-            If xContainsInvalidChar Then
-                xT.BackColor = Color.FromArgb(&HFFFFC0C0)
-            Else
-                xT.BackColor = Nothing
-            End If
+            xT.BackColor = If(xContainsInvalidChar, Color.FromArgb(&HFFFFC0C0), Nothing)
         Next
     End Sub
 

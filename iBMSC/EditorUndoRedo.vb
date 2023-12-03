@@ -107,7 +107,7 @@ Partial Public Class MainWindow
                     'If xDenom < 4 Then xDenom = 4
                     For Each xM As Integer In xCmd.Indices
                         MeasureLength(xM) = xCmd.Value
-                        LBeat.Items(xM) = Add3Zeros(xM) & ": " & (xCmd.Value / 192) & IIf(xxD > 10000, "", " ( " & CLng(xCmd.Value / 192 * xxD) & " / " & xxD & " ) ")
+                        LBeat.Items(xM) = Add3Zeros(xM) & ": " & (xCmd.Value / 192) & IIf(xxD > 10000, "", " ( " & (xCmd.Value / 192 * xxD) & " / " & xxD & " ) ")
                         LBeat.SelectedIndices.Add(xM)
                     Next
                     UpdateMeasureBottom()
@@ -234,9 +234,9 @@ Partial Public Class MainWindow
             Dim xUndo As New UndoRedo.RemoveNote(Notes(xI1))
             Dim xRedo As New UndoRedo.AddNote(Notes(xI1))
             xUndo.Next = BaseUndo
-                BaseUndo = xUndo
-                If BaseRedo IsNot Nothing Then BaseRedo.Next = xRedo
-                BaseRedo = xRedo
+            BaseUndo = xUndo
+            If BaseRedo IsNot Nothing Then BaseRedo.Next = xRedo
+            BaseRedo = xRedo
 
         Next
     End Sub
@@ -246,11 +246,13 @@ Partial Public Class MainWindow
 
             Dim xRedo As New UndoRedo.AddNote(Notes(xI1))
             If BaseRedo IsNot Nothing Then BaseRedo.Next = xRedo
-                BaseRedo = xRedo
+            BaseRedo = xRedo
 
         Next
-        Dim xUndo As New UndoRedo.RemoveAllNotes
-        xUndo.Next = BaseUndo
+
+        Dim xUndo As New UndoRedo.RemoveAllNotes With {
+            .Next = BaseUndo
+        }
         BaseUndo = xUndo
     End Sub
 
@@ -290,8 +292,9 @@ Partial Public Class MainWindow
     Private Sub RedoRemoveNoteAll(ByVal xSel As Boolean, ByRef BaseUndo As UndoRedo.LinkedURCmd, ByRef BaseRedo As UndoRedo.LinkedURCmd)
         For xI1 As Integer = 1 To UBound(Notes)
             With Notes(xI1)
-                Dim xUndo As New UndoRedo.AddNote(Notes(xI1))
-                xUndo.Next = BaseUndo
+                Dim xUndo As New UndoRedo.AddNote(Notes(xI1)) With {
+                    .Next = BaseUndo
+                }
                 BaseUndo = xUndo
             End With
         Next

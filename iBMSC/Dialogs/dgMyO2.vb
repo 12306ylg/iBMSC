@@ -1,5 +1,5 @@
 Public Class dgMyO2
-    Structure Adj
+    Public Structure Adj
         Public Measure As Integer
         Public ColumnIndex As Integer
         Public ColumnName As String
@@ -13,13 +13,13 @@ Public Class dgMyO2
 
     Private Aj(-1) As Adj
 
-    Private Sub fMyO2_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.Font = MainWindow.Font
+    Private Sub fMyO2_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Font = MainWindow.Font
         vBPM.Value = MainWindow.THBPM.Value
     End Sub
 
     Private Sub AddAdjItem(ByVal xAj As Adj, ByVal Index As Integer)
-        lResult.Rows.Add()
+        Dim unused = lResult.Rows.Add()
         Dim xRow As Integer = lResult.Rows.Count - 1
         lResult.Item(0, xRow).Value = Index
         lResult.Item(1, xRow).Value = xAj.Measure
@@ -32,11 +32,11 @@ Public Class dgMyO2
         lResult.Item(8, xRow).Value = xAj.D48
     End Sub
 
-    Private Sub bApply1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bApply1.Click
+    Private Sub bApply1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles bApply1.Click
         MainWindow.MyO2ConstBPM(vBPM.Value * 10000)
     End Sub
 
-    Private Sub bApply2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bApply2.Click
+    Private Sub bApply2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles bApply2.Click
         Dim xStrItem() As String = MainWindow.MyO2GridCheck()
         ReDim Aj(UBound(xStrItem))
 
@@ -59,7 +59,7 @@ Public Class dgMyO2
         Next
     End Sub
 
-    Private Sub bApply3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles bApply3.Click
+    Private Sub bApply3_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles bApply3.Click
         MainWindow.MyO2GridAdjust(Aj)
     End Sub
 
@@ -67,7 +67,7 @@ Public Class dgMyO2
         InitializeComponent()
     End Sub
 
-    Private Sub lResult_CellEndEdit(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles lResult.CellEndEdit
+    Private Sub lResult_CellEndEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles lResult.CellEndEdit
         If e.ColumnIndex <> 6 Then Return
         If e.RowIndex < 0 Then Return
         Aj(Val(lResult.Item(0, e.RowIndex).Value)).AdjTo64 = lResult.Item(6, e.RowIndex).Value

@@ -54,7 +54,7 @@
         ReDim SelectedNotes(-1)
         KMouseOver = -1
         If Not My.Computer.FileSystem.FileExists(xFileName) Then
-            MsgBox(Strings.Messages.CannotFind.Replace("{}", xFileName), MsgBoxStyle.Critical)
+            Dim unused = MsgBox(Strings.Messages.CannotFind.Replace("{}", xFileName), MsgBoxStyle.Critical)
             Exit Sub
         End If
         If ClosingPopSave() Then Exit Sub
@@ -75,19 +75,19 @@
         End Select
     End Sub
 
-    Private Sub TBOpenR0_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBOpenR0.Click, mnOpenR0.Click
+    Private Sub TBOpenR0_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBOpenR0.Click, mnOpenR0.Click
         OpenRecent(Recent(0))
     End Sub
-    Private Sub TBOpenR1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBOpenR1.Click, mnOpenR1.Click
+    Private Sub TBOpenR1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBOpenR1.Click, mnOpenR1.Click
         OpenRecent(Recent(1))
     End Sub
-    Private Sub TBOpenR2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBOpenR2.Click, mnOpenR2.Click
+    Private Sub TBOpenR2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBOpenR2.Click, mnOpenR2.Click
         OpenRecent(Recent(2))
     End Sub
-    Private Sub TBOpenR3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBOpenR3.Click, mnOpenR3.Click
+    Private Sub TBOpenR3_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBOpenR3.Click, mnOpenR3.Click
         OpenRecent(Recent(3))
     End Sub
-    Private Sub TBOpenR4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBOpenR4.Click, mnOpenR4.Click
+    Private Sub TBOpenR4_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles TBOpenR4.Click, mnOpenR4.Click
         OpenRecent(Recent(4))
     End Sub
 
