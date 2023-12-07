@@ -367,6 +367,7 @@ Partial Class MainWindow
         TimerMiddle = New Timer(components)
         ToolStripContainer1 = New ToolStripContainer()
         PMain = New Panel()
+        bmsfilename = New Label()
         PMainIn = New Panel()
         MainPanelScroll = New VScrollBar()
         HS = New HScrollBar()
@@ -3472,6 +3473,7 @@ Partial Class MainWindow
         ' 
         mnPreview.DropDownItems.AddRange(New ToolStripItem() {mnPlayB, mnPlay, mnStop})
         mnPreview.Name = "mnPreview"
+        mnPreview.ShortcutKeys = Keys.Delete
         mnPreview.Size = New Size(64, 21)
         mnPreview.Text = "&Preview"
         ' 
@@ -4167,7 +4169,8 @@ Partial Class MainWindow
         ' 
         ' PMain
         ' 
-        PMain.BackColor = Color.Black
+        PMain.BackColor = Color.WhiteSmoke
+        PMain.Controls.Add(bmsfilename)
         PMain.Controls.Add(PMainIn)
         PMain.Controls.Add(MainPanelScroll)
         PMain.Controls.Add(HS)
@@ -4180,15 +4183,25 @@ Partial Class MainWindow
         PMain.TabIndex = 58
         PMain.Tag = "1"
         ' 
+        ' bmsfilename
+        ' 
+        bmsfilename.AutoSize = True
+        bmsfilename.BackColor = Color.WhiteSmoke
+        bmsfilename.ForeColor = Color.Black
+        bmsfilename.Location = New Point(-2, -1)
+        bmsfilename.Name = "bmsfilename"
+        bmsfilename.Size = New Size(34, 14)
+        bmsfilename.TabIndex = 0
+        bmsfilename.Text = "bms"
+        ' 
         ' PMainIn
         ' 
         PMainIn.BackColor = Color.Black
-        PMainIn.Dock = DockStyle.Fill
         PMainIn.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         PMainIn.ForeColor = Color.White
-        PMainIn.Location = New Point(0, 0)
+        PMainIn.Location = New Point(0, 16)
         PMainIn.Name = "PMainIn"
-        PMainIn.Size = New Size(849, 641)
+        PMainIn.Size = New Size(849, 625)
         PMainIn.TabIndex = 0
         PMainIn.TabStop = True
         PMainIn.Tag = "1"
@@ -4492,6 +4505,7 @@ Partial Class MainWindow
         ToolStripContainer1.ResumeLayout(False)
         ToolStripContainer1.PerformLayout()
         PMain.ResumeLayout(False)
+        PMain.PerformLayout()
         PMainR.ResumeLayout(False)
         PMainL.ResumeLayout(False)
         ResumeLayout(False)
@@ -4859,4 +4873,5 @@ Partial Class MainWindow
     Friend WithEvents TBCopy As ToolStripButton
     Friend WithEvents TBPaste As ToolStripButton
     Friend WithEvents TBFind As ToolStripButton
+    Friend WithEvents bmsfilename As Label
 End Class

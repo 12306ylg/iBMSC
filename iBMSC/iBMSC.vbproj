@@ -142,7 +142,4 @@
     <Compile Remove="SCompareMethod.vb" />
     <EmbeddedResource Remove="SCompareMethod.resx" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\.editorconfig" Link=".editorconfig" />
-  </ItemGroup>
 </Project>

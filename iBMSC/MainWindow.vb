@@ -1455,11 +1455,11 @@ EndSearch:
         OpenBMS(Clipboard.GetText)
     End Sub
 
-    Private Sub TBOpen_ButtonClick(sender As Object, e As EventArgs) Handles TBOpen.ButtonClick, mnOpen.Click
+    Private Sub TBOpen_ButtonClick(sender As Object, e As EventArgs) Handles TBOpen.ButtonClick, mnOpen.Click, bmsfilename.Leave, bmsfilename.DataContextChanged
         'KMouseDown = -1
         ReDim SelectedNotes(-1)
         KMouseOver = -1
-        If ClosingPopSave() Then Exit Sub
+        If ClosingPopSave Then Exit Sub
 
         Dim xDOpen As New OpenFileDialog With {
             .Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt",
@@ -1470,7 +1470,7 @@ EndSearch:
         If xDOpen.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDOpen.FileName)
         OpenBMS(My.Computer.FileSystem.ReadAllText(xDOpen.FileName, TextEncoding))
-        ClearUndo()
+        ClearUndo
         SetFileName(xDOpen.FileName)
         NewRecent(FileName)
         SetIsSaved(True)
@@ -2102,7 +2102,9 @@ EndSearch:
     Private Function GetFileName(s As String) As String
         Dim fslash As Integer = InStrRev(s, "/")
         Dim bslash As Integer = InStrRev(s, "\")
+        bmsfilename.Text = FileName
         Return Mid(s, IIf(fslash > bslash, fslash, bslash) + 1)
+
     End Function
 
     Private Function ExcludeFileName(s As String) As String
@@ -4917,7 +4919,4 @@ case2:              Dim xI0 As Integer
         End If
     End Sub
 
-    Private Sub Label8_Click(sender As Object, e As EventArgs) Handles Label8.Click
-
-    End Sub
 End Class
