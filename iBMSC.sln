@@ -3,12 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "iBMSC", "iBMSC\iBMSC.vbproj", "{35281D99-2A97-4AA0-AC1E-6CDC78999A3D}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "iBMSC", "iBMSC\iBMSC.vbproj", "{35281D99-2A97-4AA0-AC1E-6CDC78999A3D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{03BE6300-686B-4F95-BD36-20A9F7732469}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "2bmscsetup", "Setupibmsc\Setupibmsc.vdproj", "{7E3382F3-AF2A-4CEC-965B-08F660642C06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +22,10 @@ Global
 		{35281D99-2A97-4AA0-AC1E-6CDC78999A3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35281D99-2A97-4AA0-AC1E-6CDC78999A3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35281D99-2A97-4AA0-AC1E-6CDC78999A3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E3382F3-AF2A-4CEC-965B-08F660642C06}.Debug|Any CPU.ActiveCfg = Debug
+		{7E3382F3-AF2A-4CEC-965B-08F660642C06}.Debug|Any CPU.Build.0 = Debug
+		{7E3382F3-AF2A-4CEC-965B-08F660642C06}.Release|Any CPU.ActiveCfg = Release
+		{7E3382F3-AF2A-4CEC-965B-08F660642C06}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

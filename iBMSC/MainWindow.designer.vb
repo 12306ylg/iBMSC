@@ -25,16 +25,16 @@ Partial Class MainWindow
         TBLangDef = New ToolStripMenuItem()
         TBLangRefresh = New ToolStripMenuItem()
         ToolStripSeparator9 = New ToolStripSeparator()
-        mnLanguage = New ToolStripMenuItem()
         TBLanguage = New ToolStripDropDownButton()
+        mnLanguage = New ToolStripMenuItem()
         cmnTheme = New ContextMenuStrip(components)
         TBThemeDef = New ToolStripMenuItem()
         TBThemeSave = New ToolStripMenuItem()
         TBThemeRefresh = New ToolStripMenuItem()
         TBThemeLoadComptability = New ToolStripMenuItem()
         ToolStripSeparator6 = New ToolStripSeparator()
-        mnTheme = New ToolStripMenuItem()
         TBTheme = New ToolStripDropDownButton()
+        mnTheme = New ToolStripMenuItem()
         POptionsScroll = New Panel()
         POptions = New Panel()
         POExpansion = New Panel()
@@ -286,11 +286,11 @@ Partial Class MainWindow
         ToolStripSeparator11 = New ToolStripSeparator()
         POBModify = New ToolStripMenuItem()
         POBMirror = New ToolStripMenuItem()
-        POConvert = New ToolStripDropDownButton()
         mnPreview = New ToolStripMenuItem()
         mnPlayB = New ToolStripMenuItem()
         mnPlay = New ToolStripMenuItem()
         mnStop = New ToolStripMenuItem()
+        POConvert = New ToolStripDropDownButton()
         TBMain = New ToolStrip()
         TBNew = New ToolStripButton()
         TBOpen = New ToolStripSplitButton()
@@ -367,6 +367,11 @@ Partial Class MainWindow
         TimerMiddle = New Timer(components)
         ToolStripContainer1 = New ToolStripContainer()
         PMain = New Panel()
+        rawtip = New Label()
+        rawtext = New Label()
+        textsaveButton = New Button()
+        bmsrawTextBox = New TextBox()
+        title = New Label()
         bmsfilename = New Label()
         PMainIn = New Panel()
         MainPanelScroll = New VScrollBar()
@@ -470,7 +475,7 @@ Partial Class MainWindow
         ' 
         cmnLanguage.Items.AddRange(New ToolStripItem() {TBLangDef, TBLangRefresh, ToolStripSeparator9})
         cmnLanguage.Name = "cmnLanguage"
-        cmnLanguage.OwnerItem = TBLanguage
+        cmnLanguage.OwnerItem = mnLanguage
         cmnLanguage.Size = New Size(126, 54)
         ' 
         ' TBLangDef
@@ -491,14 +496,6 @@ Partial Class MainWindow
         ToolStripSeparator9.Name = "ToolStripSeparator9"
         ToolStripSeparator9.Size = New Size(122, 6)
         ' 
-        ' mnLanguage
-        ' 
-        mnLanguage.DropDown = cmnLanguage
-        mnLanguage.Image = CType(resources.GetObject("mnLanguage.Image"), Image)
-        mnLanguage.Name = "mnLanguage"
-        mnLanguage.Size = New Size(247, 22)
-        mnLanguage.Text = "&Language"
-        ' 
         ' TBLanguage
         ' 
         TBLanguage.DisplayStyle = ToolStripItemDisplayStyle.Image
@@ -509,11 +506,19 @@ Partial Class MainWindow
         TBLanguage.Size = New Size(29, 22)
         TBLanguage.Text = "Language"
         ' 
+        ' mnLanguage
+        ' 
+        mnLanguage.DropDown = cmnLanguage
+        mnLanguage.Image = CType(resources.GetObject("mnLanguage.Image"), Image)
+        mnLanguage.Name = "mnLanguage"
+        mnLanguage.Size = New Size(247, 22)
+        mnLanguage.Text = "&Language"
+        ' 
         ' cmnTheme
         ' 
         cmnTheme.Items.AddRange(New ToolStripItem() {TBThemeDef, TBThemeSave, TBThemeRefresh, TBThemeLoadComptability, ToolStripSeparator6})
         cmnTheme.Name = "cmnLanguage"
-        cmnTheme.OwnerItem = TBTheme
+        cmnTheme.OwnerItem = mnTheme
         cmnTheme.Size = New Size(266, 98)
         ' 
         ' TBThemeDef
@@ -547,14 +552,6 @@ Partial Class MainWindow
         ToolStripSeparator6.Name = "ToolStripSeparator6"
         ToolStripSeparator6.Size = New Size(262, 6)
         ' 
-        ' mnTheme
-        ' 
-        mnTheme.DropDown = cmnTheme
-        mnTheme.Image = CType(resources.GetObject("mnTheme.Image"), Image)
-        mnTheme.Name = "mnTheme"
-        mnTheme.Size = New Size(247, 22)
-        mnTheme.Text = "&Theme"
-        ' 
         ' TBTheme
         ' 
         TBTheme.DisplayStyle = ToolStripItemDisplayStyle.Image
@@ -565,14 +562,22 @@ Partial Class MainWindow
         TBTheme.Size = New Size(29, 22)
         TBTheme.Text = "Theme"
         ' 
+        ' mnTheme
+        ' 
+        mnTheme.DropDown = cmnTheme
+        mnTheme.Image = CType(resources.GetObject("mnTheme.Image"), Image)
+        mnTheme.Name = "mnTheme"
+        mnTheme.Size = New Size(247, 22)
+        mnTheme.Text = "&Theme"
+        ' 
         ' POptionsScroll
         ' 
         POptionsScroll.AutoScroll = True
         POptionsScroll.Controls.Add(POptions)
         POptionsScroll.Dock = DockStyle.Right
-        POptionsScroll.Location = New Point(882, 0)
+        POptionsScroll.Location = New Point(1150, 0)
         POptionsScroll.Name = "POptionsScroll"
-        POptionsScroll.Size = New Size(200, 730)
+        POptionsScroll.Size = New Size(200, 729)
         POptionsScroll.TabIndex = 28
         ' 
         ' POptions
@@ -2866,7 +2871,7 @@ Partial Class MainWindow
         mnMain.LayoutStyle = ToolStripLayoutStyle.Flow
         mnMain.Location = New Point(0, 0)
         mnMain.Name = "mnMain"
-        mnMain.Size = New Size(876, 25)
+        mnMain.Size = New Size(1144, 25)
         mnMain.TabIndex = 57
         ' 
         ' mnFile
@@ -3398,7 +3403,7 @@ Partial Class MainWindow
         ' 
         cmnConversion.Items.AddRange(New ToolStripItem() {POBLong, POBShort, POBLongShort, ToolStripSeparator10, POBHidden, POBVisible, POBHiddenVisible, ToolStripSeparator11, POBModify, POBMirror})
         cmnConversion.Name = "cmnLanguage"
-        cmnConversion.OwnerItem = mnConversion
+        cmnConversion.OwnerItem = POConvert
         cmnConversion.Size = New Size(241, 192)
         ' 
         ' POBLong
@@ -3469,16 +3474,6 @@ Partial Class MainWindow
         POBMirror.Size = New Size(240, 22)
         POBMirror.Text = "Mi&rror"
         ' 
-        ' POConvert
-        ' 
-        POConvert.DisplayStyle = ToolStripItemDisplayStyle.Image
-        POConvert.DropDown = cmnConversion
-        POConvert.Image = CType(resources.GetObject("POConvert.Image"), Image)
-        POConvert.ImageTransparentColor = Color.Magenta
-        POConvert.Name = "POConvert"
-        POConvert.Size = New Size(29, 22)
-        POConvert.Text = "Convert Notes"
-        ' 
         ' mnPreview
         ' 
         mnPreview.DropDownItems.AddRange(New ToolStripItem() {mnPlayB, mnPlay, mnStop})
@@ -3510,6 +3505,16 @@ Partial Class MainWindow
         mnStop.ShortcutKeys = Keys.F7
         mnStop.Size = New Size(214, 22)
         mnStop.Text = "&Stop"
+        ' 
+        ' POConvert
+        ' 
+        POConvert.DisplayStyle = ToolStripItemDisplayStyle.Image
+        POConvert.DropDown = cmnConversion
+        POConvert.Image = CType(resources.GetObject("POConvert.Image"), Image)
+        POConvert.ImageTransparentColor = Color.Magenta
+        POConvert.Name = "POConvert"
+        POConvert.Size = New Size(29, 22)
+        POConvert.Text = "Convert Notes"
         ' 
         ' TBMain
         ' 
@@ -3902,9 +3907,9 @@ Partial Class MainWindow
         pStatus.Controls.Add(FStatus2)
         pStatus.Controls.Add(FStatus)
         pStatus.Dock = DockStyle.Bottom
-        pStatus.Location = New Point(0, 708)
+        pStatus.Location = New Point(0, 707)
         pStatus.Name = "pStatus"
-        pStatus.Size = New Size(876, 22)
+        pStatus.Size = New Size(1144, 22)
         pStatus.TabIndex = 62
         ' 
         ' FStatus2
@@ -4033,11 +4038,12 @@ Partial Class MainWindow
         ' FStatus
         ' 
         FStatus.AccessibleRole = AccessibleRole.StatusBar
+        FStatus.BackColor = SystemColors.MenuHighlight
         FStatus.Items.AddRange(New ToolStripItem() {FSC, FSW, FSM, FSP1, FSP3, FSP2, FSP4, TimeStatusLabel, FST, FSH, FSL, FSE})
         FStatus.Location = New Point(0, 0)
         FStatus.Name = "FStatus"
         FStatus.ShowItemToolTips = True
-        FStatus.Size = New Size(876, 22)
+        FStatus.Size = New Size(1144, 22)
         FStatus.SizingGrip = False
         FStatus.TabIndex = 62
         FStatus.Text = "Status"
@@ -4062,7 +4068,7 @@ Partial Class MainWindow
         ' FSM
         ' 
         FSM.AutoSize = False
-        FSM.ForeColor = Color.Teal
+        FSM.ForeColor = Color.Cyan
         FSM.Name = "FSM"
         FSM.Size = New Size(40, 17)
         FSM.Text = "000"
@@ -4071,7 +4077,8 @@ Partial Class MainWindow
         ' FSP1
         ' 
         FSP1.AutoSize = False
-        FSP1.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        FSP1.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        FSP1.ForeColor = SystemColors.ControlLightLight
         FSP1.Name = "FSP1"
         FSP1.Size = New Size(170, 17)
         FSP1.Text = "9.41176470588235 / 9999"
@@ -4080,7 +4087,7 @@ Partial Class MainWindow
         ' FSP3
         ' 
         FSP3.AutoSize = False
-        FSP3.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        FSP3.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         FSP3.ForeColor = Color.Maroon
         FSP3.Name = "FSP3"
         FSP3.Size = New Size(85, 17)
@@ -4090,8 +4097,8 @@ Partial Class MainWindow
         ' FSP2
         ' 
         FSP2.AutoSize = False
-        FSP2.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        FSP2.ForeColor = Color.Green
+        FSP2.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(134))
+        FSP2.ForeColor = Color.DarkGreen
         FSP2.Name = "FSP2"
         FSP2.Size = New Size(170, 17)
         FSP2.Text = "112.941176470588 / 9999"
@@ -4100,6 +4107,7 @@ Partial Class MainWindow
         ' FSP4
         ' 
         FSP4.AutoSize = False
+        FSP4.ForeColor = SystemColors.ControlLightLight
         FSP4.Name = "FSP4"
         FSP4.Size = New Size(115, 17)
         FSP4.Text = "112.941176470588"
@@ -4107,6 +4115,7 @@ Partial Class MainWindow
         ' 
         ' TimeStatusLabel
         ' 
+        TimeStatusLabel.ForeColor = SystemColors.ControlLightLight
         TimeStatusLabel.Name = "TimeStatusLabel"
         TimeStatusLabel.Size = New Size(63, 17)
         TimeStatusLabel.Text = "00:00:000"
@@ -4154,11 +4163,11 @@ Partial Class MainWindow
         ToolStripContainer1.ContentPanel.Controls.Add(SpL)
         ToolStripContainer1.ContentPanel.Controls.Add(PMainR)
         ToolStripContainer1.ContentPanel.Controls.Add(PMainL)
-        ToolStripContainer1.ContentPanel.Size = New Size(876, 658)
+        ToolStripContainer1.ContentPanel.Size = New Size(1144, 657)
         ToolStripContainer1.Dock = DockStyle.Fill
         ToolStripContainer1.Location = New Point(0, 0)
         ToolStripContainer1.Name = "ToolStripContainer1"
-        ToolStripContainer1.Size = New Size(876, 708)
+        ToolStripContainer1.Size = New Size(1144, 707)
         ToolStripContainer1.TabIndex = 65
         ToolStripContainer1.Text = "ToolStripContainer1"
         ' 
@@ -4170,6 +4179,11 @@ Partial Class MainWindow
         ' PMain
         ' 
         PMain.BackColor = Color.WhiteSmoke
+        PMain.Controls.Add(rawtip)
+        PMain.Controls.Add(rawtext)
+        PMain.Controls.Add(textsaveButton)
+        PMain.Controls.Add(bmsrawTextBox)
+        PMain.Controls.Add(title)
         PMain.Controls.Add(bmsfilename)
         PMain.Controls.Add(PMainIn)
         PMain.Controls.Add(MainPanelScroll)
@@ -4179,18 +4193,79 @@ Partial Class MainWindow
         PMain.ForeColor = Color.White
         PMain.Location = New Point(5, 0)
         PMain.Name = "PMain"
-        PMain.Size = New Size(866, 658)
+        PMain.Size = New Size(1134, 657)
         PMain.TabIndex = 58
         PMain.Tag = "1"
         ' 
+        ' rawtip
+        ' 
+        rawtip.BackColor = SystemColors.WindowFrame
+        rawtip.Cursor = Cursors.Help
+        rawtip.Font = New Font("Microsoft YaHei UI", 7.5F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        rawtip.ForeColor = Color.Black
+        rawtip.Location = New Point(925, 22)
+        rawtip.Name = "rawtip"
+        rawtip.Size = New Size(189, 40)
+        rawtip.TabIndex = 8
+        rawtip.Text = "if you want to edit rawbmsfile cannot use the main edit"
+        ' 
+        ' rawtext
+        ' 
+        rawtext.AutoSize = True
+        rawtext.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        rawtext.ForeColor = Color.Black
+        rawtext.Location = New Point(858, 22)
+        rawtext.Name = "rawtext"
+        rawtext.Size = New Size(63, 17)
+        rawtext.TabIndex = 7
+        rawtext.Text = "Raw bms"
+        ' 
+        ' textsaveButton
+        ' 
+        textsaveButton.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        textsaveButton.ForeColor = Color.Black
+        textsaveButton.Location = New Point(858, 621)
+        textsaveButton.Name = "textsaveButton"
+        textsaveButton.Size = New Size(256, 23)
+        textsaveButton.TabIndex = 6
+        textsaveButton.Text = "Save raw and Reload"
+        textsaveButton.UseVisualStyleBackColor = True
+        ' 
+        ' bmsrawTextBox
+        ' 
+        bmsrawTextBox.AcceptsReturn = True
+        bmsrawTextBox.AcceptsTab = True
+        bmsrawTextBox.AccessibleRole = AccessibleRole.Text
+        bmsrawTextBox.HideSelection = False
+        bmsrawTextBox.ImeMode = ImeMode.On
+        bmsrawTextBox.Location = New Point(855, 62)
+        bmsrawTextBox.MaxLength = 1919810
+        bmsrawTextBox.Multiline = True
+        bmsrawTextBox.Name = "bmsrawTextBox"
+        bmsrawTextBox.ScrollBars = ScrollBars.Both
+        bmsrawTextBox.Size = New Size(259, 556)
+        bmsrawTextBox.TabIndex = 5
+        bmsrawTextBox.WordWrap = False
+        ' 
+        ' title
+        ' 
+        title.BackColor = Color.Azure
+        title.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        title.ForeColor = Color.Black
+        title.Location = New Point(846, -1)
+        title.Name = "title"
+        title.Size = New Size(268, 17)
+        title.TabIndex = 4
+        title.Text = "title"
+        ' 
         ' bmsfilename
         ' 
-        bmsfilename.AutoSize = True
-        bmsfilename.BackColor = Color.WhiteSmoke
+        bmsfilename.BackColor = Color.Azure
+        bmsfilename.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         bmsfilename.ForeColor = Color.Black
         bmsfilename.Location = New Point(-2, -1)
         bmsfilename.Name = "bmsfilename"
-        bmsfilename.Size = New Size(34, 14)
+        bmsfilename.Size = New Size(851, 17)
         bmsfilename.TabIndex = 0
         bmsfilename.Text = "bms"
         ' 
@@ -4211,11 +4286,11 @@ Partial Class MainWindow
         MainPanelScroll.AccessibleRole = AccessibleRole.ScrollBar
         MainPanelScroll.Dock = DockStyle.Right
         MainPanelScroll.LargeChange = 592
-        MainPanelScroll.Location = New Point(849, 0)
+        MainPanelScroll.Location = New Point(1117, 0)
         MainPanelScroll.Maximum = 591
         MainPanelScroll.Minimum = -10000
         MainPanelScroll.Name = "MainPanelScroll"
-        MainPanelScroll.Size = New Size(17, 641)
+        MainPanelScroll.Size = New Size(17, 640)
         MainPanelScroll.SmallChange = 12
         MainPanelScroll.TabIndex = 2
         MainPanelScroll.Tag = "1"
@@ -4225,10 +4300,10 @@ Partial Class MainWindow
         HS.AccessibleRole = AccessibleRole.ScrollBar
         HS.Dock = DockStyle.Bottom
         HS.LargeChange = 777
-        HS.Location = New Point(0, 641)
+        HS.Location = New Point(0, 640)
         HS.Maximum = 1233
         HS.Name = "HS"
-        HS.Size = New Size(866, 17)
+        HS.Size = New Size(1134, 17)
         HS.TabIndex = 3
         HS.Tag = "1"
         ' 
@@ -4237,9 +4312,9 @@ Partial Class MainWindow
         SpR.Dock = DockStyle.Right
         SpR.FlatAppearance.BorderSize = 0
         SpR.FlatStyle = FlatStyle.Flat
-        SpR.Location = New Point(871, 0)
+        SpR.Location = New Point(1139, 0)
         SpR.Name = "SpR"
-        SpR.Size = New Size(5, 658)
+        SpR.Size = New Size(5, 657)
         SpR.TabIndex = 59
         SpR.TabStop = False
         SpR.UseVisualStyleBackColor = True
@@ -4252,7 +4327,7 @@ Partial Class MainWindow
         SpL.FlatStyle = FlatStyle.Flat
         SpL.Location = New Point(0, 0)
         SpL.Name = "SpL"
-        SpL.Size = New Size(5, 658)
+        SpL.Size = New Size(5, 657)
         SpL.TabIndex = 60
         SpL.TabStop = False
         SpL.UseVisualStyleBackColor = True
@@ -4267,9 +4342,9 @@ Partial Class MainWindow
         PMainR.Dock = DockStyle.Right
         PMainR.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         PMainR.ForeColor = Color.White
-        PMainR.Location = New Point(876, 0)
+        PMainR.Location = New Point(1144, 0)
         PMainR.Name = "PMainR"
-        PMainR.Size = New Size(0, 658)
+        PMainR.Size = New Size(0, 657)
         PMainR.TabIndex = 56
         PMainR.Tag = "2"
         ' 
@@ -4281,7 +4356,7 @@ Partial Class MainWindow
         PMainInR.ForeColor = Color.White
         PMainInR.Location = New Point(0, 0)
         PMainInR.Name = "PMainInR"
-        PMainInR.Size = New Size(0, 641)
+        PMainInR.Size = New Size(0, 640)
         PMainInR.TabIndex = 0
         PMainInR.TabStop = True
         PMainInR.Tag = "2"
@@ -4294,7 +4369,7 @@ Partial Class MainWindow
         RightPanelScroll.Maximum = 591
         RightPanelScroll.Minimum = -10000
         RightPanelScroll.Name = "RightPanelScroll"
-        RightPanelScroll.Size = New Size(17, 641)
+        RightPanelScroll.Size = New Size(17, 640)
         RightPanelScroll.SmallChange = 12
         RightPanelScroll.TabIndex = 2
         RightPanelScroll.Tag = "2"
@@ -4303,7 +4378,7 @@ Partial Class MainWindow
         ' 
         HSR.Dock = DockStyle.Bottom
         HSR.LargeChange = 777
-        HSR.Location = New Point(0, 641)
+        HSR.Location = New Point(0, 640)
         HSR.Maximum = 1233
         HSR.Name = "HSR"
         HSR.Size = New Size(0, 17)
@@ -4321,7 +4396,7 @@ Partial Class MainWindow
         PMainL.ForeColor = Color.White
         PMainL.Location = New Point(0, 0)
         PMainL.Name = "PMainL"
-        PMainL.Size = New Size(0, 658)
+        PMainL.Size = New Size(0, 657)
         PMainL.TabIndex = 54
         PMainL.Tag = "0"
         ' 
@@ -4333,7 +4408,7 @@ Partial Class MainWindow
         PMainInL.ForeColor = Color.White
         PMainInL.Location = New Point(0, 0)
         PMainInL.Name = "PMainInL"
-        PMainInL.Size = New Size(0, 641)
+        PMainInL.Size = New Size(0, 640)
         PMainInL.TabIndex = 0
         PMainInL.TabStop = True
         PMainInL.Tag = "0"
@@ -4346,7 +4421,7 @@ Partial Class MainWindow
         LeftPanelScroll.Maximum = 591
         LeftPanelScroll.Minimum = -10000
         LeftPanelScroll.Name = "LeftPanelScroll"
-        LeftPanelScroll.Size = New Size(17, 641)
+        LeftPanelScroll.Size = New Size(17, 640)
         LeftPanelScroll.SmallChange = 12
         LeftPanelScroll.TabIndex = 2
         LeftPanelScroll.Tag = "0"
@@ -4355,7 +4430,7 @@ Partial Class MainWindow
         ' 
         HSL.Dock = DockStyle.Bottom
         HSL.LargeChange = 777
-        HSL.Location = New Point(0, 641)
+        HSL.Location = New Point(0, 640)
         HSL.Maximum = 1233
         HSL.Name = "HSL"
         HSL.Size = New Size(0, 17)
@@ -4370,9 +4445,9 @@ Partial Class MainWindow
         POptionsResizer.Dock = DockStyle.Right
         POptionsResizer.FlatAppearance.BorderSize = 0
         POptionsResizer.FlatStyle = FlatStyle.Flat
-        POptionsResizer.Location = New Point(876, 0)
+        POptionsResizer.Location = New Point(1144, 0)
         POptionsResizer.Name = "POptionsResizer"
-        POptionsResizer.Size = New Size(6, 730)
+        POptionsResizer.Size = New Size(6, 729)
         POptionsResizer.TabIndex = 67
         POptionsResizer.TabStop = False
         POptionsResizer.UseVisualStyleBackColor = False
@@ -4381,7 +4456,7 @@ Partial Class MainWindow
         ' 
         AllowDrop = True
         AutoScaleMode = AutoScaleMode.None
-        ClientSize = New Size(1082, 730)
+        ClientSize = New Size(1350, 729)
         Controls.Add(ToolStripContainer1)
         Controls.Add(pStatus)
         Controls.Add(POptionsResizer)
@@ -4874,4 +4949,9 @@ Partial Class MainWindow
     Friend WithEvents TBPaste As ToolStripButton
     Friend WithEvents TBFind As ToolStripButton
     Friend WithEvents bmsfilename As Label
+    Friend WithEvents title As Label
+    Friend WithEvents bmsrawTextBox As TextBox
+    Friend WithEvents textsaveButton As Button
+    Friend WithEvents rawtext As Label
+    Friend WithEvents rawtip As Label
 End Class

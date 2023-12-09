@@ -1,3 +1,4 @@
+Imports System.Diagnostics.Eventing.Reader
 Imports iBMSC.Editor
 
 
@@ -1453,28 +1454,31 @@ EndSearch:
 
         If MsgBox("Please copy your code to clipboard and click OK.", MsgBoxStyle.OkCancel, "Create from code") = MsgBoxResult.Cancel Then Exit Sub
         OpenBMS(Clipboard.GetText)
+        Loadraw()
     End Sub
 
     Private Sub TBOpen_ButtonClick(sender As Object, e As EventArgs) Handles TBOpen.ButtonClick, mnOpen.Click, bmsfilename.Leave, bmsfilename.DataContextChanged
         'KMouseDown = -1
         ReDim SelectedNotes(-1)
         KMouseOver = -1
-        If ClosingPopSave Then Exit Sub
+        If ClosingPopSave() Then Exit Sub
 
         Dim xDOpen As New OpenFileDialog With {
-            .Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt",
-            .DefaultExt = "bms",
-            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
-        }
+             .Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt",
+             .DefaultExt = "bms",
+             .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
+             }
 
-        If xDOpen.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
-        InitPath = ExcludeFileName(xDOpen.FileName)
-        OpenBMS(My.Computer.FileSystem.ReadAllText(xDOpen.FileName, TextEncoding))
-        ClearUndo
+            If xDOpen.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
+
+            InitPath = ExcludeFileName(xDOpen.FileName)
+        OpenBMS(File.ReadAllText(xDOpen.FileName, TextEncoding))
+        ClearUndo()
         SetFileName(xDOpen.FileName)
         NewRecent(FileName)
         SetIsSaved(True)
         'pIsSaved.Visible = Not IsSaved
+        Loadraw()
     End Sub
 
     Private Sub TBImportIBMSC_Click(sender As Object, e As EventArgs) Handles TBImportIBMSC.Click, mnImportIBMSC.Click
@@ -1496,6 +1500,7 @@ EndSearch:
         NewRecent(xDOpen.FileName)
         SetIsSaved(False)
         'pIsSaved.Visible = Not IsSaved
+        Loadraw()
     End Sub
 
     Private Sub TBImportSM_Click(sender As Object, e As EventArgs) Handles TBImportSM.Click, mnImportSM.Click
@@ -1511,12 +1516,13 @@ EndSearch:
         }
 
         If xDOpen.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
-        If OpenSM(My.Computer.FileSystem.ReadAllText(xDOpen.FileName, TextEncoding)) Then Exit Sub
+        If OpenSM(File.ReadAllText(xDOpen.FileName, TextEncoding)) Then Exit Sub
         InitPath = ExcludeFileName(xDOpen.FileName)
         SetFileName("Untitled.bms")
         ClearUndo()
         SetIsSaved(False)
         'pIsSaved.Visible = Not IsSaved
+        Loadraw()
     End Sub
 
     Private Sub TBSave_ButtonClick(sender As Object, e As EventArgs) Handles TBSave.ButtonClick, mnSave.Click
@@ -1541,7 +1547,7 @@ EndSearch:
             InitPath = ExcludeFileName(xDSave.FileName)
             SetFileName(xDSave.FileName)
         End If
-        Dim xStrAll As String = SaveBMS()
+        Dim xStrAll = SaveBMS()
         My.Computer.FileSystem.WriteAllText(FileName, xStrAll, False, TextEncoding)
         NewRecent(FileName)
         SetFileName(FileName)
@@ -2103,6 +2109,7 @@ EndSearch:
         Dim fslash As Integer = InStrRev(s, "/")
         Dim bslash As Integer = InStrRev(s, "\")
         bmsfilename.Text = FileName
+        title.Text = THTitle.Text + THSubTitle.Text
         Return Mid(s, IIf(fslash > bslash, fslash, bslash) + 1)
 
     End Function
@@ -4918,5 +4925,35 @@ case2:              Dim xI0 As Integer
             PanelVScroll(PanelFocus) = -MeasureBottom(i)
         End If
     End Sub
-
+    Private Sub Loadraw()
+        bmsrawTextBox.Text = File.ReadAllText(FileName)
+    End Sub
+    Private Sub Saveraw(sender As Object, e As EventArgs) Handles textsaveButton.Click
+        File.WriteAllText(FileName, bmsrawTextBox.Text)
+        Reloadbms()
+        Loadraw()
+        POHeader.Visible = True
+        PMainIn.Visible = True
+        bmsrawTextBox.Size = New Size(259, Width)
+        bmsrawTextBox.Location = New Point(855, 62)
+    End Sub
+    Private Sub Enterraw(sender As Object, e As EventArgs) Handles bmsrawTextBox.Enter
+        TBSave_ButtonClick(sender, e)
+        POHeader.Visible = False
+        PMainIn.Visible = False
+        bmsrawTextBox.Size = New Size(1106, Width)
+        bmsrawTextBox.Location = New Point(0, 16)
+    End Sub
+    Private Sub Reloadbms()
+        'KMouseDown = -1
+        ReDim SelectedNotes(-1)
+        KMouseOver = -1
+        If ClosingPopSave() Then Exit Sub
+        OpenBMS(File.ReadAllText(FileName, TextEncoding))
+        ClearUndo()
+        SetFileName(FileName)
+        NewRecent(FileName)
+        SetIsSaved(True)
+        'pIsSaved.Visible = Not IsSaved
+    End Sub
 End Class

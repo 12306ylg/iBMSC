@@ -22,6 +22,7 @@ Partial Class SplashScreen1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SplashScreen1))
         SuspendLayout()
         ' 
         ' SplashScreen1
@@ -29,10 +30,11 @@ Partial Class SplashScreen1
         AutoScaleDimensions = New SizeF(7F, 17F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = SystemColors.ControlDarkDark
-        ClientSize = New Size(842, 433)
+        BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
+        ClientSize = New Size(1000, 600)
         ControlBox = False
         FormBorderStyle = FormBorderStyle.None
-        Margin = New Padding(4, 4, 4, 4)
+        Margin = New Padding(4)
         MaximizeBox = False
         MinimizeBox = False
         Name = "SplashScreen1"
