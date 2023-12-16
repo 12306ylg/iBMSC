@@ -1469,9 +1469,9 @@ EndSearch:
              .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
              }
 
-            If xDOpen.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
+        If xDOpen.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
 
-            InitPath = ExcludeFileName(xDOpen.FileName)
+        InitPath = ExcludeFileName(xDOpen.FileName)
         OpenBMS(File.ReadAllText(xDOpen.FileName, TextEncoding))
         ClearUndo()
         SetFileName(xDOpen.FileName)
@@ -4925,24 +4925,16 @@ case2:              Dim xI0 As Integer
             PanelVScroll(PanelFocus) = -MeasureBottom(i)
         End If
     End Sub
-    Private Sub Loadraw()
+    Private Sub Loadraw() Handles bmsrawTextBox.Enter
         bmsrawTextBox.Text = File.ReadAllText(FileName)
     End Sub
-    Private Sub Saveraw(sender As Object, e As EventArgs) Handles textsaveButton.Click
+    Private Sub Saveraw(sender As Object, e As EventArgs) Handles bmsrawTextBox.Leave
         File.WriteAllText(FileName, bmsrawTextBox.Text)
         Reloadbms()
         Loadraw()
-        POHeader.Visible = True
-        PMainIn.Visible = True
-        bmsrawTextBox.Size = New Size(259, Width)
-        bmsrawTextBox.Location = New Point(855, 62)
     End Sub
     Private Sub Enterraw(sender As Object, e As EventArgs) Handles bmsrawTextBox.Enter
         TBSave_ButtonClick(sender, e)
-        POHeader.Visible = False
-        PMainIn.Visible = False
-        bmsrawTextBox.Size = New Size(1106, Width)
-        bmsrawTextBox.Location = New Point(0, 16)
     End Sub
     Private Sub Reloadbms()
         'KMouseDown = -1

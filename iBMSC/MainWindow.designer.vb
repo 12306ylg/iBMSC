@@ -25,16 +25,16 @@ Partial Class MainWindow
         TBLangDef = New ToolStripMenuItem()
         TBLangRefresh = New ToolStripMenuItem()
         ToolStripSeparator9 = New ToolStripSeparator()
-        TBLanguage = New ToolStripDropDownButton()
         mnLanguage = New ToolStripMenuItem()
+        TBLanguage = New ToolStripDropDownButton()
         cmnTheme = New ContextMenuStrip(components)
         TBThemeDef = New ToolStripMenuItem()
         TBThemeSave = New ToolStripMenuItem()
         TBThemeRefresh = New ToolStripMenuItem()
         TBThemeLoadComptability = New ToolStripMenuItem()
         ToolStripSeparator6 = New ToolStripSeparator()
-        TBTheme = New ToolStripDropDownButton()
         mnTheme = New ToolStripMenuItem()
+        TBTheme = New ToolStripDropDownButton()
         POptionsScroll = New Panel()
         POptions = New Panel()
         POExpansion = New Panel()
@@ -286,11 +286,11 @@ Partial Class MainWindow
         ToolStripSeparator11 = New ToolStripSeparator()
         POBModify = New ToolStripMenuItem()
         POBMirror = New ToolStripMenuItem()
+        POConvert = New ToolStripDropDownButton()
         mnPreview = New ToolStripMenuItem()
         mnPlayB = New ToolStripMenuItem()
         mnPlay = New ToolStripMenuItem()
         mnStop = New ToolStripMenuItem()
-        POConvert = New ToolStripDropDownButton()
         TBMain = New ToolStrip()
         TBNew = New ToolStripButton()
         TBOpen = New ToolStripSplitButton()
@@ -367,9 +367,7 @@ Partial Class MainWindow
         TimerMiddle = New Timer(components)
         ToolStripContainer1 = New ToolStripContainer()
         PMain = New Panel()
-        rawtip = New Label()
         rawtext = New Label()
-        textsaveButton = New Button()
         bmsrawTextBox = New TextBox()
         title = New Label()
         bmsfilename = New Label()
@@ -388,6 +386,7 @@ Partial Class MainWindow
         HSL = New HScrollBar()
         POptionsResizer = New Button()
         ToolTipUniversal = New ToolTip(components)
+        Panel1 = New Panel()
         cmnLanguage.SuspendLayout()
         cmnTheme.SuspendLayout()
         POptionsScroll.SuspendLayout()
@@ -467,15 +466,17 @@ Partial Class MainWindow
         ToolStripContainer1.TopToolStripPanel.SuspendLayout()
         ToolStripContainer1.SuspendLayout()
         PMain.SuspendLayout()
+        PMainIn.SuspendLayout()
         PMainR.SuspendLayout()
         PMainL.SuspendLayout()
+        Panel1.SuspendLayout()
         SuspendLayout()
         ' 
         ' cmnLanguage
         ' 
         cmnLanguage.Items.AddRange(New ToolStripItem() {TBLangDef, TBLangRefresh, ToolStripSeparator9})
         cmnLanguage.Name = "cmnLanguage"
-        cmnLanguage.OwnerItem = mnLanguage
+        cmnLanguage.OwnerItem = TBLanguage
         cmnLanguage.Size = New Size(126, 54)
         ' 
         ' TBLangDef
@@ -496,6 +497,14 @@ Partial Class MainWindow
         ToolStripSeparator9.Name = "ToolStripSeparator9"
         ToolStripSeparator9.Size = New Size(122, 6)
         ' 
+        ' mnLanguage
+        ' 
+        mnLanguage.DropDown = cmnLanguage
+        mnLanguage.Image = CType(resources.GetObject("mnLanguage.Image"), Image)
+        mnLanguage.Name = "mnLanguage"
+        mnLanguage.Size = New Size(247, 22)
+        mnLanguage.Text = "&Language"
+        ' 
         ' TBLanguage
         ' 
         TBLanguage.DisplayStyle = ToolStripItemDisplayStyle.Image
@@ -506,19 +515,11 @@ Partial Class MainWindow
         TBLanguage.Size = New Size(29, 22)
         TBLanguage.Text = "Language"
         ' 
-        ' mnLanguage
-        ' 
-        mnLanguage.DropDown = cmnLanguage
-        mnLanguage.Image = CType(resources.GetObject("mnLanguage.Image"), Image)
-        mnLanguage.Name = "mnLanguage"
-        mnLanguage.Size = New Size(247, 22)
-        mnLanguage.Text = "&Language"
-        ' 
         ' cmnTheme
         ' 
         cmnTheme.Items.AddRange(New ToolStripItem() {TBThemeDef, TBThemeSave, TBThemeRefresh, TBThemeLoadComptability, ToolStripSeparator6})
         cmnTheme.Name = "cmnLanguage"
-        cmnTheme.OwnerItem = mnTheme
+        cmnTheme.OwnerItem = TBTheme
         cmnTheme.Size = New Size(266, 98)
         ' 
         ' TBThemeDef
@@ -552,6 +553,14 @@ Partial Class MainWindow
         ToolStripSeparator6.Name = "ToolStripSeparator6"
         ToolStripSeparator6.Size = New Size(262, 6)
         ' 
+        ' mnTheme
+        ' 
+        mnTheme.DropDown = cmnTheme
+        mnTheme.Image = CType(resources.GetObject("mnTheme.Image"), Image)
+        mnTheme.Name = "mnTheme"
+        mnTheme.Size = New Size(247, 22)
+        mnTheme.Text = "&Theme"
+        ' 
         ' TBTheme
         ' 
         TBTheme.DisplayStyle = ToolStripItemDisplayStyle.Image
@@ -561,14 +570,6 @@ Partial Class MainWindow
         TBTheme.Name = "TBTheme"
         TBTheme.Size = New Size(29, 22)
         TBTheme.Text = "Theme"
-        ' 
-        ' mnTheme
-        ' 
-        mnTheme.DropDown = cmnTheme
-        mnTheme.Image = CType(resources.GetObject("mnTheme.Image"), Image)
-        mnTheme.Name = "mnTheme"
-        mnTheme.Size = New Size(247, 22)
-        mnTheme.Text = "&Theme"
         ' 
         ' POptionsScroll
         ' 
@@ -3403,7 +3404,7 @@ Partial Class MainWindow
         ' 
         cmnConversion.Items.AddRange(New ToolStripItem() {POBLong, POBShort, POBLongShort, ToolStripSeparator10, POBHidden, POBVisible, POBHiddenVisible, ToolStripSeparator11, POBModify, POBMirror})
         cmnConversion.Name = "cmnLanguage"
-        cmnConversion.OwnerItem = POConvert
+        cmnConversion.OwnerItem = mnConversion
         cmnConversion.Size = New Size(241, 192)
         ' 
         ' POBLong
@@ -3474,6 +3475,16 @@ Partial Class MainWindow
         POBMirror.Size = New Size(240, 22)
         POBMirror.Text = "Mi&rror"
         ' 
+        ' POConvert
+        ' 
+        POConvert.DisplayStyle = ToolStripItemDisplayStyle.Image
+        POConvert.DropDown = cmnConversion
+        POConvert.Image = CType(resources.GetObject("POConvert.Image"), Image)
+        POConvert.ImageTransparentColor = Color.Magenta
+        POConvert.Name = "POConvert"
+        POConvert.Size = New Size(29, 22)
+        POConvert.Text = "Convert Notes"
+        ' 
         ' mnPreview
         ' 
         mnPreview.DropDownItems.AddRange(New ToolStripItem() {mnPlayB, mnPlay, mnStop})
@@ -3505,16 +3516,6 @@ Partial Class MainWindow
         mnStop.ShortcutKeys = Keys.F7
         mnStop.Size = New Size(214, 22)
         mnStop.Text = "&Stop"
-        ' 
-        ' POConvert
-        ' 
-        POConvert.DisplayStyle = ToolStripItemDisplayStyle.Image
-        POConvert.DropDown = cmnConversion
-        POConvert.Image = CType(resources.GetObject("POConvert.Image"), Image)
-        POConvert.ImageTransparentColor = Color.Magenta
-        POConvert.Name = "POConvert"
-        POConvert.Size = New Size(29, 22)
-        POConvert.Text = "Convert Notes"
         ' 
         ' TBMain
         ' 
@@ -4179,11 +4180,8 @@ Partial Class MainWindow
         ' PMain
         ' 
         PMain.BackColor = Color.WhiteSmoke
-        PMain.Controls.Add(rawtip)
         PMain.Controls.Add(rawtext)
-        PMain.Controls.Add(textsaveButton)
         PMain.Controls.Add(bmsrawTextBox)
-        PMain.Controls.Add(title)
         PMain.Controls.Add(bmsfilename)
         PMain.Controls.Add(PMainIn)
         PMain.Controls.Add(MainPanelScroll)
@@ -4197,18 +4195,6 @@ Partial Class MainWindow
         PMain.TabIndex = 58
         PMain.Tag = "1"
         ' 
-        ' rawtip
-        ' 
-        rawtip.BackColor = SystemColors.WindowFrame
-        rawtip.Cursor = Cursors.Help
-        rawtip.Font = New Font("Microsoft YaHei UI", 7.5F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        rawtip.ForeColor = Color.Black
-        rawtip.Location = New Point(925, 22)
-        rawtip.Name = "rawtip"
-        rawtip.Size = New Size(189, 40)
-        rawtip.TabIndex = 8
-        rawtip.Text = "if you want to edit rawbmsfile cannot use the main edit"
-        ' 
         ' rawtext
         ' 
         rawtext.AutoSize = True
@@ -4220,30 +4206,20 @@ Partial Class MainWindow
         rawtext.TabIndex = 7
         rawtext.Text = "Raw bms"
         ' 
-        ' textsaveButton
-        ' 
-        textsaveButton.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        textsaveButton.ForeColor = Color.Black
-        textsaveButton.Location = New Point(858, 621)
-        textsaveButton.Name = "textsaveButton"
-        textsaveButton.Size = New Size(256, 23)
-        textsaveButton.TabIndex = 6
-        textsaveButton.Text = "Save raw and Reload"
-        textsaveButton.UseVisualStyleBackColor = True
-        ' 
         ' bmsrawTextBox
         ' 
         bmsrawTextBox.AcceptsReturn = True
         bmsrawTextBox.AcceptsTab = True
         bmsrawTextBox.AccessibleRole = AccessibleRole.Text
+        bmsrawTextBox.Dock = DockStyle.Right
         bmsrawTextBox.HideSelection = False
         bmsrawTextBox.ImeMode = ImeMode.On
-        bmsrawTextBox.Location = New Point(855, 62)
+        bmsrawTextBox.Location = New Point(858, 0)
         bmsrawTextBox.MaxLength = 1919810
         bmsrawTextBox.Multiline = True
         bmsrawTextBox.Name = "bmsrawTextBox"
         bmsrawTextBox.ScrollBars = ScrollBars.Both
-        bmsrawTextBox.Size = New Size(259, 556)
+        bmsrawTextBox.Size = New Size(259, 640)
         bmsrawTextBox.TabIndex = 5
         bmsrawTextBox.WordWrap = False
         ' 
@@ -4252,9 +4228,9 @@ Partial Class MainWindow
         title.BackColor = Color.Azure
         title.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         title.ForeColor = Color.Black
-        title.Location = New Point(846, -1)
+        title.Location = New Point(597, 0)
         title.Name = "title"
-        title.Size = New Size(268, 17)
+        title.Size = New Size(260, 17)
         title.TabIndex = 4
         title.Text = "title"
         ' 
@@ -4265,18 +4241,20 @@ Partial Class MainWindow
         bmsfilename.ForeColor = Color.Black
         bmsfilename.Location = New Point(-2, -1)
         bmsfilename.Name = "bmsfilename"
-        bmsfilename.Size = New Size(851, 17)
+        bmsfilename.Size = New Size(603, 17)
         bmsfilename.TabIndex = 0
         bmsfilename.Text = "bms"
         ' 
         ' PMainIn
         ' 
         PMainIn.BackColor = Color.Black
+        PMainIn.Controls.Add(Panel1)
+        PMainIn.Dock = DockStyle.Fill
         PMainIn.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         PMainIn.ForeColor = Color.White
-        PMainIn.Location = New Point(0, 16)
+        PMainIn.Location = New Point(0, 0)
         PMainIn.Name = "PMainIn"
-        PMainIn.Size = New Size(849, 625)
+        PMainIn.Size = New Size(1117, 640)
         PMainIn.TabIndex = 0
         PMainIn.TabStop = True
         PMainIn.Tag = "1"
@@ -4452,6 +4430,14 @@ Partial Class MainWindow
         POptionsResizer.TabStop = False
         POptionsResizer.UseVisualStyleBackColor = False
         ' 
+        ' Panel1
+        ' 
+        Panel1.Controls.Add(title)
+        Panel1.Location = New Point(2, -1)
+        Panel1.Name = "Panel1"
+        Panel1.Size = New Size(1115, 20)
+        Panel1.TabIndex = 0
+        ' 
         ' MainWindow
         ' 
         AllowDrop = True
@@ -4581,8 +4567,10 @@ Partial Class MainWindow
         ToolStripContainer1.PerformLayout()
         PMain.ResumeLayout(False)
         PMain.PerformLayout()
+        PMainIn.ResumeLayout(False)
         PMainR.ResumeLayout(False)
         PMainL.ResumeLayout(False)
+        Panel1.ResumeLayout(False)
         ResumeLayout(False)
         PerformLayout()
 
@@ -4951,7 +4939,6 @@ Partial Class MainWindow
     Friend WithEvents bmsfilename As Label
     Friend WithEvents title As Label
     Friend WithEvents bmsrawTextBox As TextBox
-    Friend WithEvents textsaveButton As Button
     Friend WithEvents rawtext As Label
-    Friend WithEvents rawtip As Label
+    Friend WithEvents Panel1 As Panel
 End Class
