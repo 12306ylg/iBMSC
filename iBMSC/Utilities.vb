@@ -146,25 +146,25 @@ Namespace Editor
         End Function
 
         Public Function ArrayToString(xInt() As Integer) As String
-            Dim xStr As String = ""
+            Dim xStr As String = String.Empty
             For xI1 As Integer = 0 To UBound(xInt)
-                xStr &= xInt(xI1).ToString & IIf(xI1 = UBound(xInt), "", ",")
+                xStr &= xInt(xI1).ToString & IIf(xI1 = UBound(xInt), String.Empty, ",")
             Next
             Return xStr
         End Function
 
         Public Function ArrayToString(xBool() As Boolean) As String
-            Dim xStr As String = ""
+            Dim xStr As String = String.Empty
             For xI1 As Integer = 0 To UBound(xBool)
-                xStr &= CInt(xBool(xI1)).ToString & IIf(xI1 = UBound(xBool), "", ",")
+                xStr &= CInt(xBool(xI1)).ToString & IIf(xI1 = UBound(xBool), String.Empty, ",")
             Next
             Return xStr
         End Function
 
         Public Function ArrayToString(xColor() As Color) As String
-            Dim xStr As String = ""
+            Dim xStr As String = String.Empty
             For xI1 As Integer = 0 To UBound(xColor)
-                xStr &= xColor(xI1).ToArgb.ToString & IIf(xI1 = UBound(xColor), "", ",")
+                xStr &= xColor(xI1).ToArgb.ToString & IIf(xI1 = UBound(xColor), String.Empty, ",")
             Next
             Return xStr
         End Function

@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
     <OutputType>WinExe</OutputType>
     <StartupObject>iBMSC.My.MyApplication</StartupObject>
     <AssemblyName>μBMSC</AssemblyName>
@@ -41,10 +41,11 @@
     <Company>iBMS</Company>
     <Product>μBMSC</Product>
     <Copyright>Copyright %28C%29 [4th Age]</Copyright>
-    <AssemblyVersion>3.6.0.0</AssemblyVersion>
-    <FileVersion>3.6.0.0</FileVersion>
+    <AssemblyVersion>3.6.0.2</AssemblyVersion>
+    <FileVersion>3.6.0.2</FileVersion>
     <NeutralLanguage>en</NeutralLanguage>
     <ImportedNamespaces>System.Drawing=False,System.Drawing.Imaging=False,System.IO=False,System.Runtime.InteropServices=False,System.Windows=False,System.Windows.Forms=False,System.Xml=False,Microsoft.VisualBasic=True,System=True,System.Collections=True,System.Collections.Generic=True,System.Diagnostics=True,System.Linq=True,System.Xml.Linq=True,System.Threading.Tasks=True,iBMSC=True</ImportedNamespaces>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
   <ItemGroup>
     <Import Include="System.Drawing" />
@@ -197,7 +198,7 @@
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
     <PackageReference Include="System.Text.Encodings.Web" Version="8.0.0" />
-    <PackageReference Include="System.Text.Json" Version="8.0.0" />
+    <PackageReference Include="System.Text.Json" Version="8.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="SCompareMethod.Designer.vb" />

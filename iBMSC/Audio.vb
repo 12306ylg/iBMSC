@@ -54,7 +54,7 @@ Friend Module Audio
             Source = Nothing
         End If
 
-        If filename Is "" Then
+        If filename Is String.Empty Then
             Return
         End If
 
@@ -83,7 +83,7 @@ Friend Class NVorbisSource
 
     Public Sub New(stream As Stream)
         If stream Is Nothing Or Not stream.CanRead Then
-            Throw New ArgumentException("stream")
+            Throw New ArgumentException(Nothing, NameOf(stream))
         End If
         _stream = stream
         _vorbisReader = New VorbisReader(stream, Nothing)

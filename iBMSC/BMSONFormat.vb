@@ -14,22 +14,22 @@ Namespace Editor
         Public key_channels As MineChannel() = {}
     End Class
     Public Class BMSInfo
-        Public title As String = ""
-        Public subtitle As String = ""
-        Public genre As String = ""
-        Public artist As String = ""
-        Public subartists As String() = {""}
+        Public title As String = String.Empty
+        Public subtitle As String = String.Empty
+        Public genre As String = String.Empty
+        Public artist As String = String.Empty
+        Public subartists As String() = {String.Empty}
         Public mode_hint As String = "beat-7k"
-        Public chart_name As String = ""
+        Public chart_name As String = String.Empty
         Public judge_rank As Integer = 80
         Public total As Double = 90.0R
         Public init_bpm As Double = 120.0R
         Public level As Integer
 
-        Public back_image As String = ""
-        Public eyecatch_image As String = ""
-        Public banner_image As String = ""
-        Public preview_music As String = ""
+        Public back_image As String = String.Empty
+        Public eyecatch_image As String = String.Empty
+        Public banner_image As String = String.Empty
+        Public preview_music As String = String.Empty
         Public resolution As Integer = 48
 
         Public ln_type As Integer
@@ -139,7 +139,7 @@ Namespace Editor
         Inherits BMSONEvent
         Public id As Integer
         Public id_set As Integer() = {}
-        Public condition As String = ""
+        Public condition As String = String.Empty
         Public interval As Integer = 0
         Public Sub New(position As Integer, value As Double)
             y = position

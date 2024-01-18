@@ -74,7 +74,7 @@ Partial Public Class MainWindow
                               New Column(50, 60, "SCROLL", True, True, False, True, 99, 0, &HFFFF0000, 0, &HFFFF0000, 0),
                               New Column(110, 60, "BPM", True, True, False, True, 3, 0, &HFFFF0000, 0, &HFFFF0000, 0),
                               New Column(170, 50, "STOP", True, True, False, True, 9, 0, &HFFFF0000, 0, &HFFFF0000, 0),
-                              New Column(220, 5, "", False, False, False, True, 0, 0, 0, 0, 0, 0),
+                              New Column(220, 5, String.Empty, False, False, False, True, 0, 0, 0, 0, 0, 0),
                               New Column(225, 40, "AQ", True, False, True, False, 42, &HFFB0B0B0, &HFF000000, &HFF909090, &HFF000000, 0),
                               New Column(225, 40, "A1", True, False, True, True, 43, &HFF808080, &HFF000000, &HFF909090, &HFF000000, 0),
                               New Column(265, 42, "A2", True, False, True, True, 37, &HFFB0B0B0, &HFF000000, &HFFC0C0C0, &HFF000000, &H14FFFFFF),
@@ -101,7 +101,7 @@ Partial Public Class MainWindow
                               New Column(496, 30, "AN", True, False, True, False, 60, &HFF62B0FF, &HFF000000, &HFF6AB0F7, &HFF000000, &H140033FF),
                               New Column(496, 42, "AO", True, False, True, False, 61, &HFFB0B0B0, &HFF000000, &HFFC0C0C0, &HFF000000, &H14FFFFFF),
                               New Column(496, 30, "AP", True, False, True, False, 62, &HFF62B0FF, &HFF000000, &HFF6AB0F7, &HFF000000, &H140033FF),
-                              New Column(496, 5, "", False, False, False, True, 0, 0, 0, 0, 0, 0),
+                              New Column(496, 5, String.Empty, False, False, False, True, 0, 0, 0, 0, 0, 0),
                               New Column(503, 42, "D1", True, False, True, False, 73, &HFFB0B0B0, &HFF000000, &HFFC0C0C0, &HFF000000, &H14FFFFFF),
                               New Column(503, 30, "D2", True, False, True, False, 74, &HFF62B0FF, &HFF000000, &HFF6AB0F7, &HFF000000, &H140033FF),
                               New Column(503, 42, "D3", True, False, True, False, 75, &HFFB0B0B0, &HFF000000, &HFFC0C0C0, &HFF000000, &H14FFFFFF),
@@ -128,11 +128,11 @@ Partial Public Class MainWindow
                               New Column(503, 30, "DP", True, False, True, False, 98, &HFF62B0FF, &HFF000000, &HFF6AB0F7, &HFF000000, &H140033FF),
                               New Column(503, 40, "DQ", True, False, True, False, 78, &HFF808080, &HFF000000, &HFF909090, &HFF000000, 0),
                               New Column(503, 40, "D8", True, False, True, False, 79, &HFF808080, &HFF000000, &HFF909090, &HFF000000, 0),
-                              New Column(503, 5, "", False, False, False, False, 0, 0, 0, 0, 0, 0),
+                              New Column(503, 5, String.Empty, False, False, False, False, 0, 0, 0, 0, 0, 0),
                               New Column(503, 40, "BGA", True, False, False, False, 4, &HFF8CD78A, &HFF000000, &HFF90D38E, &HFF000000, 0),
                               New Column(503, 40, "LAYER", True, False, False, False, 7, &HFF8CD78A, &HFF000000, &HFF90D38E, &HFF000000, 0),
                               New Column(503, 40, "POOR", True, False, False, False, 6, &HFF8CD78A, &HFF000000, &HFF90D38E, &HFF000000, 0),
-                              New Column(503, 5, "", False, False, False, False, 0, 0, 0, 0, 0, 0),
+                              New Column(503, 5, String.Empty, False, False, False, False, 0, 0, 0, 0, 0, 0),
                               New Column(503, 40, "B", True, False, True, True, 1, &HFFE18080, &HFF000000, &HFFDC8585, &HFF000000, 0)}
 
 

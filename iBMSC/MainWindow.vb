@@ -1,10 +1,6 @@
-Imports System.Diagnostics.Eventing.Reader
 Imports iBMSC.Editor
 
-
 Public Class MainWindow
-
-
     'Public Structure MARGINS
     '    Public Left As Integer
     '    Public Right As Integer
@@ -55,8 +51,8 @@ Public Class MainWindow
     'Dim SortingMethod As Integer = 1
     Private MiddleButtonMoveMethod As Integer = 0
     Private TextEncoding As System.Text.Encoding = System.Text.Encoding.UTF8
-    Private DispLang As String = ""     'Display Language
-    Private Recent() As String = {"", "", "", "", ""}
+    Private DispLang As String = String.Empty     'Display Language
+    Private Recent() As String = {String.Empty, String.Empty, String.Empty, String.Empty, String.Empty}
     Private NTInput As Boolean = True
     Private ShowFileName As Boolean = False
 
@@ -80,11 +76,14 @@ Public Class MainWindow
     'IO
     Private FileName As String = "Untitled.bms"
     'Dim TitlePath As New Drawing2D.GraphicsPath
-    Private InitPath As String = ""
+    Private InitPath As String = String.Empty
     Private IsSaved As Boolean = True
-
+    Class Chartinfo
+        Public Shared Fultitle As String
+        Public Shared Allartist As String
+    End Class
     'Variables for Drag/Drop
-    Private DDFileName() As String = {}
+    Private DDFileName() As String = Array.Empty(Of String)()
     Private SupportedFileExtension() As String = {".bms", ".bme", ".bml", ".pms", ".txt", ".sm", ".ibmsc"}
     Private SupportedAudioExtension() As String = {".wav", ".mp3", ".ogg", ".flac"}
     Private SupportedImageExtension() As String = {".bmp", ".png", ".jpg", ".jpeg", ".gif", ".mpg", ".mpeg", ".avi", ".m1v", ".m2v", ".m4v", ".mp4", ".webm", ".wmv"}
@@ -135,7 +134,7 @@ Public Class MainWindow
     Private vSelHalf As Double = 0.0#
     Private vSelMouseOverLine As Integer = 0  '0 = nothing, 1 = start, 2 = half, 3 = end
     Private vSelAdjust As Boolean = False
-    Private vSelK() As Note = {}
+    Private vSelK() As Note = Array.Empty(Of Note)()
     Private vSelPStart As Double = 192.0#
     Private vSelPLength As Double = 0.0#
     Private vSelPHalf As Double = 0.0#
@@ -150,7 +149,7 @@ Public Class MainWindow
     Private tempResize As Integer = 0
 
     '----AutoSave Options
-    Private PreviousAutoSavedFileName As String = ""
+    Private PreviousAutoSavedFileName As String = String.Empty
     Private AutoSaveInterval As Integer = 120000
 
     '----ErrorCheck Options
@@ -210,19 +209,25 @@ Public Class MainWindow
     End Structure
 
     Public pArgs() As PlayerArguments = {New PlayerArguments("<apppath>\uBMplay.exe",
-                                                             "-P -N0 ""<filename>""",
-                                                             "-P -N<measure> ""<filename>""",
-                                                             "-S"),
-                                         New PlayerArguments("<apppath>\o2play.exe",
-                                                             "-P -N0 ""<filename>""",
-                                                             "-P -N<measure> ""<filename>""",
-                                                             "-S")}
+                                                         "-P -N0 ""<filename>""",
+                                                         "-P -N<measure> ""<filename>""",
+                                                         "-S"),
+                                     New PlayerArguments("<apppath>\o2play.exe",
+                                                         "-P -N0 ""<filename>""",
+                                                         "-P -N<measure> ""<filename>""",
+                                                         "-S"),
+                                     New PlayerArguments("java.exe -jar <apppath>beatoraja.jar  [BMS path]",'-(a|p|r1|r2|r3|r4|s)
+                                                         "-a -s""<filename>""",
+                                                         "none1",
+                                                         "none1"
+                                                         )}
+
     Public CurrentPlayer As Integer = 0
     Private PreviewOnClick As Boolean = True
     Private PreviewErrorCheck As Boolean = False
     Private Rscratch As Boolean = False
     Private ClickStopPreview As Boolean = True
-    Private pTempFileNames() As String = {}
+    Private pTempFileNames() As String = Array.Empty(Of String)()
 
     '----Split Panel Options
     Private PanelWidth() As Single = {0, 100, 0}
@@ -237,7 +242,7 @@ Public Class MainWindow
     Private FirstClickDisabled As Boolean = True
     Private tempFirstMouseDown As Boolean = False
 
-    Private spMain() As Panel = {}
+    Private spMain() As Panel = Array.Empty(Of Panel)()
 
     '----Find Delete Replace Options
     Private fdriMesL As Integer
@@ -419,8 +424,8 @@ Public Class MainWindow
         xI2 = CInt(Int(xxMid * Rnd())) + xMin
         xI3 = CInt(Int(xxMid * Rnd())) + xMin
         xxMid = If(Notes(xI1).VPosition <= Notes(xI2).VPosition And Notes(xI2).VPosition <= Notes(xI3).VPosition,
-            xI2,
-            If(Notes(xI2).VPosition <= Notes(xI1).VPosition And Notes(xI1).VPosition <= Notes(xI3).VPosition, xI1, xI3))
+        xI2,
+        If(Notes(xI2).VPosition <= Notes(xI1).VPosition And Notes(xI1).VPosition <= Notes(xI3).VPosition, xI1, xI3))
         xNoteMid = Notes(xxMid)
         Do
             Do While Notes(xxMin).VPosition < xNoteMid.VPosition And xxMin < xMax
@@ -460,9 +465,9 @@ Public Class MainWindow
 
     Public Function PrevCodeToReal(InitStr As String) As String
         Dim xFileName As String = IIf(Not PathIsValid(FileName),
-                                        IIf(InitPath = "", My.Application.Info.DirectoryPath, InitPath),
-                                        ExcludeFileName(FileName)) _
-                                        & "\___TempBMS.bms"
+                                    IIf(InitPath = String.Empty, My.Application.Info.DirectoryPath, InitPath),
+                                    ExcludeFileName(FileName)) _
+                                    & "\___TempBMS.bms"
         Dim xMeasure As Integer = MeasureAtDisplacement(Math.Abs(PanelVScroll(PanelFocus)))
         Dim xS1 As String = Replace(InitStr, "<apppath>", My.Application.Info.DirectoryPath)
         Dim xS2 As String = Replace(xS1, "<measure>", xMeasure)
@@ -480,8 +485,8 @@ Public Class MainWindow
         'pttl.Refresh()
         'pIsSaved.Visible = Not xBool
         Dim xVersion As String = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor &
-                             IIf(My.Application.Info.Version.Build = 0, "", "." & My.Application.Info.Version.Build)
-        Text = IIf(isSaved, "", "*") & GetFileName(FileName) & " - " & My.Application.Info.Title & " " & xVersion
+                         IIf(My.Application.Info.Version.Build = 0, String.Empty, "." & My.Application.Info.Version.Build)
+        Text = IIf(isSaved, String.Empty, "*") & GetFileName(FileName) & " - " & My.Application.Info.Title & " " & xVersion
         Me.IsSaved = isSaved
     End Sub
 
@@ -493,9 +498,9 @@ Public Class MainWindow
     End Sub
 
     Private Sub AddNote(note As Note,
-               Optional xSelected As Boolean = False,
-               Optional OverWrite As Boolean = True,
-               Optional SortAndUpdatePairing As Boolean = True)
+           Optional xSelected As Boolean = False,
+           Optional OverWrite As Boolean = True,
+           Optional SortAndUpdatePairing As Boolean = True)
 
         If note.VPosition < 0 Or note.VPosition >= GetMaxVPosition() Then Exit Sub
 
@@ -504,7 +509,7 @@ Public Class MainWindow
         If OverWrite Then
             Do While xI1 <= UBound(Notes)
                 If Notes(xI1).VPosition = note.VPosition And
-                    Notes(xI1).ColumnIndex = note.ColumnIndex Then
+                Notes(xI1).ColumnIndex = note.ColumnIndex Then
                     RemoveNote(xI1)
                 Else
                     xI1 += 1
@@ -571,7 +576,7 @@ Public Class MainWindow
             'paste
             Dim xStrSub() As String
             For xI1 = 1 To UBound(xStrLine)
-                If xStrLine(xI1).Trim = "" Then Continue For
+                If xStrLine(xI1).Trim = String.Empty Then Continue For
                 xStrSub = Split(xStrLine(xI1), " ")
                 xTempVP = Val(xStrSub(1)) + MeasureBottom(MeasureAtDisplacement(-xVS) + 1)
                 If UBound(xStrSub) = 5 And xTempVP >= 0 And xTempVP < GetMaxVPosition() Then
@@ -614,7 +619,7 @@ Public Class MainWindow
             'paste
             Dim xStrSub() As String
             For xI1 = 1 To UBound(xStrLine)
-                If xStrLine(xI1).Trim = "" Then Continue For
+                If xStrLine(xI1).Trim = String.Empty Then Continue For
                 xStrSub = Split(xStrLine(xI1), " ")
                 xTempVP = Val(xStrSub(1)) + MeasureBottom(MeasureAtDisplacement(-xVS) + 1)
                 If UBound(xStrSub) = 5 And xTempVP >= 0 And xTempVP < GetMaxVPosition() Then
@@ -709,7 +714,7 @@ Public Class MainWindow
     End Sub
 
     Private Sub CopyNotes(Optional Unselect As Boolean = True)
-        Dim xStrAll As String = "iBMSC Clipboard Data" & IIf(NTInput, " xNT", "")
+        Dim xStrAll As String = "iBMSC Clipboard Data" & IIf(NTInput, " xNT", String.Empty)
         Dim xI1 As Integer
         Dim MinMeasure As Double = 999
 
@@ -722,11 +727,11 @@ Public Class MainWindow
             For xI1 = 1 To UBound(Notes)
                 If Notes(xI1).Selected Then
                     xStrAll &= vbCrLf & Notes(xI1).ColumnIndex.ToString & " " &
-                                       (Notes(xI1).VPosition - MinMeasure).ToString & " " &
-                                        Notes(xI1).Value.ToString & " " &
-                                   CInt(Notes(xI1).LongNote).ToString & " " &
-                                   CInt(Notes(xI1).Hidden).ToString & " " &
-                                   CInt(Notes(xI1).Landmine).ToString
+                                   (Notes(xI1).VPosition - MinMeasure).ToString & " " &
+                                    Notes(xI1).Value.ToString & " " &
+                               CInt(Notes(xI1).LongNote).ToString & " " &
+                               CInt(Notes(xI1).Hidden).ToString & " " &
+                               CInt(Notes(xI1).Landmine).ToString
                     Notes(xI1).Selected = Not Unselect
                 End If
             Next
@@ -735,11 +740,11 @@ Public Class MainWindow
             For xI1 = 1 To UBound(Notes)
                 If Notes(xI1).Selected Then
                     xStrAll &= vbCrLf & Notes(xI1).ColumnIndex.ToString & " " &
-                                       (Notes(xI1).VPosition - MinMeasure).ToString & " " &
-                                        Notes(xI1).Value.ToString & " " &
-                                        Notes(xI1).Length.ToString & " " &
-                                   CInt(Notes(xI1).Hidden).ToString & " " &
-                                   CInt(Notes(xI1).Landmine).ToString
+                                   (Notes(xI1).VPosition - MinMeasure).ToString & " " &
+                                    Notes(xI1).Value.ToString & " " &
+                                    Notes(xI1).Length.ToString & " " &
+                               CInt(Notes(xI1).Hidden).ToString & " " &
+                               CInt(Notes(xI1).Landmine).ToString
                     Notes(xI1).Selected = Not Unselect
                 End If
             Next
@@ -793,7 +798,7 @@ Public Class MainWindow
                 File.Delete(xStr)
             Next
         End If
-        If PreviousAutoSavedFileName <> "" Then File.Delete(PreviousAutoSavedFileName)
+        If PreviousAutoSavedFileName <> String.Empty Then File.Delete(PreviousAutoSavedFileName)
     End Sub
 
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -805,18 +810,18 @@ Public Class MainWindow
             Dim xResult = MsgBox(xStr, MsgBoxStyle.YesNoCancel Or MsgBoxStyle.Question, Text)
 
             If xResult = MsgBoxResult.Yes Then
-                If ExcludeFileName(FileName) = "" Then
+                If ExcludeFileName(FileName) = String.Empty Then
                     Dim xDSave As New SaveFileDialog With {
-                        .Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt|" &
-                                    Strings.FileType.BMS & "|*.bms|" &
-                                    Strings.FileType.BME & "|*.bme|" &
-                                    Strings.FileType.BML & "|*.bml|" &
-                                    Strings.FileType.PMS & "|*.pms|" &
-                                    Strings.FileType.TXT & "|*.txt|" &
-                                    Strings.FileType._all & "|*.*",
-                        .DefaultExt = "bms",
-                        .InitialDirectory = InitPath
-                    }
+                    .Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt|" &
+                                Strings.FileType.BMS & "|*.bms|" &
+                                Strings.FileType.BME & "|*.bme|" &
+                                Strings.FileType.BML & "|*.bml|" &
+                                Strings.FileType.PMS & "|*.pms|" &
+                                Strings.FileType.TXT & "|*.txt|" &
+                                Strings.FileType._all & "|*.*",
+                    .DefaultExt = "bms",
+                    .InitialDirectory = InitPath
+                }
 
                     If xDSave.ShowDialog = Forms.DialogResult.Cancel Then e.Cancel = True : Exit Sub
                     SetFileName(xDSave.FileName)
@@ -875,30 +880,30 @@ Public Class MainWindow
         ' .Value = 1200000
         'End With
 
-        THTitle.Text = ""
-        THArtist.Text = ""
-        THGenre.Text = ""
+        THTitle.Text = String.Empty
+        THArtist.Text = String.Empty
+        THGenre.Text = String.Empty
         THBPM.Value = 120
         If CHPlayer.SelectedIndex = -1 Then CHPlayer.SelectedIndex = 0
         CHRank.SelectedIndex = 2
-        THPlayLevel.Text = ""
-        THSubTitle.Text = ""
-        THSubArtist.Text = ""
-        THStageFile.Text = ""
-        THBanner.Text = ""
-        THBackBMP.Text = ""
+        THPlayLevel.Text = String.Empty
+        THSubTitle.Text = String.Empty
+        THSubArtist.Text = String.Empty
+        THStageFile.Text = String.Empty
+        THBanner.Text = String.Empty
+        THBackBMP.Text = String.Empty
         CHDifficulty.SelectedIndex = 0
-        THExRank.Text = ""
-        THTotal.Text = ""
-        THComment.Text = ""
+        THExRank.Text = String.Empty
+        THTotal.Text = String.Empty
+        THComment.Text = String.Empty
         'THLnType.Text = "1"
         CHLnObj.SelectedIndex = 0
 
-        THLandMine.Text = ""
-        THMissBMP.Text = ""
-        TExpansion.Text = ""
+        THLandMine.Text = String.Empty
+        THMissBMP.Text = String.Empty
+        TExpansion.Text = String.Empty
 
-        THPreview.Text = ""
+        THPreview.Text = String.Empty
         CHLnmode.SelectedIndex = 0
 
         LBeat.Items.Clear()
@@ -1031,7 +1036,7 @@ Public Class MainWindow
         Loop
         GCD = xNMax
     End Function
-    Public Function GCD(NumA As Double, NumB As Double, res As Integer) As Double
+    Public Shared Function GCD(NumA As Double, NumB As Double, res As Integer) As Double
         Dim xNMax As Double = NumA
         Dim xNMin As Double = NumB
         Dim minLimit = 192.0R / res
@@ -1341,18 +1346,18 @@ EndSearch:
             Dim xResult As MsgBoxResult = MsgBox(Strings.Messages.SaveOnExit, MsgBoxStyle.YesNoCancel Or MsgBoxStyle.Question, Text)
 
             If xResult = MsgBoxResult.Yes Then
-                If ExcludeFileName(FileName) = "" Then
+                If ExcludeFileName(FileName) = String.Empty Then
                     Dim xDSave As New SaveFileDialog With {
-                        .Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt|" &
-                                    Strings.FileType.BMS & "|*.bms|" &
-                                    Strings.FileType.BME & "|*.bme|" &
-                                    Strings.FileType.BML & "|*.bml|" &
-                                    Strings.FileType.PMS & "|*.pms|" &
-                                    Strings.FileType.TXT & "|*.txt|" &
-                                    Strings.FileType._all & "|*.*",
-                        .DefaultExt = "bms",
-                        .InitialDirectory = InitPath
-                    }
+                    .Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt|" &
+                                Strings.FileType.BMS & "|*.bms|" &
+                                Strings.FileType.BME & "|*.bme|" &
+                                Strings.FileType.BML & "|*.bml|" &
+                                Strings.FileType.PMS & "|*.pms|" &
+                                Strings.FileType.TXT & "|*.txt|" &
+                                Strings.FileType._all & "|*.*",
+                    .DefaultExt = "bms",
+                    .InitialDirectory = InitPath
+                }
 
                     If xDSave.ShowDialog = Forms.DialogResult.Cancel Then Return True
                     SetFileName(xDSave.FileName)
@@ -1385,10 +1390,10 @@ EndSearch:
         ReDim hBPM(1295)    'x10000
         ReDim hSTOP(1295)
         ReDim hBMSCROLL(1295)
-        THGenre.Text = ""
-        THTitle.Text = ""
-        THArtist.Text = ""
-        THPlayLevel.Text = ""
+        THGenre.Text = String.Empty
+        THTitle.Text = String.Empty
+        THArtist.Text = String.Empty
+        THPlayLevel.Text = String.Empty
 
         With Notes(0)
             .ColumnIndex = niBPM
@@ -1434,10 +1439,10 @@ EndSearch:
         ReDim hBPM(1295)    'x10000
         ReDim hSTOP(1295)
         ReDim hBMSCROLL(1295)
-        THGenre.Text = ""
-        THTitle.Text = ""
-        THArtist.Text = ""
-        THPlayLevel.Text = ""
+        THGenre.Text = String.Empty
+        THTitle.Text = String.Empty
+        THArtist.Text = String.Empty
+        THPlayLevel.Text = String.Empty
 
         With Notes(0)
             .ColumnIndex = niBPM
@@ -1454,20 +1459,19 @@ EndSearch:
 
         If MsgBox("Please copy your code to clipboard and click OK.", MsgBoxStyle.OkCancel, "Create from code") = MsgBoxResult.Cancel Then Exit Sub
         OpenBMS(Clipboard.GetText)
-        Loadraw()
     End Sub
 
-    Private Sub TBOpen_ButtonClick(sender As Object, e As EventArgs) Handles TBOpen.ButtonClick, mnOpen.Click, bmsfilename.Leave, bmsfilename.DataContextChanged
+    Private Sub TBOpen_ButtonClick(sender As Object, e As EventArgs) Handles TBOpen.ButtonClick, mnOpen.Click
         'KMouseDown = -1
         ReDim SelectedNotes(-1)
         KMouseOver = -1
         If ClosingPopSave() Then Exit Sub
 
         Dim xDOpen As New OpenFileDialog With {
-             .Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt",
-             .DefaultExt = "bms",
-             .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
-             }
+         .Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt",
+         .DefaultExt = "bms",
+         .InitialDirectory = IIf(ExcludeFileName(FileName) = String.Empty, InitPath, ExcludeFileName(FileName))
+         }
 
         If xDOpen.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
 
@@ -1478,7 +1482,6 @@ EndSearch:
         NewRecent(FileName)
         SetIsSaved(True)
         'pIsSaved.Visible = Not IsSaved
-        Loadraw()
     End Sub
 
     Private Sub TBImportIBMSC_Click(sender As Object, e As EventArgs) Handles TBImportIBMSC.Click, mnImportIBMSC.Click
@@ -1488,10 +1491,10 @@ EndSearch:
         If ClosingPopSave() Then Return
 
         Dim xDOpen As New OpenFileDialog With {
-            .Filter = Strings.FileType.IBMSC & "|*.ibmsc",
-            .DefaultExt = "ibmsc",
-            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
-        }
+        .Filter = Strings.FileType.IBMSC & "|*.ibmsc",
+        .DefaultExt = "ibmsc",
+        .InitialDirectory = IIf(ExcludeFileName(FileName) = String.Empty, InitPath, ExcludeFileName(FileName))
+    }
 
         If xDOpen.ShowDialog = Forms.DialogResult.Cancel Then Return
         InitPath = ExcludeFileName(xDOpen.FileName)
@@ -1500,7 +1503,6 @@ EndSearch:
         NewRecent(xDOpen.FileName)
         SetIsSaved(False)
         'pIsSaved.Visible = Not IsSaved
-        Loadraw()
     End Sub
 
     Private Sub TBImportSM_Click(sender As Object, e As EventArgs) Handles TBImportSM.Click, mnImportSM.Click
@@ -1510,10 +1512,10 @@ EndSearch:
         If ClosingPopSave() Then Exit Sub
 
         Dim xDOpen As New OpenFileDialog With {
-            .Filter = Strings.FileType.SM & "|*.sm",
-            .DefaultExt = "sm",
-            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
-        }
+        .Filter = Strings.FileType.SM & "|*.sm",
+        .DefaultExt = "sm",
+        .InitialDirectory = IIf(ExcludeFileName(FileName) = String.Empty, InitPath, ExcludeFileName(FileName))
+    }
 
         If xDOpen.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         If OpenSM(File.ReadAllText(xDOpen.FileName, TextEncoding)) Then Exit Sub
@@ -1522,7 +1524,6 @@ EndSearch:
         ClearUndo()
         SetIsSaved(False)
         'pIsSaved.Visible = Not IsSaved
-        Loadraw()
     End Sub
 
     Private Sub TBSave_ButtonClick(sender As Object, e As EventArgs) Handles TBSave.ButtonClick, mnSave.Click
@@ -1530,18 +1531,18 @@ EndSearch:
         ReDim SelectedNotes(-1)
         KMouseOver = -1
 
-        If ExcludeFileName(FileName) = "" Then
+        If ExcludeFileName(FileName) = String.Empty Then
             Dim xDSave As New SaveFileDialog With {
-                .Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt|" &
-                            Strings.FileType.BMS & "|*.bms|" &
-                            Strings.FileType.BME & "|*.bme|" &
-                            Strings.FileType.BML & "|*.bml|" &
-                            Strings.FileType.PMS & "|*.pms|" &
-                            Strings.FileType.TXT & "|*.txt|" &
-                            Strings.FileType._all & "|*.*",
-                .DefaultExt = "bms",
-                .InitialDirectory = InitPath
-            }
+            .Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt|" &
+                        Strings.FileType.BMS & "|*.bms|" &
+                        Strings.FileType.BME & "|*.bme|" &
+                        Strings.FileType.BML & "|*.bml|" &
+                        Strings.FileType.PMS & "|*.pms|" &
+                        Strings.FileType.TXT & "|*.txt|" &
+                        Strings.FileType._all & "|*.*",
+            .DefaultExt = "bms",
+            .InitialDirectory = InitPath
+        }
 
             If xDSave.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
             InitPath = ExcludeFileName(xDSave.FileName)
@@ -1562,16 +1563,16 @@ EndSearch:
         KMouseOver = -1
 
         Dim xDSave As New SaveFileDialog With {
-            .Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt|" &
-                        Strings.FileType.BMS & "|*.bms|" &
-                        Strings.FileType.BME & "|*.bme|" &
-                        Strings.FileType.BML & "|*.bml|" &
-                        Strings.FileType.PMS & "|*.pms|" &
-                        Strings.FileType.TXT & "|*.txt|" &
-                        Strings.FileType._all & "|*.*",
-            .DefaultExt = "bms",
-            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
-        }
+        .Filter = Strings.FileType._bms & "|*.bms;*.bme;*.bml;*.pms;*.txt|" &
+                    Strings.FileType.BMS & "|*.bms|" &
+                    Strings.FileType.BME & "|*.bme|" &
+                    Strings.FileType.BML & "|*.bml|" &
+                    Strings.FileType.PMS & "|*.pms|" &
+                    Strings.FileType.TXT & "|*.txt|" &
+                    Strings.FileType._all & "|*.*",
+        .DefaultExt = "bms",
+        .InitialDirectory = IIf(ExcludeFileName(FileName) = String.Empty, InitPath, ExcludeFileName(FileName))
+    }
 
         If xDSave.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDSave.FileName)
@@ -1591,10 +1592,10 @@ EndSearch:
         KMouseOver = -1
 
         Dim xDSave As New SaveFileDialog With {
-            .Filter = Strings.FileType.IBMSC & "|*.ibmsc",
-            .DefaultExt = "ibmsc",
-            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
-        }
+        .Filter = Strings.FileType.IBMSC & "|*.ibmsc",
+        .DefaultExt = "ibmsc",
+        .InitialDirectory = IIf(ExcludeFileName(FileName) = String.Empty, InitPath, ExcludeFileName(FileName))
+    }
         If xDSave.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
 
         SaveiBMSC(xDSave.FileName)
@@ -1609,10 +1610,10 @@ EndSearch:
         KMouseOver = -1
 
         Dim xDSave As New SaveFileDialog With {
-            .Filter = Strings.FileType.BMSON & "|*.bmson",
-            .DefaultExt = "bmson",
-            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
-        }
+        .Filter = Strings.FileType.BMSON & "|*.bmson",
+        .DefaultExt = "bmson",
+        .InitialDirectory = IIf(ExcludeFileName(FileName) = String.Empty, InitPath, ExcludeFileName(FileName))
+    }
         If xDSave.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
 
         SaveBMSON(xDSave.FileName)
@@ -1937,25 +1938,25 @@ EndSearch:
     Private Sub LWAV_Click(sender As Object, e As EventArgs) Handles LWAV.Click
         If TBWrite.Checked Then FSW.Text = C10to36(LWAV.SelectedIndex + 1)
 
-        PreviewNote("", True)
+        PreviewNote(String.Empty, True)
         If Not PreviewOnClick Then Exit Sub
-        If hWAV(LWAV.SelectedIndex + 1) = "" Then Exit Sub
+        If hWAV(LWAV.SelectedIndex + 1) = String.Empty Then Exit Sub
 
-        Dim xFileLocation As String = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName)) & "\" & hWAV(LWAV.SelectedIndex + 1)
+        Dim xFileLocation As String = IIf(ExcludeFileName(FileName) = String.Empty, InitPath, ExcludeFileName(FileName)) & "\" & hWAV(LWAV.SelectedIndex + 1)
         PreviewNote(xFileLocation, False)
     End Sub
 
     Private Sub LWAV_DoubleClick(sender As Object, e As EventArgs) Handles LWAV.DoubleClick
         Dim xDWAV As New OpenFileDialog With {
-            .DefaultExt = "wav",
-            .Filter = Strings.FileType._wave & "|*.wav;*.ogg;*.mp3;*.flac|" &
-                       Strings.FileType.WAV & "|*.wav|" &
-                       Strings.FileType.OGG & "|*.ogg|" &
-                       Strings.FileType.MP3 & "|*.mp3|" &
-                       Strings.FileType.FLAC & "|*.flac|" &
-                       Strings.FileType._all & "|*.*",
-            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
-        }
+        .DefaultExt = "wav",
+        .Filter = Strings.FileType._wave & "|*.wav;*.ogg;*.mp3;*.flac|" &
+                   Strings.FileType.WAV & "|*.wav|" &
+                   Strings.FileType.OGG & "|*.ogg|" &
+                   Strings.FileType.MP3 & "|*.mp3|" &
+                   Strings.FileType.FLAC & "|*.flac|" &
+                   Strings.FileType._all & "|*.*",
+        .InitialDirectory = IIf(ExcludeFileName(FileName) = String.Empty, InitPath, ExcludeFileName(FileName))
+    }
 
         If xDWAV.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDWAV.FileName)
@@ -1967,7 +1968,7 @@ EndSearch:
     Private Sub LWAV_KeyDown(sender As Object, e As KeyEventArgs) Handles LWAV.KeyDown
         Select Case e.KeyCode
             Case Keys.Delete
-                hWAV(LWAV.SelectedIndex + 1) = ""
+                hWAV(LWAV.SelectedIndex + 1) = String.Empty
                 LWAV.Items.Item(LWAV.SelectedIndex) = C10to36(LWAV.SelectedIndex + 1) & ": "
                 If IsSaved Then SetIsSaved(False)
         End Select
@@ -1975,21 +1976,21 @@ EndSearch:
 
     Private Sub LBMP_DoubleClick(sender As Object, e As EventArgs) Handles LBMP.DoubleClick
         Dim xDBMP As New OpenFileDialog With {
-            .DefaultExt = "bmp",
-            .Filter = Strings.FileType._image & "|*.bmp;*.png;*.jpg;*.jpeg;.gif|" &
-                       Strings.FileType._movie & "|*.mpg;*.m1v;*.m2v;*.avi;*.mp4;*.m4v;*.wmv;*.webm|" &
-                       Strings.FileType.BMP & "|*.bmp|" &
-                       Strings.FileType.PNG & "|*.png|" &
-                       Strings.FileType.JPG & "|*.jpg;*.jpeg|" &
-                       Strings.FileType.GIF & "|*.gif|" &
-                       Strings.FileType.MP4 & "|*.mp4;*.m4v|" &
-                       Strings.FileType.AVI & "|*.avi|" &
-                       Strings.FileType.MPG & "|*.mpg;*.m1v;*.m2v|" &
-                       Strings.FileType.WMV & "|*.wmv|" &
-                       Strings.FileType.WEBM & "|*.webm|" &
-                       Strings.FileType._all & "|*.*",
-            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
-        }
+        .DefaultExt = "bmp",
+        .Filter = Strings.FileType._image & "|*.bmp;*.png;*.jpg;*.jpeg;.gif|" &
+                   Strings.FileType._movie & "|*.mpg;*.m1v;*.m2v;*.avi;*.mp4;*.m4v;*.wmv;*.webm|" &
+                   Strings.FileType.BMP & "|*.bmp|" &
+                   Strings.FileType.PNG & "|*.png|" &
+                   Strings.FileType.JPG & "|*.jpg;*.jpeg|" &
+                   Strings.FileType.GIF & "|*.gif|" &
+                   Strings.FileType.MP4 & "|*.mp4;*.m4v|" &
+                   Strings.FileType.AVI & "|*.avi|" &
+                   Strings.FileType.MPG & "|*.mpg;*.m1v;*.m2v|" &
+                   Strings.FileType.WMV & "|*.wmv|" &
+                   Strings.FileType.WEBM & "|*.webm|" &
+                   Strings.FileType._all & "|*.*",
+        .InitialDirectory = IIf(ExcludeFileName(FileName) = String.Empty, InitPath, ExcludeFileName(FileName))
+    }
 
         If xDBMP.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDBMP.FileName)
@@ -2001,7 +2002,7 @@ EndSearch:
     Private Sub LBMP_KeyDown(sender As Object, e As KeyEventArgs) Handles LBMP.KeyDown
         Select Case e.KeyCode
             Case Keys.Delete
-                hBMP(LBMP.SelectedIndex + 1) = ""
+                hBMP(LBMP.SelectedIndex + 1) = String.Empty
                 LBMP.Items.Item(LBMP.SelectedIndex) = C10to36(LBMP.SelectedIndex + 1) & ": "
                 If IsSaved Then SetIsSaved(False)
         End Select
@@ -2017,7 +2018,7 @@ EndSearch:
     End Sub
 
     Private Sub TBPreviewOnClick_Click(sender As Object, e As EventArgs) Handles TBPreviewOnClick.Click, mnPreviewOnClick.Click
-        PreviewNote("", True)
+        PreviewNote(String.Empty, True)
         PreviewOnClick = sender.Checked
         TBPreviewOnClick.Checked = PreviewOnClick
         mnPreviewOnClick.Checked = PreviewOnClick
@@ -2108,8 +2109,7 @@ EndSearch:
     Private Function GetFileName(s As String) As String
         Dim fslash As Integer = InStrRev(s, "/")
         Dim bslash As Integer = InStrRev(s, "\")
-        bmsfilename.Text = FileName
-        title.Text = THTitle.Text + THSubTitle.Text
+
         Return Mid(s, IIf(fslash > bslash, fslash, bslash) + 1)
 
     End Function
@@ -2117,23 +2117,23 @@ EndSearch:
     Private Function ExcludeFileName(s As String) As String
         Dim fslash As Integer = InStrRev(s, "/")
         Dim bslash As Integer = InStrRev(s, "\")
-        If (bslash Or fslash) = 0 Then Return ""
+        If (bslash Or fslash) = 0 Then Return String.Empty
         Return Mid(s, 1, IIf(fslash > bslash, fslash, bslash) - 1)
     End Function
 
     Private Sub PlayerMissingPrompt()
         Dim xArg As PlayerArguments = pArgs(CurrentPlayer)
         Dim unused = MsgBox(Strings.Messages.CannotFind.Replace("{}", PrevCodeToReal(xArg.Path)) & vbCrLf &
-               Strings.Messages.PleaseRespecifyPath, MsgBoxStyle.Critical, Strings.Messages.PlayerNotFound)
+           Strings.Messages.PleaseRespecifyPath, MsgBoxStyle.Critical, Strings.Messages.PlayerNotFound)
 
         Dim xDOpen As New OpenFileDialog With {
-            .InitialDirectory = IIf(ExcludeFileName(PrevCodeToReal(xArg.Path)) = "",
-                                      My.Application.Info.DirectoryPath,
-                                      ExcludeFileName(PrevCodeToReal(xArg.Path))),
-            .FileName = PrevCodeToReal(xArg.Path),
-            .Filter = Strings.FileType.EXE & "|*.exe",
-            .DefaultExt = "exe"
-        }
+        .InitialDirectory = IIf(ExcludeFileName(PrevCodeToReal(xArg.Path)) = String.Empty,
+                                  My.Application.Info.DirectoryPath,
+                                  ExcludeFileName(PrevCodeToReal(xArg.Path))),
+        .FileName = PrevCodeToReal(xArg.Path),
+        .Filter = Strings.FileType.EXE & "|*.exe",
+        .DefaultExt = "exe"
+    }
         If xDOpen.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
 
         'pArgs(CurrentPlayer) = Replace(xDOpen.FileName, My.Application.Info.DirectoryPath, "<apppath>") & _
@@ -2159,8 +2159,8 @@ EndSearch:
 
         Dim xStrAll As String = SaveBMS()
         Dim xFileName As String = IIf(Not PathIsValid(FileName),
-                                      IIf(InitPath = "", My.Application.Info.DirectoryPath, InitPath),
-                                      ExcludeFileName(FileName)) & "\___TempBMS.bms"
+                                  IIf(InitPath = String.Empty, My.Application.Info.DirectoryPath, InitPath),
+                                  ExcludeFileName(FileName)) & "\___TempBMS.bms"
         My.Computer.FileSystem.WriteAllText(xFileName, xStrAll, False, TextEncoding)
 
         AddTempFileList(xFileName)
@@ -2182,8 +2182,8 @@ EndSearch:
 
         Dim xStrAll As String = SaveBMS()
         Dim xFileName As String = IIf(Not PathIsValid(FileName),
-                                      IIf(InitPath = "", My.Application.Info.DirectoryPath, InitPath),
-                                      ExcludeFileName(FileName)) & "\___TempBMS.bms"
+                                  IIf(InitPath = String.Empty, My.Application.Info.DirectoryPath, InitPath),
+                                  ExcludeFileName(FileName)) & "\___TempBMS.bms"
         My.Computer.FileSystem.WriteAllText(xFileName, xStrAll, False, TextEncoding)
 
         AddTempFileList(xFileName)
@@ -2220,15 +2220,17 @@ EndSearch:
             pTempFileNames(UBound(pTempFileNames)) = s
         End If
     End Sub
-
-    Private Sub TBStatistics_Click(sender As Object, e As EventArgs) Handles TBStatistics.Click, mnStatistics.Click
+    Private Sub TBinfo_Click(sender As Object, e As EventArgs) Handles mnStatistics.Click, TBStatistics.Click
+        My.Forms.Chartinfo.Show()
+    End Sub
+    Public Sub TBStatistics_Click(sender As Object, e As EventArgs)
         SortByVPositionInsertion()
         UpdatePairing()
 
         Dim data(6, 5) As Integer
-        For i As Integer = 1 To UBound(Notes)
+        For i = 1 To UBound(Notes)
             With Notes(i)
-                Dim row As Integer = -1
+                Dim row = -1
                 If .ColumnIndex = niBPM Then
                     row = 0
                 ElseIf .ColumnIndex = niSTOP Then
@@ -2256,7 +2258,7 @@ StartCount:     If Not NTInput Then
                     data(row, 5) += 1
 
                 Else
-                    Dim noteUnit As Integer = 1
+                    Dim noteUnit = 1
                     If .Length = 0 Then data(row, 0) += 1
                     If .Length <> 0 Then data(row, 1) += 2 : noteUnit = 2
 
@@ -2273,7 +2275,7 @@ StartCount:     If Not NTInput Then
         Next
 
         Dim dStat As New dgStatistics(data)
-        Dim unused = dStat.ShowDialog()
+        Dim unused = dStat.ShowDialog
     End Sub
 
     ''' <summary>
@@ -2313,11 +2315,11 @@ StartCount:     If Not NTInput Then
 
         For xI1 = 1 To UBound(Notes)
             If Notes(xI1).ColumnIndex >= niA1 AndAlso Notes(xI1).ColumnIndex <= niAQ AndAlso
-                   Not Notes(xI1).Hidden AndAlso Not Notes(xI1).Landmine AndAlso column(Notes(xI1).ColumnIndex).isVisible Then
+               Not Notes(xI1).Hidden AndAlso Not Notes(xI1).Landmine AndAlso column(Notes(xI1).ColumnIndex).isVisible Then
                 xIAll += 1
             End If
             If Notes(xI1).ColumnIndex >= niD1 AndAlso Notes(xI1).ColumnIndex <= niDQ AndAlso
-                   Not Notes(xI1).Hidden AndAlso Not Notes(xI1).Landmine AndAlso column(Notes(xI1).ColumnIndex).isVisible Then
+               Not Notes(xI1).Hidden AndAlso Not Notes(xI1).Landmine AndAlso column(Notes(xI1).ColumnIndex).isVisible Then
                 xIAll += 1
             End If
         Next
@@ -2353,12 +2355,12 @@ StartCount:     If Not NTInput Then
                 FSP4.Text = TempVPosition.ToString() & "  "
                 TimeStatusLabel.Text = GetTimeFromVPosition(TempVPosition).ToString("F4")
                 FSC.Text = nTitle(SelectedColumn)
-                FSW.Text = ""
+                FSW.Text = String.Empty
                 FSM.Text = Add3Zeros(xMeasure)
-                FST.Text = ""
-                FSH.Text = ""
-                FSL.Text = ""
-                FSE.Text = ""
+                FST.Text = String.Empty
+                FSH.Text = String.Empty
+                FSL.Text = String.Empty
+                FSE.Text = String.Empty
 
             Else
                 Dim xMeasure As Integer = MeasureAtDisplacement(Notes(xI1).VPosition)
@@ -2373,13 +2375,13 @@ StartCount:     If Not NTInput Then
                 TimeStatusLabel.Text = GetTimeFromVPosition(TempVPosition).ToString("F4")
                 FSC.Text = nTitle(Notes(xI1).ColumnIndex)
                 FSW.Text = IIf(IsColumnNumeric(Notes(xI1).ColumnIndex),
-                               Notes(xI1).Value / 10000,
-                               C10to36(Notes(xI1).Value \ 10000))
+                           Notes(xI1).Value / 10000,
+                           C10to36(Notes(xI1).Value \ 10000))
                 FSM.Text = Add3Zeros(xMeasure)
-                FST.Text = IIf(NTInput, Strings.StatusBar.Length & " = " & Notes(xI1).Length, IIf(Notes(xI1).LongNote, Strings.StatusBar.LongNote, ""))
-                FSH.Text = IIf(Notes(xI1).Hidden, Strings.StatusBar.Hidden, "")
-                FSL.Text = IIf(Notes(xI1).Landmine, Strings.StatusBar.LandMine, "")
-                FSE.Text = IIf(Notes(xI1).HasError, Strings.StatusBar.Err, "")
+                FST.Text = IIf(NTInput, Strings.StatusBar.Length & " = " & Notes(xI1).Length, IIf(Notes(xI1).LongNote, Strings.StatusBar.LongNote, String.Empty))
+                FSH.Text = IIf(Notes(xI1).Hidden, Strings.StatusBar.Hidden, String.Empty)
+                FSL.Text = IIf(Notes(xI1).Landmine, Strings.StatusBar.LandMine, String.Empty)
+                FSE.Text = IIf(Notes(xI1).HasError, Strings.StatusBar.Err, String.Empty)
 
             End If
 
@@ -2402,12 +2404,12 @@ StartCount:     If Not NTInput Then
             ElseIf IsColumnImage(SelectedColumn) Then
                 FSW.Text = C10to36(LBMP.SelectedIndex + 1)
             Else
-                FSW.Text = ""
+                FSW.Text = String.Empty
             End If
             FSM.Text = Add3Zeros(xMeasure)
-            FST.Text = IIf(NTInput, TempLength, IIf(My.Computer.Keyboard.ShiftKeyDown And Not My.Computer.Keyboard.CtrlKeyDown, Strings.StatusBar.LongNote, ""))
-            FSH.Text = IIf(My.Computer.Keyboard.CtrlKeyDown And Not My.Computer.Keyboard.ShiftKeyDown, Strings.StatusBar.Hidden, "")
-            FSL.Text = IIf(My.Computer.Keyboard.ShiftKeyDown And My.Computer.Keyboard.CtrlKeyDown, Strings.StatusBar.LandMine, "")
+            FST.Text = IIf(NTInput, TempLength, IIf(My.Computer.Keyboard.ShiftKeyDown And Not My.Computer.Keyboard.CtrlKeyDown, Strings.StatusBar.LongNote, String.Empty))
+            FSH.Text = IIf(My.Computer.Keyboard.CtrlKeyDown And Not My.Computer.Keyboard.ShiftKeyDown, Strings.StatusBar.Hidden, String.Empty)
+            FSL.Text = IIf(My.Computer.Keyboard.ShiftKeyDown And My.Computer.Keyboard.CtrlKeyDown, Strings.StatusBar.LandMine, String.Empty)
 
         ElseIf TBTimeSelect.Checked Then
             FSSS.Text = vSelStart
@@ -2422,7 +2424,7 @@ StartCount:     If Not NTInput Then
         Dim timing_notes = (From note In Notes
                             Where note.ColumnIndex = niBPM Or note.ColumnIndex = niSTOP
                             Group By Column = note.ColumnIndex
-                               Into NoteGroups = Group).ToDictionary(Function(x) x.Column, Function(x) x.NoteGroups)
+                           Into NoteGroups = Group).ToDictionary(Function(x) x.Column, Function(x) x.NoteGroups)
 
         Dim bpm_notes = timing_notes.Item(niBPM)
 
@@ -2457,7 +2459,7 @@ StartCount:     If Not NTInput Then
 
             Dim stops = From stp In stop_notes
                         Where stp.VPosition >= notevpos And
-                            stp.VPosition < notevpos + duration
+                        stp.VPosition < notevpos + duration
 
             Dim stop_beats = stops.Sum(Function(x) x.Value / 10000.0) / 48
             stop_contrib += current_bps * stop_beats
@@ -2707,9 +2709,9 @@ StartCount:     If Not NTInput Then
         'If My.Computer.FileSystem.FileExists(My.Application.Info.DirectoryPath & "\About.png") Then
         'Aboutboxx1.SelectBitmap()
         Dim Aboutboxx1 As New AboutBox1 With {
-            .bBitmap = My.Resources.About0,
-            .ClientSize = New Size(1000, 500)
-        }
+        .bBitmap = My.Resources.About0,
+        .ClientSize = New Size(1000, 500)
+    }
         Aboutboxx1.ClickToCopy.Visible = True
         Dim unused = Aboutboxx1.ShowDialog(Me)
         'Else
@@ -2736,7 +2738,7 @@ StartCount:     If Not NTInput Then
             ReDim Preserve xIndices(UBound(xPath))
 
             Do While i < xIndices.Length And currWavIndex <= 1294
-                Do While currWavIndex <= 1294 AndAlso hWAV(currWavIndex + 1) <> ""
+                Do While currWavIndex <= 1294 AndAlso hWAV(currWavIndex + 1) <> String.Empty
                     currWavIndex += 1
                 Loop
                 If currWavIndex > 1294 Then Exit Do
@@ -2757,7 +2759,7 @@ StartCount:     If Not NTInput Then
                 ReDim Preserve xIndices(UBound(xPath))
 
                 Do While i < xIndices.Length And currWavIndex <= 1294
-                    Do While currWavIndex <= 1294 AndAlso hWAV(currWavIndex + 1) <> ""
+                    Do While currWavIndex <= 1294 AndAlso hWAV(currWavIndex + 1) <> String.Empty
                         currWavIndex += 1
                     Loop
                     If currWavIndex > 1294 Then Exit Do
@@ -2838,7 +2840,7 @@ StartCount:     If Not NTInput Then
             ReDim Preserve xIndices(UBound(xPath))
 
             Do While i < xIndices.Length And currBmpIndex <= 1294
-                Do While currBmpIndex <= 1294 AndAlso hBMP(currBmpIndex + 1) <> ""
+                Do While currBmpIndex <= 1294 AndAlso hBMP(currBmpIndex + 1) <> String.Empty
                     currBmpIndex += 1
                 Loop
                 If currBmpIndex > 1294 Then Exit Do
@@ -2859,7 +2861,7 @@ StartCount:     If Not NTInput Then
                 ReDim Preserve xIndices(UBound(xPath))
 
                 Do While i < xIndices.Length And currBmpIndex <= 1294
-                    Do While currBmpIndex <= 1294 AndAlso hBMP(currBmpIndex + 1) <> ""
+                    Do While currBmpIndex <= 1294 AndAlso hBMP(currBmpIndex + 1) <> String.Empty
                         currBmpIndex += 1
                     Loop
                     If currBmpIndex > 1294 Then Exit Do
@@ -2956,9 +2958,9 @@ StartCount:     If Not NTInput Then
     End Sub
 
     Private Sub THGenre_TextChanged(sender As Object, e As EventArgs) Handles _
-    THGenre.TextChanged, THTitle.TextChanged, THArtist.TextChanged, THPlayLevel.TextChanged, CHRank.SelectedIndexChanged, TExpansion.TextChanged,
-    THSubTitle.TextChanged, THSubArtist.TextChanged, THStageFile.TextChanged, THBanner.TextChanged, THBackBMP.TextChanged,
-    CHDifficulty.SelectedIndexChanged, THExRank.TextChanged, THTotal.TextChanged, THComment.TextChanged, THPreview.TextChanged, CHLnmode.SelectedIndexChanged
+THGenre.TextChanged, THTitle.TextChanged, THArtist.TextChanged, THPlayLevel.TextChanged, CHRank.SelectedIndexChanged, TExpansion.TextChanged,
+THSubTitle.TextChanged, THSubArtist.TextChanged, THStageFile.TextChanged, THBanner.TextChanged, THBackBMP.TextChanged,
+CHDifficulty.SelectedIndexChanged, THExRank.TextChanged, THTotal.TextChanged, THComment.TextChanged, THPreview.TextChanged, CHLnmode.SelectedIndexChanged
         If IsSaved Then SetIsSaved(False)
 
         If ReferenceEquals(sender, THLandMine) Then
@@ -3167,7 +3169,7 @@ StartCount:     If Not NTInput Then
     End Sub
 
     Private Sub TBLangDef_Click(sender As Object, e As EventArgs) Handles TBLangDef.Click
-        DispLang = ""
+        DispLang = String.Empty
         Dim unused = MsgBox(Strings.Messages.PreferencePostpone, MsgBoxStyle.Information)
     End Sub
 
@@ -3278,8 +3280,8 @@ StartCount:     If Not NTInput Then
         End Select
 
         Dim xDiag As New OpGeneral(gWheel, gPgUpDn, MiddleButtonMoveMethod, xTE, 192.0R / BMSGridLimit,
-            AutoSaveInterval, BeepWhileSaved, BPMx1296, STOPx1296,
-            AutoFocusMouseEnter, FirstClickDisabled, ClickStopPreview)
+        AutoSaveInterval, BeepWhileSaved, BPMx1296, STOPx1296,
+        AutoFocusMouseEnter, FirstClickDisabled, ClickStopPreview)
 
         If xDiag.ShowDialog() = Forms.DialogResult.OK Then
             With xDiag
@@ -3502,10 +3504,10 @@ Jump2:
 
     Private Function fdrCheck(xNote As Note) As Boolean
         Return xNote.VPosition >= MeasureBottom(fdriMesL) And xNote.VPosition < MeasureBottom(fdriMesU) + MeasureLength(fdriMesU) AndAlso
-               IIf(IsColumnNumeric(xNote.ColumnIndex),
-                   xNote.Value >= fdriValL And xNote.Value <= fdriValU,
-                   xNote.Value >= fdriLblL And xNote.Value <= fdriLblU) AndAlso
-               Array.IndexOf(fdriCol, xNote.ColumnIndex) <> -1
+           IIf(IsColumnNumeric(xNote.ColumnIndex),
+               xNote.Value >= fdriValL And xNote.Value <= fdriValU,
+               xNote.Value >= fdriLblL And xNote.Value <= fdriLblU) AndAlso
+           Array.IndexOf(fdriCol, xNote.ColumnIndex) <> -1
     End Function
 
     Private Function fdrRangeS(xbLim1 As Boolean, xbLim2 As Boolean, xVal As Boolean) As Boolean
@@ -3513,10 +3515,10 @@ Jump2:
     End Function
 
     Public Sub fdrSelect(iRange As Integer,
-                          xMesL As Integer, xMesU As Integer,
-                          xLblL As String, xLblU As String,
-                          xValL As Integer, xValU As Integer,
-                          iCol() As Integer)
+                      xMesL As Integer, xMesU As Integer,
+                      xLblL As String, xLblU As String,
+                      xValL As Integer, xValU As Integer,
+                      iCol() As Integer)
 
         fdriMesL = xMesL
         fdriMesU = xMesU
@@ -3548,7 +3550,7 @@ Jump2:
             Dim bbbf As Boolean = fdrCheck(Notes(xI1))
 
             If ((xbSel And xSel(xI1)) Or (xbUnsel And Not xSel(xI1))) AndAlso
-                    nEnabled(Notes(xI1).ColumnIndex) AndAlso fdrRangeS(xbShort, xbLong, IIf(NTInput, Notes(xI1).Length, Notes(xI1).LongNote)) And fdrRangeS(xbVisible, xbHidden, Notes(xI1).Hidden) Then
+                nEnabled(Notes(xI1).ColumnIndex) AndAlso fdrRangeS(xbShort, xbLong, IIf(NTInput, Notes(xI1).Length, Notes(xI1).LongNote)) And fdrRangeS(xbVisible, xbHidden, Notes(xI1).Hidden) Then
                 Notes(xI1).Selected = fdrCheck(Notes(xI1))
             End If
         Next
@@ -3558,10 +3560,10 @@ Jump2:
     End Sub
 
     Public Sub fdrUnselect(iRange As Integer,
-                            xMesL As Integer, xMesU As Integer,
-                            xLblL As String, xLblU As String,
-                            xValL As Integer, xValU As Integer,
-                            iCol() As Integer)
+                        xMesL As Integer, xMesU As Integer,
+                        xLblL As String, xLblU As String,
+                        xValL As Integer, xValU As Integer,
+                        iCol() As Integer)
 
         fdriMesL = xMesL
         fdriMesU = xMesU
@@ -3586,7 +3588,7 @@ Jump2:
         'Main process
         For xI1 As Integer = 1 To UBound(Notes)
             If ((xbSel And xSel(xI1)) Or (xbUnsel And Not xSel(xI1))) AndAlso
-                        nEnabled(Notes(xI1).ColumnIndex) AndAlso fdrRangeS(xbShort, xbLong, IIf(NTInput, Notes(xI1).Length, Notes(xI1).LongNote)) And fdrRangeS(xbVisible, xbHidden, Notes(xI1).Hidden) Then
+                    nEnabled(Notes(xI1).ColumnIndex) AndAlso fdrRangeS(xbShort, xbLong, IIf(NTInput, Notes(xI1).Length, Notes(xI1).LongNote)) And fdrRangeS(xbVisible, xbHidden, Notes(xI1).Hidden) Then
                 Notes(xI1).Selected = Not fdrCheck(Notes(xI1))
             End If
         Next
@@ -3596,10 +3598,10 @@ Jump2:
     End Sub
 
     Public Sub fdrDelete(iRange As Integer,
-                          xMesL As Integer, xMesU As Integer,
-                          xLblL As String, xLblU As String,
-                          xValL As Integer, xValU As Integer,
-                          iCol() As Integer)
+                      xMesL As Integer, xMesU As Integer,
+                      xLblL As String, xLblU As String,
+                      xValL As Integer, xValU As Integer,
+                      iCol() As Integer)
 
         fdriMesL = xMesL
         fdriMesU = xMesU
@@ -3624,7 +3626,7 @@ Jump2:
         Dim xI1 As Integer = 1
         Do While xI1 <= UBound(Notes)
             If ((xbSel And Notes(xI1).Selected) Or (xbUnsel And Not Notes(xI1).Selected)) AndAlso
-                        fdrCheck(Notes(xI1)) AndAlso nEnabled(Notes(xI1).ColumnIndex) AndAlso fdrRangeS(xbShort, xbLong, IIf(NTInput, Notes(xI1).Length, Notes(xI1).LongNote)) And fdrRangeS(xbVisible, xbHidden, Notes(xI1).Hidden) Then
+                    fdrCheck(Notes(xI1)) AndAlso nEnabled(Notes(xI1).ColumnIndex) AndAlso fdrRangeS(xbShort, xbLong, IIf(NTInput, Notes(xI1).Length, Notes(xI1).LongNote)) And fdrRangeS(xbVisible, xbHidden, Notes(xI1).Hidden) Then
                 RedoRemoveNote(Notes(xI1), xUndo, xRedo)
                 RemoveNote(xI1, False)
             Else
@@ -3641,10 +3643,10 @@ Jump2:
     End Sub
 
     Public Sub fdrReplaceL(iRange As Integer,
-                            xMesL As Integer, xMesU As Integer,
-                            xLblL As String, xLblU As String,
-                            xValL As Integer, xValU As Integer,
-                            iCol() As Integer, xReplaceLbl As String)
+                        xMesL As Integer, xMesU As Integer,
+                        xLblL As String, xLblU As String,
+                        xValL As Integer, xValU As Integer,
+                        iCol() As Integer, xReplaceLbl As String)
 
         fdriMesL = xMesL
         fdriMesU = xMesU
@@ -3670,7 +3672,7 @@ Jump2:
         'Main process
         For xI1 As Integer = 1 To UBound(Notes)
             If ((xbSel And Notes(xI1).Selected) Or (xbUnsel And Not Notes(xI1).Selected)) AndAlso
-                    fdrCheck(Notes(xI1)) AndAlso nEnabled(Notes(xI1).ColumnIndex) And Not IsColumnNumeric(Notes(xI1).ColumnIndex) AndAlso fdrRangeS(xbShort, xbLong, IIf(NTInput, Notes(xI1).Length, Notes(xI1).LongNote)) And fdrRangeS(xbVisible, xbHidden, Notes(xI1).Hidden) Then
+                fdrCheck(Notes(xI1)) AndAlso nEnabled(Notes(xI1).ColumnIndex) And Not IsColumnNumeric(Notes(xI1).ColumnIndex) AndAlso fdrRangeS(xbShort, xbLong, IIf(NTInput, Notes(xI1).Length, Notes(xI1).LongNote)) And fdrRangeS(xbVisible, xbHidden, Notes(xI1).Hidden) Then
                 'xUndo &= sCmdKC(K(xI1).ColumnIndex, K(xI1).VPosition, xxLbl, IIf(NTInput, K(xI1).Length, K(xI1).LongNote), K(xI1).Hidden, 0, 0, K(xI1).Value, IIf(NTInput, K(xI1).Length, K(xI1).LongNote), K(xI1).Hidden, True) & vbCrLf
                 'xRedo &= sCmdKC(K(xI1).ColumnIndex, K(xI1).VPosition, K(xI1).Value, IIf(NTInput, K(xI1).Length, K(xI1).LongNote), K(xI1).Hidden, 0, 0, xxLbl, IIf(NTInput, K(xI1).Length, K(xI1).LongNote), K(xI1).Hidden, True) & vbCrLf
                 RedoRelabelNote(Notes(xI1), xxLbl, xUndo, xRedo)
@@ -3684,10 +3686,10 @@ Jump2:
     End Sub
 
     Public Sub fdrReplaceV(iRange As Integer,
-                            xMesL As Integer, xMesU As Integer,
-                            xLblL As String, xLblU As String,
-                            xValL As Integer, xValU As Integer,
-                            iCol() As Integer, xReplaceVal As Integer)
+                        xMesL As Integer, xMesU As Integer,
+                        xLblL As String, xLblU As String,
+                        xValL As Integer, xValU As Integer,
+                        iCol() As Integer, xReplaceVal As Integer)
 
         fdriMesL = xMesL
         fdriMesU = xMesU
@@ -3711,7 +3713,7 @@ Jump2:
         'Main process
         For xI1 As Integer = 1 To UBound(Notes)
             If ((xbSel And Notes(xI1).Selected) Or (xbUnsel And Not Notes(xI1).Selected)) AndAlso
-                    fdrCheck(Notes(xI1)) AndAlso nEnabled(Notes(xI1).ColumnIndex) And IsColumnNumeric(Notes(xI1).ColumnIndex) AndAlso fdrRangeS(xbShort, xbLong, IIf(NTInput, Notes(xI1).Length, Notes(xI1).LongNote)) And fdrRangeS(xbVisible, xbHidden, Notes(xI1).Hidden) Then
+                fdrCheck(Notes(xI1)) AndAlso nEnabled(Notes(xI1).ColumnIndex) And IsColumnNumeric(Notes(xI1).ColumnIndex) AndAlso fdrRangeS(xbShort, xbLong, IIf(NTInput, Notes(xI1).Length, Notes(xI1).LongNote)) And fdrRangeS(xbVisible, xbHidden, Notes(xI1).Hidden) Then
                 'xUndo &= sCmdKC(K(xI1).ColumnIndex, K(xI1).VPosition, xReplaceVal, IIf(NTInput, K(xI1).Length, K(xI1).LongNote), K(xI1).Hidden, 0, 0, K(xI1).Value, IIf(NTInput, K(xI1).Length, K(xI1).LongNote), K(xI1).Hidden, True) & vbCrLf
                 'xRedo &= sCmdKC(K(xI1).ColumnIndex, K(xI1).VPosition, K(xI1).Value, IIf(NTInput, K(xI1).Length, K(xI1).LongNote), K(xI1).Hidden, 0, 0, xReplaceVal, IIf(NTInput, K(xI1).Length, K(xI1).LongNote), K(xI1).Hidden, True) & vbCrLf
                 RedoRelabelNote(Notes(xI1), xReplaceVal, xUndo, xRedo)
@@ -3882,10 +3884,10 @@ Jump2:
 
     Private Sub TBThemeSave_Click(sender As Object, e As EventArgs) Handles TBThemeSave.Click
         Dim xDiag As New SaveFileDialog With {
-            .Filter = Strings.FileType.THEME_XML & "|*.Theme.xml",
-            .DefaultExt = "Theme.xml",
-            .InitialDirectory = My.Application.Info.DirectoryPath & "\Data"
-        }
+        .Filter = Strings.FileType.THEME_XML & "|*.Theme.xml",
+        .DefaultExt = "Theme.xml",
+        .InitialDirectory = My.Application.Info.DirectoryPath & "\Data"
+    }
         If xDiag.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
 
         SaveSettings(xDiag.FileName, True)
@@ -3910,10 +3912,10 @@ Jump2:
 
     Private Sub TBThemeLoadComptability_Click(sender As Object, e As EventArgs) Handles TBThemeLoadComptability.Click
         Dim xDiag As New OpenFileDialog With {
-            .Filter = Strings.FileType.TH & "|*.th",
-            .DefaultExt = "th",
-            .InitialDirectory = My.Application.Info.DirectoryPath
-        }
+        .Filter = Strings.FileType.TH & "|*.th",
+        .DefaultExt = "th",
+        .InitialDirectory = My.Application.Info.DirectoryPath
+    }
         If My.Computer.FileSystem.DirectoryExists(My.Application.Info.DirectoryPath & "\Theme") Then xDiag.InitialDirectory = My.Application.Info.DirectoryPath & "\Theme"
         If xDiag.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
 
@@ -3926,7 +3928,7 @@ Jump2:
     ''' </summary>
     Private Function InputBoxDouble(Prompt As String, LBound As Double, UBound As Double, Optional Title As String = "", Optional DefaultResponse As String = "") As Double
         Dim xStr As String = InputBox(Prompt, Title, DefaultResponse)
-        If xStr = "" Then Return Double.PositiveInfinity
+        If xStr = String.Empty Then Return Double.PositiveInfinity
 
         InputBoxDouble = Val(xStr)
         If InputBoxDouble > UBound Then InputBoxDouble = UBound
@@ -3983,13 +3985,13 @@ Jump2:
         Dim xFileName As String
         With xTime
             xFileName = My.Application.Info.DirectoryPath & "\AutoSave_" &
-                              .Year & "_" & .Month & "_" & .Day & "_" & .Hour & "_" & .Minute & "_" & .Second & "_" & .Millisecond & ".IBMSC"
+                          .Year & "_" & .Month & "_" & .Day & "_" & .Hour & "_" & .Minute & "_" & .Second & "_" & .Millisecond & ".IBMSC"
         End With
         'My.Computer.FileSystem.WriteAllText(xFileName, SaveiBMSC, False, System.Text.Encoding.Unicode)
         SaveiBMSC(xFileName)
 
         On Error Resume Next
-        If PreviousAutoSavedFileName <> "" Then File.Delete(PreviousAutoSavedFileName)
+        If PreviousAutoSavedFileName <> String.Empty Then File.Delete(PreviousAutoSavedFileName)
         On Error GoTo 0
 
         PreviousAutoSavedFileName = xFileName
@@ -4124,16 +4126,16 @@ Jump2:
 
     Private Sub BWAVBrowse_Click(sender As Object, e As EventArgs) Handles BWAVBrowse.Click
         Dim xDWAV As New OpenFileDialog With {
-            .DefaultExt = "wav",
-            .Filter = Strings.FileType._wave & "|*.wav;*.ogg;*.mp3;*.flac|" &
-                       Strings.FileType.WAV & "|*.wav|" &
-                       Strings.FileType.OGG & "|*.ogg|" &
-                       Strings.FileType.MP3 & "|*.mp3|" &
-                       Strings.FileType.FLAC & "|*.flac|" &
-                       Strings.FileType._all & "|*.*",
-            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName)),
-            .Multiselect = WAVMultiSelect
-        }
+        .DefaultExt = "wav",
+        .Filter = Strings.FileType._wave & "|*.wav;*.ogg;*.mp3;*.flac|" &
+                   Strings.FileType.WAV & "|*.wav|" &
+                   Strings.FileType.OGG & "|*.ogg|" &
+                   Strings.FileType.MP3 & "|*.mp3|" &
+                   Strings.FileType.FLAC & "|*.flac|" &
+                   Strings.FileType._all & "|*.*",
+        .InitialDirectory = IIf(ExcludeFileName(FileName) = String.Empty, InitPath, ExcludeFileName(FileName)),
+        .Multiselect = WAVMultiSelect
+    }
 
         If xDWAV.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDWAV.FileName)
@@ -4145,7 +4147,7 @@ Jump2:
         Dim xIndices(LWAV.SelectedIndices.Count - 1) As Integer
         LWAV.SelectedIndices.CopyTo(xIndices, 0)
         For xI1 As Integer = 0 To UBound(xIndices)
-            hWAV(xIndices(xI1) + 1) = ""
+            hWAV(xIndices(xI1) + 1) = String.Empty
             LWAV.Items.Item(xIndices(xI1)) = C10to36(xIndices(xI1) + 1) & ": "
         Next
 
@@ -4275,22 +4277,22 @@ Jump2:
 
     Private Sub BBMPBrowse_Click(sender As Object, e As EventArgs) Handles BBMPBrowse.Click
         Dim xDBMP As New OpenFileDialog With {
-            .DefaultExt = "bmp",
-            .Filter = Strings.FileType._image & "|*.bmp;*.png;*.jpg;*.jpeg;.gif|" &
-                       Strings.FileType._movie & "|*.mpg;*.m1v;*.m2v;*.avi;*.mp4;*.m4v;*.wmv;*.webm|" &
-                       Strings.FileType.BMP & "|*.bmp|" &
-                       Strings.FileType.PNG & "|*.png|" &
-                       Strings.FileType.JPG & "|*.jpg;*.jpeg|" &
-                       Strings.FileType.GIF & "|*.gif|" &
-                       Strings.FileType.MP4 & "|*.mp4;*.m4v|" &
-                       Strings.FileType.AVI & "|*.avi|" &
-                       Strings.FileType.MPG & "|*.mpg;*.m1v;*.m2v|" &
-                       Strings.FileType.WMV & "|*.wmv|" &
-                       Strings.FileType.WEBM & "|*.webm|" &
-                       Strings.FileType._all & "|*.*",
-            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName)),
-            .Multiselect = WAVMultiSelect
-        }
+        .DefaultExt = "bmp",
+        .Filter = Strings.FileType._image & "|*.bmp;*.png;*.jpg;*.jpeg;.gif|" &
+                   Strings.FileType._movie & "|*.mpg;*.m1v;*.m2v;*.avi;*.mp4;*.m4v;*.wmv;*.webm|" &
+                   Strings.FileType.BMP & "|*.bmp|" &
+                   Strings.FileType.PNG & "|*.png|" &
+                   Strings.FileType.JPG & "|*.jpg;*.jpeg|" &
+                   Strings.FileType.GIF & "|*.gif|" &
+                   Strings.FileType.MP4 & "|*.mp4;*.m4v|" &
+                   Strings.FileType.AVI & "|*.avi|" &
+                   Strings.FileType.MPG & "|*.mpg;*.m1v;*.m2v|" &
+                   Strings.FileType.WMV & "|*.wmv|" &
+                   Strings.FileType.WEBM & "|*.webm|" &
+                   Strings.FileType._all & "|*.*",
+        .InitialDirectory = IIf(ExcludeFileName(FileName) = String.Empty, InitPath, ExcludeFileName(FileName)),
+        .Multiselect = WAVMultiSelect
+    }
 
         If xDBMP.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDBMP.FileName)
@@ -4302,7 +4304,7 @@ Jump2:
         Dim xIndices(LBMP.SelectedIndices.Count - 1) As Integer
         LBMP.SelectedIndices.CopyTo(xIndices, 0)
         For xI1 As Integer = 0 To UBound(xIndices)
-            hBMP(xIndices(xI1) + 1) = ""
+            hBMP(xIndices(xI1) + 1) = String.Empty
             LBMP.Items.Item(xIndices(xI1)) = C10to36(xIndices(xI1) + 1) & ": "
         Next
 
@@ -4729,18 +4731,18 @@ case2:              Dim xI0 As Integer
 
             Dim xxD As Long = GetDenominator(a)
 
-            ApplyBeat(a, a & IIf(xxD > 10000, "", " ( " & (a * xxD) & " / " & xxD & " ) "))
+            ApplyBeat(a, a & IIf(xxD > 10000, String.Empty, " ( " & (a * xxD) & " / " & xxD & " ) "))
         End If
     End Sub
 
 
     Private Sub BHStageFile_Click(sender As Object, e As EventArgs) Handles BHStageFile.Click, BHBanner.Click, BHBackBMP.Click, BHMissBMP.Click
         Dim xDiag As New OpenFileDialog With {
-            .Filter = Strings.FileType._image & "|*.bmp;*.png;*.jpeg;*.jpg;*.gif|" &
-                       Strings.FileType._all & "|*.*",
-            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName)),
-            .DefaultExt = "png"
-        }
+        .Filter = Strings.FileType._image & "|*.bmp;*.png;*.jpeg;*.jpg;*.gif|" &
+                   Strings.FileType._all & "|*.*",
+        .InitialDirectory = IIf(ExcludeFileName(FileName) = String.Empty, InitPath, ExcludeFileName(FileName)),
+        .DefaultExt = "png"
+    }
 
         If xDiag.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
         InitPath = ExcludeFileName(xDiag.FileName)
@@ -4759,15 +4761,15 @@ case2:              Dim xI0 As Integer
 
     Private Sub BHWavFile_Click(sender As Object, e As EventArgs) Handles BHLandMine.Click, BHPreview.Click
         Dim xDiag As New OpenFileDialog With {
-            .Filter = Strings.FileType._wave & "|*.wav;*.ogg;*.mp3;*.flac|" &
-                       Strings.FileType.WAV & "|*.wav|" &
-                       Strings.FileType.OGG & "|*.ogg|" &
-                       Strings.FileType.MP3 & "|*.mp3|" &
-                       Strings.FileType.FLAC & "|*.flac|" &
-                       Strings.FileType._all & "|*.*",
-            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName)),
-            .DefaultExt = "wav"
-        }
+        .Filter = Strings.FileType._wave & "|*.wav;*.ogg;*.mp3;*.flac|" &
+                   Strings.FileType.WAV & "|*.wav|" &
+                   Strings.FileType.OGG & "|*.ogg|" &
+                   Strings.FileType.MP3 & "|*.mp3|" &
+                   Strings.FileType.FLAC & "|*.flac|" &
+                   Strings.FileType._all & "|*.*",
+        .InitialDirectory = IIf(ExcludeFileName(FileName) = String.Empty, InitPath, ExcludeFileName(FileName)),
+        .DefaultExt = "wav"
+    }
 
         If xDiag.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub
 
@@ -4782,13 +4784,13 @@ case2:              Dim xI0 As Integer
     End Sub
 
     Private Sub Switches_CheckedChanged(sender As Object, e As EventArgs) Handles _
-    POHeaderSwitch.CheckedChanged,
-    POGridSwitch.CheckedChanged,
-    POWaveFormSwitch.CheckedChanged,
-    POWAVSwitch.CheckedChanged,
-    POBMPSwitch.CheckedChanged,
-    POBeatSwitch.CheckedChanged,
-    POExpansionSwitch.CheckedChanged
+POHeaderSwitch.CheckedChanged,
+POGridSwitch.CheckedChanged,
+POWaveFormSwitch.CheckedChanged,
+POWAVSwitch.CheckedChanged,
+POBMPSwitch.CheckedChanged,
+POBeatSwitch.CheckedChanged,
+POExpansionSwitch.CheckedChanged
 
         Try
             Dim Source As CheckBox = CType(sender, CheckBox)
@@ -4812,11 +4814,11 @@ case2:              Dim xI0 As Integer
     End Sub
 
     Private Sub Expanders_CheckChanged(sender As Object, e As EventArgs) Handles _
-    POHeaderExpander.CheckedChanged,
-    POGridExpander.CheckedChanged,
-    POWaveFormExpander.CheckedChanged,
-    POWAVExpander.CheckedChanged,
-    POBeatExpander.CheckedChanged
+POHeaderExpander.CheckedChanged,
+POGridExpander.CheckedChanged,
+POWaveFormExpander.CheckedChanged,
+POWAVExpander.CheckedChanged,
+POBeatExpander.CheckedChanged
 
         Try
             Dim Source As CheckBox = CType(sender, CheckBox)
@@ -4925,17 +4927,6 @@ case2:              Dim xI0 As Integer
             PanelVScroll(PanelFocus) = -MeasureBottom(i)
         End If
     End Sub
-    Private Sub Loadraw() Handles bmsrawTextBox.Enter
-        bmsrawTextBox.Text = File.ReadAllText(FileName)
-    End Sub
-    Private Sub Saveraw(sender As Object, e As EventArgs) Handles bmsrawTextBox.Leave
-        File.WriteAllText(FileName, bmsrawTextBox.Text)
-        Reloadbms()
-        Loadraw()
-    End Sub
-    Private Sub Enterraw(sender As Object, e As EventArgs) Handles bmsrawTextBox.Enter
-        TBSave_ButtonClick(sender, e)
-    End Sub
     Private Sub Reloadbms()
         'KMouseDown = -1
         ReDim SelectedNotes(-1)
@@ -4948,4 +4939,5 @@ case2:              Dim xI0 As Integer
         SetIsSaved(True)
         'pIsSaved.Visible = Not IsSaved
     End Sub
+
 End Class

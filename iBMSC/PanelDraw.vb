@@ -529,9 +529,9 @@ Partial Public Class MainWindow
         Dim xLabel As String = C10to36(sNote.Value \ 10000)
         If ShowFileName Then
             If IsColumnSound(sNote.ColumnIndex) Then
-                If hWAV(C36to10(xLabel)) <> "" Then xLabel = Path.GetFileNameWithoutExtension(hWAV(C36to10(xLabel)))
+                If hWAV(C36to10(xLabel)) <> String.Empty Then xLabel = Path.GetFileNameWithoutExtension(hWAV(C36to10(xLabel)))
             Else
-                If hBMP(C36to10(xLabel)) <> "" Then xLabel = Path.GetFileNameWithoutExtension(hBMP(C36to10(xLabel)))
+                If hBMP(C36to10(xLabel)) <> String.Empty Then xLabel = Path.GetFileNameWithoutExtension(hBMP(C36to10(xLabel)))
             End If
         End If
 
@@ -638,9 +638,9 @@ Partial Public Class MainWindow
         Dim xLabel As String = C10to36(sNote.Value \ 10000)
         If ShowFileName Then
             If IsColumnSound(sNote.ColumnIndex) Then
-                If hWAV(C36to10(xLabel)) <> "" Then xLabel = Path.GetFileNameWithoutExtension(hWAV(C36to10(xLabel)))
+                If hWAV(C36to10(xLabel)) <> String.Empty Then xLabel = Path.GetFileNameWithoutExtension(hWAV(C36to10(xLabel)))
             Else
-                If hBMP(C36to10(xLabel)) <> "" Then xLabel = Path.GetFileNameWithoutExtension(hBMP(C36to10(xLabel)))
+                If hBMP(C36to10(xLabel)) <> String.Empty Then xLabel = Path.GetFileNameWithoutExtension(hBMP(C36to10(xLabel)))
             End If
         End If
 

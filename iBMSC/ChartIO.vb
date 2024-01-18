@@ -1,5 +1,5 @@
-﻿Imports System.Text.Json
-Imports iBMSC.Editor
+﻿Imports iBMSC.Editor
+Imports System.Text.Json
 Partial Public Class MainWindow
     Private Sub OpenBMS(xStrAll As String)
         KMouseOver = -1
@@ -10,7 +10,7 @@ Partial Public Class MainWindow
         Dim xStrLine() As String = Split(xStrAll, vbCrLf, , CompareMethod.Text)
         Dim xI1 As Integer
         Dim sLine As String
-        Dim xExpansion As String = ""
+        Dim xExpansion As String = String.Empty
         ReDim Notes(0)
         ReDim mColumn(999)
         ReDim hWAV(1295)
@@ -47,7 +47,7 @@ Partial Public Class MainWindow
                 Dim xRatio As Double = Val(Mid(sLineTrim, 8))
                 Dim xxD As Long = GetDenominator(xRatio)
                 MeasureLength(xIndex) = xRatio * 192.0R
-                LBeat.Items(xIndex) = Add3Zeros(xIndex) & ": " & xRatio & IIf(xxD > 10000, "", " ( " & (xRatio * xxD) & " / " & xxD & " ) ")
+                LBeat.Items(xIndex) = Add3Zeros(xIndex) & ": " & xRatio & IIf(xxD > 10000, String.Empty, " ( " & (xRatio * xxD) & " / " & xxD & " ) ")
 
             ElseIf sLineTrim.StartsWith("#WAV", StringComparison.CurrentCultureIgnoreCase) Then
                 hWAV(C36to10(Mid(sLineTrim, Len("#WAV") + 1, 2))) = Mid(sLineTrim, Len("#WAV") + 4)
@@ -55,7 +55,7 @@ Partial Public Class MainWindow
             ElseIf sLineTrim.StartsWith("#BMP", StringComparison.CurrentCultureIgnoreCase) Then
                 hBMP(C36to10(Mid(sLineTrim, Len("#BMP") + 1, 2))) = Mid(sLineTrim, Len("#BMP") + 4)
 
-            ElseIf sLineTrim.StartsWith("#BPM", StringComparison.CurrentCultureIgnoreCase) And Not Mid(sLineTrim, Len("#BPM") + 1, 1).Trim = "" Then  'If BPM##
+            ElseIf sLineTrim.StartsWith("#BPM", StringComparison.CurrentCultureIgnoreCase) And Not Mid(sLineTrim, Len("#BPM") + 1, 1).Trim = String.Empty Then  'If BPM##
                 ' zdr: No limits on BPM editing.. they don't make much sense.
                 hBPM(C36to10(Mid(sLineTrim, Len("#BPM") + 1, 2))) = Val(Mid(sLineTrim, Len("#BPM") + 4)) * 10000
 
@@ -232,9 +232,11 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
         LBMP.Visible = True
         THLandMine.Text = hWAV(0)
         THMissBMP.Text = hBMP(0)
-
         TExpansion.Text = xExpansion
-
+        Chartinfo.Fultitle = THTitle.Text + THSubTitle.Text
+        Chartinfo.Allartist = THArtist.Text + THSubArtist.Text
+        My.Forms.Chartinfo.Label1.Text = THTitle.Text + THSubTitle.Text
+        My.Forms.Chartinfo.Label2.Text = THArtist.Text + THSubArtist.Text
         SortByVPositionQuick(0, UBound(Notes))
         UpdatePairing()
         CalculateTotalPlayableNotes()
@@ -341,10 +343,10 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
 
         ' Add expansion text
         Dim xStrExp As String = vbCrLf & "*---------------------- EXPANSION FIELD" & vbCrLf & TExpansion.Text & vbCrLf & vbCrLf
-        If TExpansion.Text = "" Then xStrExp = ""
+        If TExpansion.Text = String.Empty Then xStrExp = String.Empty
 
         ' Output main data field.
-        Dim xStrMain As String = "*---------------------- MAIN DATA FIELD" & vbCrLf & vbCrLf & Join(xStrMeasure, "") & vbCrLf
+        Dim xStrMain As String = "*---------------------- MAIN DATA FIELD" & vbCrLf & vbCrLf & Join(xStrMeasure, String.Empty) & vbCrLf
 
         If xNTInput Then
             Notes = xKBackUp
@@ -369,34 +371,34 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
         xStrHeader &= "#PLAYLEVEL " & THPlayLevel.Text & vbCrLf
         xStrHeader &= "#RANK " & CHRank.SelectedIndex & vbCrLf
         xStrHeader &= vbCrLf
-        If THSubTitle.Text <> "" Then xStrHeader &= "#SUBTITLE " & THSubTitle.Text & vbCrLf
-        If THSubArtist.Text <> "" Then xStrHeader &= "#SUBARTIST " & THSubArtist.Text & vbCrLf
-        If THStageFile.Text <> "" Then xStrHeader &= "#STAGEFILE " & THStageFile.Text & vbCrLf
-        If THBanner.Text <> "" Then xStrHeader &= "#BANNER " & THBanner.Text & vbCrLf
-        If THBackBMP.Text <> "" Then xStrHeader &= "#BACKBMP " & THBackBMP.Text & vbCrLf
+        If THSubTitle.Text <> String.Empty Then xStrHeader &= "#SUBTITLE " & THSubTitle.Text & vbCrLf
+        If THSubArtist.Text <> String.Empty Then xStrHeader &= "#SUBARTIST " & THSubArtist.Text & vbCrLf
+        If THStageFile.Text <> String.Empty Then xStrHeader &= "#STAGEFILE " & THStageFile.Text & vbCrLf
+        If THBanner.Text <> String.Empty Then xStrHeader &= "#BANNER " & THBanner.Text & vbCrLf
+        If THBackBMP.Text <> String.Empty Then xStrHeader &= "#BACKBMP " & THBackBMP.Text & vbCrLf
         xStrHeader &= vbCrLf
         If CHDifficulty.SelectedIndex Then xStrHeader &= "#DIFFICULTY " & CHDifficulty.SelectedIndex & vbCrLf
-        If THExRank.Text <> "" Then xStrHeader &= "#DEFEXRANK " & THExRank.Text & vbCrLf
-        If THTotal.Text <> "" Then xStrHeader &= "#TOTAL " & THTotal.Text & vbCrLf
-        If THComment.Text <> "" Then xStrHeader &= "#COMMENT """ & THComment.Text & """" & vbCrLf
+        If THExRank.Text <> String.Empty Then xStrHeader &= "#DEFEXRANK " & THExRank.Text & vbCrLf
+        If THTotal.Text <> String.Empty Then xStrHeader &= "#TOTAL " & THTotal.Text & vbCrLf
+        If THComment.Text <> String.Empty Then xStrHeader &= "#COMMENT """ & THComment.Text & """" & vbCrLf
         'If THLnType.Text <> "" Then xStrHeader &= "#LNTYPE " & THLnType.Text & vbCrLf
         If CHLnObj.SelectedIndex > 0 Then xStrHeader &= "#LNOBJ " & C10to36(CHLnObj.SelectedIndex) & vbCrLf _
                                      Else xStrHeader &= "#LNTYPE 1" & vbCrLf
-        If THPreview.Text <> "" Then xStrHeader &= "#PREVIEW " & THPreview.Text & vbCrLf
+        If THPreview.Text <> String.Empty Then xStrHeader &= "#PREVIEW " & THPreview.Text & vbCrLf
         If CHLnmode.SelectedIndex > 0 Then xStrHeader &= "#LNMODE " & CHLnmode.SelectedIndex & vbCrLf
         xStrHeader &= vbCrLf
         Return xStrHeader
     End Function
 
     Private Function GenerateHeaderIndexedData() As String
-        Dim xStrHeader As String = ""
+        Dim xStrHeader As String = String.Empty
 
         For i = 0 To UBound(hWAV)
-            If Not hWAV(i) = "" Then xStrHeader &= "#WAV" & C10to36(i) &
+            If Not hWAV(i) = String.Empty Then xStrHeader &= "#WAV" & C10to36(i) &
                                                     " " & hWAV(i) & vbCrLf
         Next
         For i = 0 To UBound(hBMP)
-            If Not hBMP(i) = "" Then xStrHeader &= "#BMP" & C10to36(i) &
+            If Not hBMP(i) = String.Empty Then xStrHeader &= "#BMP" & C10to36(i) &
                                                     " " & hBMP(i) & vbCrLf
         Next
         For i = 1 To UBound(hBPM)
@@ -442,7 +444,7 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
 
     Private Function GenerateKeyTracks(MeasureIndex As Integer, ByRef hasOverlapping As Boolean, NotesInMeasure() As Note, ByRef xprevNotes() As Note) As String
         Dim CurrentBMSChannel As String
-        Dim Ret As String = ""
+        Dim Ret As String = String.Empty
 
         For Each CurrentBMSChannel In BMSChannelList 'Start rendering other notes
             Dim relativeMeasurePos(-1) 'Ks in the same column
@@ -540,7 +542,7 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
                 xStrKey(relativeMeasurePos(i) / xGCD) = NoteStrings(i)
             Next
 
-            Ret &= "#" & Add3Zeros(MeasureIndex) & CurrentBMSChannel & ":" & Join(xStrKey, "") & vbCrLf
+            Ret &= "#" & Add3Zeros(MeasureIndex) & CurrentBMSChannel & ":" & Join(xStrKey, String.Empty) & vbCrLf
         Next
 
         Return Ret
@@ -549,7 +551,7 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
     Private Function GenerateBackgroundTracks(MeasureIndex As Integer, ByRef hasOverlapping As Boolean, NotesInMeasure() As Note, GreatestColumn As Integer, ByRef xprevNotes() As Note) As String
         Dim relativeNotePositions() As Double 'Ks in the same column
         Dim noteStrings() As String    'Ks in the same column
-        Dim Ret As String = ""
+        Dim Ret As String = String.Empty
 
         For ColIndex = niB To GreatestColumn 'Start rendering B notes (xI3 is columnindex)
             ReDim relativeNotePositions(-1) 'Ks in the same column
@@ -595,7 +597,7 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
                 xStrKey(relativeNotePositions(i) / xGCD) = noteStrings(i)
             Next
 
-            Ret &= "#" & Add3Zeros(MeasureIndex) & "01:" & Join(xStrKey, "") & vbCrLf
+            Ret &= "#" & Add3Zeros(MeasureIndex) & "01:" & Join(xStrKey, String.Empty) & vbCrLf
         Next
 
         Return Ret
@@ -610,7 +612,7 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
             If xStrLine(xI1).Contains("//") Then xStrLine(xI1) = Mid(xStrLine(xI1), 1, InStr(xStrLine(xI1), "//") - 1)
         Next
 
-        xStrAll = Join(xStrLine, "")
+        xStrAll = Join(xStrLine, String.Empty)
         xStrLine = Split(xStrAll, ";")
 
         Dim iDiff As Integer = 0
@@ -950,7 +952,7 @@ Jump1:
                         MeasureLength(xIndex) = br.ReadDouble
                         Dim xRatio As Double = MeasureLength(xIndex) / 192.0R
                         Dim xxD As Long = GetDenominator(xRatio)
-                        LBeat.Items(xIndex) = Add3Zeros(xIndex) & ": " & xRatio & IIf(xxD > 10000, "", " ( " & (xRatio * xxD) & " / " & xxD & " ) ")
+                        LBeat.Items(xIndex) = Add3Zeros(xIndex) & ": " & xRatio & IIf(xxD > 10000, String.Empty, " ( " & (xRatio * xxD) & " / " & xxD & " ) ")
                     Next
 
                 Case &H6E707845     'Expansion Code
@@ -1127,12 +1129,12 @@ EndOfSub:
 
             Dim xWAVCount As Integer = 0
             For i As Integer = 0 To UBound(hWAV)
-                If hWAV(i) <> "" Then xWAVCount += 1
+                If hWAV(i) <> String.Empty Then xWAVCount += 1
             Next
             bw.Write(xWAVCount)
 
             For i As Integer = 0 To UBound(hWAV)
-                If hWAV(i) = "" Then Continue For
+                If hWAV(i) = String.Empty Then Continue For
                 bw.Write(CShort(i))
                 bw.Write(hWAV(i))
             Next
@@ -1143,12 +1145,12 @@ EndOfSub:
 
             Dim xBMPCount As Integer = 0
             For i As Integer = 0 To UBound(hBMP)
-                If hBMP(i) <> "" Then xBMPCount += 1
+                If hBMP(i) <> String.Empty Then xBMPCount += 1
             Next
             bw.Write(xBMPCount)
 
             For i As Integer = 0 To UBound(hBMP)
-                If hBMP(i) = "" Then Continue For
+                If hBMP(i) = String.Empty Then Continue For
                 bw.Write(CShort(i))
                 bw.Write(hBMP(i))
             Next
@@ -1272,12 +1274,12 @@ EndOfSub:
             format.info.subartists(0) = THSubArtist.Text
             format.info.genre = THGenre.Text
             format.info.mode_hint = If(CHPlayer.SelectedIndex = 0, "beat-5k", "popn-9k")
-            format.info.chart_name = ""
+            format.info.chart_name = String.Empty
             'format.info.judge_rank = If(THExRank.Text <> "", DirectCast(CDbl(THExRank.Text), Integer), (CHRank.SelectedIndex + 1) * 25)
-            format.info.judge_rank = If(THExRank.Text <> "", CType(CDbl(THExRank.Text), Integer), (CHRank.SelectedIndex + 1) * 25)
-            format.info.total = If(THTotal.Text <> "", CalcBMSONTotal(THTotal.Text), CalcBMSONTotal(CalcBMSTotal()))
+            format.info.judge_rank = If(THExRank.Text <> String.Empty, CType(CDbl(THExRank.Text), Integer), (CHRank.SelectedIndex + 1) * 25)
+            format.info.total = If(THTotal.Text <> String.Empty, CalcBMSONTotal(THTotal.Text), CalcBMSONTotal(CalcBMSTotal()))
             format.info.init_bpm = CDbl(THBPM.Text)
-            format.info.level = If(THPlayLevel.Text <> "", CInt(THPlayLevel.Text), 0)
+            format.info.level = If(THPlayLevel.Text <> String.Empty, CInt(THPlayLevel.Text), 0)
             format.info.back_image = THBackBMP.Text
             format.info.eyecatch_image = THStageFile.Text
             format.info.banner_image = THBanner.Text
@@ -1419,23 +1421,23 @@ EndOfSub:
             Next
             ' 音定義
             For i = 1 To UBound(hWAV)
-                If hWAV(i) <> "" Then
+                If hWAV(i) <> String.Empty Then
                     If note_list.ContainsKey(i) Then
                         wav_list.Add(i, New SoundChannel(hWAV(i)))
                     End If
                 End If
                 If hidden_note_list.ContainsKey(i) Then
-                    If hWAV(i) <> "" Then
+                    If hWAV(i) <> String.Empty Then
                         hidden_list.Add(i, New MineChannel(hWAV(i)))
                     Else
-                        hidden_list.Add(i, New MineChannel(""))
+                        hidden_list.Add(i, New MineChannel(String.Empty))
                     End If
                 End If
             Next
             ReDim format.mine_channels(0)
-            format.mine_channels(0) = If(hWAV(0) <> "", New MineChannel(hWAV(0)), New MineChannel(""))
+            format.mine_channels(0) = If(hWAV(0) <> String.Empty, New MineChannel(hWAV(0)), New MineChannel(String.Empty))
             For i = 1 To UBound(hBMP)
-                If hBMP(i) <> "" Then
+                If hBMP(i) <> String.Empty Then
                     bmp_list.Add(New BGAHeader(i, hBMP(i)))
                 End If
             Next

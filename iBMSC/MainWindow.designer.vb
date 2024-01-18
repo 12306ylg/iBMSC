@@ -1,7 +1,7 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class MainWindow
-    Inherits System.Windows.Forms.Form
 
+    Inherits System.Windows.Forms.Form
     'Form 重写 Dispose，以清理组件列表。
     <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
@@ -25,16 +25,16 @@ Partial Class MainWindow
         TBLangDef = New ToolStripMenuItem()
         TBLangRefresh = New ToolStripMenuItem()
         ToolStripSeparator9 = New ToolStripSeparator()
-        mnLanguage = New ToolStripMenuItem()
         TBLanguage = New ToolStripDropDownButton()
+        mnLanguage = New ToolStripMenuItem()
         cmnTheme = New ContextMenuStrip(components)
         TBThemeDef = New ToolStripMenuItem()
         TBThemeSave = New ToolStripMenuItem()
         TBThemeRefresh = New ToolStripMenuItem()
         TBThemeLoadComptability = New ToolStripMenuItem()
         ToolStripSeparator6 = New ToolStripSeparator()
-        mnTheme = New ToolStripMenuItem()
         TBTheme = New ToolStripDropDownButton()
+        mnTheme = New ToolStripMenuItem()
         POptionsScroll = New Panel()
         POptions = New Panel()
         POExpansion = New Panel()
@@ -194,12 +194,12 @@ Partial Class MainWindow
         Label2 = New Label()
         THArtist = New TextBox()
         THTitle = New TextBox()
-        Label9 = New Label()
         Label8 = New Label()
         Label6 = New Label()
         THTotal = New TextBox()
         Label20 = New Label()
         Label25 = New Label()
+        Label9 = New Label()
         POHeaderSwitch = New CheckBox()
         Timer1 = New Timer(components)
         Menu1 = New ContextMenuStrip(components)
@@ -286,11 +286,12 @@ Partial Class MainWindow
         ToolStripSeparator11 = New ToolStripSeparator()
         POBModify = New ToolStripMenuItem()
         POBMirror = New ToolStripMenuItem()
-        POConvert = New ToolStripDropDownButton()
         mnPreview = New ToolStripMenuItem()
         mnPlayB = New ToolStripMenuItem()
         mnPlay = New ToolStripMenuItem()
         mnStop = New ToolStripMenuItem()
+        PreviewToolStripMenuItem = New ToolStripMenuItem()
+        POConvert = New ToolStripDropDownButton()
         TBMain = New ToolStrip()
         TBNew = New ToolStripButton()
         TBOpen = New ToolStripSplitButton()
@@ -367,10 +368,6 @@ Partial Class MainWindow
         TimerMiddle = New Timer(components)
         ToolStripContainer1 = New ToolStripContainer()
         PMain = New Panel()
-        rawtext = New Label()
-        bmsrawTextBox = New TextBox()
-        title = New Label()
-        bmsfilename = New Label()
         PMainIn = New Panel()
         MainPanelScroll = New VScrollBar()
         HS = New HScrollBar()
@@ -386,7 +383,6 @@ Partial Class MainWindow
         HSL = New HScrollBar()
         POptionsResizer = New Button()
         ToolTipUniversal = New ToolTip(components)
-        Panel1 = New Panel()
         cmnLanguage.SuspendLayout()
         cmnTheme.SuspendLayout()
         POptionsScroll.SuspendLayout()
@@ -466,17 +462,15 @@ Partial Class MainWindow
         ToolStripContainer1.TopToolStripPanel.SuspendLayout()
         ToolStripContainer1.SuspendLayout()
         PMain.SuspendLayout()
-        PMainIn.SuspendLayout()
         PMainR.SuspendLayout()
         PMainL.SuspendLayout()
-        Panel1.SuspendLayout()
         SuspendLayout()
         ' 
         ' cmnLanguage
         ' 
         cmnLanguage.Items.AddRange(New ToolStripItem() {TBLangDef, TBLangRefresh, ToolStripSeparator9})
         cmnLanguage.Name = "cmnLanguage"
-        cmnLanguage.OwnerItem = TBLanguage
+        cmnLanguage.OwnerItem = mnLanguage
         cmnLanguage.Size = New Size(126, 54)
         ' 
         ' TBLangDef
@@ -497,14 +491,6 @@ Partial Class MainWindow
         ToolStripSeparator9.Name = "ToolStripSeparator9"
         ToolStripSeparator9.Size = New Size(122, 6)
         ' 
-        ' mnLanguage
-        ' 
-        mnLanguage.DropDown = cmnLanguage
-        mnLanguage.Image = CType(resources.GetObject("mnLanguage.Image"), Image)
-        mnLanguage.Name = "mnLanguage"
-        mnLanguage.Size = New Size(247, 22)
-        mnLanguage.Text = "&Language"
-        ' 
         ' TBLanguage
         ' 
         TBLanguage.DisplayStyle = ToolStripItemDisplayStyle.Image
@@ -515,11 +501,19 @@ Partial Class MainWindow
         TBLanguage.Size = New Size(29, 22)
         TBLanguage.Text = "Language"
         ' 
+        ' mnLanguage
+        ' 
+        mnLanguage.DropDown = cmnLanguage
+        mnLanguage.Image = CType(resources.GetObject("mnLanguage.Image"), Image)
+        mnLanguage.Name = "mnLanguage"
+        mnLanguage.Size = New Size(247, 22)
+        mnLanguage.Text = "&Language"
+        ' 
         ' cmnTheme
         ' 
         cmnTheme.Items.AddRange(New ToolStripItem() {TBThemeDef, TBThemeSave, TBThemeRefresh, TBThemeLoadComptability, ToolStripSeparator6})
         cmnTheme.Name = "cmnLanguage"
-        cmnTheme.OwnerItem = TBTheme
+        cmnTheme.OwnerItem = mnTheme
         cmnTheme.Size = New Size(266, 98)
         ' 
         ' TBThemeDef
@@ -553,14 +547,6 @@ Partial Class MainWindow
         ToolStripSeparator6.Name = "ToolStripSeparator6"
         ToolStripSeparator6.Size = New Size(262, 6)
         ' 
-        ' mnTheme
-        ' 
-        mnTheme.DropDown = cmnTheme
-        mnTheme.Image = CType(resources.GetObject("mnTheme.Image"), Image)
-        mnTheme.Name = "mnTheme"
-        mnTheme.Size = New Size(247, 22)
-        mnTheme.Text = "&Theme"
-        ' 
         ' TBTheme
         ' 
         TBTheme.DisplayStyle = ToolStripItemDisplayStyle.Image
@@ -571,19 +557,27 @@ Partial Class MainWindow
         TBTheme.Size = New Size(29, 22)
         TBTheme.Text = "Theme"
         ' 
+        ' mnTheme
+        ' 
+        mnTheme.DropDown = cmnTheme
+        mnTheme.Image = CType(resources.GetObject("mnTheme.Image"), Image)
+        mnTheme.Name = "mnTheme"
+        mnTheme.Size = New Size(247, 22)
+        mnTheme.Text = "&Theme"
+        ' 
         ' POptionsScroll
         ' 
         POptionsScroll.AutoScroll = True
         POptionsScroll.Controls.Add(POptions)
         POptionsScroll.Dock = DockStyle.Right
-        POptionsScroll.Location = New Point(1150, 0)
+        POptionsScroll.Location = New Point(1141, 0)
         POptionsScroll.Name = "POptionsScroll"
-        POptionsScroll.Size = New Size(200, 729)
+        POptionsScroll.Size = New Size(209, 729)
         POptionsScroll.TabIndex = 28
         ' 
         ' POptions
         ' 
-        POptions.AutoSize = True
+        POptions.AutoScroll = True
         POptions.AutoSizeMode = AutoSizeMode.GrowAndShrink
         POptions.Controls.Add(POExpansion)
         POptions.Controls.Add(POBeat)
@@ -592,10 +586,11 @@ Partial Class MainWindow
         POptions.Controls.Add(POWaveForm)
         POptions.Controls.Add(POGrid)
         POptions.Controls.Add(POHeader)
-        POptions.Dock = DockStyle.Top
+        POptions.Dock = DockStyle.Fill
+        POptions.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(134))
         POptions.Location = New Point(0, 0)
         POptions.Name = "POptions"
-        POptions.Size = New Size(183, 2099)
+        POptions.Size = New Size(209, 729)
         POptions.TabIndex = 29
         ' 
         ' POExpansion
@@ -605,9 +600,9 @@ Partial Class MainWindow
         POExpansion.Controls.Add(POExpansionInner)
         POExpansion.Controls.Add(POExpansionSwitch)
         POExpansion.Dock = DockStyle.Top
-        POExpansion.Location = New Point(0, 1829)
+        POExpansion.Location = New Point(0, 1833)
         POExpansion.Name = "POExpansion"
-        POExpansion.Size = New Size(183, 270)
+        POExpansion.Size = New Size(192, 270)
         POExpansion.TabIndex = 6
         ' 
         ' POExpansionInner
@@ -618,7 +613,7 @@ Partial Class MainWindow
         POExpansionInner.Font = New Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         POExpansionInner.Location = New Point(0, 20)
         POExpansionInner.Name = "POExpansionInner"
-        POExpansionInner.Size = New Size(183, 250)
+        POExpansionInner.Size = New Size(192, 250)
         POExpansionInner.TabIndex = 7
         POExpansionInner.Visible = False
         ' 
@@ -631,7 +626,7 @@ Partial Class MainWindow
         TExpansion.Multiline = True
         TExpansion.Name = "TExpansion"
         TExpansion.ScrollBars = ScrollBars.Vertical
-        TExpansion.Size = New Size(183, 245)
+        TExpansion.Size = New Size(192, 245)
         TExpansion.TabIndex = 0
         TExpansion.WordWrap = False
         ' 
@@ -643,7 +638,7 @@ Partial Class MainWindow
         POExpansionResizer.Location = New Point(0, 245)
         POExpansionResizer.Margin = New Padding(0)
         POExpansionResizer.Name = "POExpansionResizer"
-        POExpansionResizer.Size = New Size(183, 5)
+        POExpansionResizer.Size = New Size(192, 5)
         POExpansionResizer.TabIndex = 65
         POExpansionResizer.TabStop = False
         POExpansionResizer.UseVisualStyleBackColor = True
@@ -654,10 +649,11 @@ Partial Class MainWindow
         POExpansionSwitch.BackColor = SystemColors.Control
         POExpansionSwitch.Cursor = Cursors.Hand
         POExpansionSwitch.Dock = DockStyle.Top
+        POExpansionSwitch.FlatStyle = FlatStyle.Flat
         POExpansionSwitch.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         POExpansionSwitch.Location = New Point(0, 0)
         POExpansionSwitch.Name = "POExpansionSwitch"
-        POExpansionSwitch.Size = New Size(183, 20)
+        POExpansionSwitch.Size = New Size(192, 20)
         POExpansionSwitch.TabIndex = 6
         POExpansionSwitch.TabStop = False
         POExpansionSwitch.Text = "Expansion Code"
@@ -672,9 +668,9 @@ Partial Class MainWindow
         POBeat.Controls.Add(POBeatInner)
         POBeat.Controls.Add(POBeatSwitch)
         POBeat.Dock = DockStyle.Top
-        POBeat.Location = New Point(0, 1559)
+        POBeat.Location = New Point(0, 1563)
         POBeat.Name = "POBeat"
-        POBeat.Size = New Size(183, 270)
+        POBeat.Size = New Size(192, 270)
         POBeat.TabIndex = 5
         ' 
         ' POBeatInner
@@ -695,7 +691,7 @@ Partial Class MainWindow
         POBeatInner.RowStyles.Add(New RowStyle())
         POBeatInner.RowStyles.Add(New RowStyle(SizeType.Percent, 100F))
         POBeatInner.RowStyles.Add(New RowStyle())
-        POBeatInner.Size = New Size(183, 250)
+        POBeatInner.Size = New Size(192, 250)
         POBeatInner.TabIndex = 6
         POBeatInner.Visible = False
         ' 
@@ -710,7 +706,7 @@ Partial Class MainWindow
         POBeatExpander.Location = New Point(0, 58)
         POBeatExpander.Margin = New Padding(0)
         POBeatExpander.Name = "POBeatExpander"
-        POBeatExpander.Size = New Size(183, 27)
+        POBeatExpander.Size = New Size(192, 27)
         POBeatExpander.TabIndex = 65
         POBeatExpander.TabStop = False
         POBeatExpander.Text = "Expand..."
@@ -726,7 +722,7 @@ Partial Class MainWindow
         POBeatResizer.Location = New Point(0, 245)
         POBeatResizer.Margin = New Padding(0)
         POBeatResizer.Name = "POBeatResizer"
-        POBeatResizer.Size = New Size(183, 5)
+        POBeatResizer.Size = New Size(192, 5)
         POBeatResizer.TabIndex = 64
         POBeatResizer.TabStop = False
         POBeatResizer.UseVisualStyleBackColor = True
@@ -753,17 +749,17 @@ Partial Class MainWindow
         TableLayoutPanel7.RowCount = 2
         TableLayoutPanel7.RowStyles.Add(New RowStyle())
         TableLayoutPanel7.RowStyles.Add(New RowStyle())
-        TableLayoutPanel7.Size = New Size(183, 58)
+        TableLayoutPanel7.Size = New Size(192, 58)
         TableLayoutPanel7.TabIndex = 63
         ' 
         ' nBeatD
         ' 
         nBeatD.Dock = DockStyle.Fill
-        nBeatD.Location = New Point(67, 3)
+        nBeatD.Location = New Point(69, 3)
         nBeatD.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         nBeatD.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         nBeatD.Name = "nBeatD"
-        nBeatD.Size = New Size(45, 23)
+        nBeatD.Size = New Size(47, 23)
         nBeatD.TabIndex = 37
         nBeatD.Value = New Decimal(New Integer() {4, 0, 0, 0})
         ' 
@@ -772,10 +768,10 @@ Partial Class MainWindow
         BBeatApplyV.AutoSize = True
         BBeatApplyV.AutoSizeMode = AutoSizeMode.GrowAndShrink
         BBeatApplyV.Dock = DockStyle.Fill
-        BBeatApplyV.Location = New Point(115, 31)
+        BBeatApplyV.Location = New Point(119, 31)
         BBeatApplyV.Margin = New Padding(0, 0, 3, 0)
         BBeatApplyV.Name = "BBeatApplyV"
-        BBeatApplyV.Size = New Size(65, 27)
+        BBeatApplyV.Size = New Size(70, 27)
         BBeatApplyV.TabIndex = 35
         BBeatApplyV.Text = "Apply"
         BBeatApplyV.UseVisualStyleBackColor = True
@@ -787,7 +783,7 @@ Partial Class MainWindow
         nBeatN.Maximum = New Decimal(New Integer() {99999, 0, 0, 0})
         nBeatN.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         nBeatN.Name = "nBeatN"
-        nBeatN.Size = New Size(45, 23)
+        nBeatN.Size = New Size(47, 23)
         nBeatN.TabIndex = 27
         nBeatN.Value = New Decimal(New Integer() {4, 0, 0, 0})
         ' 
@@ -796,10 +792,10 @@ Partial Class MainWindow
         BBeatApply.AutoSize = True
         BBeatApply.AutoSizeMode = AutoSizeMode.GrowAndShrink
         BBeatApply.Dock = DockStyle.Fill
-        BBeatApply.Location = New Point(115, 2)
+        BBeatApply.Location = New Point(119, 2)
         BBeatApply.Margin = New Padding(0, 2, 3, 2)
         BBeatApply.Name = "BBeatApply"
-        BBeatApply.Size = New Size(65, 27)
+        BBeatApply.Size = New Size(70, 27)
         BBeatApply.TabIndex = 30
         BBeatApply.Text = "Apply"
         BBeatApply.UseVisualStyleBackColor = True
@@ -808,7 +804,7 @@ Partial Class MainWindow
         ' 
         Label7.Anchor = AnchorStyles.None
         Label7.AutoSize = True
-        Label7.Location = New Point(51, 7)
+        Label7.Location = New Point(53, 7)
         Label7.Margin = New Padding(0)
         Label7.Name = "Label7"
         Label7.Size = New Size(13, 17)
@@ -823,7 +819,7 @@ Partial Class MainWindow
         tBeatValue.Location = New Point(3, 32)
         tBeatValue.Margin = New Padding(3, 1, 3, 0)
         tBeatValue.Name = "tBeatValue"
-        tBeatValue.Size = New Size(109, 23)
+        tBeatValue.Size = New Size(113, 23)
         tBeatValue.TabIndex = 36
         tBeatValue.Text = "1"
         ' 
@@ -838,7 +834,7 @@ Partial Class MainWindow
         LBeat.Margin = New Padding(3, 0, 3, 0)
         LBeat.Name = "LBeat"
         LBeat.SelectionMode = SelectionMode.MultiExtended
-        LBeat.Size = New Size(177, 78)
+        LBeat.Size = New Size(186, 78)
         LBeat.TabIndex = 26
         ' 
         ' POBeatPart2
@@ -860,7 +856,7 @@ Partial Class MainWindow
         POBeatPart2.RowStyles.Add(New RowStyle())
         POBeatPart2.RowStyles.Add(New RowStyle())
         POBeatPart2.RowStyles.Add(New RowStyle())
-        POBeatPart2.Size = New Size(183, 82)
+        POBeatPart2.Size = New Size(192, 82)
         POBeatPart2.TabIndex = 66
         POBeatPart2.Visible = False
         ' 
@@ -882,7 +878,7 @@ Partial Class MainWindow
         CBeatCut.Location = New Point(3, 42)
         CBeatCut.Margin = New Padding(3, 0, 3, 0)
         CBeatCut.Name = "CBeatCut"
-        CBeatCut.Size = New Size(177, 19)
+        CBeatCut.Size = New Size(186, 19)
         CBeatCut.TabIndex = 2
         CBeatCut.Text = "Keep measure position and cut overflow"
         CBeatCut.UseVisualStyleBackColor = True
@@ -917,10 +913,11 @@ Partial Class MainWindow
         POBeatSwitch.BackColor = SystemColors.Control
         POBeatSwitch.Cursor = Cursors.Hand
         POBeatSwitch.Dock = DockStyle.Top
+        POBeatSwitch.FlatStyle = FlatStyle.Flat
         POBeatSwitch.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         POBeatSwitch.Location = New Point(0, 0)
         POBeatSwitch.Name = "POBeatSwitch"
-        POBeatSwitch.Size = New Size(183, 20)
+        POBeatSwitch.Size = New Size(192, 20)
         POBeatSwitch.TabIndex = 5
         POBeatSwitch.TabStop = False
         POBeatSwitch.Text = "Beat"
@@ -936,9 +933,9 @@ Partial Class MainWindow
         POBMP.Controls.Add(POBMPInner)
         POBMP.Controls.Add(POBMPSwitch)
         POBMP.Dock = DockStyle.Top
-        POBMP.Location = New Point(0, 1289)
+        POBMP.Location = New Point(0, 1293)
         POBMP.Name = "POBMP"
-        POBMP.Size = New Size(183, 270)
+        POBMP.Size = New Size(192, 270)
         POBMP.TabIndex = 4
         ' 
         ' POBMPInner
@@ -955,7 +952,7 @@ Partial Class MainWindow
         POBMPInner.RowStyles.Add(New RowStyle())
         POBMPInner.RowStyles.Add(New RowStyle(SizeType.Percent, 100F))
         POBMPInner.RowStyles.Add(New RowStyle())
-        POBMPInner.Size = New Size(183, 250)
+        POBMPInner.Size = New Size(192, 250)
         POBMPInner.TabIndex = 5
         POBMPInner.Visible = False
         ' 
@@ -969,7 +966,7 @@ Partial Class MainWindow
         LBMP.Margin = New Padding(3, 0, 3, 0)
         LBMP.Name = "LBMP"
         LBMP.SelectionMode = SelectionMode.MultiExtended
-        LBMP.Size = New Size(177, 215)
+        LBMP.Size = New Size(186, 215)
         LBMP.TabIndex = 25
         ' 
         ' FlowLayoutPanel4
@@ -1038,7 +1035,7 @@ Partial Class MainWindow
         POBMPResizer.Location = New Point(0, 245)
         POBMPResizer.Margin = New Padding(0)
         POBMPResizer.Name = "POBMPResizer"
-        POBMPResizer.Size = New Size(183, 5)
+        POBMPResizer.Size = New Size(192, 5)
         POBMPResizer.TabIndex = 33
         POBMPResizer.TabStop = False
         POBMPResizer.UseVisualStyleBackColor = True
@@ -1051,10 +1048,11 @@ Partial Class MainWindow
         POBMPSwitch.CheckState = CheckState.Checked
         POBMPSwitch.Cursor = Cursors.Hand
         POBMPSwitch.Dock = DockStyle.Top
+        POBMPSwitch.FlatStyle = FlatStyle.Flat
         POBMPSwitch.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         POBMPSwitch.Location = New Point(0, 0)
         POBMPSwitch.Name = "POBMPSwitch"
-        POBMPSwitch.Size = New Size(183, 20)
+        POBMPSwitch.Size = New Size(192, 20)
         POBMPSwitch.TabIndex = 4
         POBMPSwitch.TabStop = False
         POBMPSwitch.Text = "#BMP (Images List)"
@@ -1070,9 +1068,9 @@ Partial Class MainWindow
         POWAV.Controls.Add(POWAVInner)
         POWAV.Controls.Add(POWAVSwitch)
         POWAV.Dock = DockStyle.Top
-        POWAV.Location = New Point(0, 1019)
+        POWAV.Location = New Point(0, 1023)
         POWAV.Name = "POWAV"
-        POWAV.Size = New Size(183, 270)
+        POWAV.Size = New Size(192, 270)
         POWAV.TabIndex = 4
         ' 
         ' POWAVInner
@@ -1093,7 +1091,7 @@ Partial Class MainWindow
         POWAVInner.RowStyles.Add(New RowStyle())
         POWAVInner.RowStyles.Add(New RowStyle(SizeType.Percent, 100F))
         POWAVInner.RowStyles.Add(New RowStyle())
-        POWAVInner.Size = New Size(183, 250)
+        POWAVInner.Size = New Size(192, 250)
         POWAVInner.TabIndex = 5
         ' 
         ' POWAVExpander
@@ -1107,7 +1105,7 @@ Partial Class MainWindow
         POWAVExpander.Location = New Point(0, 30)
         POWAVExpander.Margin = New Padding(0)
         POWAVExpander.Name = "POWAVExpander"
-        POWAVExpander.Size = New Size(183, 27)
+        POWAVExpander.Size = New Size(192, 27)
         POWAVExpander.TabIndex = 34
         POWAVExpander.TabStop = False
         POWAVExpander.Text = "Expand..."
@@ -1124,7 +1122,7 @@ Partial Class MainWindow
         LWAV.Margin = New Padding(3, 0, 3, 0)
         LWAV.Name = "LWAV"
         LWAV.SelectionMode = SelectionMode.MultiExtended
-        LWAV.Size = New Size(177, 126)
+        LWAV.Size = New Size(186, 126)
         LWAV.TabIndex = 25
         ' 
         ' FlowLayoutPanel3
@@ -1193,7 +1191,7 @@ Partial Class MainWindow
         POWAVResizer.Location = New Point(0, 245)
         POWAVResizer.Margin = New Padding(0)
         POWAVResizer.Name = "POWAVResizer"
-        POWAVResizer.Size = New Size(183, 5)
+        POWAVResizer.Size = New Size(192, 5)
         POWAVResizer.TabIndex = 33
         POWAVResizer.TabStop = False
         POWAVResizer.UseVisualStyleBackColor = True
@@ -1215,7 +1213,7 @@ Partial Class MainWindow
         POWAVPart2.RowStyles.Add(New RowStyle())
         POWAVPart2.RowStyles.Add(New RowStyle())
         POWAVPart2.RowStyles.Add(New RowStyle(SizeType.Absolute, 20F))
-        POWAVPart2.Size = New Size(183, 62)
+        POWAVPart2.Size = New Size(192, 62)
         POWAVPart2.TabIndex = 35
         POWAVPart2.Visible = False
         ' 
@@ -1266,10 +1264,11 @@ Partial Class MainWindow
         POWAVSwitch.CheckState = CheckState.Checked
         POWAVSwitch.Cursor = Cursors.Hand
         POWAVSwitch.Dock = DockStyle.Top
+        POWAVSwitch.FlatStyle = FlatStyle.Flat
         POWAVSwitch.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         POWAVSwitch.Location = New Point(0, 0)
         POWAVSwitch.Name = "POWAVSwitch"
-        POWAVSwitch.Size = New Size(183, 20)
+        POWAVSwitch.Size = New Size(192, 20)
         POWAVSwitch.TabIndex = 4
         POWAVSwitch.TabStop = False
         POWAVSwitch.Text = "#WAV (Sounds List)"
@@ -1284,9 +1283,9 @@ Partial Class MainWindow
         POWaveForm.Controls.Add(POWaveFormInner)
         POWaveForm.Controls.Add(POWaveFormSwitch)
         POWaveForm.Dock = DockStyle.Top
-        POWaveForm.Location = New Point(0, 774)
+        POWaveForm.Location = New Point(0, 778)
         POWaveForm.Name = "POWaveForm"
-        POWaveForm.Size = New Size(183, 245)
+        POWaveForm.Size = New Size(192, 245)
         POWaveForm.TabIndex = 3
         ' 
         ' POWaveFormInner
@@ -1299,7 +1298,7 @@ Partial Class MainWindow
         POWaveFormInner.Dock = DockStyle.Top
         POWaveFormInner.Location = New Point(0, 20)
         POWaveFormInner.Name = "POWaveFormInner"
-        POWaveFormInner.Size = New Size(183, 225)
+        POWaveFormInner.Size = New Size(192, 225)
         POWaveFormInner.TabIndex = 29
         POWaveFormInner.Visible = False
         ' 
@@ -1335,18 +1334,18 @@ Partial Class MainWindow
         POWaveFormPart2.RowStyles.Add(New RowStyle(SizeType.Absolute, 28F))
         POWaveFormPart2.RowStyles.Add(New RowStyle(SizeType.Absolute, 28F))
         POWaveFormPart2.RowStyles.Add(New RowStyle(SizeType.Absolute, 28F))
-        POWaveFormPart2.Size = New Size(183, 140)
+        POWaveFormPart2.Size = New Size(192, 140)
         POWaveFormPart2.TabIndex = 5
         ' 
         ' TWSaturation
         ' 
         TWSaturation.Dock = DockStyle.Fill
         TWSaturation.Increment = New Decimal(New Integer() {50, 0, 0, 0})
-        TWSaturation.Location = New Point(137, 112)
+        TWSaturation.Location = New Point(143, 112)
         TWSaturation.Margin = New Padding(0, 0, 3, 0)
         TWSaturation.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         TWSaturation.Name = "TWSaturation"
-        TWSaturation.Size = New Size(43, 23)
+        TWSaturation.Size = New Size(46, 23)
         TWSaturation.TabIndex = 68
         ' 
         ' PictureBox2
@@ -1364,11 +1363,11 @@ Partial Class MainWindow
         ' 
         TWTransparency.Dock = DockStyle.Fill
         TWTransparency.Increment = New Decimal(New Integer() {10, 0, 0, 0})
-        TWTransparency.Location = New Point(137, 84)
+        TWTransparency.Location = New Point(143, 84)
         TWTransparency.Margin = New Padding(0, 0, 3, 0)
         TWTransparency.Maximum = New Decimal(New Integer() {255, 0, 0, 0})
         TWTransparency.Name = "TWTransparency"
-        TWTransparency.Size = New Size(43, 23)
+        TWTransparency.Size = New Size(46, 23)
         TWTransparency.TabIndex = 69
         TWTransparency.Value = New Decimal(New Integer() {80, 0, 0, 0})
         ' 
@@ -1386,11 +1385,11 @@ Partial Class MainWindow
         ' TWPrecision
         ' 
         TWPrecision.Dock = DockStyle.Fill
-        TWPrecision.Location = New Point(137, 56)
+        TWPrecision.Location = New Point(143, 56)
         TWPrecision.Margin = New Padding(0, 0, 3, 0)
         TWPrecision.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
         TWPrecision.Name = "TWPrecision"
-        TWPrecision.Size = New Size(43, 23)
+        TWPrecision.Size = New Size(46, 23)
         TWPrecision.TabIndex = 46
         TWPrecision.Value = New Decimal(New Integer() {5, 0, 0, 0})
         ' 
@@ -1409,11 +1408,11 @@ Partial Class MainWindow
         ' 
         TWWidth.Dock = DockStyle.Fill
         TWWidth.Increment = New Decimal(New Integer() {10, 0, 0, 0})
-        TWWidth.Location = New Point(137, 28)
+        TWWidth.Location = New Point(143, 28)
         TWWidth.Margin = New Padding(0, 0, 3, 0)
         TWWidth.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         TWWidth.Name = "TWWidth"
-        TWWidth.Size = New Size(43, 23)
+        TWWidth.Size = New Size(46, 23)
         TWWidth.TabIndex = 45
         TWWidth.Value = New Decimal(New Integer() {200, 0, 0, 0})
         ' 
@@ -1432,11 +1431,11 @@ Partial Class MainWindow
         ' 
         TWLeft.Dock = DockStyle.Fill
         TWLeft.Increment = New Decimal(New Integer() {5, 0, 0, 0})
-        TWLeft.Location = New Point(137, 0)
+        TWLeft.Location = New Point(143, 0)
         TWLeft.Margin = New Padding(0, 0, 3, 0)
         TWLeft.Maximum = New Decimal(New Integer() {800, 0, 0, 0})
         TWLeft.Name = "TWLeft"
-        TWLeft.Size = New Size(43, 23)
+        TWLeft.Size = New Size(46, 23)
         TWLeft.TabIndex = 44
         TWLeft.Value = New Decimal(New Integer() {50, 0, 0, 0})
         ' 
@@ -1459,7 +1458,7 @@ Partial Class MainWindow
         TWSaturation2.Margin = New Padding(0)
         TWSaturation2.Maximum = 1000
         TWSaturation2.Name = "TWSaturation2"
-        TWSaturation2.Size = New Size(107, 28)
+        TWSaturation2.Size = New Size(113, 28)
         TWSaturation2.SmallChange = 50
         TWSaturation2.TabIndex = 70
         TWSaturation2.TickFrequency = 200
@@ -1472,7 +1471,7 @@ Partial Class MainWindow
         TWLeft2.Margin = New Padding(0)
         TWLeft2.Maximum = 800
         TWLeft2.Name = "TWLeft2"
-        TWLeft2.Size = New Size(107, 28)
+        TWLeft2.Size = New Size(113, 28)
         TWLeft2.SmallChange = 10
         TWLeft2.TabIndex = 63
         TWLeft2.TickFrequency = 100
@@ -1486,7 +1485,7 @@ Partial Class MainWindow
         TWTransparency2.Margin = New Padding(0)
         TWTransparency2.Maximum = 255
         TWTransparency2.Name = "TWTransparency2"
-        TWTransparency2.Size = New Size(107, 28)
+        TWTransparency2.Size = New Size(113, 28)
         TWTransparency2.SmallChange = 8
         TWTransparency2.TabIndex = 71
         TWTransparency2.TickFrequency = 64
@@ -1500,7 +1499,7 @@ Partial Class MainWindow
         TWWidth2.Margin = New Padding(0)
         TWWidth2.Maximum = 1000
         TWWidth2.Name = "TWWidth2"
-        TWWidth2.Size = New Size(107, 28)
+        TWWidth2.Size = New Size(113, 28)
         TWWidth2.SmallChange = 10
         TWWidth2.TabIndex = 64
         TWWidth2.TickFrequency = 100
@@ -1514,7 +1513,7 @@ Partial Class MainWindow
         TWPrecision2.Margin = New Padding(0)
         TWPrecision2.Maximum = 50
         TWPrecision2.Name = "TWPrecision2"
-        TWPrecision2.Size = New Size(107, 28)
+        TWPrecision2.Size = New Size(113, 28)
         TWPrecision2.TabIndex = 65
         TWPrecision2.TickFrequency = 5
         TWPrecision2.Value = 5
@@ -1530,7 +1529,7 @@ Partial Class MainWindow
         POWaveFormExpander.Location = New Point(0, 58)
         POWaveFormExpander.Margin = New Padding(0)
         POWaveFormExpander.Name = "POWaveFormExpander"
-        POWaveFormExpander.Size = New Size(183, 27)
+        POWaveFormExpander.Size = New Size(192, 27)
         POWaveFormExpander.TabIndex = 29
         POWaveFormExpander.TabStop = False
         POWaveFormExpander.Text = "Expand..."
@@ -1551,7 +1550,7 @@ Partial Class MainWindow
         POWaveFormPart1.RowCount = 2
         POWaveFormPart1.RowStyles.Add(New RowStyle())
         POWaveFormPart1.RowStyles.Add(New RowStyle())
-        POWaveFormPart1.Size = New Size(183, 58)
+        POWaveFormPart1.Size = New Size(192, 58)
         POWaveFormPart1.TabIndex = 4
         ' 
         ' TableLayoutPanel1
@@ -1569,7 +1568,7 @@ Partial Class MainWindow
         TableLayoutPanel1.Name = "TableLayoutPanel1"
         TableLayoutPanel1.RowCount = 1
         TableLayoutPanel1.RowStyles.Add(New RowStyle())
-        TableLayoutPanel1.Size = New Size(183, 30)
+        TableLayoutPanel1.Size = New Size(192, 30)
         TableLayoutPanel1.TabIndex = 0
         ' 
         ' FlowLayoutPanel1
@@ -1627,7 +1626,7 @@ Partial Class MainWindow
         TWFileName.Location = New Point(81, 3)
         TWFileName.Name = "TWFileName"
         TWFileName.ReadOnly = True
-        TWFileName.Size = New Size(99, 23)
+        TWFileName.Size = New Size(108, 23)
         TWFileName.TabIndex = 42
         TWFileName.Text = "(None)"
         ' 
@@ -1648,7 +1647,7 @@ Partial Class MainWindow
         TableLayoutPanel6.Name = "TableLayoutPanel6"
         TableLayoutPanel6.RowCount = 1
         TableLayoutPanel6.RowStyles.Add(New RowStyle(SizeType.Absolute, 28F))
-        TableLayoutPanel6.Size = New Size(183, 28)
+        TableLayoutPanel6.Size = New Size(192, 28)
         TableLayoutPanel6.TabIndex = 1
         ' 
         ' PictureBox1
@@ -1671,7 +1670,7 @@ Partial Class MainWindow
         TWPosition2.Margin = New Padding(0)
         TWPosition2.Maximum = 960
         TWPosition2.Name = "TWPosition2"
-        TWPosition2.Size = New Size(91, 28)
+        TWPosition2.Size = New Size(97, 28)
         TWPosition2.TabIndex = 58
         TWPosition2.TickFrequency = 192
         ' 
@@ -1680,11 +1679,11 @@ Partial Class MainWindow
         TWPosition.DecimalPlaces = 2
         TWPosition.Dock = DockStyle.Fill
         TWPosition.Enabled = False
-        TWPosition.Location = New Point(121, 0)
+        TWPosition.Location = New Point(127, 0)
         TWPosition.Margin = New Padding(0, 0, 3, 0)
         TWPosition.Maximum = New Decimal(New Integer() {192000, 0, 0, 0})
         TWPosition.Name = "TWPosition"
-        TWPosition.Size = New Size(59, 23)
+        TWPosition.Size = New Size(62, 23)
         TWPosition.TabIndex = 43
         ' 
         ' POWaveFormSwitch
@@ -1693,10 +1692,11 @@ Partial Class MainWindow
         POWaveFormSwitch.BackColor = SystemColors.Control
         POWaveFormSwitch.Cursor = Cursors.Hand
         POWaveFormSwitch.Dock = DockStyle.Top
+        POWaveFormSwitch.FlatStyle = FlatStyle.Flat
         POWaveFormSwitch.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         POWaveFormSwitch.Location = New Point(0, 0)
         POWaveFormSwitch.Name = "POWaveFormSwitch"
-        POWaveFormSwitch.Size = New Size(183, 20)
+        POWaveFormSwitch.Size = New Size(192, 20)
         POWaveFormSwitch.TabIndex = 3
         POWaveFormSwitch.TabStop = False
         POWaveFormSwitch.Text = "WaveForm"
@@ -1711,9 +1711,9 @@ Partial Class MainWindow
         POGrid.Controls.Add(POGridInner)
         POGrid.Controls.Add(POGridSwitch)
         POGrid.Dock = DockStyle.Top
-        POGrid.Location = New Point(0, 538)
+        POGrid.Location = New Point(0, 542)
         POGrid.Name = "POGrid"
-        POGrid.Size = New Size(183, 236)
+        POGrid.Size = New Size(192, 236)
         POGrid.TabIndex = 2
         ' 
         ' POGridInner
@@ -1726,7 +1726,7 @@ Partial Class MainWindow
         POGridInner.Dock = DockStyle.Top
         POGridInner.Location = New Point(0, 20)
         POGridInner.Name = "POGridInner"
-        POGridInner.Size = New Size(183, 216)
+        POGridInner.Size = New Size(192, 216)
         POGridInner.TabIndex = 3
         ' 
         ' POGridPart2
@@ -1744,7 +1744,7 @@ Partial Class MainWindow
         POGridPart2.RowStyles.Add(New RowStyle())
         POGridPart2.RowStyles.Add(New RowStyle())
         POGridPart2.RowStyles.Add(New RowStyle(SizeType.Absolute, 20F))
-        POGridPart2.Size = New Size(183, 58)
+        POGridPart2.Size = New Size(192, 58)
         POGridPart2.TabIndex = 0
         ' 
         ' TableLayoutPanel5
@@ -1762,7 +1762,7 @@ Partial Class MainWindow
         TableLayoutPanel5.Name = "TableLayoutPanel5"
         TableLayoutPanel5.RowCount = 1
         TableLayoutPanel5.RowStyles.Add(New RowStyle())
-        TableLayoutPanel5.Size = New Size(183, 29)
+        TableLayoutPanel5.Size = New Size(192, 29)
         TableLayoutPanel5.TabIndex = 46
         ' 
         ' FlowLayoutPanel2
@@ -1774,7 +1774,7 @@ Partial Class MainWindow
         FlowLayoutPanel2.Controls.Add(cVSLockR)
         FlowLayoutPanel2.Location = New Point(127, 3)
         FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-        FlowLayoutPanel2.Size = New Size(53, 23)
+        FlowLayoutPanel2.Size = New Size(62, 23)
         FlowLayoutPanel2.TabIndex = 72
         FlowLayoutPanel2.WrapContents = False
         ' 
@@ -1843,7 +1843,7 @@ Partial Class MainWindow
         TableLayoutPanel4.Name = "TableLayoutPanel4"
         TableLayoutPanel4.RowCount = 1
         TableLayoutPanel4.RowStyles.Add(New RowStyle())
-        TableLayoutPanel4.Size = New Size(183, 29)
+        TableLayoutPanel4.Size = New Size(192, 29)
         TableLayoutPanel4.TabIndex = 44
         ' 
         ' Label1
@@ -1864,7 +1864,7 @@ Partial Class MainWindow
         CGB.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
         CGB.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         CGB.Name = "CGB"
-        CGB.Size = New Size(33, 23)
+        CGB.Size = New Size(42, 23)
         CGB.TabIndex = 35
         CGB.Value = New Decimal(New Integer() {15, 0, 0, 0})
         ' 
@@ -1875,11 +1875,11 @@ Partial Class MainWindow
         POGridExpander.Cursor = Cursors.Hand
         POGridExpander.Dock = DockStyle.Top
         POGridExpander.FlatAppearance.BorderSize = 0
-        POGridExpander.FlatStyle = FlatStyle.Popup
+        POGridExpander.FlatStyle = FlatStyle.Flat
         POGridExpander.Location = New Point(0, 131)
         POGridExpander.Margin = New Padding(0)
         POGridExpander.Name = "POGridExpander"
-        POGridExpander.Size = New Size(183, 27)
+        POGridExpander.Size = New Size(192, 27)
         POGridExpander.TabIndex = 27
         POGridExpander.TabStop = False
         POGridExpander.Text = "Expand..."
@@ -1905,7 +1905,7 @@ Partial Class MainWindow
         POGridPart1.RowStyles.Add(New RowStyle())
         POGridPart1.RowStyles.Add(New RowStyle())
         POGridPart1.RowStyles.Add(New RowStyle(SizeType.Absolute, 20F))
-        POGridPart1.Size = New Size(183, 131)
+        POGridPart1.Size = New Size(192, 131)
         POGridPart1.TabIndex = 11
         ' 
         ' TableLayoutPanel3
@@ -1929,7 +1929,7 @@ Partial Class MainWindow
         TableLayoutPanel3.RowCount = 2
         TableLayoutPanel3.RowStyles.Add(New RowStyle(SizeType.Absolute, 28F))
         TableLayoutPanel3.RowStyles.Add(New RowStyle(SizeType.Absolute, 28F))
-        TableLayoutPanel3.Size = New Size(183, 56)
+        TableLayoutPanel3.Size = New Size(192, 56)
         TableLayoutPanel3.TabIndex = 12
         ' 
         ' PictureBox9
@@ -1952,7 +1952,7 @@ Partial Class MainWindow
         CGHeight2.Maximum = 20
         CGHeight2.Minimum = 1
         CGHeight2.Name = "CGHeight2"
-        CGHeight2.Size = New Size(107, 28)
+        CGHeight2.Size = New Size(113, 28)
         CGHeight2.TabIndex = 29
         CGHeight2.TickFrequency = 2
         CGHeight2.Value = 4
@@ -1962,12 +1962,12 @@ Partial Class MainWindow
         CGHeight.DecimalPlaces = 2
         CGHeight.Dock = DockStyle.Fill
         CGHeight.Increment = New Decimal(New Integer() {25, 0, 0, 131072})
-        CGHeight.Location = New Point(137, 0)
+        CGHeight.Location = New Point(143, 0)
         CGHeight.Margin = New Padding(0, 0, 3, 0)
         CGHeight.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         CGHeight.Minimum = New Decimal(New Integer() {25, 0, 0, 131072})
         CGHeight.Name = "CGHeight"
-        CGHeight.Size = New Size(43, 23)
+        CGHeight.Size = New Size(46, 23)
         CGHeight.TabIndex = 23
         CGHeight.Value = New Decimal(New Integer() {1, 0, 0, 0})
         ' 
@@ -1991,7 +1991,7 @@ Partial Class MainWindow
         CGWidth2.Maximum = 20
         CGWidth2.Minimum = 1
         CGWidth2.Name = "CGWidth2"
-        CGWidth2.Size = New Size(107, 28)
+        CGWidth2.Size = New Size(113, 28)
         CGWidth2.TabIndex = 30
         CGWidth2.TickFrequency = 2
         CGWidth2.Value = 4
@@ -2001,12 +2001,12 @@ Partial Class MainWindow
         CGWidth.DecimalPlaces = 2
         CGWidth.Dock = DockStyle.Fill
         CGWidth.Increment = New Decimal(New Integer() {25, 0, 0, 131072})
-        CGWidth.Location = New Point(137, 28)
+        CGWidth.Location = New Point(143, 28)
         CGWidth.Margin = New Padding(0, 0, 3, 0)
         CGWidth.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         CGWidth.Minimum = New Decimal(New Integer() {25, 0, 0, 131072})
         CGWidth.Name = "CGWidth"
-        CGWidth.Size = New Size(43, 23)
+        CGWidth.Size = New Size(46, 23)
         CGWidth.TabIndex = 24
         CGWidth.Value = New Decimal(New Integer() {1, 0, 0, 0})
         ' 
@@ -2016,7 +2016,7 @@ Partial Class MainWindow
         CGDisableVertical.Location = New Point(3, 110)
         CGDisableVertical.Margin = New Padding(3, 0, 3, 0)
         CGDisableVertical.Name = "CGDisableVertical"
-        CGDisableVertical.Size = New Size(177, 21)
+        CGDisableVertical.Size = New Size(178, 21)
         CGDisableVertical.TabIndex = 45
         CGDisableVertical.Text = "Disable vertical moves (D)"
         CGDisableVertical.UseVisualStyleBackColor = True
@@ -2053,7 +2053,7 @@ Partial Class MainWindow
         TableLayoutPanel2.Name = "TableLayoutPanel2"
         TableLayoutPanel2.RowCount = 1
         TableLayoutPanel2.RowStyles.Add(New RowStyle(SizeType.Percent, 100F))
-        TableLayoutPanel2.Size = New Size(183, 30)
+        TableLayoutPanel2.Size = New Size(192, 30)
         TableLayoutPanel2.TabIndex = 11
         ' 
         ' PictureBox7
@@ -2074,18 +2074,18 @@ Partial Class MainWindow
         CGDivide.Maximum = New Decimal(New Integer() {1920, 0, 0, 0})
         CGDivide.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         CGDivide.Name = "CGDivide"
-        CGDivide.Size = New Size(58, 23)
+        CGDivide.Size = New Size(62, 23)
         CGDivide.TabIndex = 36
         CGDivide.Value = New Decimal(New Integer() {16, 0, 0, 0})
         ' 
         ' CGSub
         ' 
         CGSub.Dock = DockStyle.Fill
-        CGSub.Location = New Point(97, 3)
+        CGSub.Location = New Point(101, 3)
         CGSub.Maximum = New Decimal(New Integer() {1920, 0, 0, 0})
         CGSub.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         CGSub.Name = "CGSub"
-        CGSub.Size = New Size(58, 23)
+        CGSub.Size = New Size(62, 23)
         CGSub.TabIndex = 37
         CGSub.Value = New Decimal(New Integer() {4, 0, 0, 0})
         ' 
@@ -2093,7 +2093,7 @@ Partial Class MainWindow
         ' 
         BGSlash.Anchor = AnchorStyles.None
         BGSlash.Image = CType(resources.GetObject("BGSlash.Image"), Image)
-        BGSlash.Location = New Point(158, 4)
+        BGSlash.Location = New Point(166, 4)
         BGSlash.Margin = New Padding(0, 0, 3, 0)
         BGSlash.Name = "BGSlash"
         BGSlash.Size = New Size(22, 22)
@@ -2108,10 +2108,11 @@ Partial Class MainWindow
         POGridSwitch.CheckState = CheckState.Checked
         POGridSwitch.Cursor = Cursors.Hand
         POGridSwitch.Dock = DockStyle.Top
+        POGridSwitch.FlatStyle = FlatStyle.Flat
         POGridSwitch.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(134))
         POGridSwitch.Location = New Point(0, 0)
         POGridSwitch.Name = "POGridSwitch"
-        POGridSwitch.Size = New Size(183, 20)
+        POGridSwitch.Size = New Size(192, 20)
         POGridSwitch.TabIndex = 2
         POGridSwitch.TabStop = False
         POGridSwitch.Text = "Grid"
@@ -2128,7 +2129,7 @@ Partial Class MainWindow
         POHeader.Dock = DockStyle.Top
         POHeader.Location = New Point(0, 0)
         POHeader.Name = "POHeader"
-        POHeader.Size = New Size(183, 538)
+        POHeader.Size = New Size(192, 542)
         POHeader.TabIndex = 1
         ' 
         ' POHeaderInner
@@ -2139,9 +2140,9 @@ Partial Class MainWindow
         POHeaderInner.Controls.Add(POHeaderExpander)
         POHeaderInner.Controls.Add(POHeaderPart1)
         POHeaderInner.Dock = DockStyle.Top
-        POHeaderInner.Location = New Point(0, 20)
+        POHeaderInner.Location = New Point(0, 24)
         POHeaderInner.Name = "POHeaderInner"
-        POHeaderInner.Size = New Size(183, 518)
+        POHeaderInner.Size = New Size(192, 518)
         POHeaderInner.TabIndex = 2
         ' 
         ' POHeaderPart2
@@ -2202,7 +2203,7 @@ Partial Class MainWindow
         POHeaderPart2.RowStyles.Add(New RowStyle())
         POHeaderPart2.RowStyles.Add(New RowStyle())
         POHeaderPart2.RowStyles.Add(New RowStyle(SizeType.Absolute, 20F))
-        POHeaderPart2.Size = New Size(183, 306)
+        POHeaderPart2.Size = New Size(192, 306)
         POHeaderPart2.TabIndex = 27
         ' 
         ' CHDifficulty
@@ -2215,14 +2216,14 @@ Partial Class MainWindow
         CHDifficulty.Location = New Point(73, 118)
         CHDifficulty.Margin = New Padding(0)
         CHDifficulty.Name = "CHDifficulty"
-        CHDifficulty.Size = New Size(110, 25)
+        CHDifficulty.Size = New Size(119, 25)
         CHDifficulty.TabIndex = 63
         ' 
         ' Label13
         ' 
         Label13.AutoSize = True
         Label13.Dock = DockStyle.Fill
-        Label13.Location = New Point(156, 143)
+        Label13.Location = New Point(165, 143)
         Label13.Margin = New Padding(3, 0, 0, 0)
         Label13.Name = "Label13"
         Label13.Size = New Size(27, 23)
@@ -2236,7 +2237,7 @@ Partial Class MainWindow
         THExRank.Location = New Point(73, 143)
         THExRank.Margin = New Padding(0)
         THExRank.Name = "THExRank"
-        THExRank.Size = New Size(80, 23)
+        THExRank.Size = New Size(89, 23)
         THExRank.TabIndex = 27
         ' 
         ' CHLnObj
@@ -2249,7 +2250,7 @@ Partial Class MainWindow
         CHLnObj.Location = New Point(73, 189)
         CHLnObj.Margin = New Padding(0)
         CHLnObj.Name = "CHLnObj"
-        CHLnObj.Size = New Size(110, 25)
+        CHLnObj.Size = New Size(119, 25)
         CHLnObj.TabIndex = 28
         ' 
         ' Label23
@@ -2281,7 +2282,7 @@ Partial Class MainWindow
         THComment.Location = New Point(73, 166)
         THComment.Margin = New Padding(0)
         THComment.Name = "THComment"
-        THComment.Size = New Size(110, 23)
+        THComment.Size = New Size(119, 23)
         THComment.TabIndex = 19
         ' 
         ' Label24
@@ -2310,7 +2311,7 @@ Partial Class MainWindow
         ' 
         BHStageFile.Dock = DockStyle.Fill
         BHStageFile.FlatStyle = FlatStyle.System
-        BHStageFile.Location = New Point(156, 46)
+        BHStageFile.Location = New Point(165, 46)
         BHStageFile.Margin = New Padding(3, 0, 0, 0)
         BHStageFile.Name = "BHStageFile"
         BHStageFile.Size = New Size(27, 24)
@@ -2322,7 +2323,7 @@ Partial Class MainWindow
         ' 
         BHBanner.Dock = DockStyle.Fill
         BHBanner.FlatStyle = FlatStyle.System
-        BHBanner.Location = New Point(156, 70)
+        BHBanner.Location = New Point(165, 70)
         BHBanner.Margin = New Padding(3, 0, 0, 0)
         BHBanner.Name = "BHBanner"
         BHBanner.Size = New Size(27, 24)
@@ -2345,7 +2346,7 @@ Partial Class MainWindow
         ' 
         BHBackBMP.Dock = DockStyle.Fill
         BHBackBMP.FlatStyle = FlatStyle.System
-        BHBackBMP.Location = New Point(156, 94)
+        BHBackBMP.Location = New Point(165, 94)
         BHBackBMP.Margin = New Padding(3, 0, 0, 0)
         BHBackBMP.Name = "BHBackBMP"
         BHBackBMP.Size = New Size(27, 24)
@@ -2392,7 +2393,7 @@ Partial Class MainWindow
         THBackBMP.Location = New Point(73, 94)
         THBackBMP.Margin = New Padding(0)
         THBackBMP.Name = "THBackBMP"
-        THBackBMP.Size = New Size(80, 23)
+        THBackBMP.Size = New Size(89, 23)
         THBackBMP.TabIndex = 17
         ' 
         ' Label11
@@ -2412,7 +2413,7 @@ Partial Class MainWindow
         THBanner.Location = New Point(73, 70)
         THBanner.Margin = New Padding(0)
         THBanner.Name = "THBanner"
-        THBanner.Size = New Size(80, 23)
+        THBanner.Size = New Size(89, 23)
         THBanner.TabIndex = 19
         ' 
         ' THStageFile
@@ -2421,7 +2422,7 @@ Partial Class MainWindow
         THStageFile.Location = New Point(73, 46)
         THStageFile.Margin = New Padding(0)
         THStageFile.Name = "THStageFile"
-        THStageFile.Size = New Size(80, 23)
+        THStageFile.Size = New Size(89, 23)
         THStageFile.TabIndex = 18
         ' 
         ' THSubTitle
@@ -2431,7 +2432,7 @@ Partial Class MainWindow
         THSubTitle.Location = New Point(73, 0)
         THSubTitle.Margin = New Padding(0)
         THSubTitle.Name = "THSubTitle"
-        THSubTitle.Size = New Size(110, 23)
+        THSubTitle.Size = New Size(119, 23)
         THSubTitle.TabIndex = 6
         ' 
         ' THSubArtist
@@ -2441,7 +2442,7 @@ Partial Class MainWindow
         THSubArtist.Location = New Point(73, 23)
         THSubArtist.Margin = New Padding(0)
         THSubArtist.Name = "THSubArtist"
-        THSubArtist.Size = New Size(110, 23)
+        THSubArtist.Size = New Size(119, 23)
         THSubArtist.TabIndex = 7
         ' 
         ' Label26
@@ -2472,14 +2473,14 @@ Partial Class MainWindow
         THLandMine.Location = New Point(73, 214)
         THLandMine.Margin = New Padding(0)
         THLandMine.Name = "THLandMine"
-        THLandMine.Size = New Size(80, 23)
+        THLandMine.Size = New Size(89, 23)
         THLandMine.TabIndex = 30
         ' 
         ' BHLandMine
         ' 
         BHLandMine.Dock = DockStyle.Fill
         BHLandMine.FlatStyle = FlatStyle.System
-        BHLandMine.Location = New Point(156, 214)
+        BHLandMine.Location = New Point(165, 214)
         BHLandMine.Margin = New Padding(3, 0, 0, 0)
         BHLandMine.Name = "BHLandMine"
         BHLandMine.Size = New Size(27, 24)
@@ -2493,14 +2494,14 @@ Partial Class MainWindow
         THMissBMP.Location = New Point(73, 238)
         THMissBMP.Margin = New Padding(0)
         THMissBMP.Name = "THMissBMP"
-        THMissBMP.Size = New Size(80, 23)
+        THMissBMP.Size = New Size(89, 23)
         THMissBMP.TabIndex = 33
         ' 
         ' BHMissBMP
         ' 
         BHMissBMP.Dock = DockStyle.Fill
         BHMissBMP.FlatStyle = FlatStyle.System
-        BHMissBMP.Location = New Point(156, 238)
+        BHMissBMP.Location = New Point(165, 238)
         BHMissBMP.Margin = New Padding(3, 0, 0, 0)
         BHMissBMP.Name = "BHMissBMP"
         BHMissBMP.Size = New Size(27, 24)
@@ -2536,14 +2537,14 @@ Partial Class MainWindow
         THPreview.Location = New Point(73, 262)
         THPreview.Margin = New Padding(0)
         THPreview.Name = "THPreview"
-        THPreview.Size = New Size(80, 23)
+        THPreview.Size = New Size(89, 23)
         THPreview.TabIndex = 36
         ' 
         ' BHPreview
         ' 
         BHPreview.Dock = DockStyle.Fill
         BHPreview.FlatStyle = FlatStyle.System
-        BHPreview.Location = New Point(156, 262)
+        BHPreview.Location = New Point(165, 262)
         BHPreview.Margin = New Padding(3, 0, 0, 0)
         BHPreview.Name = "BHPreview"
         BHPreview.Size = New Size(27, 24)
@@ -2561,7 +2562,7 @@ Partial Class MainWindow
         CHLnmode.Location = New Point(73, 286)
         CHLnmode.Margin = New Padding(0)
         CHLnmode.Name = "CHLnmode"
-        CHLnmode.Size = New Size(110, 25)
+        CHLnmode.Size = New Size(119, 25)
         CHLnmode.TabIndex = 39
         ' 
         ' POHeaderExpander
@@ -2571,12 +2572,12 @@ Partial Class MainWindow
         POHeaderExpander.Cursor = Cursors.Hand
         POHeaderExpander.Dock = DockStyle.Top
         POHeaderExpander.FlatAppearance.BorderSize = 0
-        POHeaderExpander.FlatStyle = FlatStyle.Popup
+        POHeaderExpander.FlatStyle = FlatStyle.Flat
         POHeaderExpander.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         POHeaderExpander.Location = New Point(0, 185)
         POHeaderExpander.Margin = New Padding(0)
         POHeaderExpander.Name = "POHeaderExpander"
-        POHeaderExpander.Size = New Size(183, 27)
+        POHeaderExpander.Size = New Size(192, 27)
         POHeaderExpander.TabIndex = 26
         POHeaderExpander.TabStop = False
         POHeaderExpander.Text = "Expand..."
@@ -2602,12 +2603,12 @@ Partial Class MainWindow
         POHeaderPart1.Controls.Add(Label2, 0, 2)
         POHeaderPart1.Controls.Add(THArtist, 1, 1)
         POHeaderPart1.Controls.Add(THTitle, 1, 0)
-        POHeaderPart1.Controls.Add(Label9, 0, 3)
         POHeaderPart1.Controls.Add(Label8, 0, 4)
         POHeaderPart1.Controls.Add(Label6, 0, 6)
         POHeaderPart1.Controls.Add(THTotal, 1, 7)
         POHeaderPart1.Controls.Add(Label20, 0, 7)
         POHeaderPart1.Controls.Add(Label25, 2, 7)
+        POHeaderPart1.Controls.Add(Label9, 0, 3)
         POHeaderPart1.Dock = DockStyle.Top
         POHeaderPart1.Location = New Point(0, 0)
         POHeaderPart1.Name = "POHeaderPart1"
@@ -2620,7 +2621,7 @@ Partial Class MainWindow
         POHeaderPart1.RowStyles.Add(New RowStyle())
         POHeaderPart1.RowStyles.Add(New RowStyle())
         POHeaderPart1.RowStyles.Add(New RowStyle(SizeType.Absolute, 20F))
-        POHeaderPart1.Size = New Size(183, 185)
+        POHeaderPart1.Size = New Size(192, 185)
         POHeaderPart1.TabIndex = 25
         ' 
         ' Label3
@@ -2642,7 +2643,7 @@ Partial Class MainWindow
         THPlayLevel.Location = New Point(70, 142)
         THPlayLevel.Margin = New Padding(0)
         THPlayLevel.Name = "THPlayLevel"
-        THPlayLevel.Size = New Size(113, 23)
+        THPlayLevel.Size = New Size(122, 23)
         THPlayLevel.TabIndex = 8
         ' 
         ' CHRank
@@ -2655,7 +2656,7 @@ Partial Class MainWindow
         CHRank.Location = New Point(70, 117)
         CHRank.Margin = New Padding(0)
         CHRank.Name = "CHRank"
-        CHRank.Size = New Size(113, 25)
+        CHRank.Size = New Size(122, 25)
         CHRank.TabIndex = 15
         ' 
         ' Label10
@@ -2679,7 +2680,7 @@ Partial Class MainWindow
         CHPlayer.Location = New Point(70, 92)
         CHPlayer.Margin = New Padding(0)
         CHPlayer.Name = "CHPlayer"
-        CHPlayer.Size = New Size(113, 25)
+        CHPlayer.Size = New Size(122, 25)
         CHPlayer.TabIndex = 14
         ' 
         ' Label4
@@ -2700,7 +2701,7 @@ Partial Class MainWindow
         THGenre.Location = New Point(70, 46)
         THGenre.Margin = New Padding(0)
         THGenre.Name = "THGenre"
-        THGenre.Size = New Size(113, 23)
+        THGenre.Size = New Size(122, 23)
         THGenre.TabIndex = 5
         ' 
         ' THBPM
@@ -2714,7 +2715,7 @@ Partial Class MainWindow
         THBPM.Maximum = New Decimal(New Integer() {655359999, 0, 0, 262144})
         THBPM.Minimum = New Decimal(New Integer() {1, 0, 0, 262144})
         THBPM.Name = "THBPM"
-        THBPM.Size = New Size(113, 23)
+        THBPM.Size = New Size(122, 23)
         THBPM.TabIndex = 10
         THBPM.Value = New Decimal(New Integer() {120, 0, 0, 0})
         ' 
@@ -2736,7 +2737,7 @@ Partial Class MainWindow
         THArtist.Location = New Point(70, 23)
         THArtist.Margin = New Padding(0)
         THArtist.Name = "THArtist"
-        THArtist.Size = New Size(113, 23)
+        THArtist.Size = New Size(122, 23)
         THArtist.TabIndex = 7
         ' 
         ' THTitle
@@ -2746,19 +2747,8 @@ Partial Class MainWindow
         THTitle.Location = New Point(70, 0)
         THTitle.Margin = New Padding(0)
         THTitle.Name = "THTitle"
-        THTitle.Size = New Size(113, 23)
+        THTitle.Size = New Size(122, 23)
         THTitle.TabIndex = 6
-        ' 
-        ' Label9
-        ' 
-        Label9.Anchor = AnchorStyles.Right
-        Label9.AutoSize = True
-        Label9.Location = New Point(32, 72)
-        Label9.Name = "Label9"
-        Label9.Size = New Size(35, 17)
-        Label9.TabIndex = 9
-        Label9.Text = "BPM"
-        Label9.TextAlign = ContentAlignment.MiddleRight
         ' 
         ' Label8
         ' 
@@ -2788,7 +2778,7 @@ Partial Class MainWindow
         THTotal.Location = New Point(70, 165)
         THTotal.Margin = New Padding(0)
         THTotal.Name = "THTotal"
-        THTotal.Size = New Size(83, 23)
+        THTotal.Size = New Size(92, 23)
         THTotal.TabIndex = 5
         ' 
         ' Label20
@@ -2806,13 +2796,24 @@ Partial Class MainWindow
         ' 
         Label25.AutoSize = True
         Label25.Dock = DockStyle.Fill
-        Label25.Location = New Point(156, 165)
+        Label25.Location = New Point(165, 165)
         Label25.Margin = New Padding(3, 0, 0, 0)
         Label25.Name = "Label25"
         Label25.Size = New Size(27, 20)
         Label25.TabIndex = 23
         Label25.Text = "(%)"
         Label25.TextAlign = ContentAlignment.MiddleLeft
+        ' 
+        ' Label9
+        ' 
+        Label9.Anchor = AnchorStyles.Right
+        Label9.AutoSize = True
+        Label9.Location = New Point(32, 72)
+        Label9.Name = "Label9"
+        Label9.Size = New Size(35, 17)
+        Label9.TabIndex = 9
+        Label9.Text = "BPM"
+        Label9.TextAlign = ContentAlignment.MiddleRight
         ' 
         ' POHeaderSwitch
         ' 
@@ -2822,10 +2823,11 @@ Partial Class MainWindow
         POHeaderSwitch.CheckState = CheckState.Checked
         POHeaderSwitch.Cursor = Cursors.Hand
         POHeaderSwitch.Dock = DockStyle.Top
+        POHeaderSwitch.FlatStyle = FlatStyle.Flat
         POHeaderSwitch.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(134))
         POHeaderSwitch.Location = New Point(0, 0)
         POHeaderSwitch.Name = "POHeaderSwitch"
-        POHeaderSwitch.Size = New Size(183, 20)
+        POHeaderSwitch.Size = New Size(192, 24)
         POHeaderSwitch.TabIndex = 1
         POHeaderSwitch.TabStop = False
         POHeaderSwitch.Text = "Header"
@@ -2872,7 +2874,7 @@ Partial Class MainWindow
         mnMain.LayoutStyle = ToolStripLayoutStyle.Flow
         mnMain.Location = New Point(0, 0)
         mnMain.Name = "mnMain"
-        mnMain.Size = New Size(1144, 25)
+        mnMain.Size = New Size(1135, 25)
         mnMain.TabIndex = 57
         ' 
         ' mnFile
@@ -3097,7 +3099,7 @@ Partial Class MainWindow
         mnStatistics.Name = "mnStatistics"
         mnStatistics.ShortcutKeyDisplayString = "Ctrl+T"
         mnStatistics.Size = New Size(300, 22)
-        mnStatistics.Text = "St&atistics"
+        mnStatistics.Text = "Chartinfo(old St&atistics)"
         ' 
         ' ToolStripSeparator19
         ' 
@@ -3404,7 +3406,7 @@ Partial Class MainWindow
         ' 
         cmnConversion.Items.AddRange(New ToolStripItem() {POBLong, POBShort, POBLongShort, ToolStripSeparator10, POBHidden, POBVisible, POBHiddenVisible, ToolStripSeparator11, POBModify, POBMirror})
         cmnConversion.Name = "cmnLanguage"
-        cmnConversion.OwnerItem = mnConversion
+        cmnConversion.OwnerItem = POConvert
         cmnConversion.Size = New Size(241, 192)
         ' 
         ' POBLong
@@ -3475,19 +3477,9 @@ Partial Class MainWindow
         POBMirror.Size = New Size(240, 22)
         POBMirror.Text = "Mi&rror"
         ' 
-        ' POConvert
-        ' 
-        POConvert.DisplayStyle = ToolStripItemDisplayStyle.Image
-        POConvert.DropDown = cmnConversion
-        POConvert.Image = CType(resources.GetObject("POConvert.Image"), Image)
-        POConvert.ImageTransparentColor = Color.Magenta
-        POConvert.Name = "POConvert"
-        POConvert.Size = New Size(29, 22)
-        POConvert.Text = "Convert Notes"
-        ' 
         ' mnPreview
         ' 
-        mnPreview.DropDownItems.AddRange(New ToolStripItem() {mnPlayB, mnPlay, mnStop})
+        mnPreview.DropDownItems.AddRange(New ToolStripItem() {mnPlayB, mnPlay, mnStop, PreviewToolStripMenuItem})
         mnPreview.Name = "mnPreview"
         mnPreview.ShortcutKeys = Keys.Delete
         mnPreview.Size = New Size(64, 21)
@@ -3516,6 +3508,22 @@ Partial Class MainWindow
         mnStop.ShortcutKeys = Keys.F7
         mnStop.Size = New Size(214, 22)
         mnStop.Text = "&Stop"
+        ' 
+        ' PreviewToolStripMenuItem
+        ' 
+        PreviewToolStripMenuItem.Name = "PreviewToolStripMenuItem"
+        PreviewToolStripMenuItem.Size = New Size(214, 22)
+        PreviewToolStripMenuItem.Text = "&Preview"
+        ' 
+        ' POConvert
+        ' 
+        POConvert.DisplayStyle = ToolStripItemDisplayStyle.Image
+        POConvert.DropDown = cmnConversion
+        POConvert.Image = CType(resources.GetObject("POConvert.Image"), Image)
+        POConvert.ImageTransparentColor = Color.Magenta
+        POConvert.Name = "POConvert"
+        POConvert.Size = New Size(29, 22)
+        POConvert.Text = "Convert Notes"
         ' 
         ' TBMain
         ' 
@@ -3910,7 +3918,7 @@ Partial Class MainWindow
         pStatus.Dock = DockStyle.Bottom
         pStatus.Location = New Point(0, 707)
         pStatus.Name = "pStatus"
-        pStatus.Size = New Size(1144, 22)
+        pStatus.Size = New Size(1135, 22)
         pStatus.TabIndex = 62
         ' 
         ' FStatus2
@@ -4044,7 +4052,7 @@ Partial Class MainWindow
         FStatus.Location = New Point(0, 0)
         FStatus.Name = "FStatus"
         FStatus.ShowItemToolTips = True
-        FStatus.Size = New Size(1144, 22)
+        FStatus.Size = New Size(1135, 22)
         FStatus.SizingGrip = False
         FStatus.TabIndex = 62
         FStatus.Text = "Status"
@@ -4088,7 +4096,7 @@ Partial Class MainWindow
         ' FSP3
         ' 
         FSP3.AutoSize = False
-        FSP3.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        FSP3.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(134))
         FSP3.ForeColor = Color.Maroon
         FSP3.Name = "FSP3"
         FSP3.Size = New Size(85, 17)
@@ -4099,7 +4107,7 @@ Partial Class MainWindow
         ' 
         FSP2.AutoSize = False
         FSP2.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(134))
-        FSP2.ForeColor = Color.DarkGreen
+        FSP2.ForeColor = Color.PaleGreen
         FSP2.Name = "FSP2"
         FSP2.Size = New Size(170, 17)
         FSP2.Text = "112.941176470588 / 9999"
@@ -4164,11 +4172,11 @@ Partial Class MainWindow
         ToolStripContainer1.ContentPanel.Controls.Add(SpL)
         ToolStripContainer1.ContentPanel.Controls.Add(PMainR)
         ToolStripContainer1.ContentPanel.Controls.Add(PMainL)
-        ToolStripContainer1.ContentPanel.Size = New Size(1144, 657)
+        ToolStripContainer1.ContentPanel.Size = New Size(1135, 657)
         ToolStripContainer1.Dock = DockStyle.Fill
         ToolStripContainer1.Location = New Point(0, 0)
         ToolStripContainer1.Name = "ToolStripContainer1"
-        ToolStripContainer1.Size = New Size(1144, 707)
+        ToolStripContainer1.Size = New Size(1135, 707)
         ToolStripContainer1.TabIndex = 65
         ToolStripContainer1.Text = "ToolStripContainer1"
         ' 
@@ -4180,9 +4188,6 @@ Partial Class MainWindow
         ' PMain
         ' 
         PMain.BackColor = Color.WhiteSmoke
-        PMain.Controls.Add(rawtext)
-        PMain.Controls.Add(bmsrawTextBox)
-        PMain.Controls.Add(bmsfilename)
         PMain.Controls.Add(PMainIn)
         PMain.Controls.Add(MainPanelScroll)
         PMain.Controls.Add(HS)
@@ -4191,70 +4196,19 @@ Partial Class MainWindow
         PMain.ForeColor = Color.White
         PMain.Location = New Point(5, 0)
         PMain.Name = "PMain"
-        PMain.Size = New Size(1134, 657)
+        PMain.Size = New Size(1125, 657)
         PMain.TabIndex = 58
         PMain.Tag = "1"
-        ' 
-        ' rawtext
-        ' 
-        rawtext.AutoSize = True
-        rawtext.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        rawtext.ForeColor = Color.Black
-        rawtext.Location = New Point(858, 22)
-        rawtext.Name = "rawtext"
-        rawtext.Size = New Size(63, 17)
-        rawtext.TabIndex = 7
-        rawtext.Text = "Raw bms"
-        ' 
-        ' bmsrawTextBox
-        ' 
-        bmsrawTextBox.AcceptsReturn = True
-        bmsrawTextBox.AcceptsTab = True
-        bmsrawTextBox.AccessibleRole = AccessibleRole.Text
-        bmsrawTextBox.Dock = DockStyle.Right
-        bmsrawTextBox.HideSelection = False
-        bmsrawTextBox.ImeMode = ImeMode.On
-        bmsrawTextBox.Location = New Point(858, 0)
-        bmsrawTextBox.MaxLength = 1919810
-        bmsrawTextBox.Multiline = True
-        bmsrawTextBox.Name = "bmsrawTextBox"
-        bmsrawTextBox.ScrollBars = ScrollBars.Both
-        bmsrawTextBox.Size = New Size(259, 640)
-        bmsrawTextBox.TabIndex = 5
-        bmsrawTextBox.WordWrap = False
-        ' 
-        ' title
-        ' 
-        title.BackColor = Color.Azure
-        title.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        title.ForeColor = Color.Black
-        title.Location = New Point(597, 0)
-        title.Name = "title"
-        title.Size = New Size(260, 17)
-        title.TabIndex = 4
-        title.Text = "title"
-        ' 
-        ' bmsfilename
-        ' 
-        bmsfilename.BackColor = Color.Azure
-        bmsfilename.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        bmsfilename.ForeColor = Color.Black
-        bmsfilename.Location = New Point(-2, -1)
-        bmsfilename.Name = "bmsfilename"
-        bmsfilename.Size = New Size(603, 17)
-        bmsfilename.TabIndex = 0
-        bmsfilename.Text = "bms"
         ' 
         ' PMainIn
         ' 
         PMainIn.BackColor = Color.Black
-        PMainIn.Controls.Add(Panel1)
         PMainIn.Dock = DockStyle.Fill
         PMainIn.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         PMainIn.ForeColor = Color.White
         PMainIn.Location = New Point(0, 0)
         PMainIn.Name = "PMainIn"
-        PMainIn.Size = New Size(1117, 640)
+        PMainIn.Size = New Size(1108, 640)
         PMainIn.TabIndex = 0
         PMainIn.TabStop = True
         PMainIn.Tag = "1"
@@ -4264,7 +4218,7 @@ Partial Class MainWindow
         MainPanelScroll.AccessibleRole = AccessibleRole.ScrollBar
         MainPanelScroll.Dock = DockStyle.Right
         MainPanelScroll.LargeChange = 592
-        MainPanelScroll.Location = New Point(1117, 0)
+        MainPanelScroll.Location = New Point(1108, 0)
         MainPanelScroll.Maximum = 591
         MainPanelScroll.Minimum = -10000
         MainPanelScroll.Name = "MainPanelScroll"
@@ -4281,7 +4235,7 @@ Partial Class MainWindow
         HS.Location = New Point(0, 640)
         HS.Maximum = 1233
         HS.Name = "HS"
-        HS.Size = New Size(1134, 17)
+        HS.Size = New Size(1125, 17)
         HS.TabIndex = 3
         HS.Tag = "1"
         ' 
@@ -4290,7 +4244,7 @@ Partial Class MainWindow
         SpR.Dock = DockStyle.Right
         SpR.FlatAppearance.BorderSize = 0
         SpR.FlatStyle = FlatStyle.Flat
-        SpR.Location = New Point(1139, 0)
+        SpR.Location = New Point(1130, 0)
         SpR.Name = "SpR"
         SpR.Size = New Size(5, 657)
         SpR.TabIndex = 59
@@ -4320,7 +4274,7 @@ Partial Class MainWindow
         PMainR.Dock = DockStyle.Right
         PMainR.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         PMainR.ForeColor = Color.White
-        PMainR.Location = New Point(1144, 0)
+        PMainR.Location = New Point(1135, 0)
         PMainR.Name = "PMainR"
         PMainR.Size = New Size(0, 657)
         PMainR.TabIndex = 56
@@ -4423,25 +4377,19 @@ Partial Class MainWindow
         POptionsResizer.Dock = DockStyle.Right
         POptionsResizer.FlatAppearance.BorderSize = 0
         POptionsResizer.FlatStyle = FlatStyle.Flat
-        POptionsResizer.Location = New Point(1144, 0)
+        POptionsResizer.Location = New Point(1135, 0)
         POptionsResizer.Name = "POptionsResizer"
         POptionsResizer.Size = New Size(6, 729)
         POptionsResizer.TabIndex = 67
         POptionsResizer.TabStop = False
         POptionsResizer.UseVisualStyleBackColor = False
         ' 
-        ' Panel1
-        ' 
-        Panel1.Controls.Add(title)
-        Panel1.Location = New Point(2, -1)
-        Panel1.Name = "Panel1"
-        Panel1.Size = New Size(1115, 20)
-        Panel1.TabIndex = 0
-        ' 
         ' MainWindow
         ' 
         AllowDrop = True
-        AutoScaleMode = AutoScaleMode.None
+        AutoScaleDimensions = New SizeF(96F, 96F)
+        AutoScaleMode = AutoScaleMode.Dpi
+        BackColor = SystemColors.MenuBar
         ClientSize = New Size(1350, 729)
         Controls.Add(ToolStripContainer1)
         Controls.Add(pStatus)
@@ -4449,6 +4397,7 @@ Partial Class MainWindow
         Controls.Add(POptionsScroll)
         DoubleBuffered = True
         Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         KeyPreview = True
         MainMenuStrip = mnMain
@@ -4456,7 +4405,6 @@ Partial Class MainWindow
         cmnLanguage.ResumeLayout(False)
         cmnTheme.ResumeLayout(False)
         POptionsScroll.ResumeLayout(False)
-        POptionsScroll.PerformLayout()
         POptions.ResumeLayout(False)
         POptions.PerformLayout()
         POExpansion.ResumeLayout(False)
@@ -4566,11 +4514,8 @@ Partial Class MainWindow
         ToolStripContainer1.ResumeLayout(False)
         ToolStripContainer1.PerformLayout()
         PMain.ResumeLayout(False)
-        PMain.PerformLayout()
-        PMainIn.ResumeLayout(False)
         PMainR.ResumeLayout(False)
         PMainL.ResumeLayout(False)
-        Panel1.ResumeLayout(False)
         ResumeLayout(False)
         PerformLayout()
 
@@ -4936,9 +4881,5 @@ Partial Class MainWindow
     Friend WithEvents TBCopy As ToolStripButton
     Friend WithEvents TBPaste As ToolStripButton
     Friend WithEvents TBFind As ToolStripButton
-    Friend WithEvents bmsfilename As Label
-    Friend WithEvents title As Label
-    Friend WithEvents bmsrawTextBox As TextBox
-    Friend WithEvents rawtext As Label
-    Friend WithEvents Panel1 As Panel
+    Friend WithEvents PreviewToolStripMenuItem As ToolStripMenuItem
 End Class

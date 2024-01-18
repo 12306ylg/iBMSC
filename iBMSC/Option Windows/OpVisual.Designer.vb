@@ -22,825 +22,856 @@ Partial Class OpVisual
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.OK_Button = New System.Windows.Forms.Button()
-        Me.Cancel_Button = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Label33 = New System.Windows.Forms.Label()
-        Me.iHiddenNoteOpacity = New System.Windows.Forms.NumericUpDown()
-        Me.Label23 = New System.Windows.Forms.Label()
-        Me.cAdjustLengthBorder = New System.Windows.Forms.Button()
-        Me.cSelectedBorder = New System.Windows.Forms.Button()
-        Me.cMouseOver = New System.Windows.Forms.Button()
-        Me.iLongLabelHorizShift = New System.Windows.Forms.NumericUpDown()
-        Me.iLabelHorizShift = New System.Windows.Forms.NumericUpDown()
-        Me.iLabelVerticalShift = New System.Windows.Forms.NumericUpDown()
-        Me.fMeasureLabel = New System.Windows.Forms.Button()
-        Me.fNoteLabel = New System.Windows.Forms.Button()
-        Me.iNoteHeight = New System.Windows.Forms.NumericUpDown()
-        Me.fTSBPM = New System.Windows.Forms.Button()
-        Me.cTSBPM = New System.Windows.Forms.Button()
-        Me.cTSSelectionFill = New System.Windows.Forms.Button()
-        Me.cTSCursor = New System.Windows.Forms.Button()
-        Me.cSelectionBox = New System.Windows.Forms.Button()
-        Me.cWaveForm = New System.Windows.Forms.Button()
-        Me.cMeasureBarLine = New System.Windows.Forms.Button()
-        Me.cVerticalLine = New System.Windows.Forms.Button()
-        Me.cSub = New System.Windows.Forms.Button()
-        Me.cGrid = New System.Windows.Forms.Button()
-        Me.cBG = New System.Windows.Forms.Button()
-        Me.fColumnTitle = New System.Windows.Forms.Button()
-        Me.cColumnTitle = New System.Windows.Forms.Button()
-        Me.Label40 = New System.Windows.Forms.Label()
-        Me.Label39 = New System.Windows.Forms.Label()
-        Me.Label38 = New System.Windows.Forms.Label()
-        Me.Label37 = New System.Windows.Forms.Label()
-        Me.Label88 = New System.Windows.Forms.Label()
-        Me.Label35 = New System.Windows.Forms.Label()
-        Me.Label34 = New System.Windows.Forms.Label()
-        Me.Label86 = New System.Windows.Forms.Label()
-        Me.Label98 = New System.Windows.Forms.Label()
-        Me.Label31 = New System.Windows.Forms.Label()
-        Me.Label30 = New System.Windows.Forms.Label()
-        Me.Label29 = New System.Windows.Forms.Label()
-        Me.Label28 = New System.Windows.Forms.Label()
-        Me.Label27 = New System.Windows.Forms.Label()
-        Me.Label26 = New System.Windows.Forms.Label()
-        Me.Label25 = New System.Windows.Forms.Label()
-        Me.Label24 = New System.Windows.Forms.Label()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.cTSSplitter = New System.Windows.Forms.Button()
-        Me.Label97 = New System.Windows.Forms.Label()
-        Me.Label96 = New System.Windows.Forms.Label()
-        Me.iTSSensitivity = New System.Windows.Forms.NumericUpDown()
-        Me.cTSMouseOver = New System.Windows.Forms.Button()
-        Me.Label91 = New System.Windows.Forms.Label()
-        Me.Label82 = New System.Windows.Forms.Label()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.iMiddleSensitivity = New System.Windows.Forms.NumericUpDown()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.TableLayoutPanel1.SuspendLayout()
-        Me.Panel1.SuspendLayout()
-        CType(Me.iHiddenNoteOpacity, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.iLongLabelHorizShift, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.iLabelHorizShift, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.iLabelVerticalShift, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.iNoteHeight, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.iTSSensitivity, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.iMiddleSensitivity, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
-        '
-        'TableLayoutPanel1
-        '
-        Me.TableLayoutPanel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TableLayoutPanel1.ColumnCount = 2
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.OK_Button, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.Cancel_Button, 1, 0)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(868, 672)
-        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 1
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(146, 29)
-        Me.TableLayoutPanel1.TabIndex = 0
-        '
-        'OK_Button
-        '
-        Me.OK_Button.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.OK_Button.Location = New System.Drawing.Point(3, 3)
-        Me.OK_Button.Name = "OK_Button"
-        Me.OK_Button.Size = New System.Drawing.Size(67, 23)
-        Me.OK_Button.TabIndex = 0
-        Me.OK_Button.Text = "OK"
-        '
-        'Cancel_Button
-        '
-        Me.Cancel_Button.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.Cancel_Button.Location = New System.Drawing.Point(76, 3)
-        Me.Cancel_Button.Name = "Cancel_Button"
-        Me.Cancel_Button.Size = New System.Drawing.Size(67, 23)
-        Me.Cancel_Button.TabIndex = 1
-        Me.Cancel_Button.Text = "Cancel"
-        '
-        'Panel1
-        '
-        Me.Panel1.Controls.Add(Me.Label8)
-        Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Controls.Add(Me.Label7)
-        Me.Panel1.Controls.Add(Me.Label5)
-        Me.Panel1.Controls.Add(Me.Label6)
-        Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Controls.Add(Me.Label4)
-        Me.Panel1.Controls.Add(Me.Panel2)
-        Me.Panel1.Location = New System.Drawing.Point(10, 263)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1004, 410)
-        Me.Panel1.TabIndex = 87
-        '
-        'Label8
-        '
-        Me.Label8.Location = New System.Drawing.Point(12, 324)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(60, 65)
-        Me.Label8.TabIndex = 39
-        Me.Label8.Text = "Bg"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label1
-        '
-        Me.Label1.Location = New System.Drawing.Point(12, 15)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(60, 15)
-        Me.Label1.TabIndex = 33
-        Me.Label1.Text = "Width"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label7
-        '
-        Me.Label7.Location = New System.Drawing.Point(12, 258)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(60, 66)
-        Me.Label7.TabIndex = 38
-        Me.Label7.Text = "Long" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Note" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Label"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label5
-        '
-        Me.Label5.Location = New System.Drawing.Point(12, 193)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(60, 66)
-        Me.Label5.TabIndex = 36
-        Me.Label5.Text = "Long" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Note"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label6
-        '
-        Me.Label6.Location = New System.Drawing.Point(12, 128)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(60, 66)
-        Me.Label6.TabIndex = 37
-        Me.Label6.Text = "Label"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label2
-        '
-        Me.Label2.Location = New System.Drawing.Point(12, 37)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(60, 15)
-        Me.Label2.TabIndex = 34
-        Me.Label2.Text = "Caption"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label4
-        '
-        Me.Label4.Location = New System.Drawing.Point(12, 63)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(60, 66)
-        Me.Label4.TabIndex = 35
-        Me.Label4.Text = "Note"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Panel2
-        '
-        Me.Panel2.AutoScroll = True
-        Me.Panel2.Location = New System.Drawing.Point(78, 0)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(926, 410)
-        Me.Panel2.TabIndex = 88
-        '
-        'Label33
-        '
-        Me.Label33.Location = New System.Drawing.Point(315, 152)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(220, 15)
-        Me.Label33.TabIndex = 137
-        Me.Label33.Text = "Hidden Note Opacity"
-        Me.Label33.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'iHiddenNoteOpacity
-        '
-        Me.iHiddenNoteOpacity.DecimalPlaces = 2
-        Me.iHiddenNoteOpacity.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.iHiddenNoteOpacity.Location = New System.Drawing.Point(537, 148)
-        Me.iHiddenNoteOpacity.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.iHiddenNoteOpacity.Name = "iHiddenNoteOpacity"
-        Me.iHiddenNoteOpacity.Size = New System.Drawing.Size(80, 23)
-        Me.iHiddenNoteOpacity.TabIndex = 136
-        Me.iHiddenNoteOpacity.Tag = "4"
-        '
-        'Label23
-        '
-        Me.Label23.Location = New System.Drawing.Point(315, 225)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(220, 15)
-        Me.Label23.TabIndex = 135
-        Me.Label23.Text = "Note Border on Adjusting Length"
-        Me.Label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'cAdjustLengthBorder
-        '
-        Me.cAdjustLengthBorder.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cAdjustLengthBorder.Location = New System.Drawing.Point(537, 221)
-        Me.cAdjustLengthBorder.Name = "cAdjustLengthBorder"
-        Me.cAdjustLengthBorder.Size = New System.Drawing.Size(80, 23)
-        Me.cAdjustLengthBorder.TabIndex = 134
-        Me.cAdjustLengthBorder.Tag = "13"
-        Me.cAdjustLengthBorder.Text = "FF000000"
-        Me.cAdjustLengthBorder.UseVisualStyleBackColor = True
-        '
-        'cSelectedBorder
-        '
-        Me.cSelectedBorder.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cSelectedBorder.Location = New System.Drawing.Point(537, 199)
-        Me.cSelectedBorder.Name = "cSelectedBorder"
-        Me.cSelectedBorder.Size = New System.Drawing.Size(80, 23)
-        Me.cSelectedBorder.TabIndex = 133
-        Me.cSelectedBorder.Tag = "12"
-        Me.cSelectedBorder.Text = "FF000000"
-        Me.cSelectedBorder.UseVisualStyleBackColor = True
-        '
-        'cMouseOver
-        '
-        Me.cMouseOver.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cMouseOver.Location = New System.Drawing.Point(537, 177)
-        Me.cMouseOver.Name = "cMouseOver"
-        Me.cMouseOver.Size = New System.Drawing.Size(80, 23)
-        Me.cMouseOver.TabIndex = 132
-        Me.cMouseOver.Tag = "11"
-        Me.cMouseOver.Text = "FF000000"
-        Me.cMouseOver.UseVisualStyleBackColor = True
-        '
-        'iLongLabelHorizShift
-        '
-        Me.iLongLabelHorizShift.Location = New System.Drawing.Point(537, 126)
-        Me.iLongLabelHorizShift.Minimum = New Decimal(New Integer() {100, 0, 0, -2147483648})
-        Me.iLongLabelHorizShift.Name = "iLongLabelHorizShift"
-        Me.iLongLabelHorizShift.Size = New System.Drawing.Size(80, 23)
-        Me.iLongLabelHorizShift.TabIndex = 131
-        Me.iLongLabelHorizShift.Tag = "3"
-        '
-        'iLabelHorizShift
-        '
-        Me.iLabelHorizShift.Location = New System.Drawing.Point(537, 104)
-        Me.iLabelHorizShift.Minimum = New Decimal(New Integer() {100, 0, 0, -2147483648})
-        Me.iLabelHorizShift.Name = "iLabelHorizShift"
-        Me.iLabelHorizShift.Size = New System.Drawing.Size(80, 23)
-        Me.iLabelHorizShift.TabIndex = 130
-        Me.iLabelHorizShift.Tag = "2"
-        '
-        'iLabelVerticalShift
-        '
-        Me.iLabelVerticalShift.Location = New System.Drawing.Point(537, 82)
-        Me.iLabelVerticalShift.Minimum = New Decimal(New Integer() {100, 0, 0, -2147483648})
-        Me.iLabelVerticalShift.Name = "iLabelVerticalShift"
-        Me.iLabelVerticalShift.Size = New System.Drawing.Size(80, 23)
-        Me.iLabelVerticalShift.TabIndex = 129
-        Me.iLabelVerticalShift.Tag = "1"
-        '
-        'fMeasureLabel
-        '
-        Me.fMeasureLabel.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.fMeasureLabel.Location = New System.Drawing.Point(537, 60)
-        Me.fMeasureLabel.Name = "fMeasureLabel"
-        Me.fMeasureLabel.Size = New System.Drawing.Size(80, 23)
-        Me.fMeasureLabel.TabIndex = 128
-        Me.fMeasureLabel.Tag = "3"
-        Me.fMeasureLabel.Text = "Verdana"
-        Me.fMeasureLabel.UseVisualStyleBackColor = True
-        '
-        'fNoteLabel
-        '
-        Me.fNoteLabel.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.fNoteLabel.Location = New System.Drawing.Point(537, 38)
-        Me.fNoteLabel.Name = "fNoteLabel"
-        Me.fNoteLabel.Size = New System.Drawing.Size(80, 23)
-        Me.fNoteLabel.TabIndex = 127
-        Me.fNoteLabel.Tag = "2"
-        Me.fNoteLabel.Text = "Verdana"
-        Me.fNoteLabel.UseVisualStyleBackColor = True
-        '
-        'iNoteHeight
-        '
-        Me.iNoteHeight.Location = New System.Drawing.Point(537, 16)
-        Me.iNoteHeight.Name = "iNoteHeight"
-        Me.iNoteHeight.Size = New System.Drawing.Size(80, 23)
-        Me.iNoteHeight.TabIndex = 126
-        Me.iNoteHeight.Tag = "0"
-        '
-        'fTSBPM
-        '
-        Me.fTSBPM.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.fTSBPM.Location = New System.Drawing.Point(870, 170)
-        Me.fTSBPM.Name = "fTSBPM"
-        Me.fTSBPM.Size = New System.Drawing.Size(80, 23)
-        Me.fTSBPM.TabIndex = 125
-        Me.fTSBPM.Tag = "1"
-        Me.fTSBPM.Text = "Verdana"
-        Me.fTSBPM.UseVisualStyleBackColor = True
-        '
-        'cTSBPM
-        '
-        Me.cTSBPM.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cTSBPM.Location = New System.Drawing.Point(870, 148)
-        Me.cTSBPM.Name = "cTSBPM"
-        Me.cTSBPM.Size = New System.Drawing.Size(80, 23)
-        Me.cTSBPM.TabIndex = 124
-        Me.cTSBPM.Tag = "10"
-        Me.cTSBPM.Text = "FF000000"
-        Me.cTSBPM.UseVisualStyleBackColor = True
-        '
-        'cTSSelectionFill
-        '
-        Me.cTSSelectionFill.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cTSSelectionFill.Location = New System.Drawing.Point(870, 126)
-        Me.cTSSelectionFill.Name = "cTSSelectionFill"
-        Me.cTSSelectionFill.Size = New System.Drawing.Size(80, 23)
-        Me.cTSSelectionFill.TabIndex = 123
-        Me.cTSSelectionFill.Tag = "9"
-        Me.cTSSelectionFill.Text = "FF000000"
-        Me.cTSSelectionFill.UseVisualStyleBackColor = True
-        '
-        'cTSCursor
-        '
-        Me.cTSCursor.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cTSCursor.Location = New System.Drawing.Point(870, 38)
-        Me.cTSCursor.Name = "cTSCursor"
-        Me.cTSCursor.Size = New System.Drawing.Size(80, 23)
-        Me.cTSCursor.TabIndex = 122
-        Me.cTSCursor.Tag = "8"
-        Me.cTSCursor.Text = "FF000000"
-        Me.cTSCursor.UseVisualStyleBackColor = True
-        '
-        'cSelectionBox
-        '
-        Me.cSelectionBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cSelectionBox.Location = New System.Drawing.Point(870, 16)
-        Me.cSelectionBox.Name = "cSelectionBox"
-        Me.cSelectionBox.Size = New System.Drawing.Size(80, 23)
-        Me.cSelectionBox.TabIndex = 121
-        Me.cSelectionBox.Tag = "7"
-        Me.cSelectionBox.Text = "FF000000"
-        Me.cSelectionBox.UseVisualStyleBackColor = True
-        '
-        'cWaveForm
-        '
-        Me.cWaveForm.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cWaveForm.Location = New System.Drawing.Point(204, 177)
-        Me.cWaveForm.Name = "cWaveForm"
-        Me.cWaveForm.Size = New System.Drawing.Size(80, 23)
-        Me.cWaveForm.TabIndex = 120
-        Me.cWaveForm.Tag = "6"
-        Me.cWaveForm.Text = "FF000000"
-        Me.cWaveForm.UseVisualStyleBackColor = True
-        '
-        'cMeasureBarLine
-        '
-        Me.cMeasureBarLine.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cMeasureBarLine.Location = New System.Drawing.Point(204, 155)
-        Me.cMeasureBarLine.Name = "cMeasureBarLine"
-        Me.cMeasureBarLine.Size = New System.Drawing.Size(80, 23)
-        Me.cMeasureBarLine.TabIndex = 119
-        Me.cMeasureBarLine.Tag = "5"
-        Me.cMeasureBarLine.Text = "FF000000"
-        Me.cMeasureBarLine.UseVisualStyleBackColor = True
-        '
-        'cVerticalLine
-        '
-        Me.cVerticalLine.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cVerticalLine.Location = New System.Drawing.Point(204, 133)
-        Me.cVerticalLine.Name = "cVerticalLine"
-        Me.cVerticalLine.Size = New System.Drawing.Size(80, 23)
-        Me.cVerticalLine.TabIndex = 118
-        Me.cVerticalLine.Tag = "4"
-        Me.cVerticalLine.Text = "FF000000"
-        Me.cVerticalLine.UseVisualStyleBackColor = True
-        '
-        'cSub
-        '
-        Me.cSub.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cSub.Location = New System.Drawing.Point(204, 111)
-        Me.cSub.Name = "cSub"
-        Me.cSub.Size = New System.Drawing.Size(80, 23)
-        Me.cSub.TabIndex = 117
-        Me.cSub.Tag = "3"
-        Me.cSub.Text = "FF000000"
-        Me.cSub.UseVisualStyleBackColor = True
-        '
-        'cGrid
-        '
-        Me.cGrid.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cGrid.Location = New System.Drawing.Point(204, 89)
-        Me.cGrid.Name = "cGrid"
-        Me.cGrid.Size = New System.Drawing.Size(80, 23)
-        Me.cGrid.TabIndex = 116
-        Me.cGrid.Tag = "2"
-        Me.cGrid.Text = "FF000000"
-        Me.cGrid.UseVisualStyleBackColor = True
-        '
-        'cBG
-        '
-        Me.cBG.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cBG.Location = New System.Drawing.Point(204, 60)
-        Me.cBG.Name = "cBG"
-        Me.cBG.Size = New System.Drawing.Size(80, 23)
-        Me.cBG.TabIndex = 115
-        Me.cBG.Tag = "1"
-        Me.cBG.Text = "FF000000"
-        Me.cBG.UseVisualStyleBackColor = True
-        '
-        'fColumnTitle
-        '
-        Me.fColumnTitle.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.fColumnTitle.Location = New System.Drawing.Point(204, 38)
-        Me.fColumnTitle.Name = "fColumnTitle"
-        Me.fColumnTitle.Size = New System.Drawing.Size(80, 23)
-        Me.fColumnTitle.TabIndex = 114
-        Me.fColumnTitle.Tag = "0"
-        Me.fColumnTitle.Text = "Tahoma"
-        Me.fColumnTitle.UseVisualStyleBackColor = True
-        '
-        'cColumnTitle
-        '
-        Me.cColumnTitle.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cColumnTitle.Location = New System.Drawing.Point(204, 16)
-        Me.cColumnTitle.Name = "cColumnTitle"
-        Me.cColumnTitle.Size = New System.Drawing.Size(80, 23)
-        Me.cColumnTitle.TabIndex = 113
-        Me.cColumnTitle.Tag = "0"
-        Me.cColumnTitle.Text = "FF000000"
-        Me.cColumnTitle.UseVisualStyleBackColor = True
-        '
-        'Label40
-        '
-        Me.Label40.Location = New System.Drawing.Point(42, 159)
-        Me.Label40.Name = "Label40"
-        Me.Label40.Size = New System.Drawing.Size(160, 15)
-        Me.Label40.TabIndex = 111
-        Me.Label40.Text = "Measure BarLine"
-        Me.Label40.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label39
-        '
-        Me.Label39.Location = New System.Drawing.Point(315, 130)
-        Me.Label39.Name = "Label39"
-        Me.Label39.Size = New System.Drawing.Size(220, 15)
-        Me.Label39.TabIndex = 110
-        Me.Label39.Text = "LongNote Label Horizontal Shift"
-        Me.Label39.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label38
-        '
-        Me.Label38.Location = New System.Drawing.Point(315, 108)
-        Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(220, 15)
-        Me.Label38.TabIndex = 109
-        Me.Label38.Text = "Note Label Horizontal Shift"
-        Me.Label38.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label37
-        '
-        Me.Label37.Location = New System.Drawing.Point(42, 20)
-        Me.Label37.Name = "Label37"
-        Me.Label37.Size = New System.Drawing.Size(160, 15)
-        Me.Label37.TabIndex = 103
-        Me.Label37.Text = "Column Caption"
-        Me.Label37.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label88
-        '
-        Me.Label88.Location = New System.Drawing.Point(648, 152)
-        Me.Label88.Name = "Label88"
-        Me.Label88.Size = New System.Drawing.Size(220, 15)
-        Me.Label88.TabIndex = 102
-        Me.Label88.Text = "Time Selection BPM"
-        Me.Label88.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label35
-        '
-        Me.Label35.Location = New System.Drawing.Point(315, 203)
-        Me.Label35.Name = "Label35"
-        Me.Label35.Size = New System.Drawing.Size(220, 15)
-        Me.Label35.TabIndex = 101
-        Me.Label35.Text = "Note Border on Selection"
-        Me.Label35.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label34
-        '
-        Me.Label34.Location = New System.Drawing.Point(315, 181)
-        Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(220, 15)
-        Me.Label34.TabIndex = 100
-        Me.Label34.Text = "Note Border on MouseOver"
-        Me.Label34.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label86
-        '
-        Me.Label86.Location = New System.Drawing.Point(648, 130)
-        Me.Label86.Name = "Label86"
-        Me.Label86.Size = New System.Drawing.Size(220, 15)
-        Me.Label86.TabIndex = 99
-        Me.Label86.Text = "Time Selection Fill"
-        Me.Label86.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label98
-        '
-        Me.Label98.Location = New System.Drawing.Point(648, 42)
-        Me.Label98.Name = "Label98"
-        Me.Label98.Size = New System.Drawing.Size(220, 15)
-        Me.Label98.TabIndex = 98
-        Me.Label98.Text = "Time Selection Cursor"
-        Me.Label98.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label31
-        '
-        Me.Label31.Location = New System.Drawing.Point(648, 20)
-        Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(220, 15)
-        Me.Label31.TabIndex = 97
-        Me.Label31.Text = "Selection Box Border"
-        Me.Label31.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label30
-        '
-        Me.Label30.Location = New System.Drawing.Point(42, 64)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(160, 15)
-        Me.Label30.TabIndex = 96
-        Me.Label30.Text = "Background"
-        Me.Label30.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label29
-        '
-        Me.Label29.Location = New System.Drawing.Point(42, 137)
-        Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(160, 15)
-        Me.Label29.TabIndex = 95
-        Me.Label29.Text = "Vertical Line"
-        Me.Label29.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label28
-        '
-        Me.Label28.Location = New System.Drawing.Point(315, 64)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(220, 15)
-        Me.Label28.TabIndex = 94
-        Me.Label28.Text = "Measure Label"
-        Me.Label28.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label27
-        '
-        Me.Label27.Location = New System.Drawing.Point(42, 115)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(160, 15)
-        Me.Label27.TabIndex = 93
-        Me.Label27.Text = "Sub"
-        Me.Label27.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label26
-        '
-        Me.Label26.Location = New System.Drawing.Point(42, 93)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(160, 15)
-        Me.Label26.TabIndex = 92
-        Me.Label26.Text = "Grid"
-        Me.Label26.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label25
-        '
-        Me.Label25.Location = New System.Drawing.Point(315, 86)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(220, 15)
-        Me.Label25.TabIndex = 91
-        Me.Label25.Text = "Note Label Vertical Shift"
-        Me.Label25.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label24
-        '
-        Me.Label24.Location = New System.Drawing.Point(315, 42)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(220, 15)
-        Me.Label24.TabIndex = 90
-        Me.Label24.Text = "Note Label"
-        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label22
-        '
-        Me.Label22.Location = New System.Drawing.Point(42, 181)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(160, 15)
-        Me.Label22.TabIndex = 88
-        Me.Label22.Text = "BGM Waveform"
-        Me.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label21
-        '
-        Me.Label21.Location = New System.Drawing.Point(315, 20)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(220, 15)
-        Me.Label21.TabIndex = 87
-        Me.Label21.Text = "Note Height"
-        Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label9
-        '
-        Me.Label9.Location = New System.Drawing.Point(42, 42)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(160, 15)
-        Me.Label9.TabIndex = 139
-        Me.Label9.Text = "Column Caption Font"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'cTSSplitter
-        '
-        Me.cTSSplitter.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cTSSplitter.Location = New System.Drawing.Point(870, 60)
-        Me.cTSSplitter.Name = "cTSSplitter"
-        Me.cTSSplitter.Size = New System.Drawing.Size(80, 23)
-        Me.cTSSplitter.TabIndex = 141
-        Me.cTSSplitter.Tag = "9"
-        Me.cTSSplitter.Text = "FF000000"
-        Me.cTSSplitter.UseVisualStyleBackColor = True
-        '
-        'Label97
-        '
-        Me.Label97.Location = New System.Drawing.Point(648, 64)
-        Me.Label97.Name = "Label97"
-        Me.Label97.Size = New System.Drawing.Size(220, 15)
-        Me.Label97.TabIndex = 140
-        Me.Label97.Text = "Time Selection Splitter"
-        Me.Label97.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label96
-        '
-        Me.Label96.Location = New System.Drawing.Point(648, 86)
-        Me.Label96.Name = "Label96"
-        Me.Label96.Size = New System.Drawing.Size(220, 15)
-        Me.Label96.TabIndex = 142
-        Me.Label96.Text = "Time Selection Cursor Sensitivity"
-        Me.Label96.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'iTSSensitivity
-        '
-        Me.iTSSensitivity.Location = New System.Drawing.Point(870, 82)
-        Me.iTSSensitivity.Maximum = New Decimal(New Integer() {20, 0, 0, 0})
-        Me.iTSSensitivity.Name = "iTSSensitivity"
-        Me.iTSSensitivity.Size = New System.Drawing.Size(80, 23)
-        Me.iTSSensitivity.TabIndex = 143
-        Me.iTSSensitivity.Tag = "0"
-        Me.iTSSensitivity.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'cTSMouseOver
-        '
-        Me.cTSMouseOver.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.cTSMouseOver.Location = New System.Drawing.Point(870, 104)
-        Me.cTSMouseOver.Name = "cTSMouseOver"
-        Me.cTSMouseOver.Size = New System.Drawing.Size(80, 23)
-        Me.cTSMouseOver.TabIndex = 145
-        Me.cTSMouseOver.Tag = "9"
-        Me.cTSMouseOver.Text = "FF000000"
-        Me.cTSMouseOver.UseVisualStyleBackColor = True
-        '
-        'Label91
-        '
-        Me.Label91.Location = New System.Drawing.Point(648, 108)
-        Me.Label91.Name = "Label91"
-        Me.Label91.Size = New System.Drawing.Size(220, 15)
-        Me.Label91.TabIndex = 144
-        Me.Label91.Text = "Time Selection MouseOver Border"
-        Me.Label91.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label82
-        '
-        Me.Label82.Location = New System.Drawing.Point(648, 174)
-        Me.Label82.Name = "Label82"
-        Me.Label82.Size = New System.Drawing.Size(220, 15)
-        Me.Label82.TabIndex = 146
-        Me.Label82.Text = "Time Selection BPM Font"
-        Me.Label82.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label14
-        '
-        Me.Label14.Location = New System.Drawing.Point(648, 203)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(220, 15)
-        Me.Label14.TabIndex = 147
-        Me.Label14.Text = "Middle Button Release Sensitivity"
-        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'iMiddleSensitivity
-        '
-        Me.iMiddleSensitivity.Location = New System.Drawing.Point(870, 199)
-        Me.iMiddleSensitivity.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
-        Me.iMiddleSensitivity.Name = "iMiddleSensitivity"
-        Me.iMiddleSensitivity.Size = New System.Drawing.Size(80, 23)
-        Me.iMiddleSensitivity.TabIndex = 148
-        Me.iMiddleSensitivity.Tag = "0"
-        Me.iMiddleSensitivity.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.PictureBox1.Location = New System.Drawing.Point(10, 259)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(1000, 1)
-        Me.PictureBox1.TabIndex = 138
-        Me.PictureBox1.TabStop = False
-        '
-        'OpVisual
-        '
-        Me.AcceptButton = Me.OK_Button
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.CancelButton = Me.Cancel_Button
-        Me.ClientSize = New System.Drawing.Size(1026, 713)
-        Me.Controls.Add(Me.Label14)
-        Me.Controls.Add(Me.iMiddleSensitivity)
-        Me.Controls.Add(Me.Label82)
-        Me.Controls.Add(Me.cTSMouseOver)
-        Me.Controls.Add(Me.Label91)
-        Me.Controls.Add(Me.Label96)
-        Me.Controls.Add(Me.iTSSensitivity)
-        Me.Controls.Add(Me.cTSSplitter)
-        Me.Controls.Add(Me.Label97)
-        Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.Label33)
-        Me.Controls.Add(Me.iHiddenNoteOpacity)
-        Me.Controls.Add(Me.TableLayoutPanel1)
-        Me.Controls.Add(Me.Label23)
-        Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.cAdjustLengthBorder)
-        Me.Controls.Add(Me.Label37)
-        Me.Controls.Add(Me.cSelectedBorder)
-        Me.Controls.Add(Me.Label21)
-        Me.Controls.Add(Me.cMouseOver)
-        Me.Controls.Add(Me.Label22)
-        Me.Controls.Add(Me.iLongLabelHorizShift)
-        Me.Controls.Add(Me.Label24)
-        Me.Controls.Add(Me.iLabelHorizShift)
-        Me.Controls.Add(Me.Label25)
-        Me.Controls.Add(Me.iLabelVerticalShift)
-        Me.Controls.Add(Me.Label26)
-        Me.Controls.Add(Me.fMeasureLabel)
-        Me.Controls.Add(Me.Label27)
-        Me.Controls.Add(Me.fNoteLabel)
-        Me.Controls.Add(Me.Label28)
-        Me.Controls.Add(Me.iNoteHeight)
-        Me.Controls.Add(Me.Label29)
-        Me.Controls.Add(Me.fTSBPM)
-        Me.Controls.Add(Me.Label30)
-        Me.Controls.Add(Me.cTSBPM)
-        Me.Controls.Add(Me.Label31)
-        Me.Controls.Add(Me.cTSSelectionFill)
-        Me.Controls.Add(Me.Label98)
-        Me.Controls.Add(Me.cTSCursor)
-        Me.Controls.Add(Me.Label86)
-        Me.Controls.Add(Me.cSelectionBox)
-        Me.Controls.Add(Me.Label34)
-        Me.Controls.Add(Me.cWaveForm)
-        Me.Controls.Add(Me.Label35)
-        Me.Controls.Add(Me.cMeasureBarLine)
-        Me.Controls.Add(Me.Label88)
-        Me.Controls.Add(Me.cVerticalLine)
-        Me.Controls.Add(Me.Label38)
-        Me.Controls.Add(Me.cSub)
-        Me.Controls.Add(Me.Label39)
-        Me.Controls.Add(Me.cGrid)
-        Me.Controls.Add(Me.Label40)
-        Me.Controls.Add(Me.cBG)
-        Me.Controls.Add(Me.cColumnTitle)
-        Me.Controls.Add(Me.fColumnTitle)
-        Me.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
-        Me.Name = "OpVisual"
-        Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Visual Options"
-        Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.Panel1.ResumeLayout(False)
-        CType(Me.iHiddenNoteOpacity, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.iLongLabelHorizShift, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.iLabelHorizShift, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.iLabelVerticalShift, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.iNoteHeight, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.iTSSensitivity, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.iMiddleSensitivity, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
+        TableLayoutPanel1 = New TableLayoutPanel()
+        OK_Button = New Button()
+        Cancel_Button = New Button()
+        Panel1 = New Panel()
+        Label8 = New Label()
+        Label1 = New Label()
+        Label7 = New Label()
+        Label5 = New Label()
+        Label6 = New Label()
+        Label2 = New Label()
+        Label4 = New Label()
+        Panel2 = New Panel()
+        Label33 = New Label()
+        iHiddenNoteOpacity = New NumericUpDown()
+        Label23 = New Label()
+        cAdjustLengthBorder = New Button()
+        cSelectedBorder = New Button()
+        cMouseOver = New Button()
+        iLongLabelHorizShift = New NumericUpDown()
+        iLabelHorizShift = New NumericUpDown()
+        iLabelVerticalShift = New NumericUpDown()
+        fMeasureLabel = New Button()
+        fNoteLabel = New Button()
+        iNoteHeight = New NumericUpDown()
+        fTSBPM = New Button()
+        cTSBPM = New Button()
+        cTSSelectionFill = New Button()
+        cTSCursor = New Button()
+        cSelectionBox = New Button()
+        cWaveForm = New Button()
+        cMeasureBarLine = New Button()
+        cVerticalLine = New Button()
+        cSub = New Button()
+        cGrid = New Button()
+        cBG = New Button()
+        fColumnTitle = New Button()
+        cColumnTitle = New Button()
+        Label40 = New Label()
+        Label39 = New Label()
+        Label38 = New Label()
+        Label37 = New Label()
+        Label88 = New Label()
+        Label35 = New Label()
+        Label34 = New Label()
+        Label86 = New Label()
+        Label98 = New Label()
+        Label31 = New Label()
+        Label30 = New Label()
+        Label29 = New Label()
+        Label28 = New Label()
+        Label27 = New Label()
+        Label26 = New Label()
+        Label25 = New Label()
+        Label24 = New Label()
+        Label22 = New Label()
+        Label21 = New Label()
+        Label9 = New Label()
+        cTSSplitter = New Button()
+        Label97 = New Label()
+        Label96 = New Label()
+        iTSSensitivity = New NumericUpDown()
+        cTSMouseOver = New Button()
+        Label91 = New Label()
+        Label82 = New Label()
+        Label14 = New Label()
+        iMiddleSensitivity = New NumericUpDown()
+        PictureBox1 = New PictureBox()
+        TableLayoutPanel1.SuspendLayout()
+        Panel1.SuspendLayout()
+        CType(iHiddenNoteOpacity, ComponentModel.ISupportInitialize).BeginInit()
+        CType(iLongLabelHorizShift, ComponentModel.ISupportInitialize).BeginInit()
+        CType(iLabelHorizShift, ComponentModel.ISupportInitialize).BeginInit()
+        CType(iLabelVerticalShift, ComponentModel.ISupportInitialize).BeginInit()
+        CType(iNoteHeight, ComponentModel.ISupportInitialize).BeginInit()
+        CType(iTSSensitivity, ComponentModel.ISupportInitialize).BeginInit()
+        CType(iMiddleSensitivity, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
+        SuspendLayout()
+        ' 
+        ' TableLayoutPanel1
+        ' 
+        TableLayoutPanel1.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
+        TableLayoutPanel1.ColumnCount = 2
+        TableLayoutPanel1.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50F))
+        TableLayoutPanel1.ColumnStyles.Add(New ColumnStyle(SizeType.Percent, 50F))
+        TableLayoutPanel1.Controls.Add(OK_Button, 0, 0)
+        TableLayoutPanel1.Controls.Add(Cancel_Button, 1, 0)
+        TableLayoutPanel1.Location = New Point(868, 672)
+        TableLayoutPanel1.Name = "TableLayoutPanel1"
+        TableLayoutPanel1.RowCount = 1
+        TableLayoutPanel1.RowStyles.Add(New RowStyle(SizeType.Percent, 50F))
+        TableLayoutPanel1.Size = New Size(146, 29)
+        TableLayoutPanel1.TabIndex = 0
+        ' 
+        ' OK_Button
+        ' 
+        OK_Button.Anchor = AnchorStyles.None
+        OK_Button.Location = New Point(3, 3)
+        OK_Button.Name = "OK_Button"
+        OK_Button.Size = New Size(67, 23)
+        OK_Button.TabIndex = 0
+        OK_Button.Text = "OK"
+        ' 
+        ' Cancel_Button
+        ' 
+        Cancel_Button.Anchor = AnchorStyles.None
+        Cancel_Button.DialogResult = DialogResult.Cancel
+        Cancel_Button.Location = New Point(76, 3)
+        Cancel_Button.Name = "Cancel_Button"
+        Cancel_Button.Size = New Size(67, 23)
+        Cancel_Button.TabIndex = 1
+        Cancel_Button.Text = "Cancel"
+        ' 
+        ' Panel1
+        ' 
+        Panel1.Controls.Add(Label8)
+        Panel1.Controls.Add(Label1)
+        Panel1.Controls.Add(Label7)
+        Panel1.Controls.Add(Label5)
+        Panel1.Controls.Add(Label6)
+        Panel1.Controls.Add(Label2)
+        Panel1.Controls.Add(Label4)
+        Panel1.Controls.Add(Panel2)
+        Panel1.Location = New Point(10, 263)
+        Panel1.Name = "Panel1"
+        Panel1.Size = New Size(1004, 410)
+        Panel1.TabIndex = 87
+        ' 
+        ' Label8
+        ' 
+        Label8.Location = New Point(12, 324)
+        Label8.Name = "Label8"
+        Label8.Size = New Size(60, 65)
+        Label8.TabIndex = 39
+        Label8.Text = "Bg"
+        Label8.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label1
+        ' 
+        Label1.Location = New Point(12, 15)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(60, 15)
+        Label1.TabIndex = 33
+        Label1.Text = "Width"
+        Label1.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label7
+        ' 
+        Label7.Location = New Point(12, 258)
+        Label7.Name = "Label7"
+        Label7.Size = New Size(60, 66)
+        Label7.TabIndex = 38
+        Label7.Text = "Long" & vbCrLf & "Note" & vbCrLf & "Label"
+        Label7.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label5
+        ' 
+        Label5.Location = New Point(12, 193)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(60, 66)
+        Label5.TabIndex = 36
+        Label5.Text = "Long" & vbCrLf & "Note"
+        Label5.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label6
+        ' 
+        Label6.Location = New Point(12, 128)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(60, 66)
+        Label6.TabIndex = 37
+        Label6.Text = "Label"
+        Label6.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label2
+        ' 
+        Label2.Location = New Point(12, 37)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(60, 15)
+        Label2.TabIndex = 34
+        Label2.Text = "Caption"
+        Label2.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label4
+        ' 
+        Label4.Location = New Point(12, 63)
+        Label4.Name = "Label4"
+        Label4.Size = New Size(60, 66)
+        Label4.TabIndex = 35
+        Label4.Text = "Note"
+        Label4.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Panel2
+        ' 
+        Panel2.AutoScroll = True
+        Panel2.Location = New Point(78, 0)
+        Panel2.Name = "Panel2"
+        Panel2.Size = New Size(926, 410)
+        Panel2.TabIndex = 88
+        ' 
+        ' Label33
+        ' 
+        Label33.BorderStyle = BorderStyle.FixedSingle
+        Label33.Location = New Point(315, 148)
+        Label33.Name = "Label33"
+        Label33.Size = New Size(220, 23)
+        Label33.TabIndex = 137
+        Label33.Text = "Hidden Note Opacity"
+        Label33.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' iHiddenNoteOpacity
+        ' 
+        iHiddenNoteOpacity.DecimalPlaces = 2
+        iHiddenNoteOpacity.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        iHiddenNoteOpacity.Location = New Point(537, 148)
+        iHiddenNoteOpacity.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        iHiddenNoteOpacity.Name = "iHiddenNoteOpacity"
+        iHiddenNoteOpacity.Size = New Size(80, 23)
+        iHiddenNoteOpacity.TabIndex = 136
+        iHiddenNoteOpacity.Tag = "4"
+        ' 
+        ' Label23
+        ' 
+        Label23.BorderStyle = BorderStyle.FixedSingle
+        Label23.Location = New Point(315, 221)
+        Label23.Name = "Label23"
+        Label23.Size = New Size(220, 23)
+        Label23.TabIndex = 135
+        Label23.Text = "Note Border on Adjusting Length"
+        Label23.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' cAdjustLengthBorder
+        ' 
+        cAdjustLengthBorder.FlatStyle = FlatStyle.Flat
+        cAdjustLengthBorder.Location = New Point(537, 221)
+        cAdjustLengthBorder.Name = "cAdjustLengthBorder"
+        cAdjustLengthBorder.Size = New Size(80, 23)
+        cAdjustLengthBorder.TabIndex = 134
+        cAdjustLengthBorder.Tag = "13"
+        cAdjustLengthBorder.Text = "FF000000"
+        cAdjustLengthBorder.UseVisualStyleBackColor = True
+        ' 
+        ' cSelectedBorder
+        ' 
+        cSelectedBorder.FlatStyle = FlatStyle.Flat
+        cSelectedBorder.Location = New Point(537, 199)
+        cSelectedBorder.Name = "cSelectedBorder"
+        cSelectedBorder.Size = New Size(80, 23)
+        cSelectedBorder.TabIndex = 133
+        cSelectedBorder.Tag = "12"
+        cSelectedBorder.Text = "FF000000"
+        cSelectedBorder.UseVisualStyleBackColor = True
+        ' 
+        ' cMouseOver
+        ' 
+        cMouseOver.FlatStyle = FlatStyle.Flat
+        cMouseOver.Location = New Point(537, 177)
+        cMouseOver.Name = "cMouseOver"
+        cMouseOver.Size = New Size(80, 23)
+        cMouseOver.TabIndex = 132
+        cMouseOver.Tag = "11"
+        cMouseOver.Text = "FF000000"
+        cMouseOver.UseVisualStyleBackColor = True
+        ' 
+        ' iLongLabelHorizShift
+        ' 
+        iLongLabelHorizShift.Location = New Point(537, 126)
+        iLongLabelHorizShift.Minimum = New Decimal(New Integer() {100, 0, 0, Integer.MinValue})
+        iLongLabelHorizShift.Name = "iLongLabelHorizShift"
+        iLongLabelHorizShift.Size = New Size(80, 23)
+        iLongLabelHorizShift.TabIndex = 131
+        iLongLabelHorizShift.Tag = "3"
+        ' 
+        ' iLabelHorizShift
+        ' 
+        iLabelHorizShift.Location = New Point(537, 104)
+        iLabelHorizShift.Minimum = New Decimal(New Integer() {100, 0, 0, Integer.MinValue})
+        iLabelHorizShift.Name = "iLabelHorizShift"
+        iLabelHorizShift.Size = New Size(80, 23)
+        iLabelHorizShift.TabIndex = 130
+        iLabelHorizShift.Tag = "2"
+        ' 
+        ' iLabelVerticalShift
+        ' 
+        iLabelVerticalShift.Location = New Point(537, 82)
+        iLabelVerticalShift.Minimum = New Decimal(New Integer() {100, 0, 0, Integer.MinValue})
+        iLabelVerticalShift.Name = "iLabelVerticalShift"
+        iLabelVerticalShift.Size = New Size(80, 23)
+        iLabelVerticalShift.TabIndex = 129
+        iLabelVerticalShift.Tag = "1"
+        ' 
+        ' fMeasureLabel
+        ' 
+        fMeasureLabel.AutoEllipsis = True
+        fMeasureLabel.FlatStyle = FlatStyle.Flat
+        fMeasureLabel.Location = New Point(537, 60)
+        fMeasureLabel.Name = "fMeasureLabel"
+        fMeasureLabel.Size = New Size(80, 23)
+        fMeasureLabel.TabIndex = 128
+        fMeasureLabel.Tag = "3"
+        fMeasureLabel.Text = "Microsoft YaHei UI"
+        fMeasureLabel.UseVisualStyleBackColor = True
+        ' 
+        ' fNoteLabel
+        ' 
+        fNoteLabel.AutoEllipsis = True
+        fNoteLabel.FlatStyle = FlatStyle.Flat
+        fNoteLabel.Location = New Point(537, 38)
+        fNoteLabel.Name = "fNoteLabel"
+        fNoteLabel.Size = New Size(80, 23)
+        fNoteLabel.TabIndex = 127
+        fNoteLabel.Tag = "2"
+        fNoteLabel.Text = "Microsoft YaHei UI"
+        fNoteLabel.UseVisualStyleBackColor = True
+        ' 
+        ' iNoteHeight
+        ' 
+        iNoteHeight.Location = New Point(537, 16)
+        iNoteHeight.Name = "iNoteHeight"
+        iNoteHeight.Size = New Size(80, 23)
+        iNoteHeight.TabIndex = 126
+        iNoteHeight.Tag = "0"
+        ' 
+        ' fTSBPM
+        ' 
+        fTSBPM.AutoEllipsis = True
+        fTSBPM.FlatStyle = FlatStyle.Flat
+        fTSBPM.Location = New Point(870, 170)
+        fTSBPM.Name = "fTSBPM"
+        fTSBPM.Size = New Size(80, 23)
+        fTSBPM.TabIndex = 125
+        fTSBPM.Tag = "1"
+        fTSBPM.Text = "Microsoft YaHei UI"
+        fTSBPM.UseVisualStyleBackColor = True
+        ' 
+        ' cTSBPM
+        ' 
+        cTSBPM.FlatStyle = FlatStyle.Flat
+        cTSBPM.Location = New Point(870, 148)
+        cTSBPM.Name = "cTSBPM"
+        cTSBPM.Size = New Size(80, 23)
+        cTSBPM.TabIndex = 124
+        cTSBPM.Tag = "10"
+        cTSBPM.Text = "FF000000"
+        cTSBPM.UseVisualStyleBackColor = True
+        ' 
+        ' cTSSelectionFill
+        ' 
+        cTSSelectionFill.FlatStyle = FlatStyle.Flat
+        cTSSelectionFill.Location = New Point(870, 126)
+        cTSSelectionFill.Name = "cTSSelectionFill"
+        cTSSelectionFill.Size = New Size(80, 23)
+        cTSSelectionFill.TabIndex = 123
+        cTSSelectionFill.Tag = "9"
+        cTSSelectionFill.Text = "FF000000"
+        cTSSelectionFill.UseVisualStyleBackColor = True
+        ' 
+        ' cTSCursor
+        ' 
+        cTSCursor.FlatStyle = FlatStyle.Flat
+        cTSCursor.Location = New Point(870, 38)
+        cTSCursor.Name = "cTSCursor"
+        cTSCursor.Size = New Size(80, 23)
+        cTSCursor.TabIndex = 122
+        cTSCursor.Tag = "8"
+        cTSCursor.Text = "FF000000"
+        cTSCursor.UseVisualStyleBackColor = True
+        ' 
+        ' cSelectionBox
+        ' 
+        cSelectionBox.FlatStyle = FlatStyle.Flat
+        cSelectionBox.Location = New Point(870, 16)
+        cSelectionBox.Name = "cSelectionBox"
+        cSelectionBox.Size = New Size(80, 23)
+        cSelectionBox.TabIndex = 121
+        cSelectionBox.Tag = "7"
+        cSelectionBox.Text = "FF000000"
+        cSelectionBox.UseVisualStyleBackColor = True
+        ' 
+        ' cWaveForm
+        ' 
+        cWaveForm.FlatStyle = FlatStyle.Flat
+        cWaveForm.Location = New Point(204, 177)
+        cWaveForm.Name = "cWaveForm"
+        cWaveForm.Size = New Size(80, 23)
+        cWaveForm.TabIndex = 120
+        cWaveForm.Tag = "6"
+        cWaveForm.Text = "FF000000"
+        cWaveForm.UseVisualStyleBackColor = True
+        ' 
+        ' cMeasureBarLine
+        ' 
+        cMeasureBarLine.FlatStyle = FlatStyle.Flat
+        cMeasureBarLine.Location = New Point(204, 155)
+        cMeasureBarLine.Name = "cMeasureBarLine"
+        cMeasureBarLine.Size = New Size(80, 23)
+        cMeasureBarLine.TabIndex = 119
+        cMeasureBarLine.Tag = "5"
+        cMeasureBarLine.Text = "FF000000"
+        cMeasureBarLine.UseVisualStyleBackColor = True
+        ' 
+        ' cVerticalLine
+        ' 
+        cVerticalLine.FlatStyle = FlatStyle.Flat
+        cVerticalLine.Location = New Point(204, 133)
+        cVerticalLine.Name = "cVerticalLine"
+        cVerticalLine.Size = New Size(80, 23)
+        cVerticalLine.TabIndex = 118
+        cVerticalLine.Tag = "4"
+        cVerticalLine.Text = "FF000000"
+        cVerticalLine.UseVisualStyleBackColor = True
+        ' 
+        ' cSub
+        ' 
+        cSub.FlatStyle = FlatStyle.Flat
+        cSub.Location = New Point(204, 111)
+        cSub.Name = "cSub"
+        cSub.Size = New Size(80, 23)
+        cSub.TabIndex = 117
+        cSub.Tag = "3"
+        cSub.Text = "FF000000"
+        cSub.UseVisualStyleBackColor = True
+        ' 
+        ' cGrid
+        ' 
+        cGrid.FlatStyle = FlatStyle.Flat
+        cGrid.Location = New Point(204, 89)
+        cGrid.Name = "cGrid"
+        cGrid.Size = New Size(80, 23)
+        cGrid.TabIndex = 116
+        cGrid.Tag = "2"
+        cGrid.Text = "FF000000"
+        cGrid.UseVisualStyleBackColor = True
+        ' 
+        ' cBG
+        ' 
+        cBG.FlatStyle = FlatStyle.Flat
+        cBG.Location = New Point(204, 60)
+        cBG.Name = "cBG"
+        cBG.Size = New Size(80, 23)
+        cBG.TabIndex = 115
+        cBG.Tag = "1"
+        cBG.Text = "FF000000"
+        cBG.UseVisualStyleBackColor = True
+        ' 
+        ' fColumnTitle
+        ' 
+        fColumnTitle.AutoEllipsis = True
+        fColumnTitle.FlatStyle = FlatStyle.Flat
+        fColumnTitle.Location = New Point(204, 38)
+        fColumnTitle.Name = "fColumnTitle"
+        fColumnTitle.Size = New Size(80, 23)
+        fColumnTitle.TabIndex = 114
+        fColumnTitle.Tag = "0"
+        fColumnTitle.Text = "Microsoft YaHei UI"
+        fColumnTitle.UseVisualStyleBackColor = True
+        ' 
+        ' cColumnTitle
+        ' 
+        cColumnTitle.FlatStyle = FlatStyle.Flat
+        cColumnTitle.Location = New Point(204, 16)
+        cColumnTitle.Name = "cColumnTitle"
+        cColumnTitle.Size = New Size(80, 23)
+        cColumnTitle.TabIndex = 113
+        cColumnTitle.Tag = "0"
+        cColumnTitle.Text = "FF000000"
+        cColumnTitle.UseVisualStyleBackColor = True
+        ' 
+        ' Label40
+        ' 
+        Label40.BorderStyle = BorderStyle.FixedSingle
+        Label40.Location = New Point(42, 155)
+        Label40.Name = "Label40"
+        Label40.Size = New Size(160, 23)
+        Label40.TabIndex = 111
+        Label40.Text = "Measure BarLine"
+        Label40.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label39
+        ' 
+        Label39.BorderStyle = BorderStyle.FixedSingle
+        Label39.Location = New Point(315, 126)
+        Label39.Name = "Label39"
+        Label39.Size = New Size(220, 23)
+        Label39.TabIndex = 110
+        Label39.Text = "LongNote Label Horizontal Shift"
+        Label39.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label38
+        ' 
+        Label38.BorderStyle = BorderStyle.FixedSingle
+        Label38.Location = New Point(315, 104)
+        Label38.Name = "Label38"
+        Label38.Size = New Size(220, 23)
+        Label38.TabIndex = 109
+        Label38.Text = "Note Label Horizontal Shift"
+        Label38.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label37
+        ' 
+        Label37.BorderStyle = BorderStyle.FixedSingle
+        Label37.Location = New Point(42, 16)
+        Label37.Name = "Label37"
+        Label37.Size = New Size(160, 23)
+        Label37.TabIndex = 103
+        Label37.Text = "Column Caption"
+        Label37.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label88
+        ' 
+        Label88.BorderStyle = BorderStyle.FixedSingle
+        Label88.Location = New Point(648, 148)
+        Label88.Name = "Label88"
+        Label88.Size = New Size(220, 23)
+        Label88.TabIndex = 102
+        Label88.Text = "Time Selection BPM"
+        Label88.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label35
+        ' 
+        Label35.BorderStyle = BorderStyle.FixedSingle
+        Label35.Location = New Point(315, 199)
+        Label35.Name = "Label35"
+        Label35.Size = New Size(220, 23)
+        Label35.TabIndex = 101
+        Label35.Text = "Note Border on Selection"
+        Label35.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label34
+        ' 
+        Label34.BorderStyle = BorderStyle.FixedSingle
+        Label34.Location = New Point(315, 177)
+        Label34.Name = "Label34"
+        Label34.Size = New Size(220, 23)
+        Label34.TabIndex = 100
+        Label34.Text = "Note Border on MouseOver"
+        Label34.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label86
+        ' 
+        Label86.BorderStyle = BorderStyle.FixedSingle
+        Label86.Location = New Point(648, 126)
+        Label86.Name = "Label86"
+        Label86.Size = New Size(220, 23)
+        Label86.TabIndex = 99
+        Label86.Text = "Time Selection Fill"
+        Label86.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label98
+        ' 
+        Label98.BorderStyle = BorderStyle.FixedSingle
+        Label98.Location = New Point(648, 38)
+        Label98.Name = "Label98"
+        Label98.Size = New Size(220, 23)
+        Label98.TabIndex = 98
+        Label98.Text = "Time Selection Cursor"
+        Label98.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label31
+        ' 
+        Label31.BorderStyle = BorderStyle.FixedSingle
+        Label31.Location = New Point(648, 16)
+        Label31.Name = "Label31"
+        Label31.Size = New Size(220, 23)
+        Label31.TabIndex = 97
+        Label31.Text = "Selection Box Border"
+        Label31.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label30
+        ' 
+        Label30.BorderStyle = BorderStyle.FixedSingle
+        Label30.Location = New Point(42, 60)
+        Label30.Name = "Label30"
+        Label30.Size = New Size(160, 23)
+        Label30.TabIndex = 96
+        Label30.Text = "Background"
+        Label30.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label29
+        ' 
+        Label29.BorderStyle = BorderStyle.FixedSingle
+        Label29.Location = New Point(42, 133)
+        Label29.Name = "Label29"
+        Label29.Size = New Size(160, 23)
+        Label29.TabIndex = 95
+        Label29.Text = "Vertical Line"
+        Label29.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label28
+        ' 
+        Label28.BorderStyle = BorderStyle.FixedSingle
+        Label28.Location = New Point(315, 60)
+        Label28.Name = "Label28"
+        Label28.Size = New Size(220, 23)
+        Label28.TabIndex = 94
+        Label28.Text = "Measure Label"
+        Label28.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label27
+        ' 
+        Label27.BorderStyle = BorderStyle.FixedSingle
+        Label27.Location = New Point(42, 111)
+        Label27.Name = "Label27"
+        Label27.Size = New Size(160, 23)
+        Label27.TabIndex = 93
+        Label27.Text = "Sub"
+        Label27.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label26
+        ' 
+        Label26.BorderStyle = BorderStyle.FixedSingle
+        Label26.Location = New Point(42, 89)
+        Label26.Name = "Label26"
+        Label26.Size = New Size(160, 23)
+        Label26.TabIndex = 92
+        Label26.Text = "Grid"
+        Label26.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label25
+        ' 
+        Label25.BorderStyle = BorderStyle.FixedSingle
+        Label25.Location = New Point(315, 82)
+        Label25.Name = "Label25"
+        Label25.Size = New Size(220, 23)
+        Label25.TabIndex = 91
+        Label25.Text = "Note Label Vertical Shift"
+        Label25.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label24
+        ' 
+        Label24.BorderStyle = BorderStyle.FixedSingle
+        Label24.Location = New Point(315, 38)
+        Label24.Name = "Label24"
+        Label24.Size = New Size(220, 23)
+        Label24.TabIndex = 90
+        Label24.Text = "Note Label"
+        Label24.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label22
+        ' 
+        Label22.BorderStyle = BorderStyle.FixedSingle
+        Label22.Location = New Point(42, 177)
+        Label22.Name = "Label22"
+        Label22.Size = New Size(160, 23)
+        Label22.TabIndex = 88
+        Label22.Text = "BGM Waveform"
+        Label22.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label21
+        ' 
+        Label21.BorderStyle = BorderStyle.FixedSingle
+        Label21.Location = New Point(315, 16)
+        Label21.Name = "Label21"
+        Label21.Size = New Size(220, 23)
+        Label21.TabIndex = 87
+        Label21.Text = "Note Height"
+        Label21.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label9
+        ' 
+        Label9.BorderStyle = BorderStyle.FixedSingle
+        Label9.Location = New Point(42, 38)
+        Label9.Name = "Label9"
+        Label9.Size = New Size(160, 23)
+        Label9.TabIndex = 139
+        Label9.Text = "Column Caption Font"
+        Label9.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' cTSSplitter
+        ' 
+        cTSSplitter.FlatStyle = FlatStyle.Flat
+        cTSSplitter.Location = New Point(870, 60)
+        cTSSplitter.Name = "cTSSplitter"
+        cTSSplitter.Size = New Size(80, 23)
+        cTSSplitter.TabIndex = 141
+        cTSSplitter.Tag = "9"
+        cTSSplitter.Text = "FF000000"
+        cTSSplitter.UseVisualStyleBackColor = True
+        ' 
+        ' Label97
+        ' 
+        Label97.BorderStyle = BorderStyle.FixedSingle
+        Label97.Location = New Point(648, 60)
+        Label97.Name = "Label97"
+        Label97.Size = New Size(220, 23)
+        Label97.TabIndex = 140
+        Label97.Text = "Time Selection Splitter"
+        Label97.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label96
+        ' 
+        Label96.BorderStyle = BorderStyle.FixedSingle
+        Label96.Location = New Point(648, 82)
+        Label96.Name = "Label96"
+        Label96.Size = New Size(220, 23)
+        Label96.TabIndex = 142
+        Label96.Text = "Time Selection Cursor Sensitivity"
+        Label96.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' iTSSensitivity
+        ' 
+        iTSSensitivity.Location = New Point(870, 82)
+        iTSSensitivity.Maximum = New Decimal(New Integer() {20, 0, 0, 0})
+        iTSSensitivity.Name = "iTSSensitivity"
+        iTSSensitivity.Size = New Size(80, 23)
+        iTSSensitivity.TabIndex = 143
+        iTSSensitivity.Tag = "0"
+        iTSSensitivity.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        ' 
+        ' cTSMouseOver
+        ' 
+        cTSMouseOver.FlatStyle = FlatStyle.Flat
+        cTSMouseOver.Location = New Point(870, 104)
+        cTSMouseOver.Name = "cTSMouseOver"
+        cTSMouseOver.Size = New Size(80, 23)
+        cTSMouseOver.TabIndex = 145
+        cTSMouseOver.Tag = "9"
+        cTSMouseOver.Text = "FF000000"
+        cTSMouseOver.UseVisualStyleBackColor = True
+        ' 
+        ' Label91
+        ' 
+        Label91.BorderStyle = BorderStyle.FixedSingle
+        Label91.Location = New Point(648, 104)
+        Label91.Name = "Label91"
+        Label91.Size = New Size(220, 23)
+        Label91.TabIndex = 144
+        Label91.Text = "Time Selection MouseOver Border"
+        Label91.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label82
+        ' 
+        Label82.BorderStyle = BorderStyle.FixedSingle
+        Label82.Location = New Point(648, 170)
+        Label82.Name = "Label82"
+        Label82.Size = New Size(220, 23)
+        Label82.TabIndex = 146
+        Label82.Text = "Time Selection BPM Font"
+        Label82.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' Label14
+        ' 
+        Label14.BorderStyle = BorderStyle.FixedSingle
+        Label14.Location = New Point(648, 199)
+        Label14.Name = "Label14"
+        Label14.Size = New Size(220, 23)
+        Label14.TabIndex = 147
+        Label14.Text = "Middle Button Release Sensitivity"
+        Label14.TextAlign = ContentAlignment.MiddleRight
+        ' 
+        ' iMiddleSensitivity
+        ' 
+        iMiddleSensitivity.Location = New Point(870, 199)
+        iMiddleSensitivity.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
+        iMiddleSensitivity.Name = "iMiddleSensitivity"
+        iMiddleSensitivity.Size = New Size(80, 23)
+        iMiddleSensitivity.TabIndex = 148
+        iMiddleSensitivity.Tag = "0"
+        iMiddleSensitivity.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        ' 
+        ' PictureBox1
+        ' 
+        PictureBox1.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        PictureBox1.Location = New Point(10, 259)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New Size(1000, 1)
+        PictureBox1.TabIndex = 138
+        PictureBox1.TabStop = False
+        ' 
+        ' OpVisual
+        ' 
+        AcceptButton = OK_Button
+        AutoScaleMode = AutoScaleMode.None
+        CancelButton = Cancel_Button
+        ClientSize = New Size(1026, 713)
+        Controls.Add(Label14)
+        Controls.Add(iMiddleSensitivity)
+        Controls.Add(Label82)
+        Controls.Add(cTSMouseOver)
+        Controls.Add(Label91)
+        Controls.Add(Label96)
+        Controls.Add(iTSSensitivity)
+        Controls.Add(cTSSplitter)
+        Controls.Add(Label97)
+        Controls.Add(Label9)
+        Controls.Add(PictureBox1)
+        Controls.Add(Label33)
+        Controls.Add(iHiddenNoteOpacity)
+        Controls.Add(TableLayoutPanel1)
+        Controls.Add(Label23)
+        Controls.Add(Panel1)
+        Controls.Add(cAdjustLengthBorder)
+        Controls.Add(Label37)
+        Controls.Add(cSelectedBorder)
+        Controls.Add(Label21)
+        Controls.Add(cMouseOver)
+        Controls.Add(Label22)
+        Controls.Add(iLongLabelHorizShift)
+        Controls.Add(Label24)
+        Controls.Add(iLabelHorizShift)
+        Controls.Add(Label25)
+        Controls.Add(iLabelVerticalShift)
+        Controls.Add(Label26)
+        Controls.Add(fMeasureLabel)
+        Controls.Add(Label27)
+        Controls.Add(fNoteLabel)
+        Controls.Add(Label28)
+        Controls.Add(iNoteHeight)
+        Controls.Add(Label29)
+        Controls.Add(fTSBPM)
+        Controls.Add(Label30)
+        Controls.Add(cTSBPM)
+        Controls.Add(Label31)
+        Controls.Add(cTSSelectionFill)
+        Controls.Add(Label98)
+        Controls.Add(cTSCursor)
+        Controls.Add(Label86)
+        Controls.Add(cSelectionBox)
+        Controls.Add(Label34)
+        Controls.Add(cWaveForm)
+        Controls.Add(Label35)
+        Controls.Add(cMeasureBarLine)
+        Controls.Add(Label88)
+        Controls.Add(cVerticalLine)
+        Controls.Add(Label38)
+        Controls.Add(cSub)
+        Controls.Add(Label39)
+        Controls.Add(cGrid)
+        Controls.Add(Label40)
+        Controls.Add(cBG)
+        Controls.Add(cColumnTitle)
+        Controls.Add(fColumnTitle)
+        Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        FormBorderStyle = FormBorderStyle.FixedDialog
+        MaximizeBox = False
+        MinimizeBox = False
+        Name = "OpVisual"
+        ShowInTaskbar = False
+        StartPosition = FormStartPosition.CenterParent
+        Text = "Visual Options"
+        TableLayoutPanel1.ResumeLayout(False)
+        Panel1.ResumeLayout(False)
+        CType(iHiddenNoteOpacity, ComponentModel.ISupportInitialize).EndInit()
+        CType(iLongLabelHorizShift, ComponentModel.ISupportInitialize).EndInit()
+        CType(iLabelHorizShift, ComponentModel.ISupportInitialize).EndInit()
+        CType(iLabelVerticalShift, ComponentModel.ISupportInitialize).EndInit()
+        CType(iNoteHeight, ComponentModel.ISupportInitialize).EndInit()
+        CType(iTSSensitivity, ComponentModel.ISupportInitialize).EndInit()
+        CType(iMiddleSensitivity, ComponentModel.ISupportInitialize).EndInit()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
+        ResumeLayout(False)
 
     End Sub
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel

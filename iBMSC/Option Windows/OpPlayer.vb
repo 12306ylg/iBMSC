@@ -83,7 +83,7 @@ Public Class OpPlayer
 
     Private Sub BPrevBrowse_Click(sender As Object, e As EventArgs) Handles BBrowse.Click
         Dim xDOpen As New OpenFileDialog With {
-            .InitialDirectory = IIf(Path.GetDirectoryName(Replace(TPath.Text, "<apppath>", My.Application.Info.DirectoryPath)) = "", _
+            .InitialDirectory = IIf(Path.GetDirectoryName(Replace(TPath.Text, "<apppath>", My.Application.Info.DirectoryPath)) = String.Empty, _
                                       My.Application.Info.DirectoryPath, _
                                       Path.GetDirectoryName(Replace(TPath.Text, "<apppath>", My.Application.Info.DirectoryPath))),
             .Filter = Strings.FileType.EXE & "|*.exe",
@@ -157,7 +157,7 @@ Public Class OpPlayer
 
     Private Sub ValidateTextBox()
         For Each xT As TextBox In New TextBox() {TPath, TPlayB, TPlay, TStop}
-            Dim xText As String = xT.Text.Replace("<apppath>", "").Replace("<measure>", "").Replace("<filename>", "").Replace("""", "")
+            Dim xText As String = xT.Text.Replace("<apppath>", String.Empty).Replace("<measure>", String.Empty).Replace("<filename>", String.Empty).Replace("""", String.Empty)
             Dim xContainsInvalidChar As Boolean = False
 
             For Each xC As Char In Path.GetInvalidPathChars

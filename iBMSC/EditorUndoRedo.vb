@@ -107,7 +107,7 @@ Partial Public Class MainWindow
                     'If xDenom < 4 Then xDenom = 4
                     For Each xM As Integer In xCmd.Indices
                         MeasureLength(xM) = xCmd.Value
-                        LBeat.Items(xM) = Add3Zeros(xM) & ": " & (xCmd.Value / 192) & IIf(xxD > 10000, "", " ( " & (xCmd.Value / 192 * xxD) & " / " & xxD & " ) ")
+                        LBeat.Items(xM) = Add3Zeros(xM) & ": " & (xCmd.Value / 192) & IIf(xxD > 10000, String.Empty, " ( " & (xCmd.Value / 192 * xxD) & " / " & xxD & " ) ")
                         LBeat.SelectedIndices.Add(xM)
                     Next
                     UpdateMeasureBottom()

@@ -541,7 +541,7 @@ Partial Public Class MainWindow
 
     Private Sub PanelPreviewNoteIndex(NoteIndex As Integer)
         'Play wav
-        If ClickStopPreview Then PreviewNote("", True)
+        If ClickStopPreview Then PreviewNote(String.Empty, True)
         'My.Computer.Audio.Stop()
         If NoteIndex > 0 And PreviewOnClick AndAlso IsColumnSound(Notes(NoteIndex).ColumnIndex) Then
             Dim xI2 As Integer = Notes(NoteIndex).Value \ 10000
@@ -552,9 +552,9 @@ Partial Public Class MainWindow
                 If xI2 >= 1296 Then xI2 = 1295
             End If
 
-            If Not hWAV(xI2) = "" Then ' AndAlso Path.GetExtension(hWAV(xI2)).ToLower = ".wav" Then
-                Dim xFileLocation As String = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName)) & "\" & hWAV(xI2)
-                If Not ClickStopPreview Then PreviewNote("", True)
+            If Not hWAV(xI2) = String.Empty Then ' AndAlso Path.GetExtension(hWAV(xI2)).ToLower = ".wav" Then
+                Dim xFileLocation As String = IIf(ExcludeFileName(FileName) = String.Empty, InitPath, ExcludeFileName(FileName)) & "\" & hWAV(xI2)
+                If Not ClickStopPreview Then PreviewNote(String.Empty, True)
                 PreviewNote(xFileLocation, False)
             End If
         End If

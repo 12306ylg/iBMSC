@@ -659,11 +659,11 @@ EndOfSub:
                     XMLLoadLocaleMenu(eFile.Item("SaveAs"), mnSaveAs.Text)
                     XMLLoadLocaleMenu(eFile.Item("ExportIBMSC"), mnExportIBMSC.Text)
                     XMLLoadLocaleMenu(eFile.Item("ExportBMSON"), mnExportBMSON.Text)
-                    If Recent(0) = "" Then XMLLoadLocaleMenu(eFile.Item("Recent0"), mnOpenR0.Text)
-                    If Recent(1) = "" Then XMLLoadLocaleMenu(eFile.Item("Recent1"), mnOpenR1.Text)
-                    If Recent(2) = "" Then XMLLoadLocaleMenu(eFile.Item("Recent2"), mnOpenR2.Text)
-                    If Recent(3) = "" Then XMLLoadLocaleMenu(eFile.Item("Recent3"), mnOpenR3.Text)
-                    If Recent(4) = "" Then XMLLoadLocaleMenu(eFile.Item("Recent4"), mnOpenR4.Text)
+                    If Recent(0) = String.Empty Then XMLLoadLocaleMenu(eFile.Item("Recent0"), mnOpenR0.Text)
+                    If Recent(1) = String.Empty Then XMLLoadLocaleMenu(eFile.Item("Recent1"), mnOpenR1.Text)
+                    If Recent(2) = String.Empty Then XMLLoadLocaleMenu(eFile.Item("Recent2"), mnOpenR2.Text)
+                    If Recent(3) = String.Empty Then XMLLoadLocaleMenu(eFile.Item("Recent3"), mnOpenR3.Text)
+                    If Recent(4) = String.Empty Then XMLLoadLocaleMenu(eFile.Item("Recent4"), mnOpenR4.Text)
                     XMLLoadLocaleMenu(eFile.Item("Quit"), mnQuit.Text)
                 End If
 
@@ -1165,7 +1165,7 @@ EndOfSub:
                 XMLLoadLocale(eFileAssociation.Item("ViewCode"), Strings.FileAssociation.ViewCode)
             End If
 
-            DispLang = Path.Replace(My.Application.Info.DirectoryPath & "\", "")
+            DispLang = Path.Replace(My.Application.Info.DirectoryPath & "\", String.Empty)
 
         Catch ex As Exception
             Dim unused = MsgBox(Path & vbCrLf & vbCrLf & ex.Message, MsgBoxStyle.Exclamation)
@@ -1186,8 +1186,8 @@ EndOfSub:
             Dim xStrLine() As String = Split(My.Computer.FileSystem.ReadAllText(xPath), vbCrLf)
             If xStrLine(0).Trim <> "iBMSC Configuration Settings Format" And xStrLine(0).Trim <> "iBMSC Theme Format" Then Exit Sub
 
-            Dim xW1 As String = ""
-            Dim xW2 As String = ""
+            Dim xW1 As String = String.Empty
+            Dim xW2 As String = String.Empty
 
             For Each xLine As String In xStrLine
                 xW1 = UCase(Mid(xLine, 1, InStr(xLine, "=") - 1))
@@ -1300,7 +1300,7 @@ EndOfSub:
         Try
             d.Load(fs)
             Dim xName As String = d.Item("iBMSC.Locale").GetAttribute("Name")
-            If xName = "" Then xName = xStr.Name
+            If xName = String.Empty Then xName = xStr.Name
 
             Dim unused1 = cmnLanguage.Items.Add(xName, Nothing, AddressOf LoadLang)
             cmnLanguage.Items(cmnLanguage.Items.Count - 1).ToolTipText = xStr.FullName

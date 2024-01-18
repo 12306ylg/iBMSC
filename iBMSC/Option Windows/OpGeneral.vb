@@ -165,44 +165,44 @@ Public Class OpGeneral
                 If Array.IndexOf(.GetSubKeyNames(), xExt) <> -1 Then .DeleteSubKeyTree(xExt)
                 Dim unused9 = .CreateSubKey(xExt)
                 xReg = .OpenSubKey(xExt, True)
-                xReg.SetValue("", xClass, Microsoft.Win32.RegistryValueKind.String)
+                xReg.SetValue(String.Empty, xClass, Microsoft.Win32.RegistryValueKind.String)
 
                 If Array.IndexOf(.GetSubKeyNames(), xClass) <> -1 Then .DeleteSubKeyTree(xClass)
                 Dim unused8 = .CreateSubKey(xClass)
                 xReg = .OpenSubKey(xClass, True)
-                xReg.SetValue("", xDescription, Microsoft.Win32.RegistryValueKind.String)
+                xReg.SetValue(String.Empty, xDescription, Microsoft.Win32.RegistryValueKind.String)
 
                 'Default Icon
                 Dim unused7 = xReg.CreateSubKey("DefaultIcon")
                 xReg = .OpenSubKey(xClass & "\DefaultIcon", True)
-                xReg.SetValue("", My.Application.Info.DirectoryPath & "\TypeBMS.ico", Microsoft.Win32.RegistryValueKind.String)
+                xReg.SetValue(String.Empty, My.Application.Info.DirectoryPath & "\TypeBMS.ico", Microsoft.Win32.RegistryValueKind.String)
 
                 xReg = .OpenSubKey(xClass, True)
                 Dim unused6 = xReg.CreateSubKey("shell")
                 xReg = .OpenSubKey(xClass & "\shell", True)
-                xReg.SetValue("", "open")
+                xReg.SetValue(String.Empty, "open")
 
                 xReg = .OpenSubKey(xClass & "\shell", True)
                 Dim unused5 = xReg.CreateSubKey("open\command")
                 xReg = .OpenSubKey(xClass & "\shell\open", True)
-                xReg.SetValue("", Strings.FileAssociation.Open)
+                xReg.SetValue(String.Empty, Strings.FileAssociation.Open)
                 xReg = .OpenSubKey(xClass & "\shell\open\command", True)
-                xReg.SetValue("", """" & Application.ExecutablePath & """ ""%1""")
+                xReg.SetValue(String.Empty, """" & Application.ExecutablePath & """ ""%1""")
 
                 If Not isIBMSC Then
                     xReg = .OpenSubKey(xClass & "\shell", True)
                     Dim unused4 = xReg.CreateSubKey("preview\command")
                     xReg = .OpenSubKey(xClass & "\shell\preview", True)
-                    xReg.SetValue("", Strings.FileAssociation.Preview)
+                    xReg.SetValue(String.Empty, Strings.FileAssociation.Preview)
                     xReg = .OpenSubKey(xClass & "\shell\preview\command", True)
-                    xReg.SetValue("", """" & My.Application.Info.DirectoryPath & "\uBMplay.exe" & """ ""%1""")
+                    xReg.SetValue(String.Empty, """" & My.Application.Info.DirectoryPath & "\uBMplay.exe" & """ ""%1""")
 
                     xReg = .OpenSubKey(xClass & "\shell", True)
                     Dim unused3 = xReg.CreateSubKey("viewcode\command")
                     xReg = .OpenSubKey(xClass & "\shell\viewcode", True)
-                    xReg.SetValue("", Strings.FileAssociation.ViewCode)
+                    xReg.SetValue(String.Empty, Strings.FileAssociation.ViewCode)
                     xReg = .OpenSubKey(xClass & "\shell\viewcode\command", True)
-                    xReg.SetValue("", Environment.SystemDirectory & "\notepad.exe %1")
+                    xReg.SetValue(String.Empty, Environment.SystemDirectory & "\notepad.exe %1")
                 End If
             End With
 

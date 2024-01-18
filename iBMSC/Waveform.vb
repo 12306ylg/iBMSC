@@ -18,7 +18,7 @@ Partial Public Class MainWindow
         Dim xDWAV As New OpenFileDialog With {
             .Filter = "Wave files (*.wav, *.ogg)" & "|*.wav;*.ogg",
             .DefaultExt = "wav",
-            .InitialDirectory = IIf(ExcludeFileName(FileName) = "", InitPath, ExcludeFileName(FileName))
+            .InitialDirectory = IIf(ExcludeFileName(FileName) = String.Empty, InitPath, ExcludeFileName(FileName))
         }
 
         If xDWAV.ShowDialog = Forms.DialogResult.Cancel Then Exit Sub

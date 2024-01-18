@@ -45,8 +45,8 @@
             Case Else : Return
         End Select
 
-        xTBOpenR.Text = IIf(Text = "", "<" & Strings.None & ">", GetFileName(Text)) : xTBOpenR.ToolTipText = Text : xTBOpenR.Enabled = Not Text = ""
-        xmnOpenR.Text = IIf(Text = "", "<" & Strings.None & ">", GetFileName(Text)) : xmnOpenR.ToolTipText = Text : xmnOpenR.Enabled = Not Text = ""
+        xTBOpenR.Text = IIf(Text = String.Empty, "<" & Strings.None & ">", GetFileName(Text)) : xTBOpenR.ToolTipText = Text : xTBOpenR.Enabled = Not Text = String.Empty
+        xmnOpenR.Text = IIf(Text = String.Empty, "<" & Strings.None & ">", GetFileName(Text)) : xmnOpenR.ToolTipText = Text : xmnOpenR.Enabled = Not Text = String.Empty
     End Sub
 
     Private Sub OpenRecent(xFileName As String)

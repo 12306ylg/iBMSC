@@ -29,7 +29,7 @@ Partial Class SplashScreen1
         ' 
         AutoScaleDimensions = New SizeF(7F, 17F)
         AutoScaleMode = AutoScaleMode.Font
-        BackColor = SystemColors.ControlDarkDark
+        BackColor = SystemColors.Window
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         ClientSize = New Size(1000, 600)
         ControlBox = False
