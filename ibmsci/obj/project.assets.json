@@ -1980,17 +1980,17 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\otto\\.nuget\\packages\\": {},
+    "G:\\NuGet\\package": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\otto\\Documents\\GitHub\\iBMSC\\ibmsci\\ibmsci.wapproj",
+      "projectUniqueName": "G:\\GitHub\\iBMSC\\ibmsci\\ibmsci.wapproj",
       "projectName": "ibmsci",
-      "projectPath": "C:\\Users\\otto\\Documents\\GitHub\\iBMSC\\ibmsci\\ibmsci.wapproj",
-      "packagesPath": "C:\\Users\\otto\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\otto\\Documents\\GitHub\\iBMSC\\ibmsci\\obj\\",
+      "projectPath": "G:\\GitHub\\iBMSC\\ibmsci\\ibmsci.wapproj",
+      "packagesPath": "G:\\NuGet\\package",
+      "outputPath": "G:\\GitHub\\iBMSC\\ibmsci\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2010,8 +2010,8 @@
         "uap10.0.18362": {
           "targetAlias": "net451",
           "projectReferences": {
-            "C:\\Users\\otto\\Documents\\GitHub\\iBMSC\\iBMSC\\iBMSC.vbproj": {
-              "projectPath": "C:\\Users\\otto\\Documents\\GitHub\\iBMSC\\iBMSC\\iBMSC.vbproj"
+            "G:\\GitHub\\iBMSC\\iBMSC\\iBMSC.vbproj": {
+              "projectPath": "G:\\GitHub\\iBMSC\\iBMSC\\iBMSC.vbproj"
             }
           }
         }
