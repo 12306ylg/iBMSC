@@ -1,4 +1,6 @@
-﻿Friend Module XMLUtil
+﻿Imports System.ComponentModel
+
+Friend Module XMLUtil
     Public Sub XMLWriteValue(w As XmlTextWriter, local As String, val As String)
         w.WriteStartElement(local)
         w.WriteAttributeString("Value", Editor.WriteDecimalWithDot(val))
@@ -29,8 +31,8 @@
         If s.Length = 0 Then Exit Sub
 
         Static nfi As New Globalization.NumberFormatInfo With {
-            .NumberDecimalSeparator = "."
-        }
+                .NumberDecimalSeparator = "."
+            }
         v = Double.Parse(s, nfi)
     End Sub
     Public Sub XMLLoadAttribute(s As String, ByRef v As Long)

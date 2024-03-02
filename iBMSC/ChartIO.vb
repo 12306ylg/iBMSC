@@ -1,4 +1,5 @@
 ﻿Imports iBMSC.Editor
+Imports System.Text
 Imports System.Text.Json
 Partial Public Class MainWindow
     Private Sub OpenBMS(xStrAll As String)
@@ -362,62 +363,79 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
     End Function
 
     Private Function GenerateHeaderMeta() As String
-        Dim xStrHeader As String = vbCrLf & "*---------------------- HEADER FIELD" & vbCrLf & vbCrLf
-        xStrHeader &= "#PLAYER " & (CHPlayer.SelectedIndex + 1) & vbCrLf
-        xStrHeader &= "#GENRE " & THGenre.Text & vbCrLf
-        xStrHeader &= "#TITLE " & THTitle.Text & vbCrLf
-        xStrHeader &= "#ARTIST " & THArtist.Text & vbCrLf
-        xStrHeader &= "#BPM " & WriteDecimalWithDot(Notes(0).Value / 10000) & vbCrLf
-        xStrHeader &= "#PLAYLEVEL " & THPlayLevel.Text & vbCrLf
-        xStrHeader &= "#RANK " & CHRank.SelectedIndex & vbCrLf
-        xStrHeader &= vbCrLf
-        If THSubTitle.Text <> String.Empty Then xStrHeader &= "#SUBTITLE " & THSubTitle.Text & vbCrLf
-        If THSubArtist.Text <> String.Empty Then xStrHeader &= "#SUBARTIST " & THSubArtist.Text & vbCrLf
-        If THStageFile.Text <> String.Empty Then xStrHeader &= "#STAGEFILE " & THStageFile.Text & vbCrLf
-        If THBanner.Text <> String.Empty Then xStrHeader &= "#BANNER " & THBanner.Text & vbCrLf
-        If THBackBMP.Text <> String.Empty Then xStrHeader &= "#BACKBMP " & THBackBMP.Text & vbCrLf
-        xStrHeader &= vbCrLf
-        If CHDifficulty.SelectedIndex Then xStrHeader &= "#DIFFICULTY " & CHDifficulty.SelectedIndex & vbCrLf
-        If THExRank.Text <> String.Empty Then xStrHeader &= "#DEFEXRANK " & THExRank.Text & vbCrLf
-        If THTotal.Text <> String.Empty Then xStrHeader &= "#TOTAL " & THTotal.Text & vbCrLf
-        If THComment.Text <> String.Empty Then xStrHeader &= "#COMMENT """ & THComment.Text & """" & vbCrLf
-        'If THLnType.Text <> "" Then xStrHeader &= "#LNTYPE " & THLnType.Text & vbCrLf
-        If CHLnObj.SelectedIndex > 0 Then xStrHeader &= "#LNOBJ " & C10to36(CHLnObj.SelectedIndex) & vbCrLf _
-                                     Else xStrHeader &= "#LNTYPE 1" & vbCrLf
-        If THPreview.Text <> String.Empty Then xStrHeader &= "#PREVIEW " & THPreview.Text & vbCrLf
-        If CHLnmode.SelectedIndex > 0 Then xStrHeader &= "#LNMODE " & CHLnmode.SelectedIndex & vbCrLf
-        xStrHeader &= vbCrLf
-        Return xStrHeader
+        Dim headerBuilder As New System.Text.StringBuilder()
+
+        ' Append the header start marker
+        headerBuilder.AppendLine().AppendLine("*---------------------- HEADER FIELD").AppendLine()
+
+        ' Append common header fields
+        headerBuilder.AppendLine($"#PLAYER {CHPlayer.SelectedIndex + 1}")
+        headerBuilder.AppendLine($"#GENRE {THGenre.Text}")
+        headerBuilder.AppendLine($"#TITLE {THTitle.Text}")
+        headerBuilder.AppendLine($"#ARTIST {THArtist.Text}")
+        headerBuilder.AppendLine($"#BPM {WriteDecimalWithDot(Notes(0).Value / 10000)}")
+        headerBuilder.AppendLine($"#PLAYLEVEL {THPlayLevel.Text}")
+        headerBuilder.AppendLine($"#RANK {CHRank.SelectedIndex}").AppendLine()
+
+        ' Append optional header fields if they are not empty
+        If Not String.IsNullOrEmpty(THSubTitle.Text) Then headerBuilder.AppendLine($"#SUBTITLE {THSubTitle.Text}")
+        If Not String.IsNullOrEmpty(THSubArtist.Text) Then headerBuilder.AppendLine($"#SUBARTIST {THSubArtist.Text}")
+        If Not String.IsNullOrEmpty(THStageFile.Text) Then headerBuilder.AppendLine($"#STAGEFILE {THStageFile.Text}")
+        If Not String.IsNullOrEmpty(THBanner.Text) Then headerBuilder.AppendLine($"#BANNER {THBanner.Text}")
+        If Not String.IsNullOrEmpty(THBackBMP.Text) Then headerBuilder.AppendLine($"#BACKBMP {THBackBMP.Text}").AppendLine()
+
+        ' Append more optional header fields if specified
+        If CHDifficulty.SelectedIndex > 0 Then headerBuilder.AppendLine($"#DIFFICULTY {CHDifficulty.SelectedIndex}")
+        If Not String.IsNullOrEmpty(THExRank.Text) Then headerBuilder.AppendLine($"#DEFEXRANK {THExRank.Text}")
+        If Not String.IsNullOrEmpty(THTotal.Text) Then headerBuilder.AppendLine($"#TOTAL {THTotal.Text}")
+        If Not String.IsNullOrEmpty(THComment.Text) Then headerBuilder.AppendLine($"#COMMENT ""{THComment.Text}""")
+        ' Uncomment the following line if THLnType is used
+        ' If Not String.IsNullOrEmpty(THLnType.Text) Then headerBuilder.AppendLine($"#LNTYPE {THLnType.Text}")
+        If CHLnObj.SelectedIndex > 0 Then headerBuilder.AppendLine($"#LNOBJ {C10to36(CHLnObj.SelectedIndex)}") _
+                                 Else headerBuilder.AppendLine("#LNTYPE 1")
+        If Not String.IsNullOrEmpty(THPreview.Text) Then headerBuilder.AppendLine($"#PREVIEW {THPreview.Text}")
+        If CHLnmode.SelectedIndex > 0 Then headerBuilder.AppendLine($"#LNMODE {CHLnmode.SelectedIndex}").AppendLine()
+
+        ' Return the completed header string
+        Return headerBuilder.ToString()
     End Function
+
 
     Private Function GenerateHeaderIndexedData() As String
-        Dim xStrHeader As String = String.Empty
+        Dim xStrHeader As New StringBuilder
 
         For i = 0 To UBound(hWAV)
-            If Not hWAV(i) = String.Empty Then xStrHeader &= "#WAV" & C10to36(i) &
-                                                    " " & hWAV(i) & vbCrLf
-        Next
-        For i = 0 To UBound(hBMP)
-            If Not hBMP(i) = String.Empty Then xStrHeader &= "#BMP" & C10to36(i) &
-                                                    " " & hBMP(i) & vbCrLf
-        Next
-        For i = 1 To UBound(hBPM)
-            xStrHeader &= "#BPM" &
-            IIf(BPMx1296, C10to36(i), Mid("0" & Hex(i), Len(Hex(i)))) &
-            " " & WriteDecimalWithDot(hBPM(i) / 10000) & vbCrLf
-        Next
-        For i = 1 To UBound(hSTOP)
-            xStrHeader &= "#STOP" &
-                IIf(STOPx1296, C10to36(i), Mid("0" & Hex(i), Len(Hex(i)))) &
-                " " & WriteDecimalWithDot(hSTOP(i) / 10000) & vbCrLf
-        Next
-        For i = 1 To UBound(hBMSCROLL)
-            xStrHeader &= "#SCROLL" &
-                C10to36(i) & " " & WriteDecimalWithDot(hBMSCROLL(i) / 10000) & vbCrLf
+            If hWAV(i) <> String.Empty Then
+                xStrHeader.AppendFormat("#WAV{0} {1}{2}", C10to36(i), hWAV(i), vbCrLf)
+            End If
         Next
 
-        Return xStrHeader
+        For i = 0 To UBound(hBMP)
+            If hBMP(i) <> String.Empty Then
+                xStrHeader.AppendFormat("#BMP{0} {1}{2}", C10to36(i), hBMP(i), vbCrLf)
+            End If
+        Next
+
+        For i = 1 To UBound(hBPM)
+            xStrHeader.AppendFormat("#BPM{0} {1}{2}",
+            IIf(BPMx1296, C10to36(i), Mid("0" & Hex(i), Len(Hex(i)))),
+            WriteDecimalWithDot(hBPM(i) / 10000), vbCrLf)
+        Next
+
+        For i = 1 To UBound(hSTOP)
+            xStrHeader.AppendFormat("#STOP{0} {1}{2}",
+            IIf(STOPx1296, C10to36(i), Mid("0" & Hex(i), Len(Hex(i)))),
+            WriteDecimalWithDot(hSTOP(i) / 10000), vbCrLf)
+        Next
+
+        For i = 1 To UBound(hBMSCROLL)
+            xStrHeader.AppendFormat("#SCROLL{0} {1}{2}",
+            C10to36(i), WriteDecimalWithDot(hBMSCROLL(i) / 10000), vbCrLf)
+        Next
+
+        Return xStrHeader.ToString()
     End Function
+
 
     Private Sub GetMeasureLimits(MeasureIndex As Integer, ByRef LowerLimit As Integer, ByRef UpperLimit As Integer)
         Dim NoteCount = UBound(Notes)

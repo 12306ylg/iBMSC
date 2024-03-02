@@ -42,16 +42,22 @@ Namespace Editor
         End Function
 
         Public Function EncodingToString(TextEncoding As Text.Encoding) As String
-            If TextEncoding Is Text.Encoding.Default Then Return "System Ansi"
-            If TextEncoding Is Text.Encoding.Unicode Then Return "Little Endian UTF16"
-            If TextEncoding Is Text.Encoding.ASCII Then Return "ASCII"
-            If TextEncoding Is Text.Encoding.BigEndianUnicode Then Return "Big Endian UTF16"
-            If TextEncoding Is Text.Encoding.UTF32 Then Return "Little Endian UTF32"
-            'If TextEncoding Is Text.Encoding.UTF7 Then Return "UTF7"
-            If TextEncoding Is Text.Encoding.UTF8 Then Return "UTF8"
-            If TextEncoding Is Text.Encoding.GetEncoding(932) Then Return "SJIS"
-            If TextEncoding Is Text.Encoding.GetEncoding(51949) Then Return "EUC-KR"
-            Return "ANSI (" & TextEncoding.EncodingName & ")" & (TextEncoding Is Text.Encoding.Default)
+            Select Case TextEncoding.WebName
+                Case "utf-7" : Return "UTF7"
+                Case "utf-8" : Return "UTF8"
+                Case "utf-16" : Return "Little Endian UTF16"
+                Case "utf-16BE" : Return "Big Endian UTF16"
+                Case "utf-32" : Return "Little Endian UTF32"
+                Case "us-ascii" : Return "ASCII"
+                Case "shift_jis" : Return "SJIS"
+                Case "euc-kr" : Return "EUC-KR"
+                Case Else
+                    If TextEncoding Is Text.Encoding.Default Then
+                        Return "System Ansi"
+                    Else
+                        Return "ANSI (" & TextEncoding.EncodingName & ")"
+                    End If
+            End Select
         End Function
 
         ''' <summary>
@@ -181,11 +187,15 @@ Namespace Editor
         Public Function StringToArrayBool(xStr As String) As Boolean()
             Dim xL() As String = Split(xStr, ",")
             Dim xBool(UBound(xL)) As Boolean
+
             For xI1 As Integer = 0 To UBound(xBool)
-                xBool(xI1) = CBool(Val(xL(xI1)))
+                Dim value As String = xL(xI1).Trim()
+                xBool(xI1) = (value = "True") Or (value = "1")
             Next
+
             Return xBool
         End Function
+
 
         Public Function GetDenominator(a As Double, Optional maxDenom As Long = &H7FFFFFFF) As Long
             Dim m00 As Long = 1
