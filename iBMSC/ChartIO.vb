@@ -366,7 +366,7 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
         Dim headerBuilder As New System.Text.StringBuilder()
 
         ' Append the header start marker
-        headerBuilder.AppendLine().AppendLine("*---------------------- HEADER FIELD").AppendLine()
+        headerBuilder.AppendLine().AppendLine("*-------------------- HEADER FIELD").AppendLine()
 
         ' Append common header fields
         headerBuilder.AppendLine($"#PLAYER {CHPlayer.SelectedIndex + 1}")
