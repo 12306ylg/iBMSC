@@ -649,8 +649,8 @@ Partial Class MainWindow
         POExpansionSwitch.BackColor = SystemColors.Control
         POExpansionSwitch.Cursor = Cursors.Hand
         POExpansionSwitch.Dock = DockStyle.Top
-        POExpansionSwitch.FlatStyle = FlatStyle.Flat
-        POExpansionSwitch.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        POExpansionSwitch.FlatStyle = FlatStyle.System
+        POExpansionSwitch.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         POExpansionSwitch.Location = New Point(0, 0)
         POExpansionSwitch.Name = "POExpansionSwitch"
         POExpansionSwitch.Size = New Size(192, 20)
@@ -702,7 +702,7 @@ Partial Class MainWindow
         POBeatExpander.Cursor = Cursors.Hand
         POBeatExpander.Dock = DockStyle.Top
         POBeatExpander.FlatAppearance.BorderSize = 0
-        POBeatExpander.FlatStyle = FlatStyle.Popup
+        POBeatExpander.FlatStyle = FlatStyle.System
         POBeatExpander.Location = New Point(0, 58)
         POBeatExpander.Margin = New Padding(0)
         POBeatExpander.Name = "POBeatExpander"
@@ -913,8 +913,8 @@ Partial Class MainWindow
         POBeatSwitch.BackColor = SystemColors.Control
         POBeatSwitch.Cursor = Cursors.Hand
         POBeatSwitch.Dock = DockStyle.Top
-        POBeatSwitch.FlatStyle = FlatStyle.Flat
-        POBeatSwitch.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        POBeatSwitch.FlatStyle = FlatStyle.System
+        POBeatSwitch.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         POBeatSwitch.Location = New Point(0, 0)
         POBeatSwitch.Name = "POBeatSwitch"
         POBeatSwitch.Size = New Size(192, 20)
@@ -1048,7 +1048,7 @@ Partial Class MainWindow
         POBMPSwitch.CheckState = CheckState.Checked
         POBMPSwitch.Cursor = Cursors.Hand
         POBMPSwitch.Dock = DockStyle.Top
-        POBMPSwitch.FlatStyle = FlatStyle.Flat
+        POBMPSwitch.FlatStyle = FlatStyle.System
         POBMPSwitch.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         POBMPSwitch.Location = New Point(0, 0)
         POBMPSwitch.Name = "POBMPSwitch"
@@ -1101,7 +1101,7 @@ Partial Class MainWindow
         POWAVExpander.Cursor = Cursors.Hand
         POWAVExpander.Dock = DockStyle.Top
         POWAVExpander.FlatAppearance.BorderSize = 0
-        POWAVExpander.FlatStyle = FlatStyle.Popup
+        POWAVExpander.FlatStyle = FlatStyle.System
         POWAVExpander.Location = New Point(0, 30)
         POWAVExpander.Margin = New Padding(0)
         POWAVExpander.Name = "POWAVExpander"
@@ -1264,8 +1264,8 @@ Partial Class MainWindow
         POWAVSwitch.CheckState = CheckState.Checked
         POWAVSwitch.Cursor = Cursors.Hand
         POWAVSwitch.Dock = DockStyle.Top
-        POWAVSwitch.FlatStyle = FlatStyle.Flat
-        POWAVSwitch.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        POWAVSwitch.FlatStyle = FlatStyle.System
+        POWAVSwitch.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         POWAVSwitch.Location = New Point(0, 0)
         POWAVSwitch.Name = "POWAVSwitch"
         POWAVSwitch.Size = New Size(192, 20)
@@ -1525,7 +1525,7 @@ Partial Class MainWindow
         POWaveFormExpander.Cursor = Cursors.Hand
         POWaveFormExpander.Dock = DockStyle.Top
         POWaveFormExpander.FlatAppearance.BorderSize = 0
-        POWaveFormExpander.FlatStyle = FlatStyle.Popup
+        POWaveFormExpander.FlatStyle = FlatStyle.System
         POWaveFormExpander.Location = New Point(0, 58)
         POWaveFormExpander.Margin = New Padding(0)
         POWaveFormExpander.Name = "POWaveFormExpander"
@@ -1586,6 +1586,7 @@ Partial Class MainWindow
         ' 
         ' BWLoad
         ' 
+        BWLoad.FlatStyle = FlatStyle.Flat
         BWLoad.Image = CType(resources.GetObject("BWLoad.Image"), Image)
         BWLoad.Location = New Point(0, 0)
         BWLoad.Margin = New Padding(0)
@@ -1597,6 +1598,7 @@ Partial Class MainWindow
         ' 
         ' BWClear
         ' 
+        BWClear.FlatAppearance.BorderSize = 0
         BWClear.Image = CType(resources.GetObject("BWClear.Image"), Image)
         BWClear.Location = New Point(24, 0)
         BWClear.Margin = New Padding(0)
@@ -1611,6 +1613,7 @@ Partial Class MainWindow
         BWLock.Appearance = Appearance.Button
         BWLock.Checked = True
         BWLock.CheckState = CheckState.Checked
+        BWLock.FlatStyle = FlatStyle.Flat
         BWLock.Image = CType(resources.GetObject("BWLock.Image"), Image)
         BWLock.Location = New Point(48, 0)
         BWLock.Margin = New Padding(0)
@@ -1692,8 +1695,8 @@ Partial Class MainWindow
         POWaveFormSwitch.BackColor = SystemColors.Control
         POWaveFormSwitch.Cursor = Cursors.Hand
         POWaveFormSwitch.Dock = DockStyle.Top
-        POWaveFormSwitch.FlatStyle = FlatStyle.Flat
-        POWaveFormSwitch.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        POWaveFormSwitch.FlatStyle = FlatStyle.System
+        POWaveFormSwitch.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         POWaveFormSwitch.Location = New Point(0, 0)
         POWaveFormSwitch.Name = "POWaveFormSwitch"
         POWaveFormSwitch.Size = New Size(192, 20)
@@ -1875,7 +1878,7 @@ Partial Class MainWindow
         POGridExpander.Cursor = Cursors.Hand
         POGridExpander.Dock = DockStyle.Top
         POGridExpander.FlatAppearance.BorderSize = 0
-        POGridExpander.FlatStyle = FlatStyle.Flat
+        POGridExpander.FlatStyle = FlatStyle.System
         POGridExpander.Location = New Point(0, 131)
         POGridExpander.Margin = New Padding(0)
         POGridExpander.Name = "POGridExpander"
@@ -2108,7 +2111,7 @@ Partial Class MainWindow
         POGridSwitch.CheckState = CheckState.Checked
         POGridSwitch.Cursor = Cursors.Hand
         POGridSwitch.Dock = DockStyle.Top
-        POGridSwitch.FlatStyle = FlatStyle.Flat
+        POGridSwitch.FlatStyle = FlatStyle.System
         POGridSwitch.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(134))
         POGridSwitch.Location = New Point(0, 0)
         POGridSwitch.Name = "POGridSwitch"
@@ -2572,7 +2575,7 @@ Partial Class MainWindow
         POHeaderExpander.Cursor = Cursors.Hand
         POHeaderExpander.Dock = DockStyle.Top
         POHeaderExpander.FlatAppearance.BorderSize = 0
-        POHeaderExpander.FlatStyle = FlatStyle.Flat
+        POHeaderExpander.FlatStyle = FlatStyle.System
         POHeaderExpander.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         POHeaderExpander.Location = New Point(0, 185)
         POHeaderExpander.Margin = New Padding(0)
@@ -2823,7 +2826,7 @@ Partial Class MainWindow
         POHeaderSwitch.CheckState = CheckState.Checked
         POHeaderSwitch.Cursor = Cursors.Hand
         POHeaderSwitch.Dock = DockStyle.Top
-        POHeaderSwitch.FlatStyle = FlatStyle.Flat
+        POHeaderSwitch.FlatStyle = FlatStyle.System
         POHeaderSwitch.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(134))
         POHeaderSwitch.Location = New Point(0, 0)
         POHeaderSwitch.Name = "POHeaderSwitch"
