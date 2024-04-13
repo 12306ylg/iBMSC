@@ -58,7 +58,7 @@
             Return MS.GetBuffer()
         End Function
 
-        Friend Sub WriteBinWriter(ByRef bw As BinaryWriter)
+        Friend Sub WriteBinWriter(bw As BinaryWriter)
             bw.Write(VPosition)
             bw.Write(ColumnIndex)
             bw.Write(Value)
@@ -68,7 +68,7 @@
             bw.Write(Landmine)
         End Sub
 
-        Friend Sub FromBinReader(ByRef br As BinaryReader)
+        Friend Sub FromBinReader(br As BinaryReader)
             VPosition = br.ReadDouble()
             ColumnIndex = br.ReadInt32()
             Value = br.ReadInt64()
@@ -78,9 +78,10 @@
             Landmine = br.ReadBoolean()
         End Sub
 
-        Friend Sub FromBytes(ByRef bytes() As Byte)
-            Dim br As New BinaryReader(New MemoryStream(bytes))
-            FromBinReader(br)
+        Sub FromBytes(bytes() As Byte)
+            Using br As New BinaryReader(New MemoryStream(bytes))
+                FromBinReader(br)
+            End Using
         End Sub
     End Structure
 End Namespace

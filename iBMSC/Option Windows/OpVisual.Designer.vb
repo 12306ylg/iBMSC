@@ -773,6 +773,7 @@ Partial Class OpVisual
         ' 
         ' iMiddleSensitivity
         ' 
+        iMiddleSensitivity.BorderStyle = BorderStyle.FixedSingle
         iMiddleSensitivity.Location = New Point(870, 199)
         iMiddleSensitivity.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
         iMiddleSensitivity.Name = "iMiddleSensitivity"

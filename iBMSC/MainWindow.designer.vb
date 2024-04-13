@@ -3406,6 +3406,7 @@ Partial Class MainWindow
         ' 
         cmnConversion.Items.AddRange(New ToolStripItem() {POBLong, POBShort, POBLongShort, ToolStripSeparator10, POBHidden, POBVisible, POBHiddenVisible, ToolStripSeparator11, POBModify, POBMirror})
         cmnConversion.Name = "cmnLanguage"
+        cmnConversion.OwnerItem = mnConversion
         cmnConversion.Size = New Size(241, 192)
         ' 
         ' POBLong
