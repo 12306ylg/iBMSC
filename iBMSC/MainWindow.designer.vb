@@ -25,16 +25,16 @@ Partial Class MainWindow
         TBLangDef = New ToolStripMenuItem()
         TBLangRefresh = New ToolStripMenuItem()
         ToolStripSeparator9 = New ToolStripSeparator()
-        mnLanguage = New ToolStripMenuItem()
         TBLanguage = New ToolStripDropDownButton()
+        mnLanguage = New ToolStripMenuItem()
         cmnTheme = New ContextMenuStrip(components)
         TBThemeDef = New ToolStripMenuItem()
         TBThemeSave = New ToolStripMenuItem()
         TBThemeRefresh = New ToolStripMenuItem()
         TBThemeLoadComptability = New ToolStripMenuItem()
         ToolStripSeparator6 = New ToolStripSeparator()
-        mnTheme = New ToolStripMenuItem()
         TBTheme = New ToolStripDropDownButton()
+        mnTheme = New ToolStripMenuItem()
         POptionsScroll = New Panel()
         POptions = New Panel()
         POExpansion = New Panel()
@@ -286,12 +286,12 @@ Partial Class MainWindow
         ToolStripSeparator11 = New ToolStripSeparator()
         POBModify = New ToolStripMenuItem()
         POBMirror = New ToolStripMenuItem()
-        POConvert = New ToolStripDropDownButton()
         mnPreview = New ToolStripMenuItem()
         mnPlayB = New ToolStripMenuItem()
         mnPlay = New ToolStripMenuItem()
         mnStop = New ToolStripMenuItem()
         PreviewToolStripMenuItem = New ToolStripMenuItem()
+        POConvert = New ToolStripDropDownButton()
         TBMain = New ToolStrip()
         TBNew = New ToolStripButton()
         TBOpen = New ToolStripSplitButton()
@@ -470,7 +470,7 @@ Partial Class MainWindow
         ' 
         cmnLanguage.Items.AddRange(New ToolStripItem() {TBLangDef, TBLangRefresh, ToolStripSeparator9})
         cmnLanguage.Name = "cmnLanguage"
-        cmnLanguage.OwnerItem = TBLanguage
+        cmnLanguage.OwnerItem = mnLanguage
         cmnLanguage.Size = New Size(126, 54)
         ' 
         ' TBLangDef
@@ -491,14 +491,6 @@ Partial Class MainWindow
         ToolStripSeparator9.Name = "ToolStripSeparator9"
         ToolStripSeparator9.Size = New Size(122, 6)
         ' 
-        ' mnLanguage
-        ' 
-        mnLanguage.DropDown = cmnLanguage
-        mnLanguage.Image = CType(resources.GetObject("mnLanguage.Image"), Image)
-        mnLanguage.Name = "mnLanguage"
-        mnLanguage.Size = New Size(247, 22)
-        mnLanguage.Text = "&Language"
-        ' 
         ' TBLanguage
         ' 
         TBLanguage.DisplayStyle = ToolStripItemDisplayStyle.Image
@@ -509,11 +501,19 @@ Partial Class MainWindow
         TBLanguage.Size = New Size(29, 22)
         TBLanguage.Text = "Language"
         ' 
+        ' mnLanguage
+        ' 
+        mnLanguage.DropDown = cmnLanguage
+        mnLanguage.Image = CType(resources.GetObject("mnLanguage.Image"), Image)
+        mnLanguage.Name = "mnLanguage"
+        mnLanguage.Size = New Size(247, 22)
+        mnLanguage.Text = "&Language"
+        ' 
         ' cmnTheme
         ' 
         cmnTheme.Items.AddRange(New ToolStripItem() {TBThemeDef, TBThemeSave, TBThemeRefresh, TBThemeLoadComptability, ToolStripSeparator6})
         cmnTheme.Name = "cmnLanguage"
-        cmnTheme.OwnerItem = TBTheme
+        cmnTheme.OwnerItem = mnTheme
         cmnTheme.Size = New Size(266, 98)
         ' 
         ' TBThemeDef
@@ -547,14 +547,6 @@ Partial Class MainWindow
         ToolStripSeparator6.Name = "ToolStripSeparator6"
         ToolStripSeparator6.Size = New Size(262, 6)
         ' 
-        ' mnTheme
-        ' 
-        mnTheme.DropDown = cmnTheme
-        mnTheme.Image = CType(resources.GetObject("mnTheme.Image"), Image)
-        mnTheme.Name = "mnTheme"
-        mnTheme.Size = New Size(247, 22)
-        mnTheme.Text = "&Theme"
-        ' 
         ' TBTheme
         ' 
         TBTheme.DisplayStyle = ToolStripItemDisplayStyle.Image
@@ -564,6 +556,14 @@ Partial Class MainWindow
         TBTheme.Name = "TBTheme"
         TBTheme.Size = New Size(29, 22)
         TBTheme.Text = "Theme"
+        ' 
+        ' mnTheme
+        ' 
+        mnTheme.DropDown = cmnTheme
+        mnTheme.Image = CType(resources.GetObject("mnTheme.Image"), Image)
+        mnTheme.Name = "mnTheme"
+        mnTheme.Size = New Size(247, 22)
+        mnTheme.Text = "&Theme"
         ' 
         ' POptionsScroll
         ' 
@@ -3406,7 +3406,7 @@ Partial Class MainWindow
         ' 
         cmnConversion.Items.AddRange(New ToolStripItem() {POBLong, POBShort, POBLongShort, ToolStripSeparator10, POBHidden, POBVisible, POBHiddenVisible, ToolStripSeparator11, POBModify, POBMirror})
         cmnConversion.Name = "cmnLanguage"
-        cmnConversion.OwnerItem = mnConversion
+        cmnConversion.OwnerItem = POConvert
         cmnConversion.Size = New Size(241, 192)
         ' 
         ' POBLong
@@ -3477,16 +3477,6 @@ Partial Class MainWindow
         POBMirror.Size = New Size(240, 22)
         POBMirror.Text = "Mi&rror"
         ' 
-        ' POConvert
-        ' 
-        POConvert.DisplayStyle = ToolStripItemDisplayStyle.Image
-        POConvert.DropDown = cmnConversion
-        POConvert.Image = CType(resources.GetObject("POConvert.Image"), Image)
-        POConvert.ImageTransparentColor = Color.Magenta
-        POConvert.Name = "POConvert"
-        POConvert.Size = New Size(29, 22)
-        POConvert.Text = "Convert Notes"
-        ' 
         ' mnPreview
         ' 
         mnPreview.DropDownItems.AddRange(New ToolStripItem() {mnPlayB, mnPlay, mnStop, PreviewToolStripMenuItem})
@@ -3524,6 +3514,16 @@ Partial Class MainWindow
         PreviewToolStripMenuItem.Name = "PreviewToolStripMenuItem"
         PreviewToolStripMenuItem.Size = New Size(214, 22)
         PreviewToolStripMenuItem.Text = "&Preview"
+        ' 
+        ' POConvert
+        ' 
+        POConvert.DisplayStyle = ToolStripItemDisplayStyle.Image
+        POConvert.DropDown = cmnConversion
+        POConvert.Image = CType(resources.GetObject("POConvert.Image"), Image)
+        POConvert.ImageTransparentColor = Color.Magenta
+        POConvert.Name = "POConvert"
+        POConvert.Size = New Size(29, 22)
+        POConvert.Text = "Convert Notes"
         ' 
         ' TBMain
         ' 
@@ -4047,7 +4047,7 @@ Partial Class MainWindow
         ' FStatus
         ' 
         FStatus.AccessibleRole = AccessibleRole.StatusBar
-        FStatus.BackColor = SystemColors.MenuHighlight
+        FStatus.BackColor = Color.DimGray
         FStatus.Items.AddRange(New ToolStripItem() {FSC, FSW, FSM, FSP1, FSP3, FSP2, FSP4, TimeStatusLabel, FST, FSH, FSL, FSE})
         FStatus.Location = New Point(0, 0)
         FStatus.Name = "FStatus"
@@ -4060,6 +4060,7 @@ Partial Class MainWindow
         ' FSC
         ' 
         FSC.AutoSize = False
+        FSC.Font = New Font("Segoe UI Variable Display", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         FSC.Name = "FSC"
         FSC.Size = New Size(70, 17)
         FSC.Text = "BPM"
@@ -4068,6 +4069,7 @@ Partial Class MainWindow
         ' FSW
         ' 
         FSW.AutoSize = False
+        FSW.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         FSW.ForeColor = Color.FromArgb(CByte(128), CByte(64), CByte(0))
         FSW.Name = "FSW"
         FSW.Size = New Size(40, 17)
@@ -4077,6 +4079,7 @@ Partial Class MainWindow
         ' FSM
         ' 
         FSM.AutoSize = False
+        FSM.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         FSM.ForeColor = Color.Cyan
         FSM.Name = "FSM"
         FSM.Size = New Size(40, 17)
@@ -4086,7 +4089,7 @@ Partial Class MainWindow
         ' FSP1
         ' 
         FSP1.AutoSize = False
-        FSP1.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        FSP1.Font = New Font("Segoe UI", 9F)
         FSP1.ForeColor = SystemColors.ControlLightLight
         FSP1.Name = "FSP1"
         FSP1.Size = New Size(170, 17)
@@ -4096,7 +4099,7 @@ Partial Class MainWindow
         ' FSP3
         ' 
         FSP3.AutoSize = False
-        FSP3.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(134))
+        FSP3.Font = New Font("Segoe UI", 9F)
         FSP3.ForeColor = Color.Maroon
         FSP3.Name = "FSP3"
         FSP3.Size = New Size(85, 17)
@@ -4106,7 +4109,7 @@ Partial Class MainWindow
         ' FSP2
         ' 
         FSP2.AutoSize = False
-        FSP2.Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(134))
+        FSP2.Font = New Font("Segoe UI", 9F)
         FSP2.ForeColor = Color.PaleGreen
         FSP2.Name = "FSP2"
         FSP2.Size = New Size(170, 17)
@@ -4116,6 +4119,7 @@ Partial Class MainWindow
         ' FSP4
         ' 
         FSP4.AutoSize = False
+        FSP4.Font = New Font("Segoe UI", 9F)
         FSP4.ForeColor = SystemColors.ControlLightLight
         FSP4.Name = "FSP4"
         FSP4.Size = New Size(115, 17)
@@ -4124,38 +4128,43 @@ Partial Class MainWindow
         ' 
         ' TimeStatusLabel
         ' 
+        TimeStatusLabel.Font = New Font("Segoe UI", 9F)
         TimeStatusLabel.ForeColor = SystemColors.ControlLightLight
         TimeStatusLabel.Name = "TimeStatusLabel"
-        TimeStatusLabel.Size = New Size(63, 17)
+        TimeStatusLabel.Size = New Size(55, 17)
         TimeStatusLabel.Text = "00:00:000"
         ' 
         ' FST
         ' 
+        FST.Font = New Font("Segoe UI Variable Display", 9F)
         FST.ForeColor = Color.Olive
         FST.LinkColor = Color.FromArgb(CByte(0), CByte(0), CByte(255))
         FST.Name = "FST"
-        FST.Size = New Size(71, 17)
+        FST.Size = New Size(64, 17)
         FST.Text = "Length = 0"
         ' 
         ' FSH
         ' 
+        FSH.Font = New Font("Segoe UI Variable Display", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         FSH.ForeColor = Color.Blue
         FSH.Name = "FSH"
-        FSH.Size = New Size(50, 17)
+        FSH.Size = New Size(45, 17)
         FSH.Text = "Hidden"
         ' 
         ' FSL
         ' 
+        FSL.Font = New Font("Segoe UI Variable Display", 9F)
         FSL.ForeColor = Color.Orange
         FSL.Name = "FSL"
-        FSL.Size = New Size(65, 17)
+        FSL.Size = New Size(60, 17)
         FSL.Text = "LandMine"
         ' 
         ' FSE
         ' 
+        FSE.Font = New Font("Segoe UI Variable Display", 9F)
         FSE.ForeColor = Color.Red
         FSE.Name = "FSE"
-        FSE.Size = New Size(38, 17)
+        FSE.Size = New Size(32, 17)
         FSE.Text = "Error"
         ' 
         ' TimerMiddle
@@ -4397,7 +4406,6 @@ Partial Class MainWindow
         Controls.Add(POptionsScroll)
         DoubleBuffered = True
         Font = New Font("Microsoft YaHei UI", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         KeyPreview = True
         MainMenuStrip = mnMain

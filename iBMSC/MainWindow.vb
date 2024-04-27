@@ -78,10 +78,10 @@ Public Class MainWindow
     'Dim TitlePath As New Drawing2D.GraphicsPath
     Private InitPath As String = String.Empty
     Private IsSaved As Boolean = True
-    Class Chartinfo
+    Public Structure Chartinfo
         Public Shared Fultitle As String
         Public Shared Allartist As String
-    End Class
+    End Structure
     'Variables for Drag/Drop
     Private DDFileName() As String = Array.Empty(Of String)()
     Private SupportedFileExtension() As String = {".bms", ".bme", ".bml", ".pms", ".txt", ".sm", ".ibmsc"}
@@ -216,7 +216,7 @@ Public Class MainWindow
                                                          "-P -N0 ""<filename>""",
                                                          "-P -N<measure> ""<filename>""",
                                                          "-S"),
-                                     New PlayerArguments("java.exe -jar <apppath>beatoraja.jar  [BMS path]",'-(a|p|r1|r2|r3|r4|s)
+                                     New PlayerArguments("java.exe -jar <apppath>\beatoraja.jar",
                                                          "-a -s""<filename>""",
                                                          "none1",
                                                          "none1"

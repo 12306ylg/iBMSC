@@ -236,8 +236,8 @@ AddExpansion:       xExpansion &= sLine & vbCrLf
         TExpansion.Text = xExpansion
         Chartinfo.Fultitle = THTitle.Text + THSubTitle.Text
         Chartinfo.Allartist = THArtist.Text + THSubArtist.Text
-        My.Forms.Chartinfo.Label1.Text = THTitle.Text + THSubTitle.Text
-        My.Forms.Chartinfo.Label2.Text = THArtist.Text + THSubArtist.Text
+        My.Forms.Chartinfo.Label1.Text = Chartinfo.Fultitle
+        My.Forms.Chartinfo.Label2.Text = Chartinfo.Allartist
         SortByVPositionQuick(0, UBound(Notes))
         UpdatePairing()
         CalculateTotalPlayableNotes()
