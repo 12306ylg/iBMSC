@@ -1,360 +1,360 @@
 Public Class OpGeneral
-    Public zWheel As Integer
-    Public zPgUpDn As Integer
-    Public zEncoding As System.Text.Encoding
-    Public zMiddle As Integer
-    'Public zSort As Integer
-    Public zAutoSave As Integer
-    Public zGridPartition As Integer
+	Public zWheel As Integer
+	Public zPgUpDn As Integer
+	Public zEncoding As System.Text.Encoding
+	Public zMiddle As Integer
+	'Public zSort As Integer
+	Public zAutoSave As Integer
+	Public zGridPartition As Integer
 
-    'Dim lpfa() As String
+	'Dim lpfa() As String
 
-    <DllImport("shell32.dll")> _
-    Public Shared Sub SHChangeNotify(wEventId As Integer, uFlags As Integer, dwItem1 As Integer, dwItem2 As Integer)
-    End Sub
+	<DllImport("shell32.dll")> _
+	Public Shared Sub SHChangeNotify(wEventId As Integer, uFlags As Integer, dwItem1 As Integer, dwItem2 As Integer)
+	End Sub
 
-    Private Sub OK_Button_Click(sender As Object, e As EventArgs) Handles OK_Button.Click
+	Private Sub OK_Button_Click(sender As Object, e As EventArgs) Handles OK_Button.Click
 
-        Select Case CWheel.SelectedIndex
-            Case 0 : zWheel = 192
-            Case 1 : zWheel = 96
-            Case 2 : zWheel = 64
-            Case 3 : zWheel = 48
-        End Select
-        Select Case CPgUpDn.SelectedIndex
-            Case 0 : zPgUpDn = 1536
-            Case 1 : zPgUpDn = 1152
-            Case 2 : zPgUpDn = 768
-            Case 3 : zPgUpDn = 576
-            Case 4 : zPgUpDn = 384
-            Case 5 : zPgUpDn = 192
-            Case 6 : zPgUpDn = 96
-        End Select
-        Select Case CTextEncoding.SelectedIndex
-            Case 0 : zEncoding = System.Text.Encoding.Default
-            Case 1 : zEncoding = System.Text.Encoding.Unicode
-            Case 2 : zEncoding = System.Text.Encoding.ASCII
-            Case 3 : zEncoding = System.Text.Encoding.BigEndianUnicode
-            Case 4 : zEncoding = System.Text.Encoding.UTF32
-            'Case 5 : zEncoding = System.Text.Encoding.UTF7
-            Case 6 : zEncoding = System.Text.Encoding.UTF8
-            Case 7 : zEncoding = System.Text.Encoding.GetEncoding(932)
-            Case 8 : zEncoding = System.Text.Encoding.GetEncoding(51949)
-        End Select
-        'zSort = CSortingMethod.SelectedIndex
-        zMiddle = IIf(rMiddleDrag.Checked, 1, 0)
-        zAutoSave = IIf(cAutoSave.Checked, 1, 0) * NAutoSave.Value * 60000
-        zGridPartition = nGridPartition.Value
-        DialogResult = DialogResult.OK
-        Close()
-    End Sub
+		Select Case CWheel.SelectedIndex
+			Case 0 : zWheel = 192
+			Case 1 : zWheel = 96
+			Case 2 : zWheel = 64
+			Case 3 : zWheel = 48
+		End Select
+		Select Case CPgUpDn.SelectedIndex
+			Case 0 : zPgUpDn = 1536
+			Case 1 : zPgUpDn = 1152
+			Case 2 : zPgUpDn = 768
+			Case 3 : zPgUpDn = 576
+			Case 4 : zPgUpDn = 384
+			Case 5 : zPgUpDn = 192
+			Case 6 : zPgUpDn = 96
+		End Select
+		Select Case CTextEncoding.SelectedIndex
+			Case 0 : zEncoding = System.Text.Encoding.Default
+			Case 1 : zEncoding = System.Text.Encoding.Unicode
+			Case 2 : zEncoding = System.Text.Encoding.ASCII
+			Case 3 : zEncoding = System.Text.Encoding.BigEndianUnicode
+			Case 4 : zEncoding = System.Text.Encoding.UTF32
+			'Case 5 : zEncoding = System.Text.Encoding.UTF7
+			Case 6 : zEncoding = System.Text.Encoding.UTF8
+			Case 7 : zEncoding = System.Text.Encoding.GetEncoding(932)
+			Case 8 : zEncoding = System.Text.Encoding.GetEncoding(51949)
+		End Select
+		'zSort = CSortingMethod.SelectedIndex
+		zMiddle = IIf(rMiddleDrag.Checked, 1, 0)
+		zAutoSave = IIf(cAutoSave.Checked, 1, 0) * NAutoSave.Value * 60000
+		zGridPartition = nGridPartition.Value
+		DialogResult = DialogResult.OK
+		Close()
+	End Sub
 
-    Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
-        DialogResult = DialogResult.Cancel
-        Close()
-    End Sub
+	Private Sub Cancel_Button_Click(sender As Object, e As EventArgs) Handles Cancel_Button.Click
+		DialogResult = DialogResult.Cancel
+		Close()
+	End Sub
 
-    Public Sub New(xMsWheel As Integer, xPgUpDn As Integer, xMiddleButton As Integer, xTextEncoding As Integer, xGridPartition As Integer, _
-                   xAutoSave As Integer, xBeep As Boolean, xBPMx As Boolean, xSTOPx As Boolean, _
-                   xMFEnter As Boolean, xMFClick As Boolean, xMStopPreview As Boolean)
-        InitializeComponent()
+	Public Sub New(xMsWheel As Integer, xPgUpDn As Integer, xMiddleButton As Integer, xTextEncoding As Integer, xGridPartition As Integer, _
+				   xAutoSave As Integer, xBeep As Boolean, xBPMx As Boolean, xSTOPx As Boolean, _
+				   xMFEnter As Boolean, xMFClick As Boolean, xMStopPreview As Boolean)
+		InitializeComponent()
 
-        On Error Resume Next
-        Select Case xMsWheel
-            Case 192 : CWheel.SelectedIndex = 0
-            Case 96 : CWheel.SelectedIndex = 1
-            Case 64 : CWheel.SelectedIndex = 2
-            Case 48 : CWheel.SelectedIndex = 3
-        End Select
+		On Error Resume Next
+		Select Case xMsWheel
+			Case 192 : CWheel.SelectedIndex = 0
+			Case 96 : CWheel.SelectedIndex = 1
+			Case 64 : CWheel.SelectedIndex = 2
+			Case 48 : CWheel.SelectedIndex = 3
+		End Select
 
-        Select Case xPgUpDn
-            Case 1536 : CPgUpDn.SelectedIndex = 0
-            Case 1152 : CPgUpDn.SelectedIndex = 1
-            Case 768 : CPgUpDn.SelectedIndex = 2
-            Case 576 : CPgUpDn.SelectedIndex = 3
-            Case 384 : CPgUpDn.SelectedIndex = 4
-            Case 192 : CPgUpDn.SelectedIndex = 5
-            Case 96 : CPgUpDn.SelectedIndex = 6
-        End Select
+		Select Case xPgUpDn
+			Case 1536 : CPgUpDn.SelectedIndex = 0
+			Case 1152 : CPgUpDn.SelectedIndex = 1
+			Case 768 : CPgUpDn.SelectedIndex = 2
+			Case 576 : CPgUpDn.SelectedIndex = 3
+			Case 384 : CPgUpDn.SelectedIndex = 4
+			Case 192 : CPgUpDn.SelectedIndex = 5
+			Case 96 : CPgUpDn.SelectedIndex = 6
+		End Select
 
-        CTextEncoding.SelectedIndex = xTextEncoding
-        'CSortingMethod.SelectedIndex = xSort
-        nGridPartition.Value = xGridPartition
+		CTextEncoding.SelectedIndex = xTextEncoding
+		'CSortingMethod.SelectedIndex = xSort
+		nGridPartition.Value = xGridPartition
 
-        If xMiddleButton = 0 Then rMiddleAuto.Checked = True _
-                             Else rMiddleDrag.Checked = True
+		If xMiddleButton = 0 Then rMiddleAuto.Checked = True _
+							 Else rMiddleDrag.Checked = True
 
-        If xAutoSave / 60000 > NAutoSave.Maximum Or xAutoSave / 60000 < NAutoSave.Minimum Then
-            cAutoSave.Checked = False
-        Else
-            NAutoSave.Value = xAutoSave / 60000
-        End If
+		If xAutoSave / 60000 > NAutoSave.Maximum Or xAutoSave / 60000 < NAutoSave.Minimum Then
+			cAutoSave.Checked = False
+		Else
+			NAutoSave.Value = xAutoSave / 60000
+		End If
 
-        cBeep.Checked = xBeep
-        cBpm1296.Checked = xBPMx
-        cStop1296.Checked = xSTOPx
-        cMEnterFocus.Checked = xMFEnter
-        cMClickFocus.Checked = xMFClick
-        cMStopPreview.Checked = xMStopPreview
-    End Sub
+		cBeep.Checked = xBeep
+		cBpm1296.Checked = xBPMx
+		cStop1296.Checked = xSTOPx
+		cMEnterFocus.Checked = xMFEnter
+		cMClickFocus.Checked = xMFClick
+		cMStopPreview.Checked = xMStopPreview
+	End Sub
 
-    Private Sub OpGeneral_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Font = MainWindow.Font
+	Private Sub OpGeneral_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+		Font = MainWindow.Font
 
-        'lpfa = Form1.lpfa
-        'Dim xL() As String = Form1.lpgo
-        Text = Strings.fopGeneral.Title
-        Label1.Text = Strings.fopGeneral.MouseWheel
-        Label2.Text = Strings.fopGeneral.TextEncoding
-        'Label3.Text = Locale.fopGeneral.SortingMethod
-        Label5.Text = Strings.fopGeneral.PageUpDown
-        Label3.Text = Strings.fopGeneral.MiddleButton
-        Label4.Text = Strings.fopGeneral.AssociateFileType
-        'CSortingMethod.Items.Item(0) = Locale.fopGeneral.sortBubble
-        'CSortingMethod.Items.Item(1) = Locale.fopGeneral.sortInsertion
-        'CSortingMethod.Items.Item(2) = Locale.fopGeneral.sortQuick
-        'CSortingMethod.Items.Item(3) = Locale.fopGeneral.sortQuickD3
-        'CSortingMethod.Items.Item(4) = Locale.fopGeneral.sortHeap
-        rMiddleAuto.Text = Strings.fopGeneral.MiddleButtonAuto
-        rMiddleDrag.Text = Strings.fopGeneral.MiddleButtonDrag
-        Label6.Text = Strings.fopGeneral.MaxGridPartition
+		'lpfa = Form1.lpfa
+		'Dim xL() As String = Form1.lpgo
+		Text = Strings.fopGeneral.Title
+		Label1.Text = Strings.fopGeneral.MouseWheel
+		Label2.Text = Strings.fopGeneral.TextEncoding
+		'Label3.Text = Locale.fopGeneral.SortingMethod
+		Label5.Text = Strings.fopGeneral.PageUpDown
+		Label3.Text = Strings.fopGeneral.MiddleButton
+		Label4.Text = Strings.fopGeneral.AssociateFileType
+		'CSortingMethod.Items.Item(0) = Locale.fopGeneral.sortBubble
+		'CSortingMethod.Items.Item(1) = Locale.fopGeneral.sortInsertion
+		'CSortingMethod.Items.Item(2) = Locale.fopGeneral.sortQuick
+		'CSortingMethod.Items.Item(3) = Locale.fopGeneral.sortQuickD3
+		'CSortingMethod.Items.Item(4) = Locale.fopGeneral.sortHeap
+		rMiddleAuto.Text = Strings.fopGeneral.MiddleButtonAuto
+		rMiddleDrag.Text = Strings.fopGeneral.MiddleButtonDrag
+		Label6.Text = Strings.fopGeneral.MaxGridPartition
 
-        cBeep.Text = Strings.fopGeneral.BeepWhileSaved
-        cBpm1296.Text = Strings.fopGeneral.ExtendBPM
-        cStop1296.Text = Strings.fopGeneral.ExtendSTOP
-        cMEnterFocus.Text = Strings.fopGeneral.AutoFocusOnMouseEnter
-        cMClickFocus.Text = Strings.fopGeneral.DisableFirstClick
-        cAutoSave.Text = Strings.fopGeneral.AutoSave
-        Label7.Text = Strings.fopGeneral.minutes
-        cMStopPreview.Text = Strings.fopGeneral.StopPreviewOnClick
+		cBeep.Text = Strings.fopGeneral.BeepWhileSaved
+		cBpm1296.Text = Strings.fopGeneral.ExtendBPM
+		cStop1296.Text = Strings.fopGeneral.ExtendSTOP
+		cMEnterFocus.Text = Strings.fopGeneral.AutoFocusOnMouseEnter
+		cMClickFocus.Text = Strings.fopGeneral.DisableFirstClick
+		cAutoSave.Text = Strings.fopGeneral.AutoSave
+		Label7.Text = Strings.fopGeneral.minutes
+		cMStopPreview.Text = Strings.fopGeneral.StopPreviewOnClick
 
-        Dim enc = System.Text.Encoding.Default
-        CTextEncoding.Items(0) = "System ANSI (" & enc.EncodingName & ")"
+		Dim enc = System.Text.Encoding.Default
+		CTextEncoding.Items(0) = "System ANSI (" & enc.EncodingName & ")"
 
-        OK_Button.Text = Strings.OK
-        Cancel_Button.Text = Strings.Cancel
-    End Sub
+		OK_Button.Text = Strings.OK
+		Cancel_Button.Text = Strings.Cancel
+	End Sub
 
-    Private Sub TBAssociate_Click(sender As Object, e As EventArgs) Handles TBAssociate.Click
-        Associate(".bms", "iBMSC.BMS", Strings.FileAssociation.BMS, False)
-    End Sub
+	Private Sub TBAssociate_Click(sender As Object, e As EventArgs) Handles TBAssociate.Click
+		Associate(".bms", "iBMSC.BMS", Strings.FileAssociation.BMS, False)
+	End Sub
 
-    Private Sub TBAssociateIBMSC_Click(sender As Object, e As EventArgs) Handles TBAssociateIBMSC.Click
-        Associate(".ibmsc", "iBMSC.iBMSC", Strings.FileAssociation.IBMSC, True)
-    End Sub
+	Private Sub TBAssociateIBMSC_Click(sender As Object, e As EventArgs) Handles TBAssociateIBMSC.Click
+		Associate(".ibmsc", "iBMSC.iBMSC", Strings.FileAssociation.IBMSC, True)
+	End Sub
 
-    Private Sub TBAssociateBME_Click(sender As Object, e As EventArgs) Handles TBAssociateBME.Click
-        Associate(".bme", "iBMSC.BME", Strings.FileAssociation.BME, False)
-    End Sub
+	Private Sub TBAssociateBME_Click(sender As Object, e As EventArgs) Handles TBAssociateBME.Click
+		Associate(".bme", "iBMSC.BME", Strings.FileAssociation.BME, False)
+	End Sub
 
-    Private Sub TBAssociateBML_Click(sender As Object, e As EventArgs) Handles TBAssociateBML.Click
-        Associate(".bml", "iBMSC.BML", Strings.FileAssociation.BML, False)
-    End Sub
+	Private Sub TBAssociateBML_Click(sender As Object, e As EventArgs) Handles TBAssociateBML.Click
+		Associate(".bml", "iBMSC.BML", Strings.FileAssociation.BML, False)
+	End Sub
 
-    Private Sub TBAssociatePMS_Click(sender As Object, e As EventArgs) Handles TBAssociatePMS.Click
-        Associate(".pms", "iBMSC.PMS", Strings.FileAssociation.PMS, False)
-    End Sub
+	Private Sub TBAssociatePMS_Click(sender As Object, e As EventArgs) Handles TBAssociatePMS.Click
+		Associate(".pms", "iBMSC.PMS", Strings.FileAssociation.PMS, False)
+	End Sub
 
-    Private Sub Associate(xExt As String, xClass As String, xDescription As String, isIBMSC As Boolean)
-        If MsgBox(Replace(Strings.Messages.FileAssociationPrompt, "{}", "*" & xExt), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) <> MsgBoxResult.Yes Then Exit Sub
+	Private Sub Associate(xExt As String, xClass As String, xDescription As String, isIBMSC As Boolean)
+		If MsgBox(Replace(Strings.Messages.FileAssociationPrompt, "{}", "*" & xExt), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) <> MsgBoxResult.Yes Then Exit Sub
 
-        Dim xReg As Microsoft.Win32.RegistryKey
+		Dim xReg As Microsoft.Win32.RegistryKey
 
-        Try
-            With Microsoft.Win32.Registry.ClassesRoot
-                If Array.IndexOf(.GetSubKeyNames(), xExt) <> -1 Then .DeleteSubKeyTree(xExt)
-                Dim unused9 = .CreateSubKey(xExt)
-                xReg = .OpenSubKey(xExt, True)
-                xReg.SetValue(String.Empty, xClass, Microsoft.Win32.RegistryValueKind.String)
+		Try
+			With Microsoft.Win32.Registry.ClassesRoot
+				If Array.IndexOf(.GetSubKeyNames(), xExt) <> -1 Then .DeleteSubKeyTree(xExt)
+				Dim unused9 = .CreateSubKey(xExt)
+				xReg = .OpenSubKey(xExt, True)
+				xReg.SetValue(String.Empty, xClass, Microsoft.Win32.RegistryValueKind.String)
 
-                If Array.IndexOf(.GetSubKeyNames(), xClass) <> -1 Then .DeleteSubKeyTree(xClass)
-                Dim unused8 = .CreateSubKey(xClass)
-                xReg = .OpenSubKey(xClass, True)
-                xReg.SetValue(String.Empty, xDescription, Microsoft.Win32.RegistryValueKind.String)
+				If Array.IndexOf(.GetSubKeyNames(), xClass) <> -1 Then .DeleteSubKeyTree(xClass)
+				Dim unused8 = .CreateSubKey(xClass)
+				xReg = .OpenSubKey(xClass, True)
+				xReg.SetValue(String.Empty, xDescription, Microsoft.Win32.RegistryValueKind.String)
 
-                'Default Icon
-                Dim unused7 = xReg.CreateSubKey("DefaultIcon")
-                xReg = .OpenSubKey(xClass & "\DefaultIcon", True)
-                xReg.SetValue(String.Empty, My.Application.Info.DirectoryPath & "\TypeBMS.ico", Microsoft.Win32.RegistryValueKind.String)
+				'Default Icon
+				Dim unused7 = xReg.CreateSubKey("DefaultIcon")
+				xReg = .OpenSubKey(xClass & "\DefaultIcon", True)
+				xReg.SetValue(String.Empty, My.Application.Info.DirectoryPath & "\TypeBMS.ico", Microsoft.Win32.RegistryValueKind.String)
 
-                xReg = .OpenSubKey(xClass, True)
-                Dim unused6 = xReg.CreateSubKey("shell")
-                xReg = .OpenSubKey(xClass & "\shell", True)
-                xReg.SetValue(String.Empty, "open")
+				xReg = .OpenSubKey(xClass, True)
+				Dim unused6 = xReg.CreateSubKey("shell")
+				xReg = .OpenSubKey(xClass & "\shell", True)
+				xReg.SetValue(String.Empty, "open")
 
-                xReg = .OpenSubKey(xClass & "\shell", True)
-                Dim unused5 = xReg.CreateSubKey("open\command")
-                xReg = .OpenSubKey(xClass & "\shell\open", True)
-                xReg.SetValue(String.Empty, Strings.FileAssociation.Open)
-                xReg = .OpenSubKey(xClass & "\shell\open\command", True)
-                xReg.SetValue(String.Empty, """" & Application.ExecutablePath & """ ""%1""")
+				xReg = .OpenSubKey(xClass & "\shell", True)
+				Dim unused5 = xReg.CreateSubKey("open\command")
+				xReg = .OpenSubKey(xClass & "\shell\open", True)
+				xReg.SetValue(String.Empty, Strings.FileAssociation.Open)
+				xReg = .OpenSubKey(xClass & "\shell\open\command", True)
+				xReg.SetValue(String.Empty, """" & Application.ExecutablePath & """ ""%1""")
 
-                If Not isIBMSC Then
-                    xReg = .OpenSubKey(xClass & "\shell", True)
-                    Dim unused4 = xReg.CreateSubKey("preview\command")
-                    xReg = .OpenSubKey(xClass & "\shell\preview", True)
-                    xReg.SetValue(String.Empty, Strings.FileAssociation.Preview)
-                    xReg = .OpenSubKey(xClass & "\shell\preview\command", True)
-                    xReg.SetValue(String.Empty, """" & My.Application.Info.DirectoryPath & "\uBMplay.exe" & """ ""%1""")
+				If Not isIBMSC Then
+					xReg = .OpenSubKey(xClass & "\shell", True)
+					Dim unused4 = xReg.CreateSubKey("preview\command")
+					xReg = .OpenSubKey(xClass & "\shell\preview", True)
+					xReg.SetValue(String.Empty, Strings.FileAssociation.Preview)
+					xReg = .OpenSubKey(xClass & "\shell\preview\command", True)
+					xReg.SetValue(String.Empty, """" & My.Application.Info.DirectoryPath & "\uBMplay.exe" & """ ""%1""")
 
-                    xReg = .OpenSubKey(xClass & "\shell", True)
-                    Dim unused3 = xReg.CreateSubKey("viewcode\command")
-                    xReg = .OpenSubKey(xClass & "\shell\viewcode", True)
-                    xReg.SetValue(String.Empty, Strings.FileAssociation.ViewCode)
-                    xReg = .OpenSubKey(xClass & "\shell\viewcode\command", True)
-                    xReg.SetValue(String.Empty, Environment.SystemDirectory & "\notepad.exe %1")
-                End If
-            End With
+					xReg = .OpenSubKey(xClass & "\shell", True)
+					Dim unused3 = xReg.CreateSubKey("viewcode\command")
+					xReg = .OpenSubKey(xClass & "\shell\viewcode", True)
+					xReg.SetValue(String.Empty, Strings.FileAssociation.ViewCode)
+					xReg = .OpenSubKey(xClass & "\shell\viewcode\command", True)
+					xReg.SetValue(String.Empty, Environment.SystemDirectory & "\notepad.exe %1")
+				End If
+			End With
 
-            With Microsoft.Win32.Registry.CurrentUser
-                Dim unused2 = .CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt)
+			With Microsoft.Win32.Registry.CurrentUser
+				Dim unused2 = .CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt)
 
-                xReg = .OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt, True)
-                'xReg.DeleteSubKey("UserChoice")
-                Dim unused1 = xReg.CreateSubKey("UserChoice")
-                xReg = .OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt & "\UserChoice", True)
-                xReg.SetValue("Progid", xClass)
-            End With
+				xReg = .OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt, True)
+				'xReg.DeleteSubKey("UserChoice")
+				Dim unused1 = xReg.CreateSubKey("UserChoice")
+				xReg = .OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt & "\UserChoice", True)
+				xReg.SetValue("Progid", xClass)
+			End With
 
-        Catch ex As Exception
-            Dim unused = MsgBox(Strings.Messages.FileAssociationError & vbCrLf & vbCrLf & ex.Message, MsgBoxStyle.Exclamation, Strings.Messages.Err)
-        End Try
+		Catch ex As Exception
+			Dim unused = MsgBox(Strings.Messages.FileAssociationError & vbCrLf & vbCrLf & ex.Message, MsgBoxStyle.Exclamation, Strings.Messages.Err)
+		End Try
 
-        SHChangeNotify(&H8000000, 0, 0, 0)
-        Beep()
-    End Sub
+		SHChangeNotify(&H8000000, 0, 0, 0)
+		Beep()
+	End Sub
 
-    '    Private Sub TBAssociateE_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBAssociatePMS.Click
-    '        If MsgBox(Replace(Locale.Messages.FileAssociationPrompt, "{}", "*.bme, *.bml"), MsgBoxStyle.YesNo + MsgBoxStyle.Question) <> MsgBoxResult.Yes Then Exit Sub
-    '
-    '        Dim xReg As Microsoft.Win32.RegistryKey
-    '        On Error GoTo Jump1
-    '
-    '        Dim xExt As String = ".bme"
-    '        Dim xCtg As String = "iBMSC.BME"
-    '
-    'Jump2:
-    '
-    '        With Microsoft.Win32.Registry.ClassesRoot
-    '            If Array.IndexOf(.GetSubKeyNames(), xExt) <> -1 Then .DeleteSubKeyTree(xExt)
-    '            .CreateSubKey(xExt)
-    '            xReg = .OpenSubKey(xExt, True)
-    '            xReg.SetValue("", xCtg, Microsoft.Win32.RegistryValueKind.String)
-    '
-    '            If Array.IndexOf(.GetSubKeyNames(), xCtg) <> -1 Then .DeleteSubKeyTree(xCtg)
-    '            .CreateSubKey(xCtg)
-    '            xReg = .OpenSubKey(xCtg, True)
-    '            xReg.SetValue("", lpfa(0), Microsoft.Win32.RegistryValueKind.String)
-    '
-    '            xReg.CreateSubKey("DefaultIcon")
-    '            xReg = .OpenSubKey(xCtg & "\DefaultIcon", True)
-    '            'xReg.SetValue("", My.Application.Info.DirectoryPath & "\TypeBMS.ico", Microsoft.Win32.RegistryValueKind.String)
-    '
-    '            xReg = .OpenSubKey(xCtg, True)
-    '            xReg.CreateSubKey("shell")
-    '            xReg = .OpenSubKey(xCtg & "\shell", True)
-    '            xReg.SetValue("", "open")
-    '
-    '            xReg.CreateSubKey("open\command")
-    '            xReg.CreateSubKey("preview\command")
-    '            xReg.CreateSubKey("viewcode\command")
-    '
-    '            xReg = .OpenSubKey(xCtg & "\shell\open", True)
-    '            xReg.SetValue("", lpfa(1))
-    '            xReg = .OpenSubKey(xCtg & "\shell\preview", True)
-    '            xReg.SetValue("", lpfa(2))
-    '            xReg = .OpenSubKey(xCtg & "\shell\viewcode", True)
-    '            xReg.SetValue("", lpfa(3))
-    '
-    '            xReg = .OpenSubKey(xCtg & "\shell\open\command", True)
-    '            xReg.SetValue("", """" & Application.ExecutablePath & """ ""%1""")
-    '            xReg = .OpenSubKey(xCtg & "\shell\preview\command", True)
-    '            xReg.SetValue("", """" & My.Application.Info.DirectoryPath & "\uBMplay.exe" & """ ""%1""")
-    '            xReg = .OpenSubKey(xCtg & "\shell\viewcode\command", True)
-    '            xReg.SetValue("", Environment.SystemDirectory & "\notepad.exe %1")
-    '        End With
-    '
-    '        With Microsoft.Win32.Registry.CurrentUser
-    '            .CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt)
-    '
-    '            xReg = .OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt, True)
-    '            xReg.CreateSubKey("UserChoice")
-    '            xReg = .OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt & "\UserChoice", True)
-    '            xReg.SetValue("Progid", xCtg)
-    '        End With
-    '
-    '        If xExt <> ".bml" Or xCtg <> "iBMSC.BML" Then
-    '            xExt = ".bml"
-    '            xCtg = "iBMSC.BML"
-    '            GoTo Jump2
-    '        End If
-    '
-    'Jump1:
-    '        Beep()
-    '    End Sub
+	'    Private Sub TBAssociateE_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBAssociatePMS.Click
+	'        If MsgBox(Replace(Locale.Messages.FileAssociationPrompt, "{}", "*.bme, *.bml"), MsgBoxStyle.YesNo + MsgBoxStyle.Question) <> MsgBoxResult.Yes Then Exit Sub
+	'
+	'        Dim xReg As Microsoft.Win32.RegistryKey
+	'        On Error GoTo Jump1
+	'
+	'        Dim xExt As String = ".bme"
+	'        Dim xCtg As String = "iBMSC.BME"
+	'
+	'Jump2:
+	'
+	'        With Microsoft.Win32.Registry.ClassesRoot
+	'            If Array.IndexOf(.GetSubKeyNames(), xExt) <> -1 Then .DeleteSubKeyTree(xExt)
+	'            .CreateSubKey(xExt)
+	'            xReg = .OpenSubKey(xExt, True)
+	'            xReg.SetValue("", xCtg, Microsoft.Win32.RegistryValueKind.String)
+	'
+	'            If Array.IndexOf(.GetSubKeyNames(), xCtg) <> -1 Then .DeleteSubKeyTree(xCtg)
+	'            .CreateSubKey(xCtg)
+	'            xReg = .OpenSubKey(xCtg, True)
+	'            xReg.SetValue("", lpfa(0), Microsoft.Win32.RegistryValueKind.String)
+	'
+	'            xReg.CreateSubKey("DefaultIcon")
+	'            xReg = .OpenSubKey(xCtg & "\DefaultIcon", True)
+	'            'xReg.SetValue("", My.Application.Info.DirectoryPath & "\TypeBMS.ico", Microsoft.Win32.RegistryValueKind.String)
+	'
+	'            xReg = .OpenSubKey(xCtg, True)
+	'            xReg.CreateSubKey("shell")
+	'            xReg = .OpenSubKey(xCtg & "\shell", True)
+	'            xReg.SetValue("", "open")
+	'
+	'            xReg.CreateSubKey("open\command")
+	'            xReg.CreateSubKey("preview\command")
+	'            xReg.CreateSubKey("viewcode\command")
+	'
+	'            xReg = .OpenSubKey(xCtg & "\shell\open", True)
+	'            xReg.SetValue("", lpfa(1))
+	'            xReg = .OpenSubKey(xCtg & "\shell\preview", True)
+	'            xReg.SetValue("", lpfa(2))
+	'            xReg = .OpenSubKey(xCtg & "\shell\viewcode", True)
+	'            xReg.SetValue("", lpfa(3))
+	'
+	'            xReg = .OpenSubKey(xCtg & "\shell\open\command", True)
+	'            xReg.SetValue("", """" & Application.ExecutablePath & """ ""%1""")
+	'            xReg = .OpenSubKey(xCtg & "\shell\preview\command", True)
+	'            xReg.SetValue("", """" & My.Application.Info.DirectoryPath & "\uBMplay.exe" & """ ""%1""")
+	'            xReg = .OpenSubKey(xCtg & "\shell\viewcode\command", True)
+	'            xReg.SetValue("", Environment.SystemDirectory & "\notepad.exe %1")
+	'        End With
+	'
+	'        With Microsoft.Win32.Registry.CurrentUser
+	'            .CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt)
+	'
+	'            xReg = .OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt, True)
+	'            xReg.CreateSubKey("UserChoice")
+	'            xReg = .OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt & "\UserChoice", True)
+	'            xReg.SetValue("Progid", xCtg)
+	'        End With
+	'
+	'        If xExt <> ".bml" Or xCtg <> "iBMSC.BML" Then
+	'            xExt = ".bml"
+	'            xCtg = "iBMSC.BML"
+	'            GoTo Jump2
+	'        End If
+	'
+	'Jump1:
+	'        Beep()
+	'    End Sub
 
-    '    Private Sub TBAssociateIBMSC_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBAssociateIBMSC.Click
-    '        If MsgBox(Replace(Locale.Messages.FileAssociationPrompt, "{}", "*.ibmsc"), MsgBoxStyle.YesNo + MsgBoxStyle.Question) <> MsgBoxResult.Yes Then Exit Sub
-    '
-    '        Dim xReg As Microsoft.Win32.RegistryKey
-    '        On Error GoTo Jump1
-    '
-    '        Dim xExt As String = ".ibmsc"
-    '        Dim xCtg As String = "iBMSC.iBMSC"
-    '
-    '        With Microsoft.Win32.Registry.ClassesRoot
-    '            If Array.IndexOf(.GetSubKeyNames(), xExt) <> -1 Then .DeleteSubKeyTree(xExt)
-    '            .CreateSubKey(xExt)
-    '            xReg = .OpenSubKey(xExt, True)
-    '            xReg.SetValue("", xCtg, Microsoft.Win32.RegistryValueKind.String)
-    '
-    '            If Array.IndexOf(.GetSubKeyNames(), xCtg) <> -1 Then .DeleteSubKeyTree(xCtg)
-    '            .CreateSubKey(xCtg)
-    '            xReg = .OpenSubKey(xCtg, True)
-    '            xReg.SetValue("", lpfa(0), Microsoft.Win32.RegistryValueKind.String)
-    '
-    '            xReg.CreateSubKey("DefaultIcon")
-    '            xReg = .OpenSubKey(xCtg & "\DefaultIcon", True)
-    '            'xReg.SetValue("", My.Application.Info.DirectoryPath & "\TypeBMS.ico", Microsoft.Win32.RegistryValueKind.String)
-    '
-    '            xReg = .OpenSubKey(xCtg, True)
-    '            xReg.CreateSubKey("shell")
-    '            xReg = .OpenSubKey(xCtg & "\shell", True)
-    '            xReg.SetValue("", "open")
-    '
-    '            xReg.CreateSubKey("open\command")
-    '            'xReg.CreateSubKey("preview\command")
-    '            xReg.CreateSubKey("viewcode\command")
-    '
-    '            xReg = .OpenSubKey(xCtg & "\shell\open", True)
-    '            xReg.SetValue("", lpfa(1))
-    '            'xReg = .OpenSubKey(xCtg & "\shell\preview", True)
-    '            'xReg.SetValue("", lpfa(2))
-    '            xReg = .OpenSubKey(xCtg & "\shell\viewcode", True)
-    '            xReg.SetValue("", lpfa(3))
-    '
-    '            xReg = .OpenSubKey(xCtg & "\shell\open\command", True)
-    '            xReg.SetValue("", """" & Application.ExecutablePath & """ ""%1""")
-    '            'xReg = .OpenSubKey(xCtg & "\shell\preview\command", True)
-    '            'xReg.SetValue("", """" & My.Application.Info.DirectoryPath & "\uBMplay.exe" & """ ""%1""")
-    '            xReg = .OpenSubKey(xCtg & "\shell\viewcode\command", True)
-    '            xReg.SetValue("", Environment.SystemDirectory & "\notepad.exe %1")
-    '        End With
-    '
-    '        With Microsoft.Win32.Registry.CurrentUser
-    '            .CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt)
-    '
-    '            xReg = .OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt, True)
-    '            xReg.CreateSubKey("UserChoice")
-    '            xReg = .OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt & "\UserChoice", True)
-    '            xReg.SetValue("Progid", xCtg)
-    '        End With
-    '
-    'Jump1:
-    '        Beep()
-    '    End Sub
+	'    Private Sub TBAssociateIBMSC_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TBAssociateIBMSC.Click
+	'        If MsgBox(Replace(Locale.Messages.FileAssociationPrompt, "{}", "*.ibmsc"), MsgBoxStyle.YesNo + MsgBoxStyle.Question) <> MsgBoxResult.Yes Then Exit Sub
+	'
+	'        Dim xReg As Microsoft.Win32.RegistryKey
+	'        On Error GoTo Jump1
+	'
+	'        Dim xExt As String = ".ibmsc"
+	'        Dim xCtg As String = "iBMSC.iBMSC"
+	'
+	'        With Microsoft.Win32.Registry.ClassesRoot
+	'            If Array.IndexOf(.GetSubKeyNames(), xExt) <> -1 Then .DeleteSubKeyTree(xExt)
+	'            .CreateSubKey(xExt)
+	'            xReg = .OpenSubKey(xExt, True)
+	'            xReg.SetValue("", xCtg, Microsoft.Win32.RegistryValueKind.String)
+	'
+	'            If Array.IndexOf(.GetSubKeyNames(), xCtg) <> -1 Then .DeleteSubKeyTree(xCtg)
+	'            .CreateSubKey(xCtg)
+	'            xReg = .OpenSubKey(xCtg, True)
+	'            xReg.SetValue("", lpfa(0), Microsoft.Win32.RegistryValueKind.String)
+	'
+	'            xReg.CreateSubKey("DefaultIcon")
+	'            xReg = .OpenSubKey(xCtg & "\DefaultIcon", True)
+	'            'xReg.SetValue("", My.Application.Info.DirectoryPath & "\TypeBMS.ico", Microsoft.Win32.RegistryValueKind.String)
+	'
+	'            xReg = .OpenSubKey(xCtg, True)
+	'            xReg.CreateSubKey("shell")
+	'            xReg = .OpenSubKey(xCtg & "\shell", True)
+	'            xReg.SetValue("", "open")
+	'
+	'            xReg.CreateSubKey("open\command")
+	'            'xReg.CreateSubKey("preview\command")
+	'            xReg.CreateSubKey("viewcode\command")
+	'
+	'            xReg = .OpenSubKey(xCtg & "\shell\open", True)
+	'            xReg.SetValue("", lpfa(1))
+	'            'xReg = .OpenSubKey(xCtg & "\shell\preview", True)
+	'            'xReg.SetValue("", lpfa(2))
+	'            xReg = .OpenSubKey(xCtg & "\shell\viewcode", True)
+	'            xReg.SetValue("", lpfa(3))
+	'
+	'            xReg = .OpenSubKey(xCtg & "\shell\open\command", True)
+	'            xReg.SetValue("", """" & Application.ExecutablePath & """ ""%1""")
+	'            'xReg = .OpenSubKey(xCtg & "\shell\preview\command", True)
+	'            'xReg.SetValue("", """" & My.Application.Info.DirectoryPath & "\uBMplay.exe" & """ ""%1""")
+	'            xReg = .OpenSubKey(xCtg & "\shell\viewcode\command", True)
+	'            xReg.SetValue("", Environment.SystemDirectory & "\notepad.exe %1")
+	'        End With
+	'
+	'        With Microsoft.Win32.Registry.CurrentUser
+	'            .CreateSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt)
+	'
+	'            xReg = .OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt, True)
+	'            xReg.CreateSubKey("UserChoice")
+	'            xReg = .OpenSubKey("Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\" & xExt & "\UserChoice", True)
+	'            xReg.SetValue("Progid", xCtg)
+	'        End With
+	'
+	'Jump1:
+	'        Beep()
+	'    End Sub
 
-    Private Sub cAutoSave_CheckedChanged(sender As Object, e As EventArgs) Handles cAutoSave.CheckedChanged
-        NAutoSave.Enabled = cAutoSave.Checked
-    End Sub
+	Private Sub cAutoSave_CheckedChanged(sender As Object, e As EventArgs) Handles cAutoSave.CheckedChanged
+		NAutoSave.Enabled = cAutoSave.Checked
+	End Sub
 End Class

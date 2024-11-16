@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net9.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
     <StartupObject>iBMSC.My.MyApplication</StartupObject>
     <AssemblyName>μBMSC</AssemblyName>
@@ -193,12 +193,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CSCore" Version="1.2.1.2" />
-    <PackageReference Include="NVorbis" Version="0.10.5" />
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="9.0.0-preview.3.24172.9" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
-    <PackageReference Include="System.Text.Encodings.Web" Version="9.0.0-preview.3.24172.9" />
-    <PackageReference Include="System.Text.Json" Version="9.0.0-preview.3.24172.9" />
+    <PackageReference Include="CSCore" />
+    <PackageReference Include="NVorbis" />
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" />
+    <PackageReference Include="System.Text.Encodings.Web" />
+    <PackageReference Include="System.Text.Json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="SCompareMethod.Designer.vb" />
