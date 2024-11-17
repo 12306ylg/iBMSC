@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="utf-8"?>
+<iBMSC.Locale Name="日本語 by Nekokan">
+	<Font Size="9">
+		<Family>Meiryo UI</Family>
+		<Family>MS UI GOTHIC</Family>
+	</Font>
+	<MonoFont Size="9">
+		<Family>ＭＳ ゴシック</Family>
+		<Family>MS Gothic</Family>
+	</MonoFont>
+	<OK>OK</OK>
+	<Cancel>キャンセル</Cancel>
+	<None>None</None>
+	<Menu>
+		<File>
+			<Title amp="6">ファイル (F)</Title>
+			<New amp="4">新規 (N)</New>
+			<Open amp="4">開く (O)</Open>
+			<ImportSM amp="2">.SM ファイルからインポート</ImportSM>
+			<ImportIBMSC amp="1">.IBMSC ファイルからインポート</ImportIBMSC>
+			<Save amp="4">保存 (S)</Save>
+			<SaveAs amp="10">名前をつけて保存 (A)</SaveAs>
+			<ExportIBMSC amp="18">.IBMSC 形式にエクスポート (E)</ExportIBMSC>
+			<ExportBMSON amp="18">.BMSON 形式にエクスポート (B)</ExportBMSON>
+			<Recent0>最近使ったファイル #0</Recent0>
+			<Recent1>最近使ったファイル #1</Recent1>
+			<Recent2>最近使ったファイル #2</Recent2>
+			<Recent3>最近使ったファイル #3</Recent3>
+			<Recent4>最近使ったファイル #4</Recent4>
+			<Quit amp="4">終了 (X)</Quit>
+		</File>
+		<Edit>
+			<Title amp="4">編集 (E)</Title>
+			<Undo amp="6">元に戻す (U)</Undo>
+			<Redo amp="6">やり直し (R)</Redo>
+			<Cut amp="6">切り取り (T)</Cut>
+			<Copy amp="5">コピー (C)</Copy>
+			<Paste amp="6">貼り付け (P)</Paste>
+			<Delete amp="4">削除 (D)</Delete>
+			<SelectAll amp="7">すべて選択 (A)</SelectAll>
+			<Find amp="14">検索 / 削除 / 置換 (F)</Find>
+			<Stat amp="4">統計 (T)</Stat>
+			<TimeSelectionTool amp="11">時間選択モード (I)</TimeSelectionTool>
+			<SelectTool amp="7">選択モード (S)</SelectTool>
+			<WriteTool amp="7">書込モード (W)</WriteTool>
+			<MyO2>MyO2 ツールボックス (中国語のみ)</MyO2>
+		</Edit>
+		<View>
+			<Title amp="4">表示 (V)</Title>
+		</View>
+		<Options>
+			<Title amp="7">オプション (O)</Title>
+			<NT amp="1">LN 入力モード - NT/BMSE</NT>
+			<ErrorCheck amp="9">エラーチェック (E)</ErrorCheck>
+			<PreviewOnClick amp="15">クリック時に音声プレビュー (C)</PreviewOnClick>
+			<ShowFileName amp="10">ファイル名を表示 (F)</ShowFileName>
+			<ChangePlaySide amp="12">スクラッチ位置の変更 (R)</ChangePlaySide>
+			<GeneralOptions amp="9">一般オプション (G)</GeneralOptions>
+			<VisualOptions amp="9">表示オプション (V)</VisualOptions>
+			<PlayerOptions amp="10">再生ソフトの設定 (P)</PlayerOptions>
+			<Language amp="4">言語 (L)</Language>
+			<Theme amp="5">テーマ (T)</Theme>
+		</Options>
+		<Conversion amp="4">置換 (C)</Conversion>
+		<Preview>
+			<Title amp="7">プレビュー (P)</Title>
+			<PlayBegin amp="8">最初から再生 (B)</PlayBegin>
+			<PlayHere amp="10">現在位置から再生 (P)</PlayHere>
+			<PlayStop amp="4">停止 (S)</PlayStop>
+		</Preview>
+		<About>
+			<Title amp="7">About (A)</Title>
+			<About amp="12">μBMSC について (A)</About>
+			<CheckUpdates amp="9">更新を確認する (C)</CheckUpdates>
+			<CheckUpdatesC>更新を確認する（中国語）</CheckUpdatesC>
+		</About>
+	</Menu>
+	<ToolBar>
+		<New>新規 (Ctrl+N)</New>
+		<Open>開く (Ctrl+O)</Open>
+		<Save>保存 (Ctrl+S)</Save>
+		<Cut>切り取り (Ctrl+X)</Cut>
+		<Copy>コピー (Ctrl+C)</Copy>
+		<Paste>貼り付け (Ctrl+V)</Paste>
+		<Find>検索 / 削除 / 置換 (Ctrl+F)</Find>
+		<Stat>統計 (Ctrl+T)</Stat>
+		<Conversion>オブジェ変換</Conversion>
+		<MyO2>MyO2 ツールボックス (中国語のみ)</MyO2>
+		<ErrorCheck>エラーチェック</ErrorCheck>
+		<PreviewOnClick>クリックしたものを音声プレビュー</PreviewOnClick>
+		<ShowFileName>ファイル名を表示</ShowFileName>
+		<ChangePlaySide>スクラッチ位置の変更</ChangePlaySide>
+		<Undo>元に戻す (Ctrl+Z)</Undo>
+		<Redo>やり直し (Ctrl+Y)</Redo>
+		<NT>LN 入力モード - NoteTool/BMSE</NT>
+		<TimeSelectionTool>時間編集モード (F1)</TimeSelectionTool>
+		<SelectTool>編集モード (F2)</SelectTool>
+		<WriteTool>書込モード (F3)</WriteTool>
+		<PlayBegin>最初から再生 (F5)</PlayBegin>
+		<PlayHere>現在位置から再生 (F6)</PlayHere>
+		<PlayStop>停止 (F7)</PlayStop>
+		<PlayerOptions>再生ソフト</PlayerOptions>
+		<VisualOptions>表示オプション</VisualOptions>
+		<GeneralOptions>一般オプション</GeneralOptions>
+		<Language>言語</Language>
+		<Theme>テーマ</Theme>
+		<About>μBMSC について</About>
+	</ToolBar>
+	<StatusBar>
+		<ColumnCaption>列の見出し</ColumnCaption>
+		<NoteIndex>オブジェのラベル</NoteIndex>
+		<MeasureIndex>小節番号</MeasureIndex>
+		<GridResolution>Grid 上の位置</GridResolution>
+		<ReducedResolution>Grid 上の位置（簡約化）</ReducedResolution>
+		<MeasureResolution>小節内での位置</MeasureResolution>
+		<AbsolutePosition>絶対的な位置</AbsolutePosition>
+		<Length>長さ</Length>
+		<LongNote>ロングノート</LongNote>
+		<Hidden>不可視オブジェ</Hidden>
+		<LandMine>地雷オブジェ</LandMine>
+		<Error>エラー</Error>
+		<SelStart>開始位置</SelStart>
+		<SelLength>範囲の長さ</SelLength>
+		<SelSplit>スプリッタの位置</SelSplit>
+		<Reverse>選択を逆転</Reverse>
+		<ByMultiple>倍</ByMultiple>
+		<ByValue>BPM</ByValue>
+	</StatusBar>
+	<SubMenu>
+		<ShowHide>
+			<ToolTip>表示 / 隠す</ToolTip>
+			<Menu>メインメニュー</Menu>
+			<ToolBar>ツールバー</ToolBar>
+			<OptionsPanel>オプションパネル</OptionsPanel>
+			<StatusBar>ステータスバー</StatusBar>
+			<LSplit>スプリッタ（左側）</LSplit>
+			<RSplit>スプリッタ（右側）</RSplit>
+			<Grid>Grid</Grid>
+			<Sub>補助</Sub>
+			<BG>背景</BG>
+			<MeasureIndex>小節番号</MeasureIndex>
+			<MeasureLine>小節線</MeasureLine>
+			<Vertical>縦線</Vertical>
+			<ColumnCaption>列の見出し</ColumnCaption>
+			<BPM>BPM</BPM>
+			<STOP>STOP</STOP>
+			<SCROLL>SCROLL</SCROLL>
+			<BLP>BGA / Layer / Poor</BLP>
+		</ShowHide>
+		<InsertMeasure>
+			<Insert>ここに1小節挿入</Insert>
+			<Remove>この小節を削除</Remove>
+		</InsertMeasure>
+		<Language>
+			<Default>初期化</Default>
+			<Refresh>リストの再読み込み</Refresh>
+		</Language>
+		<Theme>
+			<Default>初期化</Default>
+			<Save>テーマを保存</Save>
+			<Refresh>リストの再読み込み</Refresh>
+			<LoadComptability>iBMSC 2.x のテーマを読み込む</LoadComptability>
+		</Theme>
+		<Convert>
+			<Long amp="10">→ ロングノート (L)</Long>
+			<Short amp="12">→ ノーマルオブジェ (S)</Short>
+			<LongShort>ロングノート ←→ ノーマルオブジェ</LongShort>
+			<Hidden amp="11">→ 不可視オブジェ (H)</Hidden>
+			<Visible amp="10">→ 可視オブジェ (V)</Visible>
+			<HiddenVisible>不可視オブジェ ←→ 可視オブジェ</HiddenVisible>
+			<Relabel amp="10">オブジェ番号変更 (M)</Relabel>
+			<Mirror amp="5">ミラー (R)</Mirror>
+		</Convert>
+		<WAV>
+			<MultiSelection>複数選択する</MultiSelection>
+			<Synchronize>配置オブジェの定義を維持</Synchronize>
+			<Emptyfill>空定義を優先して埋める</Emptyfill>
+		</WAV>
+		<Beat>
+			<Absolute>絶対的な位置を保つ</Absolute>
+			<Measure>以降の小節を保つ</Measure>
+			<Cut>以降の小節を保ち、余りは切り捨てる</Cut>
+			<Scale>小節の長さに合わせて位置を変化させる</Scale>
+		</Beat>
+	</SubMenu>
+	<OptionsPanel>
+		<Header>
+			<Header>HEADER</Header>
+			<Title>#TITLE</Title>
+			<Artist>#ARTIST</Artist>
+			<Genre>#GENRE</Genre>
+			<BPM>#BPM</BPM>
+			<Player>#PLAYER</Player>
+			<Rank>#RANK</Rank>
+			<PlayLevel>#LEVEL</PlayLevel>
+			<SubTitle>#SUBTITLE</SubTitle>
+			<SubArtist>#SUBARTIST</SubArtist>
+			<StageFile>#STAGEFILE</StageFile>
+			<Banner>#BANNER</Banner>
+			<BackBMP>#BACKBMP</BackBMP>
+			<Difficulty>#DIFFICULTY</Difficulty>
+			<ExRank>#DEFEXRANK</ExRank>
+			<Total>#TOTAL</Total>
+			<Comment>#COMMENT</Comment>
+			<LnObj>#LNOBJ</LnObj>
+			<LandMine>#WAV00</LandMine>
+			<MissBMP>#BMP00</MissBMP>
+			<Player1>1 - Single</Player1>
+			<Player2>2 - Couple</Player2>
+			<Player3>3 - Double / PMS</Player3>
+			<Rank0>0 - Very Hard</Rank0>
+			<Rank1>1 - Hard</Rank1>
+			<Rank2>2 - Normal</Rank2>
+			<Rank3>3 - Easy</Rank3>
+			<Rank4>4 - Very Easy</Rank4>
+			<Difficulty0>None</Difficulty0>
+			<Difficulty1>1 - Beginner / EZ</Difficulty1>
+			<Difficulty2>2 - Normal / NM</Difficulty2>
+			<Difficulty3>3 - Hyper / HD</Difficulty3>
+			<Difficulty4>4 - Another / MX</Difficulty4>
+			<Difficulty5>5 - Insane / SC</Difficulty5>
+		</Header>
+		<Grid>
+			<Title>Grid</Title>
+			<Snap>Grid に合わせる (G)</Snap>
+			<BCols>BGM 列の数</BCols>
+			<DisableVertical>オブジェを縦移動させない (D)</DisableVertical>
+			<Scroll>縦スクロールロック</Scroll>
+			<LockLeft>左エディット画面のロック</LockLeft>
+			<LockMiddle>中エディット画面のロック</LockMiddle>
+			<LockRight>右エディット画面のロック</LockRight>
+		</Grid>
+		<WaveForm>
+			<Title>BGM 波形</Title>
+			<Load>選択</Load>
+			<Clear>削除</Clear>
+			<Lock>BGM の位置をロック</Lock>
+		</WaveForm>
+		<WAV>
+			<Title>#WAV</Title>
+			<MoveUp>上へ</MoveUp>
+			<MoveDown>下へ</MoveDown>
+			<Browse>指定</Browse>
+			<Remove>削除</Remove>
+		</WAV>
+		<BMP>
+			<Title>#BMP</Title>
+		</BMP>
+		<Beat>拍子</Beat>
+		<Beat.Apply>適用</Beat.Apply>
+		<Expansion>拡張命令</Expansion>
+	</OptionsPanel>
+	<Messages>
+		<Err>エラー</Err>
+		<SaveOnExit>データは変更されています。保存しますか。</SaveOnExit>
+		<SaveOnExit1>シャットダウン時、保存するか確認する。</SaveOnExit1>
+		<SaveOnExit2>タスクマネージャーから終了する場合も、保存するか確認する。</SaveOnExit2>
+		<PromptEnter>定義番号を入力してください。</PromptEnter>
+		<PromptEnterNumeric>値を入力してください。</PromptEnterNumeric>
+		<PromptEnterBPM>曲のテンポを入力してください。</PromptEnterBPM>
+		<PromptEnterSTOP>停止時間を入力してください。</PromptEnterSTOP>
+		<PromptEnterSCROLL>スクロール速度を入力してください。</PromptEnterSCROLL>
+		<PromptSlashValue>スラッシュキー ("/") が押されたら、Grid を以下の値に変更する。：</PromptSlashValue>
+		<InvalidLabel>無効な定義番号です。</InvalidLabel>
+		<CannotFind>{} が見つかりません。</CannotFind>
+		<PleaseRespecifyPath>プログラムの場所を確認してください。</PleaseRespecifyPath>
+		<PlayerNotFound>再生ソフトが見つかりません。</PlayerNotFound>
+		<PreviewDelError>再生ソフトは最低1つ必要です。</PreviewDelError>
+		<NegativeFactorError>因数は 0 より大きくなければなりません。</NegativeFactorError>
+		<NegativeDivisorError>除数は 0 より大きくなければなりません。</NegativeDivisorError>
+		<PreferencePostpone>設定は次回起動時から有効になります。</PreferencePostpone>
+		<EraserObsolete>削除ツールはオブジェ上を右クリックする方法に変更しました。</EraserObsolete>
+		<SaveWarning>警告：</SaveWarning>
+		<NoteOverlapError>オブジェの重なりがあります。最大 Grid を大きくすると解決するかもしれません。</NoteOverlapError>
+		<BPMOverflowError>拡張 BPM の数が使用できる最大値を超えています。：</BPMOverflowError>
+		<STOPOverflowError>STOP の数が使用できる最大値を超えています。：</STOPOverflowError>
+		<SCROLLOverflowError>SCROLL の数が使用できる最大値を超えています。：</SCROLLOverflowError>
+		<SavedFileWillContainErrors>保存するファイルにエラーがあります。</SavedFileWillContainErrors>
+		<FileAssociationPrompt>μBMSC を {} ファイルの既定プログラムにしますか。</FileAssociationPrompt>
+		<FileAssociationError>関連づけ変更エラー：</FileAssociationError>
+		<RestoreDefaultSettings>設定を初期化しますか？</RestoreDefaultSettings>
+		<RestoreAutosavedFile>{} 自動保存のファイルが見つかりました。復元しますか？</RestoreAutosavedFile>
+	</Messages>
+	<FileType>
+		<_all>すべてのファイル (*.*)</_all>
+		<_bms>使用可能な BMS Format (*.bms, *.bme, *.bml, *.pms, *.txt)</_bms>
+		<BMS>Be-Music Source (*.bms)</BMS>
+		<BME>Be-Music Extended Format (*.bme)</BME>
+		<BML>Be-Music Longnote Format (*.bml)</BML>
+		<PMS>Po-Mu Script (*.pms)</PMS>
+		<TXT>テキストドキュメント (*.txt)</TXT>
+		<SM>Step Mania files (*.sm)</SM>
+		<IBMSC>iBMSC files (*.ibmsc)</IBMSC>
+		<XML>XML files (*.xml)</XML>
+		<THEME_XML>iBMSC テーマ (*.Theme.xml)</THEME_XML>
+		<TH>iBMSC 2.x テーマファイル (*.Theme.xml)</TH>
+		<_audio>使用可能な音楽ファイル (*.wav, *.ogg, *.mp3, *.flac, *.mid)</_audio>
+		<_wave>使用可能な Wave ファイル (*.wav, *.ogg, *.mp3, *.flac)</_wave>
+		<WAV>Wave サウンド (*.wav)</WAV>
+		<OGG>Ogg Vorbis サウンド (*.ogg)</OGG>
+		<MP3>MP3 形式サウンド (*.mp3)</MP3>
+		<FLAC>FLAC 形式サウンド (*.flac)</FLAC>
+		<MID>MIDI files (*.mid)</MID>
+		<_image>使用可能な画像ファイル (*.png, *.bmp, *.jpg, *.gif)</_image>
+		<_movie>使用可能な映像ファイル (*.mpg, *.avi, *.mp4, *.wmv, *.webm)</_movie>
+		<BMP>Windows bitmap image (*.bmp)</BMP>
+		<PNG>Portable Network Graphic (*.png)</PNG>
+		<JPG>Joint Photographic Experts Group (*.jpg)</JPG>
+		<GIF>Graphics Interchange Format (*.gif)</GIF>
+		<MPG>Moving Picture Experts Group (*.mpg)</MPG>
+		<AVI>Audio Video Interleave (*.avi)</AVI>
+		<MP4>MPEG phase 4 (*.mp4)</MP4>
+		<WMV>Windows Media Video (*.wmv)</WMV>
+		<WEBM>WebM (*.webm)</WEBM>
+		<EXE>実行ファイル (*.exe)</EXE>
+	</FileType>
+	<Statistics>
+		<Title>統計</Title>
+		<lBPM>BPM</lBPM>
+		<lSTOP>STOP</lSTOP>
+		<lSCROLL>SCROLL</lSCROLL>
+		<lA>1P側</lA>
+		<lD>2P側</lD>
+		<lBGM>BGM</lBGM>
+		<lTotal>Total</lTotal>
+		<lShort>通常</lShort>
+		<lLong>ロング</lLong>
+		<lLnObj>LnObj</lLnObj>
+		<lHidden>不可視</lHidden>
+		<lLandMine>地雷</lLandMine>
+		<lErrors>エラー</lErrors>
+	</Statistics>
+	<PlayerOptions>
+		<Title>再生ソフトの設定</Title>
+		<Add>追加</Add>
+		<Remove>削除</Remove>
+		<Path>パス</Path>
+		<PlayFromBeginning>最初から再生</PlayFromBeginning>
+		<PlayFromHere>現在位置から再生</PlayFromHere>
+		<StopPlaying>停止</StopPlaying>
+		<References>凡例（大文字・小文字区別あり）：</References>
+		<DirectoryOfApp>このプログラムの場所</DirectoryOfApp>
+		<CurrMeasure>現在の小節番号</CurrMeasure>
+		<FileName>ファイル名</FileName>
+		<RestoreDefault>初期化</RestoreDefault>
+	</PlayerOptions>
+	<VisualOptions>
+		<Title>表示オプション</Title>
+		<Width>幅</Width>
+		<Caption>見出し</Caption>
+		<Note>オブジェ</Note>
+		<Label>定義番号</Label>
+		<LongNote>ロングノート</LongNote>
+		<LongNoteLabel>ロングノートのラベル</LongNoteLabel>
+		<Bg>背景</Bg>
+		<ColumnCaption>見出し</ColumnCaption>
+		<ColumnCaptionFont>見出しのフォント</ColumnCaptionFont>
+		<Background>背景</Background>
+		<Grid>Grid</Grid>
+		<SubGrid>補助</SubGrid>
+		<VerticalLine>縦線</VerticalLine>
+		<MeasureBarLine>小節線</MeasureBarLine>
+		<BGMWaveform>BGM 波形</BGMWaveform>
+		<NoteHeight>通常オブジェの高さ</NoteHeight>
+		<NoteLabel>通常オブジェのフォント</NoteLabel>
+		<MeasureLabel>小節番号のフォント</MeasureLabel>
+		<LabelVerticalShift>ラベルの垂直位置</LabelVerticalShift>
+		<LabelHorizontalShift>ラベルの水平位置</LabelHorizontalShift>
+		<LongNoteLabelHorizontalShift>ロングノートのラベルの水平位置</LongNoteLabelHorizontalShift>
+		<HiddenNoteOpacity>不可視オブジェの透明度</HiddenNoteOpacity>
+		<NoteBorderOnMouseOver>オブジェの枠（マウスオーバー時）</NoteBorderOnMouseOver>
+		<NoteBorderOnSelection>オブジェの枠（選択時）</NoteBorderOnSelection>
+		<NoteBorderOnAdjustingLength>オブジェの枠（長さ変更時）</NoteBorderOnAdjustingLength>
+		<SelectionBoxBorder>選択編集の枠</SelectionBoxBorder>
+		<TSCursor>時間編集のカーソル</TSCursor>
+		<TSSplitter>時間編集のスプリッタ</TSSplitter>
+		<TSCursorSensitivity>時間編集のカーソルの感度</TSCursorSensitivity>
+		<TSMouseOverBorder>時間編集の枠（マウスオーバー）</TSMouseOverBorder>
+		<TSFill>時間編集の枠</TSFill>
+		<TSBPM>時間編集の BPM</TSBPM>
+		<TSBPMFont>時間編集の BPM のフォント</TSBPMFont>
+		<MiddleSensitivity>中クリック (KeyUp) の鈍さ</MiddleSensitivity>
+	</VisualOptions>
+	<GeneralOptions>
+		<Title>一般オプション</Title>
+		<MouseWheel>マウスホイール</MouseWheel>
+		<TextEncoding>文字コード</TextEncoding>
+		<PageUpDown>PageUp / PageDown</PageUpDown>
+		<MiddleButton>中クリックの動作</MiddleButton>
+		<MiddleButtonAuto>オートスクロール</MiddleButtonAuto>
+		<MiddleButtonDrag>ドラッグ（つかんでスクロール）</MiddleButtonDrag>
+		<AssociateFileType>関連づける拡張子</AssociateFileType>
+		<MaxGridPartition>BMS の Grid 最大分解能</MaxGridPartition>
+		<BeepWhileSaved>保存時に音を鳴らす。</BeepWhileSaved>
+		<ExtendBPM>拡張 BPM の最大使用数を1295個（01～ZZ拡張）にする。</ExtendBPM>
+		<ExtendSTOP>STOP の最大使用数を1295個（01～ZZ拡張）にする。</ExtendSTOP>
+		<AutoFocusOnMouseEnter>マウスがエディットパネルに入ると自動でフォーカス。</AutoFocusOnMouseEnter>
+		<DisableFirstClick>エディットパネルがフォーカスされていない場合、1クリック目を無効化。</DisableFirstClick>
+		<AutoSave>自動保存</AutoSave>
+		<minutes>分</minutes>
+		<StopPreviewOnClick>エディットパネル上をクリックするとプレビュー再生をストップ</StopPreviewOnClick>
+	</GeneralOptions>
+	<Find>
+		<NoteRange>対象オブジェ</NoteRange>
+		<MeasureRange>小節の範囲</MeasureRange>
+		<LabelRange>定義番号の範囲</LabelRange>
+		<ValueRange>値の範囲</ValueRange>
+		<to>～</to>
+		<Selected>選択</Selected>
+		<UnSelected>未選択</UnSelected>
+		<ShortNote>通常</ShortNote>
+		<LongNote>ロング</LongNote>
+		<Hidden>不可視</Hidden>
+		<Visible>可視</Visible>
+		<LandMine>地雷</LandMine>
+		<Column>レーン</Column>
+		<SelectAll>すべて選択</SelectAll>
+		<SelectInverse>選択の切り替え</SelectInverse>
+		<UnselectAll>すべてを選択解除</UnselectAll>
+		<Operation>操作</Operation>
+		<ReplaceWithLabel>定義番号を置換：</ReplaceWithLabel>
+		<ReplaceWithValue>値を置換：</ReplaceWithValue>
+		<Select>選択</Select>
+		<Unselect>選択解除</Unselect>
+		<Delete>削除</Delete>
+		<Close>閉じる</Close>
+	</Find>
+	<ImportSM>
+		<Title>*.SM ファイルからインポート</Title>
+		<Difficulty>難易度</Difficulty>
+		<Note>注意：曲と STOP の値はインポートされません。</Note>
+	</ImportSM>
+	<FileAssociation>
+		<BMS>Be-Music Source</BMS>
+		<BME>Be-Music Extended Format</BME>
+		<BML>Be-Music Longnote Format</BML>
+		<PMS>Po-Mu Script</PMS>
+		<IBMSC>iBMSC Format</IBMSC>
+		<Open>開く</Open>
+		<Preview>再生</Preview>
+		<ViewCode>コードを見る</ViewCode>
+	</FileAssociation>
+</iBMSC.Locale>
